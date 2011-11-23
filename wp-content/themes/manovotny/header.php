@@ -3,7 +3,6 @@
 	<head> 
 		<meta charset="utf-8" /> 
 		<meta name="author" content="Michael Novotny"> 
-		<meta name="copyright" content="Copyright 2011 Michael Novotny. All rights reserved." /> 
 		<meta name="description" content="Personal landing page for software engineer and web developer Michael Novotny" /> 
 		<title>Michael Novotny | Software Engineer &amp; Web Developer</title>
 		<?php google_analytics( 'UA-27106984-1' ); ?>
