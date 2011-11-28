@@ -19,27 +19,27 @@
 		</p>
 		<ul id="social">
 			<li>
-				<a href="mailto:manovotny@gmail.com" title="Email">
+				<a id="social-email" href="mailto:manovotny@gmail.com" title="Email">
 					<img src="<?php man_get_image( 'social-email.png' ); ?>" alt="Email" />
 				</a>
 			</li>
 			<li>
-				<a href="http://twitter.com/manovotny" title="Twitter" target="_blank">
+				<a id="social-twitter" href="http://twitter.com/manovotny" title="Twitter" target="_blank">
 					<img src="<?php man_get_image( 'social-twitter.png' ); ?>" alt="Twitter" />
 				</a>
 			</li>
 			<li>
-				<a href="http://forrst.com/people/manovotny" title="Forrst" target="_blank">
+				<a id="social-forrst" href="http://forrst.com/people/manovotny" title="Forrst" target="_blank">
 					<img src="<?php man_get_image( 'social-forrst.png' ); ?>" alt="Forrst" />
 				</a>
 			</li>
 			<li>
-				<a href="http://github.com/manovotny" title="GitHub" target="_blank">
+				<a id="social-github" href="http://github.com/manovotny" title="GitHub" target="_blank">
 					<img src="<?php man_get_image( 'social-github.png' ); ?>" alt="GitHub" />
 				</a>
 			</li>
 			<li>
-				<a href="http://profiles.wordpress.org/users/manovotny/" title="WordPress" target="_blank">
+				<a id="social-wordpress" href="http://profiles.wordpress.org/users/manovotny/" title="WordPress" target="_blank">
 					<img src="<?php man_get_image( 'social-wordpress.png' ); ?>" alt="WordPress" />
 				</a>
 			</li>
