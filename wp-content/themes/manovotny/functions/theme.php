@@ -6,10 +6,10 @@
  * Convenience function to get theme images.
  */
 
-function man_get_image( $image, $return = false ) 
+function man_get_image( $image, $return = false, $sub_dirs = '' ) 
 {
 	// set image url
-	$image_url = get_template_directory_uri() . '/images/' . $image;
+	$image_url = get_template_directory_uri() . '/images/' . $sub_dirs . $image;
 	
 	// check return
 	if ( $return )
