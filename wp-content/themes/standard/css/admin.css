@@ -1,0 +1,11 @@
+#standard_theme_left_sidebar_layout, 
+#standard_theme_right_sidebar_layout,
+#standard_theme_full_width_layout {
+	vertical-align: top;
+	margin: 15px 5px 0 0;
+}
+
+img.social_option {
+	vertical-align: top;
+	margin: 4px 0 0 4px;
+}
