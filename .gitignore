@@ -2,4 +2,14 @@
 .DS_Store
 
 #WordPress
-/wp-content/uploads/
+license.txt
+readme.html
+wp-*.php
+wp-admin/
+wp-content/index.php
+wp-content/plugins/index.php
+wp-content/themes/index.php
+wp-content/upgrade/*
+wp-content/uploads/
+wp-includes/
+xmlrpc.php
