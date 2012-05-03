@@ -1,22 +1,23 @@
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
-article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}
-body{line-height:1;}
-ol,ul{list-style:none;}
-blockquote,q{quotes:none;}
-blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
-table{border-collapse:collapse;border-spacing:0;}
-html{background:#eeeded url('../images/background.png') repeat fixed;color:#666666;font-family:Arial,Sans-Serif;height:auto;position:absolute;width:auto;}
-a{color:#CC0000;text-decoration:none;}
-a:hover{text-decoration:underline;}
-a,img{border:none;outline:0;text-decoration:none;}
-h1,h2{font-family:'Bebas Neue';text-transform:uppercase;}
-.left{float:left;}
-#vcard{margin:75px auto 0;padding:75px;width:695px;}
-#name{font-size:100px;margin:0;padding:0;}
-#title{font-size:50px;margin:0 0 35px 0;padding:0;}
-.description{font-size:25px;letter-spacing:-1px;margin:0 0 25px 0;}
-#social{margin:35px 0 0 0;}
-#social li{display:inline;margin-right:0.25em;}
-#social li a:hover{text-decoration:none;}
-#copyright{font-size:12px;margin:35px 0 0;text-transform:uppercase;}
-@font-face{font-family:'Bebas Neue';src:url('../fonts/BebasNeue.eot');src:local('☺'),url('../fonts/BebasNeue.otf') format('opentype'),url('../fonts/BebasNeue.ttf') format('truetype'),url('../fonts/BebasNeue.svg') format('svg');font-weight:normal;font-style:normal;}::selection{background:#CC0000;color:#FFFFFF;text-shadow:none;}
+html{background:#eeeded url('../images/background.png') repeat fixed;color:#666666;font-family:Arial,Sans-Serif;}
+.home a{color:#CC0000;text-decoration:none;}
+.home a:hover{text-decoration:underline;}
+.home a,.home img{border:none;outline:0;text-decoration:none;}
+.home h1,.home h2{font-family:'Bebas Neue';text-transform:uppercase;}
+.home .left{float:left;}
+.home #vcard{margin:75px auto 0;padding:75px;width:695px;}
+.home #name{font-size:100px;margin:0;padding:0;}
+.home #title{font-size:50px;margin:0 0 35px 0;padding:0;}
+.home .description{font-size:25px;letter-spacing:-1px;margin:0 0 25px 0;}
+.home #social{margin:35px 0 0 0;}
+.home #social li{display:inline;margin-right:0.25em;}
+.home #social li a:hover{text-decoration:none;}
+.home #copyright{font-size:12px;margin:35px 0 0;text-transform:uppercase;}
+@font-face{font-family:'Bebas Neue';src:url('../fonts/BebasNeue.eot');src:local('☺'),url('../fonts/BebasNeue.otf') format('opentype'),url('../fonts/BebasNeue.ttf') format('truetype'),url('../fonts/BebasNeue.svg') format('svg');font-weight:normal;font-style:normal;}
+::selection{background:#CC0000;color:#FFFFFF;text-shadow:none;}
+#resume a{color:#cc0000;text-decoration:none;}#resume a:hover{text-decoration:underline;}
+#resume li{color:#000000;}
+#resume .page-header{text-transform:uppercase;}
+#resume .entry .title{line-height:22px;}#resume .entry .title small{padding-right:4px;}
+#resume .entry .location{font-size:12px;line-height:16px;font-style:italic;}
+#resume .entry .row{margin-top:20px;}#resume .entry .row .position{font-style:italic;font-weight:bold;}#resume .entry .row .position .dates{font-weight:normal;}
+#resume .entry .row .responsibilities{font-style:italic;font-weight:bold;}
