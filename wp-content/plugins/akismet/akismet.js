@@ -21,6 +21,7 @@ jQuery(document).ready(function () {
  		var thisId = jQuery(this).attr('commentid');
  		var data = {
  			action: 'comment_author_deurl',
+			_wpnonce: WPAkismet.comment_author_url_nonce,
  			id: thisId
  		};
  		jQuery.ajax({
@@ -48,6 +49,7 @@ jQuery(document).ready(function () {
 		var thisUrl = jQuery(this).attr('href').replace("http://www.", "").replace("http://", "");
  		var data = {
  			action: 'comment_author_reurl',
+			_wpnonce: WPAkismet.comment_author_url_nonce,
  			id: thisId,
  			url: thisUrl
  		};
@@ -101,4 +103,10 @@ jQuery.extend({URLEncode:function(c){var o='';var x=0;c=c.toString();var r=/(^[a
     if(m!=null && m.length>1 && m[1]!=''){o+=m[1];x+=m[1].length;
     }else{if(c[x]==' ')o+='+';else{var d=c.charCodeAt(x);var h=d.toString(16);
     o+='%'+(h.length<2?'0':'')+h.toUpperCase();}x++;}}return o;}
+});
+// Preload mshot images after everything else has loaded
+jQuery(window).load(function() {
+	jQuery('a[id^="author_comment_url"]').each(function () {
+		jQuery.get('http://s.wordpress.com/mshots/v1/'+jQuery.URLEncode(jQuery(this).attr('href'))+'?w=450');
+	});
 });
