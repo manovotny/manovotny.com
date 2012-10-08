@@ -1,31 +1,62 @@
-<?php $social_options = get_option( 'standard_theme_social_options' ); ?>
+<?php 
 
-<ul class="nav social-icons clearfix">
-
-	<?php if ( '' != $social_options['twitter'] ) { ?>
-		<li><a class="fademe" href="<?php echo esc_url( $social_options['twitter'] ); ?>" title="<?php esc_attr_e( 'Twitter', 'standard'); ?>" target="_blank"><img src="<?php echo esc_url( get_template_directory_uri() . '/images/social/small/twitter.png' ); ?>" alt="<?php esc_attr_e( 'Twitter', 'standard'); ?>" /></a></li>
-	<?php } // end if ?>
-
-	<?php if ( '' != $social_options['facebook'] ) { ?>
-		<li><a class="fademe" href="<?php echo esc_url( $social_options['facebook'] ); ?>" title="<?php esc_attr_e( 'Facebook', 'standard'); ?>" target="_blank"><img src="<?php echo esc_url( get_template_directory_uri() . '/images/social/small/facebook.png' ); ?>" alt="<?php esc_attr_e( 'Facebook', 'standard'); ?>" /></a></li>
-	<?php } // end if ?>
-
-	<?php if ( '' != $social_options['google_plus'] ) { ?>
-		<li><a class="fademe" href="<?php echo esc_url( $social_options['google_plus'] ); ?>" title="<?php esc_attr_e( 'Google+', 'standard'); ?>" target="_blank"><img src="<?php echo esc_url( get_template_directory_uri() . '/images/social/small/google_plus.png' ); ?>" alt="<?php esc_attr_e( 'Google+', 'standard'); ?>" /></a></li>
-	<?php } // end if ?>
-
-	<?php if ( '' != $social_options['pinterest'] ) { ?>
-		<li><a class="fademe" href="<?php echo esc_url( $social_options['pinterest'] ); ?>" title="<?php esc_attr_e( 'Pinterest', 'standard'); ?>" target="_blank"><img src="<?php echo esc_url( get_template_directory_uri() . '/images/social/small/pinterest.png' ); ?>" alt="<?php esc_attr_e( 'Pinterest', 'standard'); ?>" /></a></li>
-	<?php } // end if ?>
+	// Read the active social icon stirng
+	$social_options = get_option( 'standard_theme_social_options' ); 
+	$social_options = $social_options['active-social-icons'];	
 	
-	<?php if ( '' != $social_options['vimeo'] ) { ?>
-		<li><a class="fademe" href="<?php echo esc_url( $social_options['vimeo'] ); ?>" title="<?php esc_attr_e( 'Vimeo', 'standard'); ?>" target="_blank"><img src="<?php echo esc_url( get_template_directory_uri() . '/images/social/small/vimeo.png' ); ?>" alt="<?php esc_attr_e( 'Vimeo', 'standard'); ?>" /></a></li>
-	<?php } // end if ?>
+	// Read out the URLs
+	$social_icons_urls = explode( ';', $social_options );
 	
-	<?php if ( '' != $social_options['youtube'] ) { ?>
-		<li><a class="fademe" href="<?php echo esc_url( $social_options['youtube'] ); ?>" title="<?php esc_attr_e( 'YouTube', 'standard'); ?>" target="_blank"><img src="<?php echo esc_url( get_template_directory_uri() . '/images/social/small/youtube.png' ); ?>" alt="<?php esc_attr_e( 'YouTube', 'standard'); ?>" /></a></li>
-	<?php } // end if ?>
+	// Begin to build up the list looking for the anchors for each image, too
+	$html = '<ul class="nav social-icons clearfix">';
+	foreach( $social_icons_urls as $icon_url ) {
 	
-	<li><a class="fademe" href="<?php echo esc_url( $social_options['rss'] ); ?>" title="<?php esc_attr_e( 'Subscribe via RSS', 'standard'); ?>" target="_blank"><img src="<?php echo esc_url( get_template_directory_uri() . '/images/social/small/rss.png' ); ?>" alt="<?php esc_attr_e( 'Subscribe via RSS', 'standard'); ?>" /></a></li>
+		$icon_url_array = explode( '|' , $icon_url );
+		$url = null;
+		if( count( $icon_url_array ) == 1 ) {
+		
+			$icon = $icon_url_array[0];
+		
+		} else { 
+		
+			$icon = $icon_url_array[0];
+			$url = $icon_url_array[1];
+			
+		} // end if/else
+		
+		// Build the line item
+		if( isset( $url ) || '' != esc_url( $icon ) ) { 
+		
+			$html .= '<li>';
+			if( strpos( $icon, 'rss.png' ) > 0 ) {
+				$url = standard_get_rss_feed_url();
+			} // end if/else
+			
+			// if the image has a URL, setup the anchor...
+			if( '' != $url ) {
+				$html .= '<a href="' . esc_url( str_replace( 'https://', 'http://', $url ) ) . '" class="fademe" target="_blank">';
+			} // end if
+			
+				// display the image
+				$html .= '<img src="' . esc_url( $icon ) . '" alt="" />';
+			
+			// ...and if the image has a URL, close the anchor
+			if( '' != $url ) {
+				$html .= '</a>';
+			} // end if
+			
+			unset( $url );
+			
+			$html .= '</li>';
+		
+		} // end if/else
+		
+	} // end foreach
+	$html .= '</ul>';
 	
-</ul>
+	// Render the list
+	echo $html;
+	
+?>
+
+

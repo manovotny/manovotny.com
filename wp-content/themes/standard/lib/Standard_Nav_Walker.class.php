@@ -19,28 +19,34 @@ class Standard_Nav_Walker extends Walker_Nav_Menu {
 	
 	/* Each time an element is processed, start_el is called. */
 	function start_el( &$output, $item, $depth, $args ) {
-	
+		
+		$css_classes = implode( ' ', $item->classes );
+		$target = isset( $item->target ) && '' != $item->target ? ' target="_blank" ' : '';
+		
+		// If a title was specified, let's add it to the anchor
+		$title = '' == $item->attr_title ? 'title="' . $item->title . '"' : 'title="' . $item->attr_title . '"';
+		
 		// If the current menu item has children, we need to set the proper class names on the list items
-		// and the anchors.
+		// and the anchors. Parent menu items can't have blank targets.
 		if( $args->has_children ) {
 		
 			if( $item->menu_item_parent == 0 ) {
-			
-				$menu_item = get_permalink() == $item->url ? '<li class="dropdown active">' : '<li class="dropdown">';
-					$menu_item .= '<a href="' . $item->url . '" class="dropdown-toggle" data-toggle="dropdown">';
+
+				$menu_item = get_permalink() == $item->url ? '<li class="dropdown ' . $css_classes . '">' : '<li class="dropdown ' . $css_classes . '">';
+					$menu_item .= '<a href="' . $item->url . '" class="dropdown-toggle" data-toggle="dropdown"' . ' ' . $title . '>';
 					
 			} else { 
-				
-				$menu_item = '<li class="dropdown submenu ">';
-					$menu_item .= '<a href="' . $item->url . '" class="dropdown-toggle" data-toggle="dropdown">';
+
+				$menu_item = '<li class="dropdown submenu ' . $css_classes . '">';
+					$menu_item .= '<a href="' . $item->url . '" class="dropdown-toggle" data-toggle="dropdown"' . $target . ' ' . $title . '>';
 					
 			} // end if/else
 		
 		// Otherwise, it's business as usual.		
 		} else {
-		
-			$menu_item = get_permalink() == $item->url ? '<li class="active">' : '<li>';
-				$menu_item .= '<a href="' . $item->url . '">';
+
+			$menu_item = get_permalink() == $item->url ? '<li class="active ' . $css_classes . '">' : '<li class="' . $css_classes . '">';
+				$menu_item .= '<a href="' . $item->url . '"' . $target . ' ' . $title . '>';
 					
 		} // end if
 		
@@ -64,7 +70,7 @@ class Standard_Nav_Walker extends Walker_Nav_Menu {
 	 * h/t to Stack Exchange: http://wordpress.stackexchange.com/a/16821/1014 
 	 */
 	function display_element( $element, &$children_elements, $max_depth, $depth = 0, $args, &$output ) {
-
+	
 		$id_field = $this->db_fields['id'];
 		if( is_object( $args[0] ) ) {
 			$args[0]->has_children = ! empty( $children_elements[$element->$id_field] );

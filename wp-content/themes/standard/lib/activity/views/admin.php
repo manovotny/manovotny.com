@@ -1,7 +1,7 @@
 <div class="activity-tabs wrapper">
 
     <div class="option">
-    	<span><?php _e( 'Show', 'standard '); ?></span>
+    	<span><?php _e( 'Show', 'standard' ); ?></span>
     	<select name="<?php echo $this->get_field_name( 'post_count' ); ?>" id="<?php echo $this->get_field_id( 'post_count' ); ?>">
     		<?php for( $i = 0; $i <= 10; $i++ ) { ?>
     			<option value="<?php echo $i; ?>" <?php if( $instance['post_count'] == $i ) echo 'selected="selected"'; ?>><?php echo $i; ?></option>
@@ -17,7 +17,7 @@
     			<option value="<?php echo $i; ?>" <?php if( $instance['popular_count'] == $i ) echo 'selected="selected"'; ?>><?php echo $i; ?></option>
     		<?php } // end for ?>
     	</select>
-    	<span><?php _e( 'most commented posts.', 'standard' ); ?></span>
+    	<span><?php _e( 'most commented posts', 'standard' ); ?></span>
     </div>
     
     <div class="option">

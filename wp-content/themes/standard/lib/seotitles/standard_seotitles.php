@@ -34,24 +34,23 @@ class Standard_SeoTitles {
 		
 		if( is_home() ) {
 			$title = get_bloginfo( 'name' ) . ' | ' . get_bloginfo( 'description' );
-		} elseif (is_search()) {
+		} elseif ( is_search() ) {
 		
 			$query = $_GET[ 's' ];
 		
-			$search = new WP_Query( 's=$query&posts_per_page=-1' );
+			$search = new WP_Query( 's=' . $query . '&posts_per_page=-1' );
 			$key = trim( esc_html( $query, 1 ) );
 			$count = $search->post_count;
-			wp_reset_postdata();
 			
 			$title = __( 'Search Results For' , 'standard' ) . ' ' . $key . ' | ' . $count . ' ' . __( 'Results', 'standard' ) . ' | ' . get_bloginfo( 'name' );
 			
 		} elseif( is_404() ) {
 			$title = get_bloginfo( 'name' ) . ' | ' . __( '404 Nothing Found', 'standard' ); 
-		} elseif(is_author()) {
+		} elseif( is_author() ) {
 			$title = get_bloginfo( 'name' ) . ' | ' . __( 'Author Archives', 'standard' ); 
-		} elseif(is_single()) {
+		} elseif( is_single() ) {
 		
-			if( strlen( trim( get_the_title( $page_id) ) ) == 0 ) {
+			if( strlen( trim( get_the_title( $page_id ) ) ) == 0 ) {
 				$title = get_bloginfo( 'name' ) . ' | ' . get_bloginfo( 'description' );
 			} else {
 				$title = strip_tags( htmlspecialchars_decode( get_the_title( $page_id ) ) ) . ' | ' . get_bloginfo( 'name' );
@@ -74,6 +73,8 @@ class Standard_SeoTitles {
 			$title = get_bloginfo( 'name' ) . ' | ' . __( 'Archive', 'standard' ) . ' | ' . get_the_time( get_option( 'date_format' ) );
 		} elseif( is_tag() ) {
 			$title = get_bloginfo( 'name' ) . ' | ' . __( 'Tag Archive', 'standard' ) . ' | ' . single_tag_title( '', false );
+		} elseif( is_feed() ) {
+			$title = ' | ' . get_bloginfo( 'description' );
 		} // end if/else
 		
 		return $title;

@@ -27,23 +27,14 @@
 			<ol class="commentlist">
 				<?php wp_list_comments( 'avatar_size=50&callback=custom_comment&type=comment' ); ?>
 			</ol>    
-			<div class="comment-navigation">
-				<div class="fl">
-					<?php previous_comments_link(); ?>
+			<div class="comment-navigation clearfix">
+				<div class="comment-prev-nav">
+					<?php previous_comments_link( '<i class="icon-chevron-left"></i>' . __( 'Previous Comments', 'standard' ) ); ?>
 				</div>
-				<div class="fr">
-					<?php next_comments_link(); ?>
+				<div class="comment-next-nav">
+					<?php next_comments_link( __( 'Next Comments', 'standard' ) . '<i class="icon-chevron-right"></i>'); ?>
 				</div>
 			</div>
-			
-			<?php 
-				comment_form(
-					array( 
-						'comment_notes_after' => '<p class="form-allowed-tags">' . sprintf( __( 'Text formatting is available via select <a href="javascript:;">HTML</a>. %s', 'standard' ), ' <code>' . allowed_tags() . '</code>' ) . '</p>' 
-					)
-				); 
-			?>
-			
 		</div><!-- /#comments -->
 	<?php } // end if ?>
 
@@ -53,7 +44,7 @@
 				<?php _e( 'Trackbacks and Pingbacks:', 'standard' ); ?>
 			</h3>
 			<ol class="pinglist">
-				<?php wp_list_comments( 'type=pings&callback=list_pings' ); ?>
+				<?php wp_list_comments( 'type=pings&callback=list_pings&per_page=-1' ); ?>
 			</ol>
 		</div><!-- /#pings -->
 	<?php } // end if ?>	
@@ -64,14 +55,9 @@
 		<div id="no-comments" class="clearfix">
 			<p class="title"><?php _e( 'No Comments', 'standard' ); ?></p>
 			<p><?php _e( 'Be the first to start the conversation.', 'standard' ); ?></p>
-			<?php 
-				comment_form(
-					array( 
-						'comment_notes_after' => '<p class="form-allowed-tags">' . sprintf( __( 'Text formatting is available via select <a href="javascript:;">HTML</a>. %s', 'standard' ), ' <code>' . allowed_tags() . '</code>' ) . '</p>' 
-					)
-				); 
-			?>
 		</div><!-- /#no-comments -->
 	<?php } // end if ?>
 	
 <?php } // end if ?>
+
+<?php standard_comment_form(); ?>

@@ -14,25 +14,16 @@ class Activity_Tabs extends WP_Widget {
 	 * Constructor
 	 *--------------------------------------------------------*/
 	 
-	function Activity_Tabs() {
+	public function __construct() {
 
 		$widget_opts = array(
-			'classname' 	=> __( 'Activity Tabs', 'standard' ), 
-			'description' 	=> __( 'Display your most recent posts, comments, popular posts, and tags.', 'standard' )
+			'classname' 	=> __( 'standard-activity-tabs', 'standard' ), 
+			'description' 	=> __( 'Display your most recent posts, comments, popular posts, and tags.', 'standard' ),
 		);	
-		$this->WP_Widget( 'activity-tabs', __( 'Activity Tabs (Standard)', 'standard' ), $widget_opts );
+		$this->WP_Widget( 'standard-activity-tabs', __( 'Activity Tabs', 'standard' ), $widget_opts );
 		
-		if( is_admin() ) {
-		
-			wp_register_style( 'activity-tabs-admin', get_template_directory_uri() . '/lib/activity/css/admin.css' );
-			wp_enqueue_style( 'activity-tabs-admin' );
-			
-		} else {
-		
-			wp_register_script( 'activity-tabs', get_template_directory_uri() . '/lib/activity/js/widget.js', array( 'jquery' ) );
-			wp_enqueue_script( 'activity-tabs');
-			
-		} // end if
+		add_action( 'admin_enqueue_scripts', array( &$this, 'register_admin_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( &$this, 'register_widget_styles' ) );
 		
 	} // end constructor
 
@@ -46,7 +37,7 @@ class Activity_Tabs extends WP_Widget {
 	 * @args			The array of form elements
 	 * @instance
 	 */
-	function widget( $args, $instance ) {
+	public function widget( $args, $instance ) {
 	
 		extract( $args, EXTR_SKIP );
 
@@ -54,10 +45,20 @@ class Activity_Tabs extends WP_Widget {
 		$popular_count = empty( $instance['popular_count']) ? '' : apply_filters( 'popular_count', $instance['popular_count'] );
 		$comment_count = empty( $instance['comment_count']) ? '' : apply_filters( 'comment_count', $instance['comment_count'] );
 		$tag_count = empty( $instance['tag_count']) ? '' : apply_filters( 'tag_count', $instance['tag_count'] );
-    
+
 		// Display the widget
 		if( $post_count > 0 || $popular_count > 0 || $comment_count > 0 || $tag_count > 0 ) {
+		
+			if( isset( $args['before_widget'] ) ) {
+				echo $args['before_widget'];
+			} // end if
+			
 			echo self::get_popular_content( $post_count, $popular_count, $comment_count, $tag_count );
+			
+			if( isset( $args['after_widget'] ) ) {
+				echo $args['after_widget'];
+			} // end if
+			
 		} // end if
 		
 	} // end widget
@@ -68,7 +69,7 @@ class Activity_Tabs extends WP_Widget {
 	 * @new_instance	The previous instance of values before the update.
 	 * @old_instance	The new instance of values to be generated via the update.
 	 */
-	function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ) {
 		
 		$instance = $old_instance;
 
@@ -76,7 +77,7 @@ class Activity_Tabs extends WP_Widget {
 		$instance['popular_count'] = strip_tags( stripslashes( $new_instance['popular_count'] ) );
 		$instance['comment_count'] = strip_tags( stripslashes( $new_instance['comment_count'] ) ); 
 		$instance['tag_count'] = strip_tags( stripslashes( $new_instance['tag_count'] ) ); 
-		
+
 		return $instance;
 		
 	} // end widget
@@ -86,7 +87,7 @@ class Activity_Tabs extends WP_Widget {
 	 *
 	 * @instance	The array of keys and values for the widget.
 	 */
-	function form( $instance ) {
+	public function form( $instance ) {
 
 		$instance = wp_parse_args(
 			(array)$instance,
@@ -104,9 +105,35 @@ class Activity_Tabs extends WP_Widget {
     	$tag_count = strip_tags( stripslashes( $instance['tag_count'] ) );
    
 		// Display the admin form
-    	include_once( get_template_directory() . '/lib/activity/views/admin.php' );
+    	include( get_template_directory() . '/lib/activity/views/admin.php' );
 		
 	} // end form
+	
+
+	/*--------------------------------------------------------*
+	 * Helper Functions
+	 *--------------------------------------------------------*/
+
+	/** 
+	 * Registers and Enqueues the stylesheets for the Media Uploader and this widget.
+	 */
+	public function register_admin_styles() {
+
+		wp_register_style( 'standard-activity-tabs', get_template_directory_uri() . '/lib/activity/css/admin.css' );
+		wp_enqueue_style( 'standard-activity-tabs' );
+		
+	} // end register_admin_styles
+	
+	
+	/** 
+	 * Registers and Enqueues the stylesheets for this widget.
+	 */
+	public function register_widget_styles() {
+	
+		wp_register_style( 'standard-activity-tabs', get_template_directory_uri() . '/lib/activity/css/widget.css' );
+		wp_enqueue_style( 'standard-activity-tabs' );
+	
+	} // end register_widget_styles
 
 	/*--------------------------------------------------------*
 	 * Private Functions
@@ -198,48 +225,58 @@ class Activity_Tabs extends WP_Widget {
 				'orderby'	 	=> 'date'
 			)
 		);
-	
+
 		// Create the markup for the listing
 		$html = '<div class="tab-pane" id="recent">';
 			$html .= '<ul class="latest-posts">';
-			
-			foreach( $latest_posts as $post ) {
-			
-				$html .= '<li class="clearfix">';
-					
-					// Add the small featured image
-					if( has_post_thumbnail( $post->ID ) ) {
-						$html .= '<a class="latest-post-tn fademe" href="' . get_permalink( $post->ID ) . '" rel="nofollow">';
-							$html .= get_the_post_thumbnail( $post->ID, array( 50, 50 ) );
-						$html .= '</a>';
-					} // end if
-					
-					$html .='<div class="latest-meta">';	
+
+			if( count( $latest_posts ) > 0 ) {
 						
-						// Add the title
-						$html .= '<a href="' . get_permalink( $post->ID ) . '" rel="nofollow">';
-							$html .= get_the_title( $post->ID );
-						$html .= '</a>';
+				foreach( $latest_posts as $post ) {
+				
+					$html .= '<li class="clearfix">';
 						
-						// Add date posted
-						// If there's no title, then we need to turn the date into the link
-						if( strlen( get_the_title( $post->ID ) ) == 0 ) {
-							$html .= '<a href="' . get_permalink( $post->ID ) . '" rel="nofollow">';
-						} // end if
-						
-						$html .= '<span class="latest-date">';
-							$html .= get_the_time( get_option( 'date_format' ), $post->ID );
-						$html .= '</span>';
-						
-						// Close the anchor 
-						if(strlen( get_the_title( $post->ID ) ) == 0 ) {
+						// Add the small featured image
+						if( has_post_thumbnail( $post->ID ) ) {
+							$html .= '<a class="latest-post-tn fademe" href="' . get_permalink( $post->ID ) . '" rel="nofollow">';
+								$html .= get_the_post_thumbnail( $post->ID, array( 50, 50 ) );
 							$html .= '</a>';
 						} // end if
 						
-					$html .='</div>';
-					
+						$html .='<div class="latest-meta">';	
+							
+							// Add the title
+							$html .= '<a href="' . get_permalink( $post->ID ) . '" rel="nofollow">';
+								$html .= get_the_title( $post->ID );
+							$html .= '</a>';
+							
+							// Add date posted
+							// If there's no title, then we need to turn the date into the link
+							if( strlen( get_the_title( $post->ID ) ) == 0 ) {
+								$html .= '<a href="' . get_permalink( $post->ID ) . '" rel="nofollow">';
+							} // end if
+							
+							$html .= '<span class="latest-date">';
+								$html .= get_the_time( get_option( 'date_format' ), $post->ID );
+							$html .= '</span>';
+							
+							// Close the anchor 
+							if(strlen( get_the_title( $post->ID ) ) == 0 ) {
+								$html .= '</a>';
+							} // end if
+							
+						$html .='</div>';
+						
+					$html .= '</li>';
+				} // end foreach
+				
+			} else {
+			
+				$html .= '<li>';
+					$html .= '<p class="no-posts">' . __( "You have no recent posts.", 'standard' ) . '</p>';
 				$html .= '</li>';
-			} // end foreach
+			
+			} // end if/else
 			
 			$html .= '</ul>';
 		$html .= '</div>';
@@ -350,44 +387,54 @@ class Activity_Tabs extends WP_Widget {
 		// Create the markup for the listing
 		$html = '<div id="pop-comments" class="tab-pane">';
 			$html .= '<ul class="latest-comments">';
-			
-			foreach( $comments as $comment ) {
+
+			if( count( $comments ) > 0 ) {
+		
+				foreach( $comments as $comment ) {
+		
+					$html .= '<li class="clearfix">';
 	
-				$html .= '<li class="clearfix">';
+						$html .= '<a class="latest-comment-tn fademe" href="' . get_permalink( $comment->comment_post_ID ) . '" rel="nofollow">';
+							$html .= get_avatar($comment->comment_author_email, '50');
+						$html .= '</a>';
+												
+						// Link the comment to the post
+						$html .='<div class="comment-meta">';	
+							
+							// Add the title
+							if( strlen( $comment->comment_content ) <= 40 ) {
+								$html .= '<div class="comment-meta-author">' . $comment->comment_author . '</div>';
+								$html .= '<div class="comment-meta-comment">';
+									$html .= '<a href="' . get_comment_link( $comment ) . '" rel="nofollow">';
+										$html .= strip_tags( $comment->comment_content );
+									$html .= '</a>';
+								$html .= '</div>';
+							} else {
+								$html .= '<div class="comment-meta-author">' . $comment->comment_author . '</div>';
+								$html .= '<div class="comment-meta-comment">';
+									$html .= '<a href="' . get_comment_link( $comment ) . '" rel="nofollow">';
+										$html .= strip_tags( substr( $comment->comment_content, 0, 40 ) ) . '...';
+									$html .= '</a>';
+								$html .= '</div>';
+							} // end if/else	
+							
+							
+						$html .='</div>';
+	
+					$html .= '</li>';
+				} // end foreach
 
-					$html .= '<a class="latest-comment-tn fademe" href="' . get_permalink( $comment->comment_post_ID ) . '" rel="nofollow">';
-						$html .= get_avatar($comment->comment_author_email, '50');
-					$html .= '</a>';
-											
-					// Link the comment to the post
-					$html .='<div class="comment-meta">';	
-						
-						// Add the title
-						if( strlen( $comment->comment_content ) <= 40 ) {
-							$html .= '<div class="comment-meta-author">' . $comment->comment_author . '</div>';
-							$html .= '<div class="comment-meta-comment">';
-								$html .= '<a href="' . get_comment_link( $comment ) . '" rel="nofollow">';
-									$html .= strip_tags( $comment->comment_content );
-								$html .= '</a>';
-							$html .= '</div>';
-						} else {
-							$html .= '<div class="comment-meta-author">' . $comment->comment_author . '</div>';
-							$html .= '<div class="comment-meta-comment">';
-								$html .= '<a href="' . get_comment_link( $comment ) . '" rel="nofollow">';
-									$html .= strip_tags( substr( $comment->comment_content, 0, 40 ) ) . '...';
-								$html .= '</a>';
-							$html .= '</div>';
-						} // end if/else	
-						
-						
-					$html .='</div>';
-
-				$html .= '</li>';
-			} // end foreach
+				
+			} else {
 			
+				$html .= '<li>';
+					$html .= '<p class="no-comments">' . __( 'You have no comments.', 'standard' ) . '</p>';
+				$html .= '</li>';
+				
+			} // end if
+								
 			$html .= '</ul>';
 		$html .= '</div>';
-
 		
 		return $html;
 	
@@ -408,16 +455,18 @@ class Activity_Tabs extends WP_Widget {
 				 		'format' 	=> 'array'
 				 	) 
 				 );
-				 
+
 		// Create the markup
 		$html = '<div id="tags" class="tagcloud tab-pane">';		
-			if( $tags && count( $tags ) ) {
-				$html .= '<div class="post-tags">';
+			$html .= '<div class="post-tags">';
+				if( $tags && count( $tags ) > 0 ) {
 					foreach( $tags as $tag ) {
 						$html .= $tag;
 					} // end foreach
-				$html .= '</div>';
-			} // end if
+				} else {
+						$html .= '<p class="no-tags">' . __( 'You have no tags.', 'standard' ) . '</p>';
+				} // end if
+			$html .= '</div>';
 		$html .= '</div>';
 		
 		return $html; 
@@ -425,6 +474,6 @@ class Activity_Tabs extends WP_Widget {
 	} // end get_tags
 
 } // end class
-add_action( 'widgets_init', create_function( '', 'register_widget("Activity_Tabs");' ) ); 
+add_action( 'widgets_init', create_function( '', 'register_widget( "Activity_Tabs" );' ) ); 
 
 ?>

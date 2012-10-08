@@ -7,45 +7,48 @@
  * @since 3.0
  */
 ?>
+
 <?php get_header(); ?>
-<?php $options = get_option( 'standard_theme_layout_options' ); ?>
+<?php $presentation_options = get_option( 'standard_theme_presentation_options' ); ?>
 
 <div id="wrapper">
 	<div class="container">
  		<div class="row">
- 		
-			<?php if ( 'left_sidebar_layout' == $options['layout'] ) { ?>
+ 	
+			<?php if ( 'left_sidebar_layout' == $presentation_options['layout'] ) { ?>
 				<?php get_sidebar(); ?>
 			<?php } // end if ?>
 	
-			<div id="main" class="<?php echo 'full_width_layout' == $options['layout'] ? 'span12 fullwidth' : 'span8'; ?> clearfix" role="main">
-
+			<div id="main" class="<?php echo 'full_width_layout' == $presentation_options['layout'] ? 'span12 fullwidth' : 'span8'; ?> clearfix" role="main">
+			
 				<?php get_template_part( 'breadcrumbs' ); ?>
 				
-				<?php if ( is_search() ) { ?> 
-                    <div id="search-page-title" class="alert alert-success"> 
-                        <h3><?php _e( 'Search Results For ', 'standard' ); echo get_query_var( 's' ); ?></h3> 
-                    </div> 
-                <?php } elseif ( is_archive() ) { ?>                 
-                    <div id="archive-page-title" class="alert alert-success"> 
-                        <h3> 
-                            <?php _e( 'Archives For ', 'standard' ); ?>
-                            <?php if( standard_is_date_archive() ) { ?>
-                            	<?php echo standard_get_date_archive_label(); ?>
-                        	<?php } elseif ( is_author() ) { ?>
-                        		<?php $author_data = get_userdata(get_query_var('author') ); ?>
-                            	<?php echo $author_data->display_name; ?>
-                            <?php } elseif ( '' == single_tag_title( '', false ) ) { ?> 
-                                <?php echo get_cat_name( get_query_var( 'cat' ) ); ?> 
-                            <?php } else { ?> 
-                                <?php echo single_tag_title() ?> 
-                            <?php } // end if/else ?> 
-                        </h3>
-						<?php if( '' != category_description() ) { ?>
-	                        <p><?php echo category_description(); ?></p>
-                        <?php } // end if ?> 
-                    </div> 
-                <?php } // end if ?> 
+				<?php if ( is_archive() ) { ?>                 
+	                <div id="archive-page-title"> 
+	                    <h3> 
+	                        <?php _e( 'Archives For ', 'standard' ); ?>
+	                        <?php if( standard_is_date_archive() ) { ?>
+	                        	<?php echo standard_get_date_archive_label(); ?>
+	                    	<?php } elseif ( is_author() ) { ?>
+	                    	
+	                    		<?php 
+	                    			$author_data = standard_is_using_pretty_permalinks() ? 
+	                    				get_userdata( get_query_var( 'author' ) )  : 
+	                    				get_userdata( user_trailingslashit( get_query_var( 'author' ) ) );
+	                    			echo $author_data->display_name; 
+	                    		?>
+	                        	
+	                        <?php } elseif ( '' == single_tag_title( '', false ) ) { ?> 
+	                            <?php echo get_cat_name( get_query_var( 'cat' ) ); ?> 
+	                        <?php } else { ?> 
+	                            <?php echo single_tag_title() ?> 
+	                        <?php } // end if/else ?> 
+	                    </h3>
+	            <?php if( '' != category_description() ) { ?>
+	                       <?php echo category_description(); ?>
+	                    <?php } // end if ?> 
+	                </div> 
+	            <?php } // end if ?> 
 				
 				<?php if ( have_posts() ) { ?>
 				
@@ -53,7 +56,7 @@
 						<?php the_post(); ?>
 						<?php get_template_part( 'loop', get_post_format() ); ?>
 					<?php } // end while ?>
-			
+	
 					<?php get_template_part( 'pagination' ); ?>
 					
 				<?php } else { ?>
@@ -71,10 +74,10 @@
 				<?php } // end if/else ?>
 			</div><!-- /#main -->
 		
-			<?php if ( 'right_sidebar_layout' == $options['layout'] ) { ?>
+			<?php if ( 'right_sidebar_layout' == $presentation_options['layout'] ) { ?>
 				<?php get_sidebar(); ?>
 			<?php } // end if ?>
-	
+
 		</div><!-- /row -->
 	</div><!-- /container -->
 </div> <!-- /#wrapper -->

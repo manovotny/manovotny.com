@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Standard Breadcrumbs is a class that is respnsible for creating SEO-friendly
+ * Standard Breadcrumbs is a class that is responsible for creating SEO-friendly
  * breadcrumbs for blog posts.
  *
  * The class will generate the breadcrumbs in the format of:
@@ -46,7 +46,7 @@ class Standard_Breadcrumbs {
 			} elseif( is_archive() ) {
 
 				if( is_author() ) {
-					$str_breadcrumb .= self::get_home_link() . __( 'Archives', 'standard' ) . __( ' / ', 'standard' ) . self::get_author_name(); 
+					$str_breadcrumb .= self::get_home_link() . __( 'Archives', 'standard' ) . __( ' / ', 'standard' ) . self::get_author_display_name(); 
 				} elseif( '' != get_query_var( 'year' ) || '' != get_query_var( 'monthnum' ) || '' != get_query_var( 'm' ) || '' != get_query_var( 'day' ) ) {
 					$str_breadcrumb .= self::get_home_link() . __( 'Archives', 'standard' ) . __( ' / ', 'standard' ) . self::get_date_labels(); 
 				} else {
@@ -98,13 +98,20 @@ class Standard_Breadcrumbs {
 		// Get the current category based on whether or not the page ID is set.
 		// If the ID isn't set, we're on an archives page
 		if( strlen( trim( $page_id ) ) > 0 ) {
-		
+
+			$category_name = '';
+			$category_url = '';
+
 			$categories = get_the_category( $page_id );
-			$category = $categories[0];
+			if( count( $categories) > 0 ) {
 			
-			$category_id = $category->cat_ID;
-			$category_name = $category->cat_name;
-			$category_url = get_category_link( $category_id );
+				$category = $categories[0];
+				
+				$category_id = $category->cat_ID;
+				$category_name = $category->cat_name;
+				$category_url = get_category_link( $category_id );
+			
+			} // end if
 		
 		} else {
 		
@@ -126,10 +133,11 @@ class Standard_Breadcrumbs {
 		// Create the category link
 		$category_link = '<li>';
 			$category_link .= '<a href="' . $category_url . '" itemprop="url"><span itemprop="title">' . $category_name . '</span></a>';
-			if( strlen( trim( $page_id ) ) > 0 ) {
+			if( strlen( trim( $page_id ) ) > 0 && strlen( trim( $category_name ) ) > 0) {
 				$category_link .= '<span class="divider">/</span>';
 			} // end if
 		$category_link .= '</li>';
+		
 		
 		return $category_link;
 			
@@ -266,17 +274,25 @@ class Standard_Breadcrumbs {
 	/**
 	 * Returns the name of the author based on the ID in the query string.
 	 */
-	private static function get_author_name() {
-	
-		$author_data = get_userdata( get_query_var('author') );
+	private static function get_author_display_name() {
+
+		global $wp_rewrite;
 		
+		// If we're using permalinks, then we need to add user_trailingslashit;
+		// Otherwise, we use the old way of doing it.
+		if( standard_is_using_pretty_permalinks() ) { 		
+			$author_data = get_userdata( get_query_var( 'author' ) );
+		} else {
+			$author_data = get_userdata( user_trailingslashit( get_query_var( 'author' ) ) );			
+		} // end if
+
 		$author_link = '<a href="' . esc_html( get_author_posts_url( $author_data->ID ) ) . '">';
 			$author_link .= $author_data->display_name;
 		$author_link .= '</a>';
 		
 		return $author_link;
 
-	} // end get_author_name
+	} // end get_author_display_name
 
 } // end class
 

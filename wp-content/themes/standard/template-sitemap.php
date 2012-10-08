@@ -1,6 +1,7 @@
-<?php /* Template Name: Sitemap */ ?>
 <?php
 /**
+ * Template Name: Sitemap
+ *
  * The template for rendering an SEO-friendly site map.
  * 
  * @package Standard
@@ -8,17 +9,17 @@
  */
 ?>
 <?php get_header(); ?>
-<?php $options = get_option( 'standard_theme_layout_options' ); ?>
+<?php $presentation_options = get_option( 'standard_theme_presentation_options' ); ?>
 
 <div id="wrapper">
 	<div class="container">
 		<div class="row">
 
-				<?php if ( 'left_sidebar_layout' == $options['layout'] ) { ?>
+				<?php if ( 'left_sidebar_layout' == $presentation_options['layout'] ) { ?>
 					<?php get_sidebar(); ?>
 				<?php } // end if ?>
 							
-				<div id="main" class="<?php echo 'full_width_layout' == $options['layout'] ? 'span12 fullwidth' : 'span8'; ?> clearfix" role="main">
+				<div id="main" class="<?php echo 'full_width_layout' == $presentation_options['layout'] ? 'span12 fullwidth' : 'span8'; ?> clearfix" role="main">
 				
 					<?php get_template_part( 'breadcrumbs' ); ?>
 				
@@ -27,22 +28,35 @@
 							 the_post(); ?>
 							<div id="post-<?php the_ID(); ?> format-standard" <?php post_class( 'post' ); ?>>
 								<div class="post-header clearfix">
-									<h1 class="post-title"><?php the_title(); ?></h1>	
+									<h1 class="post-title entry-title"><?php the_title(); ?></h1>	
 								</div> <!-- /.post-header -->						
 								<div id="content-<?php the_ID(); ?>" class="entry-content clearfix">
-
+									<div id="sitemap-authors">
 										<h2 id="authors"><?php _e( 'Authors', 'standard' ); ?></h2>
 				
-										<ul id="sitemap-authors">
+										<ul id="sitemap-authors" class="inline-grid four-up">
 											<?php
-												wp_list_authors(
-													array(
-														'exclude_admin' => false,
-													)
-												);
+											foreach( get_users() as $user ) {
+												$query = new WP_Query( 'author=' . $user->ID . '&posts_per_page=1' );
+												if( $query->have_posts() ) {
+													echo '<li>';
+														echo '<div class="sitemap-author-meta">';
+															echo get_avatar( $user->user_email, $size = '80' );
+															$query->the_post();
+															echo '<span class="badge">';
+																the_author_posts();
+															echo '</span>';
+															echo '<br>';
+															the_author_posts_link();
+														echo '</div>';
+													echo '</li>';
+												} // end if
+												wp_reset_postdata();
+											} // end foreach
 											?>
 										</ul>
-										
+									</div><!-- /#sitemap-authors -->
+									
 										<h2 id="pages"><?php _e( 'Pages', 'standard' ); ?></h2>
 										<ul id="sitemap-pages">
 											<?php
@@ -95,7 +109,7 @@
 					<?php } // end if ?>
 				</div><!-- /#main -->
 			
-				<?php if ( 'right_sidebar_layout' == $options['layout'] ) {  ?>
+				<?php if ( 'right_sidebar_layout' == $presentation_options['layout'] ) {  ?>
 					<?php get_sidebar(); ?>
 				<?php } // end if ?>
 				

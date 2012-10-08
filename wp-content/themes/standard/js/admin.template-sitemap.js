@@ -23,11 +23,12 @@
 		} // end if
 		
 		// For 'Post Editor'
-		if($('select[name=page_template]').length > 0 && $('#page_template').length > 0) {
+		if($('select[name="page_template"]').length > 0 && $('#page_template').length > 0 && sitemapPageID($) > -1) {
 		
+			// Disable the sitemap option there's already a sitemap
 			$('#page_template').children('option')
 				.each(function() {
-					if($(this).val() == 'template-sitemap.php') {
+					if($(this).val() === 'template-sitemap.php') {
 						$(this).attr('disabled', 'disabled');
 					} // end if
 				});
@@ -45,7 +46,10 @@
 })(jQuery);
 
 /**
- * TODO
+ * Scans the JavaScript sources on the page to determine which page is using the sitemap template.
+ * 
+ * $		The jQuery function
+ * returns	The ID of the page serving as the sitemap
  */
 function sitemapPageID($) {
 
@@ -74,7 +78,9 @@ function sitemapPageID($) {
 } // end findSitemapPageID
 
 /**
- * TODO
+ * Removes the post editor if the user selects the Sitemap template.
+ * 
+ * $		The jQuery function
  */
 function togglePostBodyContent($) {
 

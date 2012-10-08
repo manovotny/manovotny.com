@@ -12,6 +12,7 @@
 	5. Sidebar
 		-Widgets
 	6. Footer
+	7. IE8
 */
 
 
@@ -61,10 +62,40 @@ input[type="submit"]:hover {
 /* ------------------------------------------------------------------------ 2. Main Styles */
 
 #wrapper {
-	padding: 0 0 40px;
+	padding: 20px 0 40px;
 }
 
-/* ------------------------------------------------------------------------ 3. Menu-Navigation */
+#head-wrapper {
+	position: relative;
+}
+
+#hgroup { 
+	padding: 45px 0 20px; 
+	position: relative; 
+}
+
+#logo { 
+	float: right; 
+}
+
+#header-widget { 
+	float: left; 
+}
+
+/* ------------------------------------------------------------------------ 3. Menu Navigation */
+
+.menu-header-container { 
+	float: right;
+}
+
+.menu-header-container .nav,
+.menu .nav {
+	float: right;
+}
+
+#social-networking {
+	float: left;
+}
 
 .topbar .social-icons {
 	float: left;
@@ -78,6 +109,18 @@ input[type="submit"]:hover {
 
 #header.imageyup #logo {
 	padding-right: 40px;
+}
+
+#top-ad.imageyup {
+	float: left;
+}
+
+#footer-links {
+	float: right;
+}
+
+#sub-floor #credit {
+	float: left;
 }
 
 /* ------------------------------------------------------------------------ 4. Posts */
@@ -112,6 +155,18 @@ input[type="submit"]:hover {
 	padding-right: 0;
 }
 
+.entry-content ol,
+.entry-content ul {
+	margin: 0 25px 9px 0 !important;	
+}
+
+blockquote {
+	padding: 0 15px 0 0;
+	border-right: 5px solid #eee;
+	border-left: 0;
+	text-align: right;
+}
+
 /* Post Format Video */
 
 .format-video p, .format-video h1, .format-video h2, .format-video h3, .format-video blockquote  {
@@ -119,16 +174,16 @@ input[type="submit"]:hover {
 	padding-right: 20px;
 }
 
-/* Post format status */
+/* Post format Status */
 
 .post.format-status .post-avatar {
 	float: right;
+	margin: 0 0 20px 20px;
 }
 
 .post.format-status .post-header .entry-content {
-	float: right;
-	padding-right: 20px;
-	padding-left: 0;
+	float: left;
+	margin-left: -10px;
 }
 
 /* Post format Quote */
@@ -229,6 +284,19 @@ input[type="submit"]:hover {
 	margin-right: 0;
 }
 
+#commentform #comment-form-wrapper {
+	float: right;
+}
+
+#commentform #comment-form-avatar {
+	float: right;
+}
+
+#commentform #comment-form-wrapper #comment-form-elements,
+#commentform #comment-form-wrapper #comment-form-elements-full {
+	float: left;
+}
+
 #commentform .code {
 	margin-right: 34px;
 	margin-left: 0;
@@ -292,8 +360,21 @@ table#wp-calendar tfoot td#next {
 	text-align: left;
 }
 
-/* ------------------------------------------------------------------------ 6. Footer */
+/* ------------------------------------------------------------------------ 7. IE8 */
 
 #sub-floor #credit {
 	text-align: left;
+}
+
+#ie8 #menu-above-header .navbar-inner,
+#ie8 #menu-below-header .navbar-inner,{
+	float:right;
+}
+
+/* Smartphones */
+@media (max-width: 768px) {
+
+	.post.format-status .post-header .entry-content {
+		float: none;
+	}
 }
