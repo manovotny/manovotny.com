@@ -1,0 +1,18 @@
+/*
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ CONTENTS /\/\/\/\/\/\/\/\/\/\/\/\/\/\//\/\/\/\/\
+
+	1. Standard Overrides
+
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//\/\/\/\/\/\/\/\/\/\
+*/
+
+
+/* Standard Overrides
+---------------------------------------------------------------------------------- */
+
+/* makes footer "stick" when there is not enough content to fill the browser */
+#footer.stick {
+	bottom: 0;
+	position: fixed;
+	width: 100%;
+}
