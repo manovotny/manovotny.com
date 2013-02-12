@@ -1,16 +1,24 @@
-#OSX
+#OS X
 .DS_Store
+
+#IDE
+.idea
+*.iml
 
 #WordPress
 /license.txt
 /index.php
 /readme.html
+/sitemap.xml
+/sitemap.xml.gz
 /wp-*.php
 /wp-admin/
 /wp-content/index.php
 /wp-content/plugins/index.php
 /wp-content/themes/index.php
-/wp-content/themes/manovotny/photos/*
+/wp-content/themes/twentyten
+/wp-content/themes/twentyeleven
+/wp-content/themes/twentytwelve
 /wp-content/upgrade/*
 /wp-content/uploads/
 /wp-includes/
