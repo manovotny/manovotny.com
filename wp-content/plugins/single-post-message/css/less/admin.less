@@ -1,0 +1,26 @@
+@background: #FCF8E3;
+@border-color: #FBEED5;
+@color: #C09853;
+
+#single-post-message {
+	width: 100%;
+}
+
+#single-post-message-preview {
+	background-color: @background;
+	border: 1px solid @border-color;
+	.border-radius(4px);
+	margin-bottom: 18px;
+	margin: 8px 0 8px 0;
+	color: @color;
+	padding: 12px;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	font-family: Arial, Sans-serif;
+	font-size: 12px;
+}
+
+.border-radius (@radius) {
+	border-radius: @radius;
+	-moz-border-radius: @radius;
+	-webkit-border-radius: @radius;
+}

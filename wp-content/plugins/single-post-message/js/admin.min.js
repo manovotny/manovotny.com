@@ -1,0 +1,1 @@
+(function(e){e(function(){if(e("#single-post-message").length>0){var t="Your post message preview will appear here.";e("#single-post-message").keyup(function(){e.trim(e(this).val()).length===0?e("#single-post-message-preview").html(t):e("#single-post-message-preview").html(e(this).val())})}})})(jQuery);

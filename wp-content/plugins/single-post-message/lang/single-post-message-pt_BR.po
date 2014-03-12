@@ -1,0 +1,41 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Single Post Message 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-13 22:38-0500\n"
+"PO-Revision-Date: 2013-12-11 20:39-0000\n"
+"Last-Translator: Celso Azevedo <mail@celsoazevedo.net>\n"
+"Language-Team: Celso Azevedo <mail@celsoazevedo.net>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.6.2\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../plugin.php:91
+msgid "Post Message"
+msgstr "Mensagem do Post"
+
+#: ../plugin.php:108
+msgid "Enter your post message here. HTML accepted."
+msgstr "Insira a sua mensagem aqui. O código HTML é permitido."
+
+#: ../plugin.php:113
+msgid "Your post message preview will appear here."
+msgstr "Uma previsualização da mensagem aparecerá aqui."
+
+#: ../plugin.php:123
+msgid "Display this message "
+msgstr "Mostrar esta mensagem"
+
+#: ../plugin.php:125
+msgid "above the post content."
+msgstr "antes do conteúdo do post."
+
+#: ../plugin.php:126
+msgid "below the post content."
+msgstr "depois do conteúdo do post."
