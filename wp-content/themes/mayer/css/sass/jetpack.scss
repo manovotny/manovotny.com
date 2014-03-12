@@ -1,0 +1,24 @@
+/* JetPack
+ *
+ * @package    Mayer
+ * @subpackage css
+ * @since      1.0.0
+ *====================================*/
+
+#subscribe-submit {
+
+	input[type="submit"] {
+
+		@include border_radius( 2px );
+
+		background: #ebebeb;
+		border:     1px solid #adadad;
+		color:      #333;
+
+		&:hover {
+			background: #fff;
+		} // hover
+
+	} // input
+
+} // #subscribe-submit

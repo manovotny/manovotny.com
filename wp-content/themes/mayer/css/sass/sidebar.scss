@@ -1,0 +1,154 @@
+/* Sidebar
+ *
+ * @package    Mayer
+ * @subpackage css
+ * @since      1.0.0
+ *====================================*/
+
+#sidebar {
+
+	background:   $mayer-dark-gray;
+	padding-top:  20px;
+
+	/*
+	 * General Elements
+	 *====================================*/
+
+	ul {
+
+		font-size:    16px;
+		padding-left: 16px;
+
+	} // ul
+
+	select {
+		@include form_control();
+	} // select
+
+	.widget {
+
+		margin:  0 0 20px 0;
+		display: block;
+		float:   left;
+		width:   100%;
+
+	} // .widget
+
+	/*
+	 * Search
+	 *====================================*/
+
+	.widget_search {
+		margin: 0;
+	} // .widget_search
+
+	/*
+	 * Recent Comments
+	 *====================================*/
+
+	 .widget_recent_comments {
+
+		 #recentcomments {
+
+			 .recentcomments {
+
+				 a {
+					 word-break: break-word;
+				 } // a
+
+			 } // .recentcomments
+
+		 } // #recentcomments
+
+	 } // .widget_recent_comments
+
+	/*
+	 * RSS Widget
+	 *====================================*/
+
+	.widget-title {
+
+		.rsswidget {
+
+			img {
+				display: none;
+			} // img
+
+		} // .rsswidget
+
+	} // .widget-title
+
+	/*
+	 * Tag Cloud
+	 *====================================*/
+
+	.tagcloud {
+
+		text-transform: uppercase;
+		text-align:     justify;
+
+	} // .tagcloud
+
+	/*
+	 * Calendar
+	 *====================================*/
+
+	.widget_calendar {
+
+		#calendar_wrap {
+
+			#wp-calendar {
+
+				width: 100%;
+
+				caption {
+
+					text-transform: uppercase;
+					font-size:      16px;
+					margin:         10px 0 10px 0;
+
+				} // caption
+
+				tr th,
+				tr td {
+					text-align:center;
+				}
+
+			} // #wp-calendar
+
+		} // #calendar_wrap
+
+	} // .widget_calendar
+
+	/*
+	 * Recent Posts
+	 *====================================*/
+
+	.widget_recent_entries {
+
+		ul {
+
+			li {
+
+				span {
+
+					display: block;
+					color:   $dark-gray;
+
+				} // span
+
+			} // li
+
+		} // ul
+
+	} // .widget_recent_entries
+
+	/*
+	 * Text Widgets
+	 *====================================*/
+
+	.textwidget {
+		font-size: 16px;
+	} // .textwidget
+
+} // #sidebar

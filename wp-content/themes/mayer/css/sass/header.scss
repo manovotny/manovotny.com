@@ -1,0 +1,81 @@
+/* Header
+ *
+ * @package    Mayer
+ * @subpackage css
+ * @version    1.1.0
+ * @since      1.0.0
+ *====================================*/
+
+#masthead {
+
+	min-height:     150px;
+	background:     $mayer-blue;
+
+	.container {
+
+		padding-top:    20px;
+		padding-bottom: 20px;
+
+		#avatar {
+
+			margin-top: 12px;
+			text-align: center;
+
+			img {
+
+				@include rounded_image();
+
+				width:         140px;
+				height:        140px;
+
+			} // img
+
+		} // #avatar
+
+	} // .container
+
+	#title {
+
+		margin-top: 16px;
+
+		#site-title {
+
+			@include header_font();
+			letter-spacing: -2px;
+
+				&:hover {
+					color: $light-gray;
+				} // :hover
+
+		} // #site-title
+
+		p#site-title {
+
+			@-moz-document url-prefix() {
+
+				margin-top:    1px;
+				margin-bottom: 0px;
+
+			} // firefox
+
+			@media screen and (-webkit-min-device-pixel-ratio:0) {
+
+				margin-top:    0px;
+				margin-bottom: 1px;
+
+			} // webkit
+
+		} // p#site-title
+
+		#site-description {
+
+			@include header_font();
+			font-size:        32px;
+			font-weight:      300;
+			letter-spacing:   -2px;
+
+		} // #site-description
+
+	} // #title
+
+} // #masthead

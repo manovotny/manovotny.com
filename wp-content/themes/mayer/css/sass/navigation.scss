@@ -1,0 +1,92 @@
+/* Navigation
+ *
+ * @package    Mayer
+ * @subpackage css
+ * @since      1.0.0
+ *====================================*/
+
+#top-navigation-wrapper {
+
+	background-color: $white;
+	padding:          0;
+
+} // #top-navigation-wrapper
+
+.navigation {
+
+	min-height:    70px;
+	padding-top:   15px;
+
+	.nav {
+
+		margin-left: 0;
+
+		.active {
+
+			a {
+				color:      $dark-gray;
+			} // :hover
+
+		} // .active
+
+		li {
+
+			a {
+
+				color:            $mayer-gray;
+				font-family:      'Nunito', Sans-serif;
+				font-weight:      100;
+				font-size:        18px;
+				background-color: transparent;
+
+				&:hover {
+
+					color:            $dark-gray;
+					background-color: transparent;
+
+				} // :hover
+
+			} // a
+
+			&:hover {
+				color:      $light-gray;
+			} // :hover
+
+		} // li
+
+		.dropdown-menu {
+
+			margin-top:  -5px;
+			margin-left: 5px;
+
+
+			> .active {
+
+				> a {
+					background-color: transparent;
+				} // a
+
+			} // .active
+
+		} // .dropdown-menu
+
+		.current-menu-parent {
+
+			.dropdown-toggle {
+				color: $dark-gray;
+			} // .dropdown-toggle
+
+			.active,
+			.current-menu-item {
+
+				a {
+					color: $dark-gray;
+				} // a
+
+			} // .active
+
+		} // .current-menu-parent
+
+	} // .nav
+
+} // .navigation
