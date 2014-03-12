@@ -1,17 +1,49 @@
 <?php
 
+function grunion_menu_alter() {
+	wp_enqueue_style( 'grunion-menu-alter', plugins_url( 'css/menu-alter.css', __FILE__ ) );
+}
+
+add_action( 'admin_enqueue_scripts', 'grunion_menu_alter' );
+
+/**
+ * Add a contact form button to the post composition screen
+ */
+add_action( 'media_buttons', 'grunion_media_button', 999 );
+function grunion_media_button( ) {
+	global $post_ID, $temp_ID;
+	$iframe_post_id = (int) (0 == $post_ID ? $temp_ID : $post_ID);
+	$title = esc_attr( __( 'Add a custom form', 'jetpack' ) );
+	$plugin_url = esc_url( GRUNION_PLUGIN_URL );
+	$site_url = esc_url( admin_url( "/admin-ajax.php?post_id={$iframe_post_id}&action=grunion_form_builder&TB_iframe=true&width=768" ) );
+	?>
+
+	<a id="insert-jetpack-contact-form" class="button thickbox" title="<?php esc_html_e( 'Add Contact Form', 'jetpack' ); ?>" data-editor="content" href="<?php echo $site_url ?>&id=add_form">
+		<span class="jetpack-contact-form-icon"></span> <?php esc_html_e( 'Add Contact Form', 'jetpack' ); ?>
+	</a>
+
+	<?php
+}
+
+add_action( 'wp_ajax_grunion_form_builder', 'display_form_view' );
+
+function display_form_view() {
+	require_once GRUNION_PLUGIN_DIR . 'grunion-form-view.php';
+	exit;
+}
+
 // feedback specific css items
 add_action( 'admin_print_styles', 'grunion_admin_css' );
 function grunion_admin_css() {
 	global $current_screen;
-	if ( 'edit-feedback' != $current_screen->id )
+	if ( ! in_array( $current_screen->id, array( 'edit-feedback', 'jetpack_page_omnisearch', 'dashboard_page_omnisearch' ) ) )
 		return;
 
 	wp_enqueue_script( 'wp-lists' );
 ?>
 
 <style type='text/css'>
-.add-new-h2, .view-switch, body.no-js .tablenav select[name^=action], body.no-js #doaction, body.no-js #doaction2 { 
+.add-new-h2, .view-switch, body.no-js .tablenav select[name^=action], body.no-js #doaction, body.no-js #doaction2 {
 	display: none
 }
 
@@ -40,15 +72,89 @@ function grunion_admin_css() {
 color: #D98500;
 }
 
-#icon-edit { background-position: -432px -5px; }
-
-#icon-edit, #icon-post { background: url("<?php echo GRUNION_PLUGIN_URL; ?>images/grunion-menu-big.png") no-repeat !important; }
+#icon-edit.icon32-posts-feedback, #icon-post.icon32-posts-feedback { background: url("<?php echo GRUNION_PLUGIN_URL; ?>images/grunion-menu-big.png") no-repeat !important; }
 @media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
-    #icon-edit, #icon-post { background: url("<?php echo GRUNION_PLUGIN_URL; ?>images/grunion-menu-big-2x.png") no-repeat !important; background-size: 30px 31px !important; }
+    #icon-edit.icon32-posts-feedback, #icon-post.icon32-posts-feedback { background: url("<?php echo GRUNION_PLUGIN_URL; ?>images/grunion-menu-big-2x.png") no-repeat !important; background-size: 30px 31px !important; }
 }
+
+#icon-edit.icon32-posts-feedback { background-position: 2px 2px !important; }
+
 </style>
 
 <?php
+}
+
+/**
+ * Hack a 'Bulk Spam' option for bulk edit
+ * There isn't a better way to do this until
+ * http://core.trac.wordpress.org/changeset/17297 is resolved
+ */
+add_action( 'admin_head', 'grunion_add_bulk_edit_option' );
+function grunion_add_bulk_edit_option() {
+
+	$screen = get_current_screen();
+
+	if ( 'edit-feedback' != $screen->id
+	|| ( ! empty( $_GET['post_status'] ) && 'spam' == $_GET['post_status'] ) )
+		return;
+
+	$spam_text = __( 'Mark Spam', 'jetpack' );
+	?>
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$('#posts-filter .actions select[name=action] option:first-child').after('<option value="spam"><?php echo esc_attr( $spam_text ); ?></option>' );
+			})
+		</script>
+	<?php
+}
+
+/**
+ * Handle a bulk spam report
+ */
+add_action( 'admin_init', 'grunion_handle_bulk_spam' );
+function grunion_handle_bulk_spam() {
+	global $pagenow;
+
+	if ( 'edit.php' != $pagenow
+	|| ( empty( $_REQUEST['post_type'] ) || 'feedback' != $_REQUEST['post_type'] ) )
+		return;
+
+	// Slip in a success message
+	if ( ! empty( $_REQUEST['message'] ) && 'marked-spam' == $_REQUEST['message'] )
+		add_action( 'admin_notices', 'grunion_message_bulk_spam' );
+
+	if ( empty( $_REQUEST['action'] ) || 'spam' != $_REQUEST['action'] )
+		return;
+
+	check_admin_referer('bulk-posts');
+
+	if ( empty( $_REQUEST['post'] ) ) {
+		wp_safe_redirect( wp_get_referer() );
+		exit;
+	}
+
+	$post_ids = array_map( 'intval', $_REQUEST['post'] );
+
+	foreach( $post_ids as $post_id ) {
+		if ( ! current_user_can( "edit_page", $post_id ) )
+			wp_die( __( 'You are not allowed to manage this item.', 'jetpack' ) );
+
+		$post = array(
+				'ID'           => $post_id,
+				'post_status'  => 'spam',
+			);
+		$akismet_values = get_post_meta( $post_id, '_feedback_akismet_values', true );
+		wp_update_post( $post );
+		do_action( 'contact_form_akismet', 'spam', $akismet_values );
+	}
+
+	$redirect_url = add_query_arg( 'message', 'marked-spam', wp_get_referer() );
+	wp_safe_redirect( $redirect_url );
+	exit;
+}
+
+function grunion_message_bulk_spam() {
+	echo '<div class="updated"><p>' . __( 'Feedback(s) marked as spam', 'jetpack' ) . '</p></div>';
 }
 
 // remove admin UI parts that we don't support in feedback management
@@ -78,8 +184,8 @@ function grunion_admin_view_tabs( $views ) {
 
 	preg_match( '|post_type=feedback\'( class="current")?\>(.*)\<span class=|', $views['all'], $match );
 	if ( !empty( $match[2] ) )
-		$views['all'] = str_replace( $match[2], 'Messages ', $views['all'] );
-	
+		$views['all'] = str_replace( $match[2], __( 'Messages', 'jetpack' ) . ' ', $views['all'] );
+
 	return $views;
 }
 
@@ -224,7 +330,7 @@ jQuery(document).ready( function($) {
 			function( r ) {
 				$('#post-<?php echo $post_id; ?>')
 					.css( {backgroundColor:'#FF7979'} )
-					.fadeOut(350, function() { 
+					.fadeOut(350, function() {
 						$(this).remove();
 						$('.subsubsub').html(r);
 				});
@@ -282,7 +388,7 @@ jQuery(document).ready( function($) {
 			function( r ) {
 				$('#post-<?php echo $post_id; ?>')
 					.css( {backgroundColor:'#59C859'} )
-					.fadeOut(350, function() { 
+					.fadeOut(350, function() {
 						$(this).remove();
 						$('.subsubsub').html(r);
 				});
@@ -296,7 +402,12 @@ jQuery(document).ready( function($) {
 			break;
 
 		case 'feedback_date':
-			echo get_the_date( __( 'Y-m-d @ g:i:s A', 'jetpack' ) );
+
+			$date_time_format = _x( '%1$s \a\t %2$s', '{$date_format} \a\t {$time_format}', 'jetpack' );
+			$date_time_format = sprintf( $date_time_format, get_option( 'date_format' ), get_option( 'time_format' ) );
+			$time = date_i18n( $date_time_format, get_the_time( 'U' ) );
+
+			echo $time;
 			break;
 	}
 }
@@ -320,83 +431,88 @@ function grunion_sort_objects( $a, $b ) {
 // returns both the shortcode form, and HTML markup representing a preview of the form
 function grunion_ajax_shortcode() {
 	check_ajax_referer( 'grunion_shortcode' );
-	
-	$atts = '';
-	if ( trim( $_POST['subject'] ) )
-		$atts .= ' subject="'.grunion_esc_attr($_POST['subject']).'"';
-	if ( trim( $_POST['to'] ) )
-		$atts .= ' to="'.grunion_esc_attr($_POST['to']).'"';
-		
-	$shortcode = '[contact-form'.$atts.']';
-	$shortcode .= "\n";
-	if ( is_array( $_POST['fields'] ) ) {
-		usort( $_POST['fields'], 'grunion_sort_objects' );
-		foreach ( $_POST['fields'] as $field ) {
-			$req = $opts = '';
-			if ( $field['required'] == 'true' )
-				$req = ' required="true"';
-			if ( isset( $field['options'] ) && $field['options'] ) {
-				$opts = ' options="';
-				foreach ( $field['options'] as $option ) {
-					$option = wp_kses( $option, array() );
-					$option = grunion_esc_attr( $option );
 
-					# we need to be very specific about how we
-					# encode these values
-					$option = str_replace( ',', '&#x002c;', $option );
-					$option = str_replace( '"', '&#x0022;', $option );
-					$option = str_replace( "'", '&#x0027;', $option );
-					$option = str_replace( '&', '&#x0026;', $option );
+	$attributes = array();
 
-					$opts .= $option . ',';
-				}
-				$opts = rtrim( $opts, ',' ) . '"';
-			}
-
-			$field['label'] = wp_kses( $field['label'], array() );
-			$field['label'] = str_replace( '"', '&#x0022;', $field['label'] );
-
-			$shortcode .= '[contact-field label="'. $field['label'] .'" type="'.grunion_esc_attr($field['type']).'"' . $req . $opts .' /]'."\n";
+	foreach ( array( 'subject', 'to' ) as $attribute ) {
+		if ( isset( $_POST[$attribute] ) && strlen( $_POST[$attribute] ) ) {
+			$attributes[$attribute] = stripslashes( $_POST[$attribute] );
 		}
 	}
-	$shortcode .= '[/contact-form]';
-	
-	die( "\n$shortcode\n" );
+
+	if ( is_array( $_POST['fields'] ) ) {
+		$fields = stripslashes_deep( $_POST['fields'] );
+		usort( $fields, 'grunion_sort_objects' );
+
+		$field_shortcodes = array();
+
+		foreach ( $fields as $field ) {
+			$field_attributes = array();
+
+			if ( isset( $field['required'] ) && 'true' === $field['required'] ) {
+				$field_attributes['required'] = 'true';
+			}
+
+			foreach ( array( 'options', 'label', 'type' ) as $attribute ) {
+				if ( isset( $field[$attribute] ) ) {
+					$field_attributes[$attribute] = $field[$attribute];
+				}
+			}
+
+			$field_shortcodes[] = new Grunion_Contact_Form_Field( $field_attributes );
+		}
+	}
+
+	$grunion = new Grunion_Contact_Form( $attributes, $field_shortcodes );
+
+	die( "\n$grunion\n" );
 }
 
 // takes a post_id, extracts the contact-form shortcode from that post (if there is one), parses it,
 // and constructs a json object representing its contents and attributes
 function grunion_ajax_shortcode_to_json() {
 	global $post, $grunion_form;
-	
-	check_ajax_referer( 'grunion_shortcode_to_json' );
-	if ( isset( $_POST['content'] ) && is_numeric( $_POST['post_id'] ) ) {
-		$content = stripslashes( $_POST['content'] );
-		$post = get_post( $_POST['post_id'] );
-		// does it look like a post with a [contact-form] already?
-		if ( strpos( $content, '[contact-form' ) !== false ) {
-			$out = do_shortcode($content);
-			global $contact_form_fields;
-			if ( is_array($contact_form_fields) && !empty($contact_form_fields) ) {
-				foreach ( $contact_form_fields as $field_id => $field ) {
-					# need to dig deeper on select field options
-					if ( preg_match( "|^(.*)\-select$|", $field_id ) ) {
-						foreach ( (array) $field['options'] as $opt_i => $opt ) {
-							$contact_form_fields[$field_id]['options'][$opt_i] = html_entity_decode( $opt );
-						}
-					}
-					$contact_form_fields[$field_id]['label'] = html_entity_decode( $contact_form_fields[$field_id]['label'] );
-					$contact_form_fields[$field_id]['label'] = wp_kses( $contact_form_fields[$field_id]['label'], array() );
-				}
 
-				$out = array( 'fields' => $contact_form_fields, 'to' => $grunion_form->to, 'subject' => $grunion_form->subject );
-				die( json_encode( $out ) );
-			}
-		}
+	check_ajax_referer( 'grunion_shortcode_to_json' );
+
+	if ( !isset( $_POST['content'] ) || !is_numeric( $_POST['post_id'] ) ) {
+		die( '-1' );
+	}
+
+	$content = stripslashes( $_POST['content'] );
+
+	// doesn't look like a post with a [contact-form] already.
+	if ( false === strpos( $content, '[contact-form' ) ) {
 		die( '' );
 	}
-	
-	die( -1 );
+
+	$post = get_post( $_POST['post_id'] );
+
+	do_shortcode( $content );
+
+	$grunion = Grunion_Contact_Form::$last;
+
+	$out = array(
+		'to'      => '',
+		'subject' => '',
+		'fields'  => array(),
+	);
+
+	foreach ( $grunion->fields as $field ) {
+		$out['fields'][$field->get_attribute( 'id' )] = $field->attributes;
+	}
+
+	$to = $grunion->get_attribute( 'to' );
+	$subject = $grunion->get_attribute( 'subject' );
+	foreach ( array( 'to', 'subject' ) as $attribute ) {
+		$value = $grunion->get_attribute( $attribute );
+		if ( isset( $grunion->defaults[$attribute] ) && $value == $grunion->defaults[$attribute] ) {
+			$value = '';
+		}
+		$out[$attribute] = $value;
+	}
+
+	die( json_encode( $out ) );
 }
 
 
@@ -466,7 +582,7 @@ function grunion_ajax_spam() {
 	$sql = "
 		SELECT post_status,
 			COUNT( * ) AS post_count
-		FROM `{$wpdb->posts}` 
+		FROM `{$wpdb->posts}`
 		WHERE post_type =  'feedback'
 		GROUP BY post_status
 	";
@@ -513,4 +629,13 @@ function grunion_ajax_spam() {
 
 	echo $status_html;
 	exit;
+}
+
+add_action( 'omnisearch_add_providers', 'grunion_omnisearch_add_providers' );
+function grunion_omnisearch_add_providers() {
+	// Feedback uses capability_type 'page'
+	if ( current_user_can( 'edit_pages' ) ) {
+		require_once( GRUNION_PLUGIN_DIR . '/grunion-omnisearch.php' );
+		new Jetpack_Omnisearch_Grunion;
+	}
 }

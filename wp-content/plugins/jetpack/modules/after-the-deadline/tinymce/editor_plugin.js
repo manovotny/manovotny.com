@@ -1,5 +1,5 @@
 /*
- * TinyMCE Writing Improvement Tool Plugin 
+ * TinyMCE Writing Improvement Tool Plugin
  * Author: Raphael Mudge (raffi@automattic.com)
  *
  * http://www.afterthedeadline.com
@@ -15,22 +15,25 @@
  *    Moxiecode Spell Checker plugin released under the LGPL with TinyMCE
  */
 
-(function() 
+(function()
 {
-   var JSONRequest = tinymce.util.JSONRequest, each = tinymce.each, DOM = tinymce.DOM; 
+   var JSONRequest = tinymce.util.JSONRequest, each = tinymce.each, DOM = tinymce.DOM, core;
 
-   tinymce.create('tinymce.plugins.AfterTheDeadlinePlugin', 
+	function getLang( key, defaultStr ) {
+		return ( window.AtD_l10n_r0ar && window.AtD_l10n_r0ar[key] ) || defaultStr;
+	}
+
+   tinymce.create('tinymce.plugins.AfterTheDeadlinePlugin',
    {
-      getInfo : function() 
+      getInfo : function()
       {
-         return 
-         ({
-	    longname :  'After The Deadline',
-            author :    'Raphael Mudge',
-	    authorurl : 'http://blog.afterthedeadline.com',
-	    infourl :   'http://www.afterthedeadline.com',
-	    version :   tinymce.majorVersion + "." + tinymce.minorVersion
-	 });
+         return {
+			longname :  'After The Deadline',
+			author :    'Raphael Mudge',
+			authorurl : 'http://blog.afterthedeadline.com',
+			infourl :   'http://www.afterthedeadline.com',
+			version :   tinymce.majorVersion + "." + tinymce.minorVersion
+		};
       },
 
       /* initializes the functions used by the AtD Core UI Module */
@@ -40,12 +43,12 @@
 
          core.map = each;
 
-         core.getAttrib = function(node, key) 
-         { 
-            return editor.dom.getAttrib(node, key); 
+         core.getAttrib = function(node, key)
+         {
+            return editor.dom.getAttrib(node, key);
          };
 
-	 core.findSpans = function(parent) 
+         core.findSpans = function(parent)
          {
             if (parent == undefined)
                return editor.dom.select('span');
@@ -53,49 +56,44 @@
                return editor.dom.select('span', parent);
          };
 
-         core.hasClass = function(node, className) 
-         { 
-            return editor.dom.hasClass(node, className); 
-         };
-         
-         core.contents = function(node) 
-         { 
-            return node.childNodes;  
+         core.hasClass = function(node, className)
+         {
+            return editor.dom.hasClass(node, className);
          };
 
-         core.replaceWith = function(old_node, new_node) 
-         { 
-            return editor.dom.replace(new_node, old_node); 
+         core.contents = function(node)
+         {
+            return node.childNodes;
          };
 
-         core.create = function(node_html) 
-         { 
+         core.replaceWith = function(old_node, new_node)
+         {
+            return editor.dom.replace(new_node, old_node);
+         };
+
+         core.create = function(node_html)
+         {
             return editor.dom.create('span', { 'class': 'mceItemHidden' }, node_html);
          };
 
-         core.removeParent = function(node) 
+         core.removeParent = function(node)
          {
-	    editor.dom.remove(node, 1);
+			editor.dom.remove(node, 1);
             return node;
          };
 
-         core.remove = function(node) 
-         { 
-            editor.dom.remove(node); 
-         };
-
-         core.getLang = function(key, defaultk) 
-         { 
-             return editor.getLang("AtD." + key, defaultk);
+         core.remove = function(node)
+         {
+            editor.dom.remove(node);
          };
 
          core.setIgnoreStrings(editor.getParam("atd_ignore_strings", [] ).join(','));
          core.showTypes(editor.getParam("atd_show_types", ""));
          return core;
       },
- 
+
       /* called when the plugin is initialized */
-      init : function(ed, url) 
+      init : function(ed, url)
       {
          if ( typeof(AtDCore) == 'undefined' )
          	return;
@@ -103,11 +101,10 @@
 		 var t = this;
          var plugin  = this;
          var editor  = ed;
-         var core = this.initAtDCore(editor, plugin);
-
          this.url    = url;
          this.editor = ed;
-         ed.core = core;
+         
+		 core = ed.core = this.initAtDCore(editor, plugin);
 
          /* look at the atd_ignore variable and put that stuff into a hash */
          var ignore = tinymce.util.Cookie.getHash('atd_ignore');
@@ -118,7 +115,7 @@
          }
 
          /* add a command to request a document check and process the results. */
-         editor.addCommand('mceWritingImprovementTool', function(callback) 
+         editor.addCommand('mceWritingImprovementTool', function(callback)
          {
             /* checks if a global var for click stats exists and increments it if it does... */
             if (typeof AtD_proofread_click_count != "undefined")
@@ -140,7 +137,7 @@
                if ( request.status != 200 || request.responseText.substr(1, 4) == 'html' || !request.responseXML )
                {
                   ed.windowManager.alert(
-                     plugin.editor.getLang('AtD.message_server_error', 'There was a problem communicating with the Proofreading service. Try again in one minute.'),
+                     getLang( 'message_server_error', 'There was a problem communicating with the Proofreading service. Try again in one minute.' ),
                      callback ? function() { callback( 0 ); } : function() {}
                   );
                   return;
@@ -162,18 +159,18 @@
                if (results.count > 0)
                {
                   ecount = plugin.markMyWords(results.errors);
-                  ed.suggestions = results.suggestions; 
+                  ed.suggestions = results.suggestions;
                }
 
                if (ecount == 0 && (!callback || callback == undefined))
-                  ed.windowManager.alert(plugin.editor.getLang('AtD.message_no_errors_found', 'No writing errors were found.'));
+                  ed.windowManager.alert( getLang('message_no_errors_found', 'No writing errors were found.') );
                else if (callback)
                   callback(ecount);
             });
          });
-          
+
          /* load cascading style sheet for this plugin */
-     	 editor.onInit.add(function() 
+     	 editor.onInit.add(function()
          {
             /* loading the content.css file, why? I have no clue */
             if (editor.settings.content_css !== false)
@@ -189,13 +186,13 @@
 	 editor.onContextMenu.add(plugin._showMenu, plugin);
 
          /* strip out the markup before the contents is serialized (and do it on a copy of the markup so we don't affect the user experience) */
-         editor.onPreProcess.add(function(sender, object) 
+         editor.onPreProcess.add(function(sender, object)
          {
             var dom = sender.dom;
 
-            each(dom.select('span', object.node).reverse(), function(n) 
+            each(dom.select('span', object.node).reverse(), function(n)
             {
-               if (n && (dom.hasClass(n, 'hiddenGrammarError') || dom.hasClass(n, 'hiddenSpellError') || dom.hasClass(n, 'hiddenSuggestion') || dom.hasClass(n, 'mceItemHidden') || (dom.getAttrib(n, 'class') == "" && dom.getAttrib(n, 'style') == "" && dom.getAttrib(n, 'id') == "" && !dom.hasClass(n, 'Apple-style-span') && dom.getAttrib(n, 'mce_name') == ""))) 
+               if (n && (dom.hasClass(n, 'hiddenGrammarError') || dom.hasClass(n, 'hiddenSpellError') || dom.hasClass(n, 'hiddenSuggestion') || dom.hasClass(n, 'mceItemHidden') || (dom.getAttrib(n, 'class') == "" && dom.getAttrib(n, 'style') == "" && dom.getAttrib(n, 'id') == "" && !dom.hasClass(n, 'Apple-style-span') && dom.getAttrib(n, 'mce_name') == "")))
                {
                   dom.remove(n, 1);
                }
@@ -203,7 +200,7 @@
          });
 
          /* cleanup the HTML before executing certain commands */
-	 editor.onBeforeExecCommand.add(function(editor, command) 
+	 editor.onBeforeExecCommand.add(function(editor, command)
          {
             if (command == 'mceCodeEditor')
             {
@@ -214,15 +211,15 @@
                plugin._done();
             }
          });
-         
-		ed.addButton('AtD', { 
-			title: ed.getLang('AtD.button_proofread_tooltip', 'Proofread Writing'),
-			image: ed.getParam('atd_button_url', url + '/atdbuttontr.gif'), 
+
+		ed.addButton('AtD', {
+			title: getLang( 'button_proofread_tooltip', 'Proofread Writing' ),
+			image: ed.getParam('atd_button_url', url + '/atdbuttontr.gif'),
 			cmd: 'mceWritingImprovementTool'
 		});
       },
 
-      _removeWords : function(w) 
+      _removeWords : function(w)
       {
          var ed = this.editor, dom = ed.dom, se = ed.selection, b = se.getBookmark();
 
@@ -247,17 +244,17 @@
          return ecount;
       },
 
-      _showMenu : function(ed, e) 
+      _showMenu : function(ed, e)
       {
          var t = this, ed = t.editor, m = t._menu, p1, dom = ed.dom, vp = dom.getViewPort(ed.getWin());
          var plugin = this;
 
-         if (!m) 
+         if (!m)
          {
             p1 = DOM.getPos(ed.getContentAreaContainer());
             //p2 = DOM.getPos(ed.getContainer());
 
-            m = ed.controlManager.createDropMenu('spellcheckermenu', 
+            m = ed.controlManager.createDropMenu('spellcheckermenu',
             {
                offset_x : p1.x,
                offset_y : p1.y,
@@ -277,11 +274,11 @@
 
             if (errorDescription == undefined)
             {
-               m.add({title : plugin.editor.getLang('AtD.menu_title_no_suggestions', 'No suggestions'), 'class' : 'mceMenuItemTitle'}).setDisabled(1);
+               m.add({ title: getLang( 'menu_title_no_suggestions', 'No suggestions' ), 'class': 'mceMenuItemTitle' }).setDisabled(1);
             }
             else if (errorDescription["suggestions"].length == 0)
             {
-               m.add({title : errorDescription["description"], 'class' : 'mceMenuItemTitle'}).setDisabled(1);
+               m.add({ title: errorDescription["description"], 'class' : 'mceMenuItemTitle' }).setDisabled(1);
             }
             else
             {
@@ -292,8 +289,8 @@
                   (function(sugg)
                    {
                       m.add({
-                         title   : sugg, 
-                         onclick : function() 
+                         title   : sugg,
+                         onclick : function()
                          {
                             ed.core.applySuggestion(e.target, sugg);
                             t._checkDone();
@@ -304,14 +301,14 @@
 
                m.addSeparator();
             }
-             
+
             if (errorDescription != undefined && errorDescription["moreinfo"] != null)
             {
                (function(url)
                 {
                    m.add({
-                     title : plugin.editor.getLang('AtD.menu_option_explain', 'Explain...'),
-                     onclick : function() 
+                     title : getLang( 'menu_option_explain', 'Explain...' ),
+                     onclick : function()
                      {
                         ed.windowManager.open({
                            url : url,
@@ -327,8 +324,8 @@
             }
 
             m.add({
-               title : plugin.editor.getLang('AtD.menu_option_ignore_once', 'Ignore suggestion'),
-               onclick : function() 
+               title : getLang( 'menu_option_ignore_once', 'Ignore suggestion' ),
+               onclick : function()
                {
                   dom.remove(e.target, 1);
                   t._checkDone();
@@ -338,8 +335,8 @@
             if (String(this.editor.getParam("atd_ignore_enable",  "false")) == "true")
             {
                 m.add({
-                  title : plugin.editor.getLang('AtD.menu_option_ignore_always', 'Ignore always'),
-                  onclick : function() 
+                  title : getLang( 'menu_option_ignore_always', 'Ignore always' ),
+                  onclick : function()
                   {
                       var url = t.editor.getParam('atd_ignore_rpc_url', '{backend}');
 
@@ -347,10 +344,10 @@
                       {
                          /* Default scheme is to save ignore preferences in a cookie */
 
-                         var ignore = tinymce.util.Cookie.getHash('atd_ignore'); 
+                         var ignore = tinymce.util.Cookie.getHash('atd_ignore');
                          if (ignore == undefined) { ignore = {}; }
                          ignore[e.target.innerHTML] = 1;
-                  
+
                          tinymce.util.Cookie.setHash('atd_ignore', ignore, new Date( (new Date().getTime()) + 157680000000) );
                       }
                       else
@@ -370,7 +367,7 @@
                              },
                              error        : function( type, req, o )
                              {
-                                alert( "Ignore preference save failed\n" + type + "\n" + req.status + "\nAt: " + o.url ); 
+                                alert( "Ignore preference save failed\n" + type + "\n" + req.status + "\nAt: " + o.url );
                              }
                          });
 
@@ -386,8 +383,8 @@
             else
             {
                 m.add({
-                  title : plugin.editor.getLang('menu_option_ignore_all', 'Ignore all'),
-                  onclick : function() 
+                  title : getLang( 'menu_option_ignore_all', 'Ignore all' ),
+                  onclick : function()
                   {
                      t._removeWords(e.target.innerHTML);
                      t._checkDone();
@@ -401,7 +398,7 @@
             m.showMenu(p1.x, p1.y + e.target.offsetHeight - vp.y);
 
             return tinymce.dom.Event.cancel(e);
-         } 
+         }
          else
          {
             m.hideMenu();
@@ -409,11 +406,11 @@
       },
 
       /* loop through editor DOM, call _done if no mce tags exist. */
-      _checkDone : function() 
+      _checkDone : function()
       {
          var t = this, ed = t.editor, dom = ed.dom, o;
 
-         each(dom.select('span'), function(n) 
+         each(dom.select('span'), function(n)
          {
             if (n && dom.hasClass(n, 'mceItemHidden'))
             {
@@ -429,7 +426,7 @@
       },
 
       /* remove all tags, hide the menu, and fire a dom change event */
-      _done : function() 
+      _done : function()
       {
          var plugin    = this;
          plugin._removeWords();
@@ -448,24 +445,24 @@
          var url = this.editor.getParam("atd_rpc_url", "{backend}");
          var plugin = this;
 
-         if (url == '{backend}' || id == '12345678') 
+         if (url == '{backend}' || id == '12345678')
          {
             this.editor.setProgressState(0);
             alert('Please specify: atd_rpc_url and atd_rpc_id');
             return;
          }
-   
+
          tinymce.util.XHR.send({
             url          : url + "/" + file,
             content_type : 'text/xml',
             type         : "POST",
-            data         : "data=" + encodeURI(data).replace(/&/g, '%26') + "&key=" + id, 
+            data         : "data=" + encodeURI(data).replace(/&/g, '%26') + "&key=" + id,
             async        : true,
             success      : success,
             error        : function( type, req, o )
             {
 	       plugin.editor.setProgressState(0);
-               alert( type + "\n" + req.status + "\nAt: " + o.url ); 
+               alert( type + "\n" + req.status + "\nAt: " + o.url );
             }
          });
       }

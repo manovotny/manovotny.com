@@ -58,8 +58,11 @@ function jetpack_mobile_exclude() {
 			$exclude = true;
 	}
 
-	if ( ! is_admin() && defined( 'DOING_AJAX' ) && true === DOING_AJAX )
+	if ( defined( 'DOING_AJAX' ) && true === DOING_AJAX )
 		$exclude = false;
+
+	if ( isset( $GLOBALS['wp_customize'] ) )
+		return true;
 
 	return $exclude;
 }
@@ -136,7 +139,7 @@ function jetpack_mobile_request_handler() {
 				$go = $_SERVER['HTTP_REFERER'];
 			}
 			else {
-				$go = get_bloginfo( 'url' );
+				$go = remove_query_arg( array( 'ak_action' ) );
 			}
 			wp_safe_redirect( $go );
 			exit;
@@ -180,8 +183,8 @@ function jetpack_mobile_theme_setup() {
 		add_action('option_template', 'jetpack_mobile_template');
 		add_action('option_stylesheet', 'jetpack_mobile_stylesheet');
 
-		if ( function_exists( 'disable_safecss_style' ) )
-			add_action( 'init', 'disable_safecss_style', 11 );
+		if ( class_exists( 'Jetpack_Custom_CSS' ) && method_exists( 'Jetpack_Custom_CSS', 'disable' ) && ! get_option( 'wp_mobile_custom_css' ) )
+			add_action( 'init', array( 'Jetpack_Custom_CSS', 'disable' ), 11 );
 
 		do_action( 'mobile_setup' );
 	}
@@ -197,7 +200,10 @@ if (isset($_COOKIE['akm_mobile']) && $_COOKIE['akm_mobile'] == 'false') {
 
 add_action( 'wp_footer', 'mobile_admin_bar', 20 );
 function mobile_admin_bar() {
-	if ( jetpack_is_mobile() ) :
+	global $wp_version;
+
+	if ( jetpack_is_mobile() && 1 != version_compare( $wp_version, '3.5-beta3-22631' ) ) :
+		// This fix was made unnecessary in http://core.trac.wordpress.org/changeset/22636
 	?>
 	<script type="text/javascript" id='mobile-admin-bar'>
 		jQuery( function( $ ) {
@@ -226,9 +232,9 @@ function jetpack_mobile_app_promo()  {
 		if ( ! navigator.userAgent.match( /wp-(iphone|android|blackberry|nokia|windowsphone)/i ) ) {
 			if ( ( navigator.userAgent.match( /iphone/i ) ) || ( navigator.userAgent.match( /ipod/i ) ) )
 			   document.write( '<span id="wpcom-mobile-app-promo" style="margin-top: 10px; font-size: 13px;"><strong>Now Available!</strong> <a href="/index.php?app-download=ios">Download WordPress for iOS</a></span><br /><br />' );
-			else if ( ( navigator.userAgent.match( /android/i ) ) )
+			else if ( ( navigator.userAgent.match( /android/i ) ) && ( null == navigator.userAgent.match( /playbook/i ) && null == navigator.userAgent.match( /bb10/i ) ) )
 			   document.write( '<span id="wpcom-mobile-app-promo" style="margin-top: 10px; font-size: 13px;"><strong>Now Available!</strong> <a href="/index.php?app-download=android">Download WordPress for Android</a></span><br /><br />' );
-			else if ( ( navigator.userAgent.match( /blackberry/i ) ) )
+			else if ( ( navigator.userAgent.match( /blackberry/i ) ) || ( navigator.userAgent.match( /playbook/i ) ) || ( navigator.userAgent.match( /bb10/i ) ) )
 			   document.write( '<span id="wpcom-mobile-app-promo" style="margin-top: 10px; font-size: 13px;"><strong>Now Available!</strong> <a href="/index.php?app-download=blackberry">Download WordPress for BlackBerry</a></span><br /><br />' );
 			else if ( ( navigator.userAgent.match( /windows phone os/i ) ) )
 			   document.write( '<span id="wpcom-mobile-app-promo" style="margin-top: 10px; font-size: 13px; line-height: 13px;"><strong>Now Available!</strong> <a href="/index.php?app-download=windowsphone">Download WordPress for <br />Windows Phone</a></span><br /><br />' );
@@ -240,3 +246,85 @@ function jetpack_mobile_app_promo()  {
 }
 
 add_action( 'wp_mobile_theme_footer', 'jetpack_mobile_app_promo' );
+
+/**
+ * Adds an option to allow your Custom CSS to also be applied to the Mobile Theme.
+ * It's disabled by default, but this should allow people who know what they're
+ * doing to customize the mobile theme.
+ */
+function jetpack_mobile_css_settings() {
+	$mobile_css = get_option( 'wp_mobile_custom_css' );
+
+	?>
+	<div class="misc-pub-section">
+		<label><?php esc_html_e( 'Mobile-compatible:', 'jetpack' ); ?></label>
+		<span id="mobile-css-display"><?php echo $mobile_css ? __( 'Yes', 'jetpack' ) : __( 'No', 'jetpack' ); ?></span>
+		<a class="edit-mobile-css hide-if-no-js" href="#mobile-css"><?php echo esc_html_e( 'Edit', 'jetpack' ); ?></a>
+		<div id="mobile-css-select" class="hide-if-js">
+			<input type="hidden" name="mobile_css" id="mobile-css" value="<?php echo intval( $mobile_css ); ?>" />
+			<label>
+				<input type="checkbox" id="mobile-css-visible" <?php checked( get_option( 'wp_mobile_custom_css' ) ); ?> />
+				<?php esc_html_e( 'Include this CSS in the Mobile Theme', 'jetpack' ); ?>
+			</label>
+			<p>
+				<a class="save-mobile-css hide-if-no-js button" href="#mobile-css"><?php esc_html_e( 'OK', 'jetpack' ); ?></a>
+				<a class="cancel-mobile-css hide-if-no-js" href="#mobile-css"><?php esc_html_e( 'Cancel', 'jetpack' ); ?></a>
+			</p>
+		</div>
+	</div>
+	<script type="text/javascript">
+		jQuery( function ( $ ) {
+			$( '.edit-mobile-css' ).bind( 'click', function ( e ) {
+				e.preventDefault();
+
+				$( '#mobile-css-select' ).slideDown();
+				$( this ).hide();
+			} );
+
+			$( '.cancel-mobile-css' ).bind( 'click', function ( e ) {
+				e.preventDefault();
+
+				$( '#mobile-css-select' ).slideUp( function () {
+					$( '.edit-mobile-css' ).show();
+
+					$( '#mobile-css-visible' ).prop( 'checked', $( '#mobile-css' ).val() == '1' );
+				} );
+			} );
+
+			$( '.save-mobile-css' ).bind( 'click', function ( e ) {
+				e.preventDefault();
+
+				$( '#mobile-css-select' ).slideUp();
+				$( '#mobile-css-display' ).text( $( '#mobile-css-visible' ).prop( 'checked' ) ? 'Yes' : 'No' );
+				$( '#mobile-css' ).val( $( '#mobile-css-visible' ).prop( 'checked' ) ? '1' : '0' );
+				$( '.edit-mobile-css' ).show();
+			} );
+		} );
+	</script>
+	<?php
+}
+
+add_action( 'custom_css_submitbox_misc_actions', 'jetpack_mobile_css_settings' );
+
+function jetpack_mobile_customizer_controls( $wp_customize ) {
+	$wp_customize->add_setting( 'wp_mobile_custom_css' , array(
+		'default' => true,
+		'transport' => 'postMessage',
+		'type' => 'option'
+	) );
+
+	$wp_customize->add_control( 'jetpack_mobile_css_control', array(
+		'type' => 'checkbox',
+		'label' => __( 'Include this CSS in the Mobile Theme', 'jetpack' ),
+		'section' => 'jetpack_custom_css',
+		'settings' => 'wp_mobile_custom_css',
+	) );
+}
+
+add_action( 'jetpack_custom_css_customizer_controls', 'jetpack_mobile_customizer_controls' );
+
+function jetpack_mobile_save_css_settings() {
+	update_option( 'wp_mobile_custom_css', isset( $_POST['mobile_css'] ) && ! empty( $_POST['mobile_css'] ) );
+}
+
+add_action( 'safecss_save_pre', 'jetpack_mobile_save_css_settings' );

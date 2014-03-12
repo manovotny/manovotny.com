@@ -3,7 +3,7 @@
 /*
  * Archives shortcode
  * @author bubel & nickmomrik
- * [archives limit=10] 
+ * [archives limit=10]
  */
 
 add_shortcode( 'archives', 'archives_shortcode' );
@@ -39,7 +39,15 @@ function archives_shortcode( $attr ) {
 	$after = wp_kses( $after, $allowedposttags );
 
 	// Get the archives
-	$archives = wp_get_archives( 'type=' . $type . '&limit=' . $limit . '&format=' . $format . '&echo=0&show_post_count=' . $showcount . '&before=' . $before . '&after=' . $after );
+	$archives = wp_get_archives( array(
+		'type'            => $type,
+		'limit'           => $limit,
+		'format'          => $format,
+		'echo'            => false,
+		'show_post_count' => $showcount,
+		'before'          => $before,
+		'after'           => $after
+	) );
 
 	if ( 'asc' == $order )
 		$archives = implode( "\n", array_reverse( explode( "\n", $archives ) ) );

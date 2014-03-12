@@ -4,6 +4,9 @@
  * Module Description: Enable WP.me-powered shortlinks for all of your Posts and Pages for easier sharing.
  * Sort Order: 10
  * First Introduced: 1.1
+ * Requires Connection: Yes
+ * Auto Activate: Yes
+ * Module Tags: Social
  */
 
 add_filter( 'get_shortlink', 'wpme_get_shortlink_handler', 1, 4 );
@@ -31,7 +34,7 @@ if ( !function_exists( 'wpme_dec2sixtwo' ) ) {
 function wpme_get_shortlink( $id = 0, $context = 'post', $allow_slugs = true ) {
 	global $wp_query;
 
-	$blog_id = Jetpack::get_option( 'id' );
+	$blog_id = Jetpack_Options::get_option( 'id' );
 
 	if ( 'query' == $context ) {
 		if ( is_singular() ) {
@@ -66,8 +69,8 @@ function wpme_get_shortlink( $id = 0, $context = 'post', $allow_slugs = true ) {
 		$id = wpme_dec2sixtwo( $post_id );
 		if ( 'page' == $post->post_type )
 			$type = 'P';
-		elseif ( 'post' == $post->post_type )
-			$type = 'p';
+		elseif ( 'post' == $post->post_type || post_type_supports( $post->post_type, 'shortlinks' ) )
+			$type= 'p';
 		elseif ( 'attachment' == $post->post_type )
 			$type = 'a';
 	}

@@ -40,6 +40,11 @@ function minileven_setup() {
 	 */
 	require( get_template_directory() . '/inc/tweaks.php' );
 
+	/**
+	 * Implement the Custom Header functions
+	 */
+	require( get_template_directory() . '/inc/custom-header.php' );
+
 	/* Make Minileven available for translation.
 	 * Translations can be added to the /languages/ directory.
 	 * If you're building a theme based on Minileven, use a find and replace
@@ -83,6 +88,37 @@ function minileven_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'minileven_scripts' );
 
+function minileven_fonts() {
+
+	/*	translators: If there are characters in your language that are not supported
+		by Open Sans, translate this to 'off'. Do not translate into your own language. */
+
+	if ( 'off' !== _x( 'on', 'Open Sans font: on or off', 'minileven' , 'jetpack' ) ) {
+
+		$opensans_subsets = 'latin,latin-ext';
+
+		/* translators: To add an additional Open Sans character subset specific to your language, translate
+		this to 'greek', 'cyrillic' or 'vietnamese'. Do not translate into your own language. */
+		$opensans_subset = _x( 'no-subset', 'Open Sans font: add new subset (greek, cyrillic, vietnamese)', 'minileven' , 'jetpack' );
+
+		if ( 'cyrillic' == $opensans_subset )
+			$opensans_subsets .= ',cyrillic,cyrillic-ext';
+		elseif ( 'greek' == $opensans_subset )
+			$opensans_subsets .= ',greek,greek-ext';
+		elseif ( 'vietnamese' == $opensans_subset )
+			$opensans_subsets .= ',vietnamese';
+
+		$protocol = is_ssl() ? 'https' : 'http';
+
+		$opensans_query_args = array(
+			'family' => 'Open+Sans:200,200italic,300,300italic,400,400italic,600,600italic,700,700italic',
+			'subset' => $opensans_subsets,
+		);
+		wp_register_style( 'minileven-open-sans', add_query_arg( $opensans_query_args, "$protocol://fonts.googleapis.com/css" ), array(), null );
+	}
+}
+add_action( 'init', 'minileven_fonts' );
+
 /**
  * Register our sidebars and widgetized areas.
  * @since Minileven 1.0
@@ -104,17 +140,16 @@ function minileven_posts_per_page() {
 }
 add_filter('pre_option_posts_per_page', 'minileven_posts_per_page');
 
-/* This function determines the actual theme the user is using. */
+/**
+ * Determine the currently active theme.
+ */
 function minileven_actual_current_theme() {
-	if ( function_exists( 'jetpack_mobile_template' ) )
-		remove_action( 'option_template', 'jetpack_mobile_template' );
+	$removed = remove_action( 'option_stylesheet', 'jetpack_mobile_stylesheet' );
+	$stylesheet = get_option( 'stylesheet' );
+	if ( $removed )
+		add_action( 'option_stylesheet', 'jetpack_mobile_stylesheet' );
 
-	$template = get_option( 'template' );
-
-	if ( function_exists( 'jetpack_mobile_template' ) )
-		add_action( 'option_template', 'jetpack_mobile_template' );
-
-	return $template;
+	return $stylesheet;
 }
 
 /* This function grabs the location of the custom menus from the current theme. If no menu is set in a location
@@ -147,6 +182,45 @@ function minileven_get_background() {
 }
 
 /**
- * Implement the Custom Header functions
+ * If the user has set a static front page, show all posts on the front page, instead of a static page.
  */
-require( get_template_directory() . '/inc/custom-header.php' );
+if ( '1' == get_option( 'wp_mobile_static_front_page' ) )
+	add_filter( 'pre_option_page_on_front', '__return_zero' );
+
+/**
+ * Retrieves the IDs for images in a gallery.
+ *
+ * @uses get_post_galleries() first, if available. Falls back to shortcode parsing,
+ * then as last option uses a get_posts() call.
+ *
+ * @return array List of image IDs from the post gallery.
+ */
+function minileven_get_gallery_images() {
+	$images = array();
+
+	if ( function_exists( 'get_post_galleries' ) ) {
+		$galleries = get_post_galleries( get_the_ID(), false );
+		if ( isset( $galleries[0]['ids'] ) )
+		 	$images = explode( ',', $galleries[0]['ids'] );
+	} else {
+		$pattern = get_shortcode_regex();
+		preg_match( "/$pattern/s", get_the_content(), $match );
+		$atts = shortcode_parse_atts( $match[3] );
+		if ( isset( $atts['ids'] ) )
+			$images = explode( ',', $atts['ids'] );
+	}
+
+	if ( ! $images ) {
+		$images = get_posts( array(
+			'fields'         => 'ids',
+			'numberposts'    => 999,
+			'order'          => 'ASC',
+			'orderby'        => 'menu_order',
+			'post_mime_type' => 'image',
+			'post_parent'    => get_the_ID(),
+			'post_type'      => 'attachment',
+		) );
+	}
+
+	return $images;
+}

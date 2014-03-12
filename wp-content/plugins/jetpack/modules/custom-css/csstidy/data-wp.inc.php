@@ -2,6 +2,8 @@
 
 unset( $GLOBALS['csstidy']['all_properties']['binding'] );
 
+$GLOBALS['csstidy']['all_properties']['text-size-adjust'] = 'CSS3.0';
+
 // Support browser prefixes for properties only in the latest CSS draft
 foreach ( $GLOBALS['csstidy']['all_properties'] as $property => $levels ) {
 	if ( strpos( $levels, "," ) === false ) {
@@ -49,6 +51,14 @@ $GLOBALS['csstidy']['at_rules']['-moz-keyframes'] = 'at';
 $GLOBALS['csstidy']['at_rules']['-ms-keyframes'] = 'at';
 
 /**
+ * Non-standard viewport rule.
+ */
+$GLOBALS['csstidy']['at_rules']['viewport'] = 'is';
+$GLOBALS['csstidy']['at_rules']['-webkit-viewport'] = 'is';
+$GLOBALS['csstidy']['at_rules']['-moz-viewport'] = 'is';
+$GLOBALS['csstidy']['at_rules']['-ms-viewport'] = 'is';
+
+/**
  * Non-standard CSS properties.  They're not part of any spec, but we say
  * they're in all of them so that we can support them.
  */
@@ -68,4 +78,6 @@ $GLOBALS['csstidy']['all_properties']['-o-object-fit'] = 'CSS3.0';
 $GLOBALS['csstidy']['all_properties']['object-fit'] = 'CSS3.0';
 $GLOBALS['csstidy']['all_properties']['-o-object-position'] = 'CSS3.0';
 $GLOBALS['csstidy']['all_properties']['object-position'] = 'CSS3.0';
+$GLOBALS['csstidy']['all_properties']['text-overflow'] = 'CSS3.0';
+$GLOBALS['csstidy']['all_properties']['zoom'] = 'CSS3.0';
 

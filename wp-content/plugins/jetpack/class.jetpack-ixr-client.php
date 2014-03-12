@@ -18,8 +18,6 @@ class Jetpack_IXR_Client extends IXR_Client {
 
 		$args = wp_parse_args( $args, $defaults );
 
-		$args['user_id'] = (int) $args['user_id'];
-
 		$this->jetpack_args = $args;
 
 		$this->IXR_Client( $args['url'], $path, $port, $timeout );
@@ -51,7 +49,7 @@ class Jetpack_IXR_Client extends IXR_Client {
 			$this->error = new IXR_Error( -32300, 'transport error - HTTP status code was not 200' );
 			return false;
 		}
-		
+
 		$content = wp_remote_retrieve_body( $response );
 
 		// Now parse what we've got back

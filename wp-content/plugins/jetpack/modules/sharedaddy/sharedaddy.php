@@ -11,22 +11,27 @@ Plugin URI: http://en.blog.wordpress.com/2010/08/24/more-ways-to-share/
 require_once plugin_dir_path( __FILE__ ).'sharing.php';
 
 function sharing_email_send_post( $data ) {
-	$content  = sprintf( __( '%1$s (%2$s) thinks you may be interested in the following post:'."\n\n", 'jetpack' ), $data['name'], $data['source'] );
+	$content  = sprintf( __( '%1$s (%2$s) thinks you may be interested in the following post:', 'jetpack' ), $data['name'], $data['source'] );
+	$content .= "\n\n";
 	$content .= $data['post']->post_title."\n";
 	$content .= get_permalink( $data['post']->ID )."\n";
 
-	wp_mail( $data['target'], '['.__( 'Shared Post', 'jetpack' ).'] '.$data['post']->post_title, $content );
+	$headers[] = sprintf( 'From: %1$s <%2$s>', $data['name'], $data['source'] );
+
+	wp_mail( $data['target'], '['.__( 'Shared Post', 'jetpack' ).'] '.$data['post']->post_title, $content, $headers );
 }
 
 function sharing_add_meta_box() {
 	$post_types = get_post_types( array( 'public' => true ) );
-
+	$title = apply_filters( 'sharing_meta_box_title', __( 'Sharing', 'jetpack' ) );
 	foreach( $post_types as $post_type ) {
-		add_meta_box( 'sharing_meta', __( 'Sharing', 'jetpack' ), 'sharing_meta_box_content', $post_type, 'advanced', 'high' );
+		add_meta_box( 'sharing_meta', $title, 'sharing_meta_box_content', $post_type, 'advanced', 'high' );
 	}
 }
 
 function sharing_meta_box_content( $post ) {
+	do_action( 'start_sharing_meta_box_content', $post );
+
 	$disabled = get_post_meta( $post->ID, 'sharing_disabled', true ); ?>
 
 	<p>
@@ -38,7 +43,7 @@ function sharing_meta_box_content( $post ) {
 	</p>
 
 	<?php
-
+	do_action( 'end_sharing_meta_box_content', $post );
 }
 
 function sharing_meta_box_save( $post_id ) {
@@ -57,14 +62,14 @@ function sharing_meta_box_save( $post_id ) {
 			}
 		}
 	}
-  	
+
   	return $post_id;
 }
 
 function sharing_meta_box_protected( $protected, $meta_key, $meta_type ) {
 	if ( 'sharing_disabled' == $meta_key )
 		$protected = true;
-		
+
 	return $protected;
 }
 
@@ -81,7 +86,7 @@ function sharing_add_plugin_settings($links, $file) {
 		$links[] = '<a href="options-general.php?page=sharing.php">' . __( 'Settings', 'jetpack' ) . '</a>';
 		$links[] = '<a href="http://support.wordpress.com/sharing/">' . __( 'Support', 'jetpack' ) . '</a>';
 	}
-	
+
 	return $links;
 }
 
@@ -137,7 +142,7 @@ add_action( 'init', 'sharing_init' );
 add_action( 'admin_init', 'sharing_add_meta_box' );
 add_action( 'save_post', 'sharing_meta_box_save' );
 add_action( 'sharing_email_send_post', 'sharing_email_send_post' );
-add_action( 'sharing_global_options', 'sharing_global_resources' );
+add_action( 'sharing_global_options', 'sharing_global_resources', 30 );
 add_action( 'sharing_admin_update', 'sharing_global_resources_save' );
 add_filter( 'sharing_services', 'sharing_restrict_to_single' );
 add_action( 'plugin_action_links_'.basename( dirname( __FILE__ ) ).'/'.basename( __FILE__ ), 'sharing_plugin_settings', 10, 4 );

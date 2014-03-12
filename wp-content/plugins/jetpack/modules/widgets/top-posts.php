@@ -32,7 +32,7 @@ class Jetpack_Top_Posts_Widget extends WP_Widget {
 	function __construct() {
 		parent::__construct(
 			'top-posts',
-			__( 'Top Posts &amp; Pages', 'jetpack' ),
+			apply_filters( 'jetpack_widget_name', __( 'Top Posts &amp; Pages', 'jetpack' ) ),
 			array(
 				'description' => __( 'Shows your most viewed posts and pages.', 'jetpack' ),
 			)
@@ -44,7 +44,7 @@ class Jetpack_Top_Posts_Widget extends WP_Widget {
 			add_action( 'wp_print_styles', array( $this, 'enqueue_style' ) );
 		}
 	}
-	
+
 	function enqueue_style() {
 		wp_register_style( 'widget-grid-and-list', plugins_url( 'widget-grid-and-list.css', __FILE__ ) );
 		wp_enqueue_style( 'widget-grid-and-list' );
@@ -55,9 +55,9 @@ class Jetpack_Top_Posts_Widget extends WP_Widget {
 		if ( false === $title ) {
 			$title = $this->default_title;
 		}
-		
+
 		$count = isset( $instance['count'] ) ? (int) $instance['count'] : 10;
-		if ( $count < 1 || 20 < $count ) {
+		if ( $count < 1 || 10 < $count ) {
 			$count = 10;
 		}
 
@@ -75,8 +75,8 @@ class Jetpack_Top_Posts_Widget extends WP_Widget {
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'count' ); ?>"><?php esc_html_e( 'Number of posts to show:', 'jetpack' ); ?></label>
-			<input id="<?php echo $this->get_field_id( 'count' ); ?>" name="<?php echo $this->get_field_name( 'count' ); ?>" type="number" value="<?php echo (int) $count; ?>" min="1" max="20" />
+			<label for="<?php echo $this->get_field_id( 'count' ); ?>"><?php esc_html_e( 'Maximum number of posts to show (no more than 10):', 'jetpack' ); ?></label>
+			<input id="<?php echo $this->get_field_id( 'count' ); ?>" name="<?php echo $this->get_field_name( 'count' ); ?>" type="number" value="<?php echo (int) $count; ?>" min="1" max="10" />
 		</p>
 
 		<p>
@@ -99,9 +99,9 @@ class Jetpack_Top_Posts_Widget extends WP_Widget {
 		if ( $instance['title'] === $this->default_title ) {
 			$instance['title'] = false; // Store as false in case of language change
 		}
-		
+
 		$instance['count'] = (int) $new_instance['count'];
-		if ( $instance['count'] < 1 || 20 < $instance['count'] ) {
+		if ( $instance['count'] < 1 || 10 < $instance['count'] ) {
 			$instance['count'] = 10;
 		}
 
@@ -121,7 +121,7 @@ class Jetpack_Top_Posts_Widget extends WP_Widget {
 		$title = apply_filters( 'widget_title', $title );
 
 		$count = isset( $instance['count'] ) ? (int) $instance['count'] : false;
-		if ( $count < 1 || 20 < $count ) {
+		if ( $count < 1 || 10 < $count ) {
 			$count = 10;
 		}
 
@@ -175,13 +175,11 @@ class Jetpack_Top_Posts_Widget extends WP_Widget {
 		case 'grid' :
 			wp_enqueue_style( 'widget-grid-and-list' );
 			foreach ( $posts as &$post ) {
-				$image = Jetpack_PostImages::get_image( $post['post_id'], $get_image_options );
+				$image = Jetpack_PostImages::get_image( $post['post_id'], array( 'fallback_to_avatars' => true ) );
 				$post['image'] = $image['src'];
 				if ( 'blavatar' != $image['from'] && 'gravatar' != $image['from'] ) {
-					if ( false !== strpos( $post['image'], 'files.wordpress.com' ) ) {
-						$post['image'] = add_query_arg( 'w', '800', $post['image'] );
-					}
-					$post['image'] = apply_filters( 'jetpack_static_url', is_ssl() ? 'https' : 'http' . "://en.wordpress.com/imgpress?resize={$get_image_options['avatar_size']},{$get_image_options['avatar_size']}&url=" . urlencode( $post['image'] ) );
+					$size = (int) $get_image_options['avatar_size'];
+					$post['image'] = jetpack_photon_url( $post['image'], array( 'resize' => "$size,$size" ) );
 				}
 			}
 
@@ -192,7 +190,7 @@ class Jetpack_Top_Posts_Widget extends WP_Widget {
 				foreach ( $posts as $post ) :
 				?>
 					<div class="widget-grid-view-image">
-						<a href="<?php echo esc_url( $post['permalink'] ); ?>" title="<?php echo esc_attr( wp_kses( $post['title'], array() ) ); ?>" class="bump-view" data-bump-view="tp"><img src="<?php echo esc_url( $post['image'] ); ?>" /></a>
+						<a href="<?php echo esc_url( $post['permalink'] ); ?>" title="<?php echo esc_attr( wp_kses( $post['title'], array() ) ); ?>" class="bump-view" data-bump-view="tp"><img src="<?php echo esc_url( $post['image'] ); ?>" alt="<?php echo esc_attr( wp_kses( $post['title'], array() ) ); ?>" /></a>
 					</div>
 
 				<?php
@@ -203,7 +201,7 @@ class Jetpack_Top_Posts_Widget extends WP_Widget {
 				foreach ( $posts as $post ) :
 				?>
 					<li>
-						<img src="<?php echo esc_url( $post['image'] ); ?>" class='widgets-list-layout-blavatar' />
+						<img src="<?php echo esc_url( $post['image'] ); ?>" class='widgets-list-layout-blavatar' alt="<?php echo esc_attr( wp_kses( $post['title'], array() ) ); ?>" />
 						<div class="widgets-list-layout-links"><a href="<?php echo esc_url( $post['permalink'] ); ?>" class="bump-view" data-bump-view="tp"><?php echo esc_html( wp_kses( $post['title'], array() ) ); ?></a></div>
 					</li>
 				<?php
@@ -223,8 +221,17 @@ class Jetpack_Top_Posts_Widget extends WP_Widget {
 	}
 
 	function get_by_views( $count ) {
-		global $wpdb;
-		$post_view_posts = stats_get_csv( 'postviews', array( 'days' => 2, 'limit' => 10 ) );
+		$days = (int) apply_filters( 'jetpack_top_posts_days', 2 );
+
+		if ( $days < 1 ) {
+			$days = 2;
+		}
+
+		if ( $days > 10 ) {
+			$days = 10;
+		}
+
+		$post_view_posts = stats_get_csv( 'postviews', array( 'days' => absint( $days ), 'limit' => 11 ) );
 		if ( !$post_view_posts ) {
 			return array();
 		}
@@ -266,7 +273,14 @@ class Jetpack_Top_Posts_Widget extends WP_Widget {
 		$posts = array();
 		foreach ( (array) $post_ids as $post_id ) {
 			$post = get_post( $post_id );
-		
+
+			if ( !$post )
+				continue;
+
+			// Only posts and pages, no attachments
+			if ( 'attachment' == $post->post_type )
+				continue;
+
 			// hide private and password protected posts
 			if ( 'publish' != $post->post_status || !empty( $post->post_password ) || empty( $post->ID ) )
 				continue;
@@ -279,12 +293,12 @@ class Jetpack_Top_Posts_Widget extends WP_Widget {
 			} else {
 				$title = $post->post_title;
 			}
-	
+
 			$permalink = get_permalink( $post->ID );
-	
+
 			$posts[] = compact( 'title', 'permalink', 'post_id' );
 			$counter++;
-		
+
 			if ( $counter == $count )
 				break; // only need to load and show x number of likes
 		}

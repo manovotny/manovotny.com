@@ -84,8 +84,8 @@ get_header(); ?>
 				</article><!-- #post-<?php the_ID(); ?> -->
 
 				<nav id="nav-single">
-					<h3 class="assistive-text"><?php _e( 'Image navigation', 'next-saturday' , 'jetpack' ); ?></h3>
-					<span class="nav-previous"><?php previous_image_link( false, __( '&raquo; Previous' , 'jetpack' ) ); ?></span>
+					<h3 class="assistive-text"><?php _ex( 'Image navigation', 'next-saturday' , 'jetpack' ); ?></h3>
+					<span class="nav-previous"><?php previous_image_link( false, __( '&laquo; Previous' , 'jetpack' ) ); ?></span>
 					<span class="nav-next"><?php next_image_link( false, __( 'Next &raquo; ' , 'jetpack' ) ); ?></span>
 				</nav><!-- #nav-single -->
 
