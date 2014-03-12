@@ -1,0 +1,70 @@
+/*
+Theme Name:  Mayer Child Theme
+Theme URI:   http://theme.wordpress.com/themes/mayer/
+Author:      Pressware
+Author URI:  http://pressware.co/
+Description: For the long-form writer, established blogger, and inspired author.
+Version:     1.0.0
+License:     GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: mayer
+Domain Path: /languages/
+Tags:        white, light, two-columns, responsive-layout, custom-menu, editor-style, rtl-language-support, sticky-post, theme-options, translation-ready, blog, journal, news, clean, conservative, light, minimal, modern, professional
+Template:    mayer
+*/
+
+@import url( '../mayer/css/style.css' );
+
+@font-face {
+    font-family: 'DIN Condensed';
+    src: url('fonts/DIN Condensed Bold.eot'); /* IE9 Compat Modes */
+    src: url('fonts/DIN Condensed Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('fonts/DIN Condensed Bold.woff') format('woff'), /* Modern Browsers */
+         url('fonts/DIN Condensed Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('fonts/DIN Condensed Bold.svg#41b483a81981df94d5e7475837c9ee2c') format('svg'); /* Legacy iOS */
+
+    font-style:   normal;
+    font-weight:  700;
+}
+
+#masthead,
+#credit {
+
+    background: #000;
+
+}
+
+#masthead #title #site-title {
+
+    font-family: 'DIN Condensed';
+    font-size: 80px;
+    letter-spacing: 0;
+    line-height: 1;
+    text-transform: uppercase;
+
+}
+
+/* This fixes the site title / description from "jumping" when flipping between home and single post pages. */
+#masthead #title p#site-title {
+
+    margin: 10px 0;
+
+}
+
+#masthead #title #site-description {
+
+    font-family: 'DIN Condensed';
+    letter-spacing: 0;
+    letter-spacing: 0;
+    text-transform: uppercase;
+}
+
+@media ( min-width: 992px ) {
+
+    #masthead #title {
+
+        padding-left: 40px;
+
+    }
+
+}
