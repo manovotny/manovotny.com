@@ -1,11 +1,14 @@
-#OS X
+# OS X
 .DS_Store
 
-#IDE
+# IDE
 .idea
 *.iml
 
-#WordPress
+# PHP
+*.log
+
+# WordPress
 /license.txt
 /index.php
 /readme.html
