@@ -17,7 +17,7 @@ module.exports = (function () {
             package: 'WP_Google_Analytics',
             slug: 'wp-google-analytics',
             url: 'https://github.com/manovotny/wp-google-analytics',
-            version: '2.0.0'
+            version: '2.0.1'
         }
     };
 

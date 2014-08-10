@@ -6,6 +6,6 @@
   "homepage": "https://github.com/manovotny/manovotny.com",
   "license": "GPL-3.0+",
   "require": {
-    "manovotny/wp-google-analytics": "2.0.0"
+    "manovotny/wp-google-analytics": "2.0.1"
   }
 }

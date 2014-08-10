@@ -12,7 +12,7 @@
  * Plugin Name: WP Google Analytics
  * Plugin URI: https://github.com/manovotny/wp-google-analytics
  * Description: Adds Google Analytics to WordPress sites.
- * Version: 2.0.0
+ * Version: 2.0.1
  * Author: Michael Novotny
  * Author URI: AUTHOR_URL
  * License: GPL-3.0+
