@@ -1,12 +1,9 @@
-# OS X
-.DS_Store
-
-# IDE
-.idea
 *.iml
+.DS_Store
+.idea
+node_modules
+vendor
 
-# PHP
-*.log
 
 # WordPress
 /license.txt

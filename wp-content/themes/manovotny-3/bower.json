@@ -1,0 +1,19 @@
+{
+  "name": "manovotny",
+  "version": "3.1.0",
+  "description": "Custom WordPress theme for Michael Novotny.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/manovotny/manovotny.com.git"
+  },
+  "keywords": [
+    "wordpress"
+  ],
+  "authors": [
+    {
+      "name": "Michael Novotny",
+      "email": "manovotny@gmail.com",
+      "homepage": "http://manovotny.com"
+    }
+  ]
+}
