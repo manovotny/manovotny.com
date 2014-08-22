@@ -48,7 +48,7 @@ module.exports = (function () {
             slug: 'manovotny',
             type: 'theme', // Should be `plugin` or `theme`.
             url: 'https://github.com/manovotny/manovotny.com',
-            version: '3.1.0'
+            version: '3.2.0'
         }
     };
 

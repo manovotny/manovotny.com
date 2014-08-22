@@ -236,7 +236,8 @@ module.exports = function (grunt) {
 
                 config.files.bower,
                 config.files.composer,
-                config.files.package
+                config.files.package,
+                config.files.style
             ],
             overwrite: overwrite,
             replacements: [
