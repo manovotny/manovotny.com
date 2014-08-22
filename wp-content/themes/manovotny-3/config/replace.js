@@ -21,8 +21,8 @@ module.exports = (function () {
             version: '3.1.0'
         },
         translations: {
-            domain: 'TRANSLATIONS_DOMAIN',
-            path: 'TRANSLATIONS_PATH'
+            domain: 'manovotny',
+            path: 'lang'
         }
     };
 
