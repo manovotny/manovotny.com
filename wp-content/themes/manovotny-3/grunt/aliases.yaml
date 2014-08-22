@@ -9,7 +9,6 @@ init:
 
 config:
   - replace
-  - rename
 
 build:
   - lint
