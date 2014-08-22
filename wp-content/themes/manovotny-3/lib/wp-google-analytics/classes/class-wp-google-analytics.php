@@ -35,37 +35,29 @@ class WP_Google_Analytics {
 
     }
 
-    /* Tracking Id
+    /* Localization Handle
     ---------------------------------------------- */
 
     /**
-     * Google Analytics tracking id for site.
+     * Getter method for localization handle.
+     *
+     * @return string Localization handle.
+     */
+    private function get_localization_handle() {
+
+        return str_replace( '-', '_', $this->slug );
+
+    }
+
+    /* Slug
+    ---------------------------------------------- */
+
+    /**
+     * Google analytics slug.
      *
      * @var string
      */
-    protected $tracking_id = '';
-
-    /**
-     * Getter method for tracking id.
-     *
-     * @return string Google Analytics tracking id.
-     */
-    public function get_tracking_id() {
-
-        return $this->tracking_id;
-
-    }
-
-    /**
-     * Setter method for tracking id.
-     *
-     * @param string $tracking_id Google Analytics tracking id.
-     */
-    public function set_tracking_id( $tracking_id ) {
-
-        $this->tracking_id = $tracking_id;
-
-    }
+    protected $slug = 'wp-google-analytics';
 
     /* Version
     ---------------------------------------------- */
@@ -75,16 +67,71 @@ class WP_Google_Analytics {
      *
      * @var string
      */
-    protected $version = '2.0.1';
+    protected $version = '3.0.0';
+
+    /* Constructor
+    ---------------------------------------------------------------------------------- */
 
     /**
-     * Getter method for version.
-     *
-     * @return string Plugin version.
+     * Initialize class.
      */
-    public function get_version() {
+    public function __construct() {
 
-        return $this->version;
+        add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
     }
+
+    /* Methods
+    ---------------------------------------------------------------------------------- */
+
+    /**
+     * Enqueues scripts.
+     */
+    public function enqueue_scripts() {
+
+        $wp_enqueue_util = WP_Enqueue_Util::get_instance();
+
+        $handle = $this->slug . '-script';
+        $relative_path = __DIR__ . '/../js/';
+        $filename = 'bundle.min.js';
+        $filename_debug = 'bundle.concat.js';
+        $dependencies = array();
+
+        $trackingId = '';
+
+        if ( defined( 'WP_GOOGLE_ANALYTICS_TRACKING_ID' ) ) {
+
+            $trackingId = WP_GOOGLE_ANALYTICS_TRACKING_ID;
+
+        }
+
+        // Check for tracking id.
+        if ( empty( $trackingId ) ) {
+
+            // No tracking id, no need to enqueue scripts.
+            return;
+
+        }
+
+        $data = array(
+            'options' => array(
+                'trackingId' => $trackingId
+            )
+        );
+
+        $options = new WP_Enqueue_Options(
+            $handle,
+            $relative_path,
+            $filename,
+            $filename_debug,
+            $dependencies,
+            $this->version
+        );
+
+        $options->set_localization( $this->get_localization_handle(),  $data );
+
+        $wp_enqueue_util->enqueue_script( $options );
+
+    }
+
 }

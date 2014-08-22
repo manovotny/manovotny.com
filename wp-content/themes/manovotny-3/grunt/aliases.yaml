@@ -1,24 +1,36 @@
 default:
   - build
 
-build:
-  - lib
-  - php
-  - js
+init:
+  - config
+  - shell:install
+  - update
+  - build
 
 config:
   - replace
+  - rename
 
-js:
-  - jslint
+build:
+  - lint
+  - test
 
-lib:
+generate:
+  - makepot
+
+update:
   - clean:lib
+  - shell:update
   - copy
+  - build
 
-php:
+lint:
   - phplint
 
-#manual:
-#  - shell
-#  - watch
+test:
+  - phpunit
+
+release:
+  - build
+  - replace:project_version
+  - generate

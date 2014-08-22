@@ -1,13 +1,15 @@
 /*
-Theme Name:  Michael Novotny
-Theme URI:   https://github.com/manovotny/manovotny.com/
-Version:     3.0.0
-Description: Custom child theme for Michael Novotny based on Mayer
-Author:      manovotny
-Author URI:  http://manovotny.com/
-License:     GNU General Public License v2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Template:    mayer
+Theme Name: Michael Novotny
+Theme URI: https://github.com/manovotny/manovotny.com/
+Version: 3.1.0
+Description: Custom WordPress theme for Michael Novotny.
+Author: manovotny
+Author URI: http://manovotny.com
+License: GPL-3.0+
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
+Domain Path: /TRANSLATIONS_PATH
+Text Domain: TRANSLATIONS_DOMAIN
+GitHub Theme URI: https://github.com/manovotny/manovotny.com
 */
 
 @import url( '../mayer/css/style.css' );

@@ -25,6 +25,9 @@ module.exports = function (grunt) {
                     src: [
                         '**/*',
 
+                        '!**/wp-phpunit-helpers/**',
+
+                        '!**/' + config.paths.config + '/**',
                         '!**/' + config.paths.grunt + '/**',
                         '!**/' + config.paths.tests + '/**',
                         '!**/' + config.paths.composer + '/**',

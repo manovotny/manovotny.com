@@ -6,16 +6,20 @@ module.exports = (function () {
         author: {
             email: 'manovotny@gmail.com',
             name: 'Michael Novotny',
-            url: 'http://manovotny.com'
+            url: 'http://manovotny.com',
+            username: 'manovotny'
         },
         files: {
             bower: 'bower.json',
             composer: 'composer.json',
             composerLock: 'composer.lock',
             grunt: 'Gruntfile.js',
+            jshint: '.jshintrc',
             package: 'package.json',
             readme: 'README.md',
-            sassLint: '.scss-lint.yml'
+            replace: 'replace.js',
+            sassLint: '.scss-lint.yml',
+            style: 'style.css'
         },
         paths: {
             admin: 'admin',
@@ -30,7 +34,9 @@ module.exports = (function () {
             lib: 'lib',
             phpunit: 'vendor/bin/phpunit',
             sass: 'sass',
-            tests: 'tests'
+            tests: 'tests',
+            translations: 'lang',
+            views: 'views'
         },
         project: {
             composer: 'manovotny/manovotny',
@@ -40,6 +46,7 @@ module.exports = (function () {
             name: 'Michael Novotny',
             package: 'Michael_Novotny',
             slug: 'manovotny',
+            type: 'theme', // Should be `plugin` or `theme`.
             url: 'https://github.com/manovotny/manovotny.com',
             version: '3.1.0'
         }
