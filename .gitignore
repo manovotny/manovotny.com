@@ -1,9 +1,11 @@
 *.iml
 .DS_Store
 .idea
+bower_components
+composer.lock
+config/runtime.json
 node_modules
 vendor
-
 
 # WordPress
 /license.txt
