@@ -3,7 +3,6 @@
  * The page template. Used when an individual page is queried.
  *
  * @package    Mayer
- * @version    1.0.0
  * @since      1.0.0
  */
 ?>
@@ -14,7 +13,7 @@
 
 			<?php if ( is_rtl() ) { ?>
 				<?php get_sidebar(); ?>
-			<?php } // end if ?>
+			<?php } ?>
 
 			<main id="main" class="site-main col-lg-8 col-md-8" role="main">
 
@@ -33,13 +32,13 @@
 						<?php comments_template(); ?>
 
 					</div><!-- .col-lg-8 -->
-				<?php } // end while ?>
+				<?php } ?>
 
 			</main><!-- #main -->
 
 			<?php if ( ! is_rtl() ) { ?>
 				<?php get_sidebar(); ?>
-			<?php } // end if ?>
+			<?php }  ?>
 
 		</div><!-- #primary -->
 	</div><!-- /#primary-wrapper -->

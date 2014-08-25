@@ -3,7 +3,6 @@
  * Implementation of the Mayer Theme Customizer.
  *
  * @package    Mayer
- * @version    1.1.0
  * @since      1.0.0
  */
 
@@ -11,12 +10,12 @@
  * Public Functions
 /*------------------------------------------------------------------*/
 
+add_action( 'customize_register', 'mayer_theme_customizer' );
 /**
  * Introduces the fields for the Twitter username, Facebook URL, Pinterest URL, and Google+ URL
  * into the Theme Customizer
  *
  * @param    object    $wp_customizer    A reference to the WordPress Theme Customizer
- * @version  1.0.0
  * @since    1.0.0
  */
 function mayer_theme_customizer( $wp_customizer ) {
@@ -34,10 +33,11 @@ function mayer_theme_customizer( $wp_customizer ) {
 	_mayer_add_twitter_username( $wp_customizer );
 	_mayer_add_facebook_url( $wp_customizer );
 	_mayer_add_pinterest_url( $wp_customizer );
+	_mayer_display_gravatar( $wp_customizer );
 	_mayer_add_googleplus_url( $wp_customizer );
+	_mayer_display_footer_social_icons( $wp_customizer );
 
-} // end mayer_theme_customizer
-add_action( 'customize_register', 'mayer_theme_customizer' );
+}
 
 /*------------------------------------------------------------------*
  * Private Functions
@@ -47,7 +47,6 @@ add_action( 'customize_register', 'mayer_theme_customizer' );
  * Adds a setting and a control for the author's email address.
  *
  * @param    object    $wp_customizer    A reference to the WordPress Theme Customizer
- * @version  1.0.0
  * @since    1.1.0
  */
 function _mayer_add_email_address( $wp_customizer ) {
@@ -72,13 +71,12 @@ function _mayer_add_email_address( $wp_customizer ) {
 	);
 
 
-} // end _mayer_add_email_address
+}
 
 /**
  * Adds a setting and a control for the Twitter username.
  *
  * @param    object    $wp_customizer    A reference to the WordPress Theme Customizer
- * @version  1.0.0
  * @since    1.0.0
  */
 function _mayer_add_twitter_username( $wp_customizer ) {
@@ -103,13 +101,12 @@ function _mayer_add_twitter_username( $wp_customizer ) {
 	);
 
 
-} // end _mayer_add_twitter_username
+}
 
 /**
  * Adds a setting and a control for the Facebook username.
  *
  * @param    object    $wp_customizer    A reference to the WordPress Theme Customizer
- * @version  1.0.0
  * @since    1.0.0
  */
 function _mayer_add_facebook_url( $wp_customizer ) {
@@ -133,13 +130,12 @@ function _mayer_add_facebook_url( $wp_customizer ) {
 	);
 
 
-} // end _mayer_add_facebook_url
+}
 
 /**
  * Adds a setting and a control for the Pinterest URL
  *
  * @param    object    $wp_customizer    A reference to the WordPress Theme Customizer
- * @version  1.0.0
  * @since    1.0.0
  */
 function _mayer_add_pinterest_url( $wp_customizer ) {
@@ -162,13 +158,12 @@ function _mayer_add_pinterest_url( $wp_customizer ) {
 		)
 	);
 
-} // end _mayer_add_pinterest_url
+}
 
 /**
  * Adds a setting and a control for the Google+ username.
  *
  * @param    object    $wp_customizer    A reference to the WordPress Theme Customizer
- * @version  1.0.0
  * @since    1.0.0
  */
 function _mayer_add_googleplus_url( $wp_customizer ) {
@@ -191,4 +186,61 @@ function _mayer_add_googleplus_url( $wp_customizer ) {
 		)
 	);
 
-} // end _mayer_add_googleplus_url
+}
+
+/**
+ * Toggles the display of the gravatar image in the header.
+ *
+ * @param    object    $wp_customizer    A reference to the WordPress Theme Customizer
+ * @since    1.5.0
+ */
+function _mayer_display_gravatar( $wp_customizer ) {
+
+	$wp_customizer->add_setting(
+		'mayer_display_gravatar',
+		array(
+			'default'           => 'checked',
+			'transport'         => 'postMessage'
+		)
+	);
+
+	$wp_customizer->add_control(
+		'mayer_display_gravatar',
+		array(
+			'section'  =>  'mayer_theme_options',
+			'label'    => __( 'Display Header Image?', 'mayer' ),
+			'type'     => 'checkbox'
+		)
+	);
+
+
+}
+
+/**
+ * Toggles the display of the social icons in the footer.
+ *
+ * @param    object    $wp_customizer    A reference to the WordPress Theme Customizer
+ * @since    1.5.0
+ */
+function _mayer_display_footer_social_icons( $wp_customizer ) {
+
+
+	$wp_customizer->add_setting(
+		'mayer_display_footer_social_icons',
+		array(
+			'default'           => '',
+			'transport'         => 'refresh'
+		)
+	);
+
+	$wp_customizer->add_control(
+		'mayer_display_footer_social_icons',
+		array(
+			'section'  =>  'mayer_theme_options',
+			'label'    => __( 'Display Social Icons in the Footer?', 'mayer' ),
+			'type'     => 'checkbox'
+		)
+	);
+
+
+}

@@ -3,7 +3,6 @@
  * The single post template file.
  *
  * @package    Mayer
- * @version    1.0.0
  * @since      1.0.0
  */
 ?>
@@ -14,13 +13,13 @@
 
 			<?php if ( is_rtl() ) { ?>
 				<?php get_sidebar(); ?>
-			<?php } // end if ?>
+			<?php } ?>
 
 			<main id="main" class="site-main col-lg-8 col-md-8" role="main">
 
 				<?php if ( function_exists( 'yoast_breadcrumb' ) ) { ?>
 					<?php yoast_breadcrumb( '<p id="breadcrumbs">', '</p>' ); ?>
-				<?php } // end if ?>
+				<?php } ?>
 
 				<?php while ( have_posts() ) { ?>
 					<?php the_post(); ?>
@@ -38,19 +37,19 @@
 
 						<?php if ( mayer_is_paginated_post() ) { ?>
 							<?php get_template_part( 'partials/post-pagination' ); ?>
-						<?php } // end if ?>
+						<?php } ?>
 
 						<?php comments_template(); ?>
 
 						<?php get_template_part( 'partials/pagination' ); ?>
 
 					</div><!-- .single -->
-				<?php } // end while ?>
+				<?php } ?>
 			</main><!-- #main -->
 
 			<?php if ( ! is_rtl() ) { ?>
 				<?php get_sidebar(); ?>
-			<?php } // end if ?>
+			<?php } ?>
 
 		</div><!-- #primary -->
 	</div><!-- /#primary-wrapper -->

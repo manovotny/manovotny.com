@@ -3,7 +3,6 @@
  * The main template for displaying comments.
  *
  * @package    Mayer
- * @version    1.0.0
  * @since      1.0.0
  */
 ?>
@@ -49,9 +48,9 @@
 						</li><!-- .next -->
 					</ul><!-- .pager -->
 				</div><!-- #comment-pagination -->
-			<?php } // end if ?>
+			<?php } ?>
 
-		<?php } // end if ?>
+		<?php } ?>
 
 		<?php if ( mayer_post_has_comments( get_the_ID(), 'pings' ) ) { ?>
 
@@ -68,17 +67,17 @@
 			?>
 			</div><!-- .ping-list -->
 
-		<?php } // end if ?>
+		<?php } ?>
 
 		<?php if ( comments_open() && 0 == get_comment_count( get_the_ID() ) ) { ?>
 			<div id="no-responses">
 				<h3><?php _e( 'No Comments', 'mayer' ); ?></h3>
 				<p><?php _e( 'There are no comments for this post.', 'mayer' ); ?></p>
 			</div><!-- #no-responses -->
-		<?php } // end if ?>
+		<?php } ?>
 
 		<?php mayer_comment_form(); ?>
 
 	</div><!-- #comments -->
 
-<?php } // end if ?>
+<?php } ?>

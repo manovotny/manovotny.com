@@ -1,7 +1,6 @@
 /* Comments
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 
@@ -16,9 +15,9 @@
 		border:         1px solid $light-gray;
 		margin:         20px 0 20px 0;
 
-	} // p
+	}
 
-} // #no-responses
+}
 
 #comments {
 
@@ -36,7 +35,7 @@
 			border:         1px solid $light-gray;
 			margin:         20px 0 20px 0;
 
-		} // .pingback
+		}
 
 		.comment {
 
@@ -49,15 +48,15 @@
 
 			&.bypostauthor {
 				border-left: 1px solid $moderate-gray;
-			} // .bypostauthor
+			}
 
-		} // .comment
+		}
 
 		.response-body {
 
 			.vcard {
 				min-height: 100px;
-			} // .vcard
+			}
 
 				.avatar {
 
@@ -69,9 +68,9 @@
 						border:       1px solid $light-gray;
 						margin-right: 10px;
 
-					} // img
+					}
 
-				} // .avatar
+				}
 
 				.response-meta-wrapper {
 
@@ -84,17 +83,17 @@
 
 							font-style: normal;
 
-						} // .fn
+						}
 
 						.response-date {
 							display: block;
-						} // .comment-date
+						}
 
-					} // .response-meta
+					}
 
-				} // .response-meta-wrapper
+				}
 
-			} // .response-body
+			}
 
 			.response-text {
 
@@ -105,15 +104,23 @@
 
 				p, pre, ul, address {
 					max-width:     700px;
-				} // p, pre, ul, address
+				}
 
-			} // .comment-text
+				code {
+
+					overflow-x: scroll;
+					display:   block;
+
+				}
+
+
+			}
 
 			.reply {
 				font-size: 17px;
-			} // .reply
+			}
 
-	} // .response-list
+	}
 
 	#comment-pagination {
 
@@ -134,9 +141,9 @@
 					padding: 0;
 					color:   $dark-blue;
 
-				} // a
+				}
 
-			} // li
+			}
 
 
 			.previous,
@@ -144,15 +151,15 @@
 
 				a:hover {
 					color: $dark-gray;
-				} // a:hover
+				}
 
-			} // .previous, .next
+			}
 
-		} // .pager
+		}
 
-	} // #pagination
+	}
 
-} // #comments
+}
 
 #respond {
 
@@ -164,40 +171,40 @@
 
 		.comment-notes {
 			font-size: 16px;
-		} // .comment-notes
+		}
 
 		label {
 			font-size: 18px;
-		} // label
+		}
 
 		.logged-in-as {
 			font-size: 16px;
-		} // .logged-in-as
+		}
 
 		.form-required-fields {
 			font-size: 16px;
-		} // .comment-form-comment
+		}
 
 		#comment {
 
-			font-size:   16px;
+			font-size:   17px;
 			line-height: 32px;
 
-		} // #comment
+		}
 
 		.form-allowed-tags {
 
 			font-size:  16px;
 			margin-top: 10px;
 
-		} // .form-allowed-tags
+		}
 
 		pre {
 
 			word-break: break-word;
 			font-size:  14px;
 
-		} // pre
+		}
 
 		.form-submit {
 
@@ -216,13 +223,13 @@
 					color:      $off-black;
 					background: $off-white;
 
-				} // :hover
+				}
 
-			} // #submit
+			}
 
-		} // .form-submit
+		}
 
-	} // #commentform
+	}
 
 	small {
 
@@ -233,8 +240,8 @@
 			padding:        10px 0 0 0;
 			font-size:      16px;
 
-		} // #cancel-comment-reply-link
+		}
 
-	} // small
+	}
 
-} // #respond
+}

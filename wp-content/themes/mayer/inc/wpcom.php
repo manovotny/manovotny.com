@@ -2,9 +2,7 @@
 /**
  * WordPress.com-specific functions and definitions.
  *
- * @package    Mayer
- * @subpackage inc
- * @version    1.1.0
+ * @package    Mayer/inc
  * @since      1.0.0
  */
 
@@ -13,9 +11,8 @@ global $themecolors;
 /**
  * Set a default theme color array for WP.com.
  *
- * @global array $themecolors
- * @subpackage inc
- * @version    1.1.0
+ * @global     array        $themecolors
+ * @package    Mayer/inc
  * @since      1.0.0
  */
 $themecolors = array(
@@ -26,11 +23,11 @@ $themecolors = array(
         'url'    => '56b4ce',
 );
 
+add_action( 'wp_enqueue_scripts', 'mayer_dequeue_fonts', 11 );
 /**
  * Dequeue Google Fonts if Custom Fonts are being used instead.
  *
- * @subpackage inc
- * @version    1.1.0
+ * @package    Mayer/inc
  * @since      1.0.0
  */
 function mayer_dequeue_fonts() {
@@ -45,7 +42,7 @@ function mayer_dequeue_fonts() {
 			wp_dequeue_style( 'mayer-muli' );
 			wp_dequeue_style( 'mayer-source-sans-pro' );
 
-	    } // end if
+	    }
 
 		if ( $custom_fonts && $custom_fonts['body-text']['id'] ) {
 
@@ -53,8 +50,8 @@ function mayer_dequeue_fonts() {
 			wp_dequeue_style( 'mayer-muli' );
 			wp_dequeue_style( 'mayer-source-sans-pro' );
 
-		} // end if
-	} // end if
+		}
 
-} // end mayer_dequeue_fonts
-add_action( 'wp_enqueue_scripts', 'mayer_dequeue_fonts', 11 );
+	}
+
+}

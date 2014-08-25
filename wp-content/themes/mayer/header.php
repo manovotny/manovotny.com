@@ -6,7 +6,6 @@
  * and everything up to div#content.
  *
  * @package    Mayer
- * @version    1.0.0
  * @since      1.0.0
  */
 ?>
@@ -23,6 +22,8 @@
 
 	<body <?php body_class(); ?>>
 
+		<?php do_action( 'before' ); ?>
+
 		<div id="top-navigation-wrapper">
 			<div class="container navigation">
 				<div class="col-lg-8 col-md-8">
@@ -36,44 +37,7 @@
 				</div><!-- .col-lg-12 -->
 				<div class="col-lg-4 col-md-4 hidden-sm hidden-xs pull-right">
 					<div class="container pull-right">
-						<ul id="social-icons" class="list-inline nav nav-pills pull-right">
-
-							<?php $visibility = ( '' === trim( get_theme_mod( 'mayer_email_address' ) ) ) ? 'hidden' : '' ?>
-							<li id="email" class="<?php echo $visibility; ?>">
-								<a href="mailto:<?php echo esc_attr( get_theme_mod( 'mayer_email_address' ) ); ?>" title="Email">
-									<i class="fa fa-envelope fa-stack-1x"></i>
-								</a>
-							</li><!-- #mail -->
-
-							<?php $visibility = ( '' === trim( get_theme_mod( 'mayer_twitter_username' ) ) ) ? 'hidden' : '' ?>
-							<li id="twitter" class="<?php echo $visibility; ?>">
-								<a href="<?php echo esc_url( 'http://twitter.com/' . get_theme_mod( 'mayer_twitter_username' ) ); ?>/" title="Twitter">
-									<i class="fa fa-twitter fa-stack-1x"></i>
-								</a>
-							</li><!-- #twitter -->
-
-							<?php $visibility = ( '' === trim( get_theme_mod( 'mayer_facebook_url' ) ) ) ? 'hidden' : '' ?>
-							<li id="facebook" class="<?php echo $visibility; ?>">
-								<a href="<?php echo esc_url( get_theme_mod( 'mayer_facebook_url' ) ); ?>" title="Facebook">
-									<i class="fa fa-facebook fa-stack-1x"></i>
-								</a>
-							</li><!-- #facebook -->
-
-							<?php $visibility = ( '' === trim( get_theme_mod( 'mayer_pinterest_url' ) ) ) ? 'hidden' : '' ?>
-							<li id="pinterest" class="<?php echo $visibility; ?>">
-								<a href="<?php echo esc_url( get_theme_mod( 'mayer_pinterest_url' ) ); ?>" title="Pinterest">
-									<i class="fa fa-pinterest fa-stack-1x"></i>
-								</a>
-							</li><!-- #google-plus -->
-
-							<?php $visibility = ( '' === trim( get_theme_mod( 'mayer_googleplus_url' ) ) ) ? 'hidden' : '' ?>
-							<li id="google-plus" class="<?php echo $visibility; ?>">
-								<a href="<?php echo esc_url( get_theme_mod( 'mayer_googleplus_url' ) ); ?>?rel=author" title="Google Plus">
-									<i class="fa fa-google-plus fa-stack-1x"></i>
-								</a>
-							</li><!-- #google-plus -->
-
-						</ul><!-- #social-icons -->
+						<?php get_template_part( 'partials/social-icons' ); ?>
 					</div><!-- .container -->
 				</div><!-- .col-lg-3 -->
 			</div><!-- .navigation -->
@@ -87,6 +51,6 @@
 				<?php } else { ?>
 					<?php get_template_part( 'partials/avatar' ); ?>
 					<?php get_template_part( 'partials/title' ); ?>
-				<?php } // end if/else ?>
+				<?php } ?>
 			</div><!-- .container -->
 		</header><!-- #masthead -->

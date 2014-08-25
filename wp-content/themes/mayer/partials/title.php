@@ -14,6 +14,6 @@
 		</a>
 		<p id="site-description"><?php bloginfo( 'description' ); ?></p>
 
-	<?php } // end if/else ?>
+	<?php } ?>
 
 </div><!-- #title -->

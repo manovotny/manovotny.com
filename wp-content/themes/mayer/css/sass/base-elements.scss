@@ -1,7 +1,6 @@
 /* Base Elements
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 
@@ -10,7 +9,7 @@ body {
 	background:  $white;
 	font-family: 'Source Sans Pro', Sans-serif;
 
-} // body
+}
 
 a {
 
@@ -22,22 +21,22 @@ a {
 
 		&:hover {
 			color: $mayer-blue;
-		} // hover
+		}
 
-	} // code
+	}
 
 	&:hover {
 
 		color:           $dark-blue;
 		text-decoration: none;
 
-	} // hover
+	}
 
 	&:focus {
 		outline: none;
-	} // focus
+	}
 
-} // a
+}
 
 address {
 
@@ -46,7 +45,7 @@ address {
 	font-size:   15px;
 	line-height: 22px;
 
-} // address
+}
 
 blockquote {
 
@@ -60,9 +59,9 @@ blockquote {
 		line-height: 22px;
 		font-size:   16px;
 
-	} // p
+	}
 
-} // blockquote
+}
 
 cite {
 
@@ -70,25 +69,25 @@ cite {
 	font-style: italic;
 	margin-top: 8px;
 
-} // cite
+}
 
 code {
 
 	background-color:	$light-gray;
 	color:				$dark-blue;
 
-} // code
+}
 
 dd {
 	margin-left: 12px;
-} // dd
+}
 
 dt {
 
 	margin-top:    10px;
 	margin-bottom: 10px;
 
-} // dt
+}
 
 th,
 td {
@@ -96,7 +95,7 @@ td {
 	border:  1px solid $mayer-gray;
 	padding: 8px;
 
-} // th, td
+}
 
 h1, h2, h3, h4, h5, h6 {
 
@@ -104,34 +103,34 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight:    bold;
 	letter-spacing: -2px;
 
-} // h1, h2, h3, h4, h5, h6
+}
 
 h2 {
 	font-size: 34px;
-} // h2
+}
 
 h3 {
 	font-size: 32px;
-} // h3
+}
 
 h4 {
 	font-size: 30px;
-} // h4
+}
 
 h5 {
 	font-size: 28px;
-} // h5
+}
 
 h6 {
 
 	font-size:      26px;
 	letter-spacing: -2px;
 
-} // h6
+}
 
 h1, h2, p {
 	word-wrap: break-word;
-} // h1, h2, p
+}
 
 code,
 pre {
@@ -141,11 +140,11 @@ pre {
 	font-family: 'Lucida Grande', Monotype, Consolas, "Courier New", Monospace;
 	font-size:   17px;
 
-} // pre
+}
 
 var {
 
 	font-family: Monospace, sans-serif;
 	font-style:  normal;
 
-} // var
+}

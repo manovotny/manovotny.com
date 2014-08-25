@@ -5,7 +5,6 @@
  * Displays the closing #content element, the #footer-wrapper, and `wp_footer`.
  *
  * @package    Mayer
- * @version    1.0.0
  * @since      1.0.0
  */
 ?>
@@ -22,6 +21,13 @@
 
 		<div id="credit">
 			<div class="container">
+				<?php if ( '1' == get_theme_mod( 'mayer_display_footer_social_icons' ) ) { ?>
+					<div class="row">
+						<div id="social-icons-footer">
+							<?php get_template_part( 'partials/social-icons' ); ?>
+						</div><!-- #social-icons-footer -->
+					</div><!-- #social-icons-footer -->
+				<?php } ?>
 				<div class="row">
 					<div class="col-lg-12">
 						<p>

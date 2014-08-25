@@ -1,7 +1,6 @@
 /* Footer
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 
@@ -27,15 +26,15 @@
 
 				&:hover {
 					color: $dark-gray;
-				} // :hover
+				}
 
-			} // a
+			}
 
-		} // #mayer-back-to-top
+		}
 
-	} // .row
+	}
 
-} //#footer-wrapper
+}
 
 #credit {
 
@@ -55,9 +54,9 @@
 
 					&:hover {
 						color: $dark-gray;
-					} // :hover
+					}
 
-				} // a
+				}
 
 				p {
 
@@ -66,12 +65,12 @@
 					padding:    40px 0 20px 0;
 					text-align: center;
 
-				} // p
+				}
 
-			} // div
+			}
 
-		} // .row
+		}
 
-	} // .container
+	}
 
-} // #credit
+}

@@ -4,7 +4,6 @@
  * and in the `footer` templates.
  *
  * @package    Mayer
- * @version    1.0.0
  * @since      1.0.0
  */
 ?>

@@ -1,7 +1,6 @@
 /* Content
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 
@@ -23,14 +22,14 @@
 				border-bottom:  1px dotted $light-gray;
 				padding-bottom: 40px;
 
-			} // .post
+			}
 
 			.single-post {
 
 				border-bottom:  0;
 				padding-bottom: 0;
 
-			} // .single-post
+			}
 
 			.page,
 			.post,
@@ -41,7 +40,7 @@
 
 				.page-title {
 					@include post_title_font( '0 0 20px 0' );
-				} // .page-title
+				}
 
 				.post-title {
 
@@ -53,11 +52,11 @@
 
 						&:hover {
 							color: $moderate-gray;
-						} // :hover
+						}
 
-					} // a
+					}
 
-				} // .post-title
+				}
 
 				.post-meta {
 
@@ -73,11 +72,11 @@
 
 						&:hover {
 							color: $mayer-gray;
-						} // :hover
+						}
 
-					} // a
+					}
 
-				} // .post-meta
+				}
 
 				.post-content {
 
@@ -92,7 +91,7 @@
 						height:     1px;
 						margin:     16px 0 0 0;
 
-					} // .divide
+					}
 
 					.more-link {
 
@@ -100,7 +99,7 @@
 						display:     block;
 						font-weight: 600;
 
-					} // .more-link
+					}
 
 					p {
 
@@ -111,15 +110,15 @@
 							max-width: 100%;
 							height:    auto;
 
-						} // img
+						}
 
-					} // p
+					}
 
 					.post-password-form {
 
 						label {
 							display: inline;
-						} // label
+						}
 
 						p {
 
@@ -133,20 +132,20 @@
 								display:                    inline;
 								margin-right:               -2px;
 
-							} // .post_password
+							}
 
 							.btn {
 
 								@include border_top_left_radius( 0 );
 								@include border_bottom_left_radius( 0 );
 
-							} // .btn
+							}
 
-						} // p
+						}
 
-					} // .post-password-form
+					}
 
-				} // .post-content
+				}
 
 				.post-pagination {
 
@@ -159,15 +158,15 @@
 
 					p {
 						margin: 0;
-					} // p
+					}
 
 
-				} // .post-pagination
+				}
 
-			} // .post
+			}
 
-		} // #main
+		}
 
-	} // #primary
+	}
 
-} // #primary-wrapper
+}

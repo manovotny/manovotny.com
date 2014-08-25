@@ -3,7 +3,6 @@
  * The attachment template. Used when viewing a single attachment.
  *
  * @package    Mayer
- * @version    1.0.0
  * @since      1.0.0
  */
 ?>
@@ -14,13 +13,13 @@
 
 			<?php if ( is_rtl() ) { ?>
 				<?php get_sidebar(); ?>
-			<?php } // end if ?>
+			<?php } ?>
 
 			<main id="main" class="site-main col-lg-8 col-md-8" role="main">
 
 				<?php if ( function_exists( 'yoast_breadcrumb' ) ) { ?>
 					<?php yoast_breadcrumb( '<p id="breadcrumbs">', '</p>' ); ?>
-				<?php } // end if ?>
+				<?php } ?>
 
 				<?php while ( have_posts() ) { ?>
 					<?php the_post(); ?>
@@ -38,7 +37,7 @@
 						</div><!-- .post-content -->
 
 					</div><!-- div -->
-				<?php } // end while ?>
+				<?php } ?>
 
 				<?php get_template_part( 'partials/attachment-pagination' ); ?>
 
@@ -46,7 +45,7 @@
 
 			<?php if ( ! is_rtl() ) { ?>
 				<?php get_sidebar(); ?>
-			<?php } // end if ?>
+			<?php } ?>
 
 		</div><!-- #primary -->
 

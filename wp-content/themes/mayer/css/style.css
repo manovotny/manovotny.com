@@ -1,26 +1,22 @@
 @charset "UTF-8";
 /* Core Theme Style sheet.
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 /* Select Bootstrap classes to style WordPress widgets.
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 /* Color Palette
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 /* Mixins
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 /*
@@ -29,8 +25,7 @@
  *==================================================*/
 /* Bootstrap Resets
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 h1, h2, h3, h4, h5, h6 {
@@ -52,8 +47,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Base Elements
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 body {
@@ -145,8 +139,7 @@ var {
 
 /* Classes
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 .alignnone {
@@ -237,9 +230,7 @@ tr.odd {
 
 /* Header
  *
- * @package    Mayer
- * @subpackage css
- * @version    1.1.0
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 #masthead {
@@ -255,11 +246,6 @@ tr.odd {
         border-radius: 150px;
         -moz-border-radius: 150px;
         -webkit-border-radius: 150px;
-        /*
-        box-shadow:            0 0 8px rgba(33, 34, 36, .8);
-        -moz-box-shadow:       0 0 8px rgba(33, 34, 36, .8);
-        -webkit-box-shadow:    0 0 8px rgba(33, 34, 36, .8);
-        */
         width: 140px;
         height: 140px; }
   #masthead #title {
@@ -273,15 +259,14 @@ tr.odd {
       letter-spacing: -2px; }
       #masthead #title #site-title:hover {
         color: #e3e3e3; }
-    #masthead #title p#site-title {
-      @-moz-document url-prefix() {
-        margin-top: 1px;
-        margin-bottom: 0px; }
- }
-      @media screen and (-webkit-min-device-pixel-ratio: 0) {
-        #masthead #title p#site-title {
-          margin-top: 0px;
-          margin-bottom: 1px; } }
+@-moz-document url-prefix() {
+  #masthead #title p#site-title {
+    margin-top: 1px;
+    margin-bottom: 0px; } }
+    @media screen and (-webkit-min-device-pixel-ratio: 0) {
+      #masthead #title p#site-title {
+        margin-top: 0px;
+        margin-bottom: 1px; } }
     #masthead #title #site-description {
       font-family: 'Muli', Sans-serif;
       font-size: 58px;
@@ -294,8 +279,7 @@ tr.odd {
 
 /* Navigation
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 #top-navigation-wrapper {
@@ -333,8 +317,7 @@ tr.odd {
 
 /* Social Icons
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 #social-icons li {
@@ -345,10 +328,15 @@ tr.odd {
   #social-icons li a i {
     text-align: right; }
 
+#social-icons-footer {
+  display: inline-block;
+  padding-top: 20px; }
+  #social-icons-footer #social-icons a:hover {
+    background: none; }
+
 /* Archive Elements
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 .archive-header {
@@ -363,8 +351,7 @@ tr.odd {
 
 /* Content
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 #primary-wrapper {
@@ -497,8 +484,7 @@ tr.odd {
 
 /* Pagination
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 #pagination {
@@ -522,8 +508,7 @@ tr.odd {
 
 /* Comments
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 #no-responses p {
@@ -577,6 +562,9 @@ tr.odd {
     text-align: justify; }
     #comments .response-list .response-text p, #comments .response-list .response-text pre, #comments .response-list .response-text ul, #comments .response-list .response-text address {
       max-width: 700px; }
+    #comments .response-list .response-text code {
+      overflow-x: scroll;
+      display: block; }
   #comments .response-list .reply {
     font-size: 17px; }
   #comments #comment-pagination {
@@ -607,7 +595,7 @@ tr.odd {
   #respond #commentform .form-required-fields {
     font-size: 16px; }
   #respond #commentform #comment {
-    font-size: 16px;
+    font-size: 17px;
     line-height: 32px; }
   #respond #commentform .form-allowed-tags {
     font-size: 16px;
@@ -636,8 +624,7 @@ tr.odd {
 
 /* Sidebar
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 #sidebar {
@@ -718,8 +705,7 @@ tr.odd {
 
 /* Footer
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 #footer-wrapper {
@@ -753,10 +739,13 @@ tr.odd {
 
 /* JetPack
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
+/* Note this style is marked as !important specifically for WordPress.com */
+#commentform {
+  background: #fff !important; }
+
 #subscribe-submit input[type="submit"] {
   border-radius: 2px;
   -moz-border-radius: 2px;
@@ -767,10 +756,45 @@ tr.odd {
   #subscribe-submit input[type="submit"]:hover {
     background: #fff; }
 
+#comment-form-subscribe {
+  width: 100%;
+  display: block; }
+
+.subscribe-label {
+  font-weight: normal;
+  font-size: 12px; }
+
+.form-allowed-tags {
+  clear: both;
+  font-size: 12px; }
+
+.sharedaddy .sd-title {
+  /* Note these styles iare marked as !important specifically for WordPress.com */
+  display: block !important;
+  letter-spacing: -1px  !important;
+  font-size: 20px  !important;
+  margin-top: 0     !important; }
+
+#jp-relatedposts h3 {
+  /* Note these styles iare marked as !important specifically for WordPress.com */
+  display: block !important;
+  letter-spacing: -1px  !important;
+  font-size: 20px  !important;
+  margin-top: 0     !important; }
+
+div.sharedaddy.sd-like-enabled .sd-like .post-likes-widget {
+  position: relative !important; }
+
+.sharedaddy .sd-content .post-content a {
+  font-size: 16px;
+  text-decoration: none; }
+
+h3.jp-relatedposts-headline {
+  width: 100%; }
+
 /* Media Queries
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 /* Large Devices Desktops (≥1200px) */
@@ -788,6 +812,9 @@ tr.odd {
   #masthead #title #site-description {
     text-align: center; }
 
+  #primary-wrapper #primary {
+    padding: 3px; }
+
   .more-link-wrapper {
     padding-bottom: 0; }
 
@@ -800,6 +827,17 @@ tr.odd {
 @media (max-width: 768px) {
   #masthead {
     min-height: 100px; }
+
+  #primary-wrapper #primary #main .post {
+    padding-bottom: 10px; }
+    #primary-wrapper #primary #main .post .post-content {
+      text-align: left; }
+      #primary-wrapper #primary #main .post .post-content h2, #primary-wrapper #primary #main .post .post-content h3, #primary-wrapper #primary #main .post .post-content h4, #primary-wrapper #primary #main .post .post-content h5, #primary-wrapper #primary #main .post .post-content h6 {
+        text-align: left; }
+      #primary-wrapper #primary #main .post .post-content p {
+        text-align: left; }
+      #primary-wrapper #primary #main .post .post-content .wp-caption-text {
+        text-align: center; }
 
   .navbar-toggle,
   .navbar-toggle.collapsed {
@@ -867,14 +905,43 @@ tr.odd {
   #primary-wrapper #primary #main .single-post .post-content {
     line-height: 25px; }
 
+  .response-text p {
+    text-align: left; }
+
   #pagination {
     border-bottom: 1px dotted #e3e3e3; }
     #pagination .pager li a {
       width: 100%;
       text-align: center; } }
 @media (max-width: 640px) {
+  #masthead #title #site-title,
+  #masthead #title #site-description {
+    font-size: 40px; }
+
+  #primary-wrapper #primary {
+    padding: 3px; }
+
   .gallery-item {
     float: left;
     clear: both;
     display: block;
     width: 100% !important; } }
+/* Web Font Styles for fixing Google Chrome
+ * web font rendering.
+ *
+ * @package    Mayer/css
+ * @since      1.4.0
+ *====================================*/
+body {
+  -webkit-animation-duration: 0.1s;
+  -webkit-animation-name: fontfix;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-delay: 0.1s; }
+
+@-webkit-keyframes fontfix {
+  from {
+    opacity: 1; }
+
+  to {
+    opacity: 1; } }

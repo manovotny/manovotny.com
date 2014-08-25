@@ -1,7 +1,6 @@
 /* Social Icons
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 
@@ -14,16 +13,33 @@
 
 		&:hover {
 			background: transparent;
-		} // :hover
+		}
 
 		a {
 
 			i {
 				text-align: right;
-			} // i
+			}
 
-		} // a
+		}
 
-	} // li
+	}
 
-} // #social-icons
+}
+
+#social-icons-footer {
+
+	display:     inline-block;
+	padding-top: 20px;
+
+	#social-icons {
+
+		a {
+			&:hover {
+				background: none;
+			}
+		}
+
+	}
+
+}

@@ -1,7 +1,6 @@
 /* Select Bootstrap classes to style WordPress widgets.
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 
@@ -24,4 +23,4 @@
 	-webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 	transition:         border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 
-} // form_control()
+}

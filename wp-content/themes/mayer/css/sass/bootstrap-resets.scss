@@ -1,7 +1,6 @@
 /* Bootstrap Resets
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 
@@ -10,11 +9,11 @@ h1, h2, h3, h4, h5, h6 {
 	margin-top:    10px;
 	margin-bottom: 10px;
 
-} // h1, h2, h3, h4, h5, h6
+}
 
 .collapse {
 	@include collapse_lr_padding();
-} // .nav-collapse
+}
 
 .nav {
 
@@ -25,9 +24,9 @@ h1, h2, h3, h4, h5, h6 {
 		margin-left:          10px;
 		margin-top:           -4px;
 
-	} // .caret
+	}
 
-} // .nav
+}
 
 .pager {
 
@@ -36,13 +35,11 @@ h1, h2, h3, h4, h5, h6 {
 		> a {
 
 			&:hover {
-
 				background: transparent;
+			}
 
-			} // :hover
+		}
 
-		} // a
+	}
 
-	} // li
-
-} // .pager
+}

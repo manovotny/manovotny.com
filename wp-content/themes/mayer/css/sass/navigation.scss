@@ -1,7 +1,6 @@
 /* Navigation
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 
@@ -10,7 +9,7 @@
 	background-color: $white;
 	padding:          0;
 
-} // #top-navigation-wrapper
+}
 
 .navigation {
 
@@ -25,9 +24,9 @@
 
 			a {
 				color:      $dark-gray;
-			} // :hover
+			}
 
-		} // .active
+		}
 
 		li {
 
@@ -44,15 +43,15 @@
 					color:            $dark-gray;
 					background-color: transparent;
 
-				} // :hover
+				}
 
-			} // a
+			}
 
 			&:hover {
 				color:      $light-gray;
-			} // :hover
+			}
 
-		} // li
+		}
 
 		.dropdown-menu {
 
@@ -64,29 +63,29 @@
 
 				> a {
 					background-color: transparent;
-				} // a
+				}
 
-			} // .active
+			}
 
-		} // .dropdown-menu
+		}
 
 		.current-menu-parent {
 
 			.dropdown-toggle {
 				color: $dark-gray;
-			} // .dropdown-toggle
+			}
 
 			.active,
 			.current-menu-item {
 
 				a {
 					color: $dark-gray;
-				} // a
+				}
 
-			} // .active
+			}
 
-		} // .current-menu-parent
+		}
 
-	} // .nav
+	}
 
-} // .navigation
+}

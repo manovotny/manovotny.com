@@ -1,7 +1,6 @@
 /* Sidebar
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 
@@ -19,11 +18,11 @@
 		font-size:    16px;
 		padding-left: 16px;
 
-	} // ul
+	}
 
 	select {
 		@include form_control();
-	} // select
+	}
 
 	.widget {
 
@@ -32,7 +31,7 @@
 		float:   left;
 		width:   100%;
 
-	} // .widget
+	}
 
 	/*
 	 * Search
@@ -40,7 +39,7 @@
 
 	.widget_search {
 		margin: 0;
-	} // .widget_search
+	}
 
 	/*
 	 * Recent Comments
@@ -54,13 +53,13 @@
 
 				 a {
 					 word-break: break-word;
-				 } // a
+				 }
 
-			 } // .recentcomments
+			 }
 
-		 } // #recentcomments
+		 }
 
-	 } // .widget_recent_comments
+	 }
 
 	/*
 	 * RSS Widget
@@ -72,11 +71,11 @@
 
 			img {
 				display: none;
-			} // img
+			}
 
-		} // .rsswidget
+		}
 
-	} // .widget-title
+	}
 
 	/*
 	 * Tag Cloud
@@ -87,7 +86,7 @@
 		text-transform: uppercase;
 		text-align:     justify;
 
-	} // .tagcloud
+	}
 
 	/*
 	 * Calendar
@@ -114,11 +113,11 @@
 					text-align:center;
 				}
 
-			} // #wp-calendar
+			}
 
-		} // #calendar_wrap
+		}
 
-	} // .widget_calendar
+	}
 
 	/*
 	 * Recent Posts
@@ -135,13 +134,13 @@
 					display: block;
 					color:   $dark-gray;
 
-				} // span
+				}
 
-			} // li
+			}
 
-		} // ul
+		}
 
-	} // .widget_recent_entries
+	}
 
 	/*
 	 * Text Widgets
@@ -149,6 +148,6 @@
 
 	.textwidget {
 		font-size: 16px;
-	} // .textwidget
+	}
 
-} // #sidebar
+}

@@ -1,7 +1,6 @@
 /* Media Queries
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 
@@ -13,18 +12,18 @@
 		padding-left:  25px;
 		padding-right: 25px;
 
-	} // #sidebar
+	}
 
-} // large
+}
 
 /* Medium Devices Desktops (≥992px) */
 @media ( min-width: '992px' ) and ( max-width: '1200px' ) {
 
 	.more-link-wrapper {
 		padding-bottom: 0;
-	} // .more-link-wrapper
+	}
 
-} // medium
+}
 
 /* Small Devices Tablets (≥768px) */
 @media ( min-width: '768px' ) and ( max-width: '992px' ) {
@@ -36,31 +35,75 @@
 			#site-title,
 			#site-description {
 				text-align: center;
-			} // #site-title, #site-description
+			}
 
-		} // #title
+		}
 
-	} // #masthead
+	}
+
+	#primary-wrapper {
+
+		#primary {
+			padding: 3px;
+		}
+
+	}
 
 	.more-link-wrapper {
 		padding-bottom: 0;
-	} // .more-link-wrapper
+	}
 
 	#sidebar {
 		background: $white;
-	} // #sidebar
+	}
 
 	#pagination {
 		border-bottom: 1px dotted $light-gray;
-	} // #pagination
+	}
 
-} // small
+}
 
 /* Extra Small Devices Phones (<768px) */
 @media ( max-width: '768px' ) {
 
 	#masthead {
 		min-height: 100px;
+	}
+
+	#primary-wrapper {
+
+		#primary {
+
+			#main {
+
+				.post {
+
+					padding-bottom: 10px;
+
+					.post-content {
+
+						text-align: left;
+
+						h2, h3, h4, h5, h6 {
+							text-align: left;
+						}
+
+						p {
+							text-align: left;
+						}
+
+						.wp-caption-text {
+							text-align: center;
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+
 	}
 
 	.navbar-toggle,
@@ -70,9 +113,9 @@
 
 		span {
 			background-color: $black;
-		} // span
+		}
 
-	} // .navbar-toggle
+	}
 
 	nav.collapsing,
 	nav.in {
@@ -91,7 +134,7 @@
 				display: block;
 				width:   100%;
 
-			} // li
+			}
 
 			.menu-item-has-children {
 
@@ -103,13 +146,13 @@
 					width:      100%;
 					position:   relative;
 
-				} // .dropdown-menu
+				}
 
-			} // .menu-item-has-children
+			}
 
-		} // ul
+		}
 
-	} // .collapsing, .in
+	}
 
 	.navigation {
 
@@ -124,49 +167,33 @@
 
 					background: transparent;
 
-				} // :hover
+				}
 
-			} // .current-menu-parent
-
-			li {
-
-				a {
-
-					&:hover,
-					&:focus {
-
-						//@include    border_radius( 4px );
-						//background: $light-gray;
-
-					} // :hover, :focus
-
-				} // a
-
-			} // li
+			}
 
 			.open {
 
 				> a {
 					background: transparent;
-				} // a
+				}
 
-			} // .open
+			}
 
 			li {
 
 				&:hover {
 					background: transparent;
-				} // :hover
+				}
 
-			} // li
+			}
 
-		} // .nav
+		}
 
-	} // .navigation
+	}
 
 	.more-link-wrapper {
 		padding-bottom: 0;
-	} // .more-link-wrapper
+	}
 
 	#masthead {
 
@@ -174,19 +201,19 @@
 
 			#site-title {
 				text-align: center;
-			} // #site-title
+			}
 
 			#site-description {
 				display: none;
-			} // site-description
+			}
 
-		} // #title
+		}
 
-	} // #masthead
+	}
 
 	#sidebar {
 		background: $white;
-	} // #sidebar
+	}
 
 	.aligncenter,
 	.aligncenter > img {
@@ -194,7 +221,7 @@
 		max-width: 100%;
 		height:    auto;
 
-	} // .aligncenter
+	}
 
 	.alignright {
 
@@ -207,9 +234,9 @@
 			max-width: 100% !important;
 			height:    auto !important;
 
-		} // img
+		}
 
-	} // .alignright
+	}
 
 	#primary-wrapper {
 
@@ -223,15 +250,23 @@
 
 					.post-content {
 						line-height: 25px;
-					} // .post-content
+					}
 
-				} // .page, .single-post
+				}
 
-			} // #main
+			}
 
-		} // #primary
+		}
 
-	} // #primary-wrapper
+	}
+
+	.response-text {
+
+		p {
+			text-align: left;
+		}
+
+	}
 
 	#pagination {
 
@@ -246,17 +281,38 @@
 					width: 100%;
 					text-align: center;
 
-				} // a
+				}
 
-			} // li
+			}
 
-		} // .pager
+		}
 
-	} // #pagination
+	}
 
-} // extra-small
+}
 
 @media( max-width: '640px' ) {
+
+	#masthead {
+
+		#title {
+
+			#site-title,
+			#site-description {
+				font-size: 40px;
+			}
+
+		}
+
+	}
+
+	#primary-wrapper {
+
+		#primary {
+			padding: 3px;
+		}
+
+	}
 
 	.gallery-item {
 
@@ -265,6 +321,6 @@
 		display: block;
 		width:   100% !important;
 
-	} // .gallery-item
+	}
 
-} // max-width 640px
+}

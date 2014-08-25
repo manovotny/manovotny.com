@@ -1,7 +1,6 @@
 /* Pagination
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 
@@ -22,43 +21,43 @@
 				border: 0;
 				color:  $dark-blue;
 
-			} // a
+			}
 
-		} // li
+		}
 
 		.previous {
 
 			> a {
 				padding-left: 0;
-			} // a
+			}
 
-		} // .previous
+		}
 
 		.next {
 
 			> a {
 				padding-right: 0;
-			} // a
+			}
 
-		} // .next
+		}
 
 		.archive-next {
 
 			> a {
 				padding-right: 20px;
-			} // a
+			}
 
-		} // .archive-next
+		}
 
 		.previous,
 		.next {
 
 			a:hover {
 				color: $dark-gray;
-			} // a:hover
+			}
 
-		} // .previous, .next
+		}
 
-	} // .pager
+	}
 
-} // #pagination
+}

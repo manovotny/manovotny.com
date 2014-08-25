@@ -1,7 +1,6 @@
 /* Mixins
  *
- * @package    Mayer
- * @subpackage css
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 
@@ -11,11 +10,11 @@
 	-moz-border-radius:    $radius;
 	-webkit-border-radius: $radius;
 
-} // border-radius
+}
 
 @mixin border_right( $radius ) {
 	border-right:  $radius;
-} // border_right
+}
 
 @mixin border_top_right_radius( $radius ) {
 
@@ -23,7 +22,7 @@
 	-moz-border-top-right-radius:    $radius;
 	-webkit-border-top-right-radius: $radius;
 
-} // border_top_right_radius
+}
 
 @mixin border_bottom_right_radius( $radius ) {
 
@@ -31,7 +30,7 @@
 	-moz-bottom-right-radius:    $radius;
 	-webkit-bottom-right-radius: $radius;
 
-} // border_bottom_right_radius
+}
 
 @mixin border_top_left_radius( $radius ) {
 
@@ -39,7 +38,7 @@
 	-moz-border-top-left-radius:    $radius;
 	-webkit-border-top-left-radius: $radius;
 
-} // border_top_left_radius
+}
 
 @mixin border_bottom_left_radius( $radius ) {
 
@@ -47,7 +46,7 @@
 	-moz-border-bottom-left-radius:    $radius;
 	-webkit-border-bottom-left-radius: $radius;
 
-} // border_bottom_left_radius
+}
 
 @mixin post_title_font( $margin: 0 0 0 0 ) {
 
@@ -58,14 +57,14 @@
 	color:          $off-black;
 	font-weight:    bold;
 
-} // post_title_font
+}
 
 @mixin collapse_lr_padding() {
 
 	padding-left:  0;
 	padding-right: 0;
 
-} // collapse_lr_padding
+}
 
 @mixin rounded_image() {
 
@@ -73,13 +72,7 @@
 	-moz-border-radius:    150px;
 	-webkit-border-radius: 150px;
 
-	/*
-	box-shadow:            0 0 8px rgba(33, 34, 36, .8);
-	-moz-box-shadow:       0 0 8px rgba(33, 34, 36, .8);
-	-webkit-box-shadow:    0 0 8px rgba(33, 34, 36, .8);
-	*/
-
-} // rounded_image
+}
 
 @mixin header_font() {
 
@@ -89,7 +82,17 @@
 	text-align:       left;
 	font-weight:      bold;
 
-} // header_font
+}
+
+@mixin jetpack_header() {
+
+	/* Note these styles iare marked as !important specifically for WordPress.com */
+	display:        block !important;
+	letter-spacing: -1px  !important;
+	font-size:      20px  !important;
+	margin-top:     0     !important;
+
+}
 
 /*
  * This mixin is based on Chris Coyier's CSS ribbon.
@@ -108,7 +111,7 @@
 		right:    -3px;
 		z-index:  1;
 
-	} // .sticky-wrapper
+	}
 
 	.sticky-ribbon {
 
@@ -148,14 +151,14 @@
 		position:     absolute;
 		bottom:       -3px;
 
-	} // .sticky-ribbon:before, .sticky-ribbon:after
+	}
 
 	.sticky-ribbon:before {
 		left:  0;
-	} // .sticky-ribbon:before
+	}
 
 	.sticky-ribbon:after {
 		right: 0;
-	} // .sticky-ribbon:after
+	}
 
-} // .sticky_ribbon()
+}

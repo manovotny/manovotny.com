@@ -6,7 +6,6 @@
  * This reduces code duplication across `single.php` and `page.php.`
  *
  * @package    Mayer
- * @version    1.0.0
  * @since      1.0.0
  */
 ?>
@@ -27,23 +26,23 @@
 			</a>
 		</h2><!-- .post-title -->
 
-	<?php } // end if ?>
+	<?php } ?>
 
 	<?php if ( ! is_page() ) { ?>
 		<?php get_template_part( 'partials/post-meta' ); ?>
-	<?php } // end if ?>
+	<?php } ?>
 
 	<div class="post-content">
 		<?php if ( has_excerpt() ) { ?>
 			<?php the_excerpt(); ?>
 		<?php } else { ?>
 			<?php the_content( __( 'Read More', 'mayer' ) ); ?>
-		<?php } // end if/else ?>
+		<?php } ?>
 	</div><!-- .post-content -->
 
 	<?php if ( mayer_is_paginated_post() ) { ?>
 		<?php get_template_part( 'partials/post-pagination' ); ?>
-	<?php } // end if ?>
+	<?php } ?>
 
 	<?php comments_template(); ?>
 

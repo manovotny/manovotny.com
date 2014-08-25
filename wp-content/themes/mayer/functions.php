@@ -9,12 +9,11 @@
  * Especially for cache-busting JavaScripts and stylesheets.
  *
  * @package    Mayer
- * @version    1.2.0
  * @since      1.0.0
  */
 if ( ! defined('MAYER_VERSION' ) ) {
-	define( 'MAYER_VERSION', '1.2.0' );
-} // end if
+	define( 'MAYER_VERSION', '1.7.0' );
+}
 
 /*------------------------------------------------------------------*
  * Dependencies
@@ -33,31 +32,29 @@ require_once( get_template_directory() . '/inc/helpers.php' );
  * and stylesheet
  *
  * @package    Mayer
- * @version    1.0.0
  * @since      1.0.0
  */
 if ( ! isset( $content_width ) ) {
 	$content_width = 740;
-} // end if
+}
 
+add_action( 'after_setup_theme', 'mayer_load_editor_style' );
 /**
  * Loads the editor style so that what the user writes in TinyMCE is as what
  * will appear on the front end.
  *
  * @package    Mayer
- * @version    1.0.0
  * @since      1.0.0
  */
 function mayer_load_editor_style() {
 	add_editor_style( get_template_directory_uri() . '/css/editor-style.css' );
-} // end mayer_load_editor_style
-add_action( 'after_setup_theme', 'mayer_load_editor_style' );
+}
 
+add_action( 'after_setup_theme', 'mayer_setup' );
 /**
  * Prepares certain core features of the theme such as thumbnails and menus.
  *
  * @package    Mayer
- * @version    1.0.0
  * @since      1.0.0
  */
 function mayer_setup() {
@@ -74,14 +71,13 @@ function mayer_setup() {
 	    __( 'Main Menu', 'mayer' )
 	);
 
-} // end mayer_setup
-add_action( 'after_setup_theme', 'mayer_setup' );
+}
 
+add_action( 'widgets_init', 'mayer_widgets_init' );
 /**
  * Registers the sidebar areas with the theme.
  *
  * @package    Mayer
- * @version    1.0.0
  * @since      1.0.0
  */
 function mayer_widgets_init() {
@@ -98,96 +94,94 @@ function mayer_widgets_init() {
 		)
 	);
 
-} // end mayer_widgets_init
-add_action( 'widgets_init', 'mayer_widgets_init' );
+}
 
 /*------------------------------------------------------------------*
  * Core Theme Functions
 /*------------------------------------------------------------------*/
 
+add_action( 'wp_enqueue_scripts', 'mayer_import_styles' );
 /**
  * Enqueues all of the stylesheets required for the theme.
  *
  * @package    Mayer
- * @version    1.0.0
  * @since      1.0.0
  */
 function mayer_import_styles() {
 
 	// Include the libraries
-	wp_enqueue_style( 'mayer-bootstrap', get_template_directory_uri() . '/css/lib/bootstrap.min.css', array(), MAYER_VERSION );
-	wp_enqueue_style( 'mayer-font-awesome', get_template_directory_uri() . '/css/lib/font-awesome.min.css', array( 'mayer-bootstrap' ), MAYER_VERSION );
+	wp_enqueue_style( 'mayer-bootstrap', get_template_directory_uri() . '/css/lib/bootstrap.css', array(), MAYER_VERSION );
+	wp_enqueue_style( 'mayer-font-awesome', get_template_directory_uri() . '/css/lib/font-awesome.css', array( 'mayer-bootstrap' ), MAYER_VERSION );
 
 	// Include the Google Fonts in a custom font-compatible way
 	$font_url = mayer_font_url( 'nunito' );
 	if ( ! empty( $font_url ) ) {
 		wp_enqueue_style( 'mayer-nunito', esc_url_raw( $font_url ), array(), MAYER_VERSION );
-	} // end if
+	}
 
 	$font_url = mayer_font_url( 'muli' );
 	if ( ! empty( $font_url ) ) {
 		wp_enqueue_style( 'mayer-muli', esc_url_raw( $font_url ), array(), MAYER_VERSION );
-	} // end if
+	}
 
 	$font_url = mayer_font_url( 'source-sans-pro' );
 	if ( ! empty( $font_url ) ) {
 		wp_enqueue_style( 'mayer-source-sans-pro', esc_url_raw( $font_url ), array(), MAYER_VERSION );
-	} // end if
+	}
 
 	// Include the main style sheet
 	wp_enqueue_style( 'mayer', get_stylesheet_directory_uri() . '/style.css' );
 
-} // end mayer_import_styles
-add_action( 'wp_enqueue_scripts', 'mayer_import_styles' );
+}
 
+add_action( 'wp_enqueue_scripts', 'mayer_import_scripts' );
 /**
  * Enqueues all of the JavaScript files required for the theme.
  *
  * @package    Mayer
- * @version    1.0.0
  * @since      1.0.0
  */
 function mayer_import_scripts() {
 
 	wp_enqueue_script( 'jquery' );
-	wp_enqueue_script( 'mayer-bootstrap', get_template_directory_uri() . '/js/lib/bootstrap.min.js', array( 'jquery' ), MAYER_VERSION );
-	wp_enqueue_script( 'mayer-fitvids', get_template_directory_uri() . '/js/lib/fitvids.min.js', array( 'mayer-bootstrap', 'jquery' ), MAYER_VERSION );
-	wp_enqueue_script( 'mayer', get_template_directory_uri() . '/js/theme.min.js', array( 'jquery', 'mayer-bootstrap', 'mayer-fitvids' ), rand() );
 
-	// If we're on a single post page with threaded comments nad open comments, add the comment-reply script
+	wp_enqueue_script( 'mayer-bootstrap', get_template_directory_uri() . '/js/lib/bootstrap.js', array( 'jquery' ), MAYER_VERSION );
+	wp_enqueue_script( 'mayer-fitvids', get_template_directory_uri() . '/js/lib/fitvids.js', array( 'mayer-bootstrap', 'jquery' ), MAYER_VERSION );
+
+	wp_enqueue_script( 'mayer-navigation', get_template_directory_uri() . '/js/navigation.js', array( 'jquery', 'mayer-bootstrap', 'mayer-fitvids' ), MAYER_VERSION );
+	wp_enqueue_script( 'mayer', get_template_directory_uri() . '/js/theme.js', array( 'jquery', 'mayer-bootstrap', 'mayer-fitvids', 'mayer-navigation' ), MAYER_VERSION );
+
+	// If we're on a single post page with threaded comments and open comments, add the comment-reply script
 	if ( is_singular() && comments_open() && ( '1' === get_option('thread_comments') ) ) {
 		wp_enqueue_script( 'comment-reply' );
-	} // end if
+	}
 
-} // end mayer_import_styles
-add_action( 'wp_enqueue_scripts', 'mayer_import_scripts' );
+}
 
+add_action( 'customize_preview_init', 'mayer_customize_live_preview' );
 /**
  * Registers the theme customizer with the theme so that it can be used to
  * customize the theme.
  *
  * @package    Mayer
- * @version    1.0.0
  * @since      1.0.0
  */
 function mayer_customize_live_preview() {
 
 	wp_enqueue_script(
 	    'mayer-theme-customizer',
-	    get_template_directory_uri() . '/js/theme-customizer.min.js',
+	    get_template_directory_uri() . '/js/theme-customizer.js',
 	    array( 'jquery', 'customize-preview' ),
 	    MAYER_VERSION,
 	    true
 	);
 
-} // end mayer_import_admin_scripts
-add_action( 'customize_preview_init', 'mayer_customize_live_preview' );
+}
 
 /**
  * Defines the custom comment template for the theme.
  *
  * @package    Mayer
- * @version    1.0.0
  * @since      1.0.0
  */
 function mayer_comment( $comment, $args, $depth ) {
@@ -224,7 +218,7 @@ function mayer_comment( $comment, $args, $depth ) {
 							<?php _e( 'Your comment is awaiting moderation.', 'mayer' ); ?>
 						</em><!-- .comment-awaiting-moderation -->
 					</div><!-- .comment-moderation-notice -->
-				<?php } // end if ?>
+				<?php } ?>
 				<?php comment_text(); ?>
 			</div><!-- .comment-text -->
 
@@ -247,13 +241,12 @@ function mayer_comment( $comment, $args, $depth ) {
 	</div><!-- #div-comment-<?php comment_ID(); ?>-->
 
 	<?php
-} // end mayer_comment
+}
 
 /**
  * Defines the custom pingback (that is, pings and trackbacks) template for the theme.
  *
  * @package    Mayer
- * @version    1.0.0
  * @since      1.0.0
  */
 function mayer_pings( $comment, $args, $depth ) {
@@ -284,13 +277,12 @@ function mayer_pings( $comment, $args, $depth ) {
 	</div><!-- #div-response-<?php comment_ID(); ?>-->
 
 	<?php
-} // end mayer_pings
+}
 
 /**
  * Defines the comment form template for both leaving a comment and leaving a reply.
  *
  * @package    Mayer
- * @version    1.0.0
  * @since      1.0.0
  */
 function mayer_comment_form() {
@@ -362,7 +354,7 @@ function mayer_comment_form() {
 	// And define the comment form
 	comment_form( $args, get_the_ID() );
 
-} // end mayer_comment_form
+}
 
 /**
  * Returns the Google font stylesheet URL, if available.
@@ -373,7 +365,6 @@ function mayer_comment_form() {
  * @param      string                   The name of the Google Font to import.
  * @return     string     $fonts_url    The URL to the font.
  * @package    Mayer
- * @version    1.0.0
  * @since      1.0.0
  */
 function mayer_font_url( $font_name ) {
@@ -393,7 +384,7 @@ function mayer_font_url( $font_name ) {
 					'family' => 'Nunito:100,300,400,700,400italic,700italic,900',
 					'subset' => 'latin,latin-ext',
 				), '//fonts.googleapis.com/css' );
-			} // end if
+			}
 
 			break;
 
@@ -408,7 +399,7 @@ function mayer_font_url( $font_name ) {
 					'family' => 'Muli:300,400',
 					'subset' => 'latin,latin-ext',
 				), '//fonts.googleapis.com/css' );
-			} // end if
+			}
 
 			break;
 
@@ -423,12 +414,12 @@ function mayer_font_url( $font_name ) {
 					'family' => 'Source+Sans+Pro:400,600,700,900',
 					'subset' => 'latin,latin-ext',
 				), '//fonts.googleapis.com/css' );
-			} // end if
+			}
 
 			break;
 
-	} // end switch/case
+	}
 
 	return $fonts_url;
 
-} // end mayer_font_url
+}

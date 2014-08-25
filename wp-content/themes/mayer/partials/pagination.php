@@ -3,7 +3,6 @@
  * The main template used for pagination.
  *
  * @package    Mayer
- * @version    1.0.0
  * @since      1.0.0
  */
 global $wp_query;
@@ -18,13 +17,13 @@ global $wp_query;
 			<li class="previous single-previous">
 				<?php previous_post_link( '%link', '<span class="nav-previous"><i class="fa fa-chevron-left"></i>&nbsp;%title</span>' ); ?>
 			</li><!-- .previous -->
-		<?php } // end if ?>
+		<?php } ?>
 
 		<?php if( get_next_post() ) { ?>
 			<li class="next single-next">
 				<?php next_post_link( '%link', '<span class="nav-next">%title&nbsp;<i class="fa fa-chevron-right"></i></span>' ); ?>
 			</li><!-- .next -->
-		<?php } // end if ?>
+		<?php } ?>
 
 	<?php } elseif ( 1 < $wp_query->max_num_pages && ( is_home() || is_archive() || is_search() ) ) { ?>
 
@@ -36,17 +35,17 @@ global $wp_query;
 				<li class="previous archive-previous">
 					<?php next_posts_link( '<span class="nav-previous"><i class="fa fa-chevron-left"></i>&nbsp;' . __( 'Older Posts', 'mayer' ) . '</span>' ); ?>
 				</li><!-- .previous -->
-			<?php } // end if ?>
+			<?php } ?>
 
 			<?php if ( get_previous_posts_link() ) { ?>
 				<li class="next archive-next">
 					<?php previous_posts_link( '<span class="nav-next">' . __( 'Newer Posts', 'mayer' ) . '&nbsp;<i class="fa fa-chevron-right"></i></span>' ); ?>
 				</li><!-- .next -->
-			<?php } // end if ?>
+			<?php } ?>
 
-		<?php } // end if/else ?>
+		<?php } ?>
 
-	<?php } // end if/else ?>
+	<?php } ?>
 
 	</ul><!-- .pager -->
 </div><!-- #pagination -->

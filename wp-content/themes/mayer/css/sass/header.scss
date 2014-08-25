@@ -1,8 +1,6 @@
 /* Header
  *
- * @package    Mayer
- * @subpackage css
- * @version    1.1.0
+ * @package    Mayer/css
  * @since      1.0.0
  *====================================*/
 
@@ -28,11 +26,11 @@
 				width:         140px;
 				height:        140px;
 
-			} // img
+			}
 
-		} // #avatar
+		}
 
-	} // .container
+	}
 
 	#title {
 
@@ -45,9 +43,9 @@
 
 				&:hover {
 					color: $light-gray;
-				} // :hover
+				}
 
-		} // #site-title
+		}
 
 		p#site-title {
 
@@ -56,16 +54,16 @@
 				margin-top:    1px;
 				margin-bottom: 0px;
 
-			} // firefox
+			}
 
 			@media screen and (-webkit-min-device-pixel-ratio:0) {
 
 				margin-top:    0px;
 				margin-bottom: 1px;
 
-			} // webkit
+			}
 
-		} // p#site-title
+		}
 
 		#site-description {
 
@@ -74,8 +72,8 @@
 			font-weight:      300;
 			letter-spacing:   -2px;
 
-		} // #site-description
+		}
 
-	} // #title
+	}
 
-} // #masthead
+}
