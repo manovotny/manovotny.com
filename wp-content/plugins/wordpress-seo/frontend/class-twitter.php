@@ -26,18 +26,18 @@ if ( ! class_exists( 'WPSEO_Twitter' ) ) {
 		/**
 		 * @var array Images
 		 */
-		var $shown_images;
+		public $shown_images;
 
 		/**
 		 * @var array $options Holds the options for the Twitter Card functionality
 		 */
-		var $options;
+		public $options;
 
 		/**
 		 * Class constructor
 		 */
 		public function __construct() {
-			$this->options = get_option( 'wpseo_social' );
+			$this->options      = WPSEO_Options::get_all();
 			$this->shown_images = array(); // Instantiate as empty array
 			$this->twitter();
 		}
@@ -52,6 +52,31 @@ if ( ! class_exists( 'WPSEO_Twitter' ) ) {
 				self::$instance = new self();
 			}
 			return self::$instance;
+		}
+
+		/**
+		 * Output the metatag
+		 *
+		 * @param $name
+		 * @param $value
+		 * @param $escaped
+		 */
+		private function output_metatag( $name, $value, $escaped = false ) {
+
+			// Escape the value if not escaped
+			if ( false === $escaped ) {
+				$value = esc_attr( $value );
+			}
+
+			/**
+			 * Filter: 'wpseo_twitter_metatag_key' - Make the Twitter metatag key filterable
+			 *
+			 * @api string $key The Twitter metatag key
+			 */
+			$metatag_key = apply_filters( 'wpseo_twitter_metatag_key', 'name' );
+
+			// Output meta
+			echo '<meta ' . esc_attr( $metatag_key ) . '="twitter:' . esc_attr( $name ) . '" content="' . $value . '"/>' . "\n";
 		}
 
 		/**
@@ -105,7 +130,7 @@ if ( ! class_exists( 'WPSEO_Twitter' ) ) {
 				$type = 'summary';
 			}
 
-			echo '<meta name="twitter:card" content="' . esc_attr( $type ) . '"/>' . "\n";
+			$this->output_metatag( 'card', $type );
 		}
 
 		/**
@@ -118,8 +143,10 @@ if ( ! class_exists( 'WPSEO_Twitter' ) ) {
 			 * @api string $unsigned Twitter site account string
 			 */
 			$site = apply_filters( 'wpseo_twitter_site', $this->options['twitter_site'] );
+			$site = $this->get_twitter_id( $site );
+
 			if ( is_string( $site ) && $site !== '' ) {
-				echo '<meta name="twitter:site" content="@' . esc_attr( $site ) . '"/>' . "\n";
+				$this->output_metatag( 'site', '@' . $site );
 			}
 		}
 
@@ -134,7 +161,7 @@ if ( ! class_exists( 'WPSEO_Twitter' ) ) {
 			 */
 			$domain = apply_filters( 'wpseo_twitter_domain', get_bloginfo( 'name' ) );
 			if ( is_string( $domain ) && $domain !== '' ) {
-				echo '<meta name="twitter:domain" content="' . esc_attr( $domain ) . '"/>' . "\n";
+				$this->output_metatag( 'domain', $domain );
 			}
 		}
 
@@ -149,13 +176,14 @@ if ( ! class_exists( 'WPSEO_Twitter' ) ) {
 			 * @api string $twitter The twitter account name string
 			 */
 			$twitter = apply_filters( 'wpseo_twitter_creator_account', $twitter );
+			$twitter = $this->get_twitter_id( $twitter );
 
 			if ( is_string( $twitter ) && $twitter !== '' ) {
-				echo '<meta name="twitter:creator" content="@' . esc_attr( $twitter ) . '"/>' . "\n";
+				$this->output_metatag( 'creator', '@' . $twitter );
 			}
 			elseif ( $this->options['twitter_site'] !== '' ) {
 				if ( is_string( $this->options['twitter_site'] ) && $this->options['twitter_site'] !== '' ) {
-					echo '<meta name="twitter:creator" content="@' . esc_attr( $this->options['twitter_site'] ) . '"/>' . "\n";
+					$this->output_metatag( 'creator', '@' . $this->options['twitter_site'] );
 				}
 			}
 		}
@@ -173,7 +201,7 @@ if ( ! class_exists( 'WPSEO_Twitter' ) ) {
 			 */
 			$title = apply_filters( 'wpseo_twitter_title', $this->title( '' ) );
 			if ( is_string( $title ) && $title !== '' ) {
-				echo '<meta name="twitter:title" content="' . esc_attr( $title ) . '"/>' . "\n";
+				$this->output_metatag( 'title', $title );
 			}
 		}
 
@@ -199,7 +227,7 @@ if ( ! class_exists( 'WPSEO_Twitter' ) ) {
 			 */
 			$meta_desc = apply_filters( 'wpseo_twitter_description', $meta_desc );
 			if ( is_string( $meta_desc ) && $meta_desc !== '' ) {
-				echo '<meta name="twitter:description" content="' . esc_attr( $meta_desc ) . '"/>' . "\n";
+				$this->output_metatag( 'description', $meta_desc );
 			}
 		}
 
@@ -216,7 +244,7 @@ if ( ! class_exists( 'WPSEO_Twitter' ) ) {
 			 */
 			$url = apply_filters( 'wpseo_twitter_url', $this->canonical( false ) );
 			if ( is_string( $url ) && $url !== '' ) {
-				echo '<meta name="twitter:url" content="' . esc_url( $url ) . '"/>' . "\n";
+				$this->output_metatag( 'url', esc_url( $url ), true );
 			}
 		}
 
@@ -224,6 +252,7 @@ if ( ! class_exists( 'WPSEO_Twitter' ) ) {
 		 * Outputs a Twitter image tag for a given image
 		 *
 		 * @param string $img
+		 * @return bool
 		 */
 		public function image_output( $img ) {
 
@@ -237,14 +266,17 @@ if ( ! class_exists( 'WPSEO_Twitter' ) ) {
 			$escaped_img = esc_url( $img );
 
 			if ( in_array( $escaped_img, $this->shown_images ) ) {
-				return;
+				return false;
 			}
 
 			if ( is_string( $escaped_img ) && $escaped_img !== ''  ) {
-				echo '<meta name="twitter:image:src" content="' . $escaped_img . '"/>' . "\n";
+				$this->output_metatag( 'image:src', $escaped_img, true );
 
 				array_push( $this->shown_images, $escaped_img );
+				return true;
 			}
+
+			return false;
 		}
 
 		/**
@@ -291,6 +323,27 @@ if ( ! class_exists( 'WPSEO_Twitter' ) ) {
 				$this->image_output( $this->options['og_default_image'] );
 			}
 		}
+
+
+		/**
+		 * Checks if the given id is actually an id or a url and if url, distills the id from it.
+		 *
+		 * Solves issues with filters returning urls and theme's/other plugins also adding a user meta
+		 * twitter field which expects url rather than an id (which is what we expect).
+		 *
+		 * @param  string $id  Twitter id or url
+		 *
+		 * @return string|bool Twitter id or false if it failed to get a valid twitter id
+		 */
+		private function get_twitter_id( $id ) {
+			if ( preg_match( '`([A-Za-z0-9_]{1,25})$`', $id, $match ) ) {
+				return $match[1];
+			}
+			else {
+				return false;
+			}
+		}
+
 	} /* End of class */
 
 } /* End of class-exists wrapper */

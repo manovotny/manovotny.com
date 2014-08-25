@@ -1,8 +1,18 @@
 jQuery(document).ready(function() {
+	
+	/* Fix banner images overlapping help texts */
+	jQuery('.screen-meta-toggle a').click( function() {
+		jQuery("#sidebar-container").toggle();
+	});
 
 	// events
 	jQuery("#enablexmlsitemap").change(function() {
 		jQuery("#sitemapinfo").toggle(jQuery(this).is(':checked'));
+	}).change();
+
+	// events
+	jQuery("#disable_author_sitemap").change(function() {
+		jQuery("#xml_user_block").toggle(!jQuery(this).is(':checked'));
 	}).change();
 
 	jQuery("#cleanpermalinks").change(function() {
@@ -31,7 +41,6 @@ jQuery(document).ready(function() {
 
 });
 
-
 // global functions
 function setWPOption( option, newval, hide, nonce ) {
 	jQuery.post(ajaxurl, {
@@ -56,6 +65,10 @@ function wpseo_killBlockingFiles( nonce ) {
 		else
 			jQuery('#block_files').html(data);
 	});
+}
+
+function copy_home_meta() {
+	jQuery('#og_frontpage_desc').val(jQuery('#meta_description').val());
 }
 
 /*jQuery(document).ready(function(){

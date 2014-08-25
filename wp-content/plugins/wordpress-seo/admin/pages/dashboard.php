@@ -31,10 +31,6 @@ if ( isset( $_GET['allow_tracking'] ) && check_admin_referer( 'wpseo_activate_tr
 	}
 }
 
-$wpseo_admin_pages->admin_header( true, WPSEO_Options::get_group_name( 'wpseo' ), 'wpseo' );
-
-do_action( 'wpseo_all_admin_notices' );
-
 
 // Fix metadescription if so requested
 if ( isset( $_GET['fixmetadesc'] ) && check_admin_referer( 'wpseo-fix-metadesc', 'nonce' ) && $options['theme_description_found'] !== '' ) {
@@ -65,7 +61,7 @@ if ( isset( $_GET['fixmetadesc'] ) && check_admin_referer( 'wpseo-fix-metadesc',
 					$header_file = fopen( $path . '/header.php', 'w+' );
 					if ( $header_file ) {
 						if ( fwrite( $header_file, $fcontent ) !== false ) {
-							$msg .= __( 'Removed hardcoded meta description.', 'wordpress-seo' );
+							$msg                               .= __( 'Removed hardcoded meta description.', 'wordpress-seo' );
 							$options['theme_has_description']   = false;
 							$options['theme_description_found'] = '';
 							update_option( 'wpseo', $options );
@@ -80,11 +76,34 @@ if ( isset( $_GET['fixmetadesc'] ) && check_admin_referer( 'wpseo-fix-metadesc',
 					wpseo_description_test();
 					$msg .= '<span class="warning">' . __( 'Earlier found meta description was not found in file. Renewed the description test data.', 'wordpress-seo' ) . '</span>';
 				}
-				echo '<div class="updated"><p>' . $msg . '</p></div>';
+				add_settings_error( 'yoast_wpseo_dashboard_options', 'error', $msg, 'updated' );
 			}
 		}
 	}
+
+	// Clean up the referrer url for later use
+	if ( isset( $_SERVER['REQUEST_URI'] ) ) {
+		$_SERVER['REQUEST_URI'] = remove_query_arg( array( 'nonce', 'fixmetadesc' ), $_SERVER['REQUEST_URI'] );
+	}
 }
+
+if ( ( ! isset( $options['theme_has_description'] ) || ( ( isset( $options['theme_has_description'] ) && $options['theme_has_description'] === true ) || $options['theme_description_found'] !== '' ) ) || ( isset( $_GET['checkmetadesc'] ) && check_admin_referer( 'wpseo-check-metadesc', 'nonce' ) ) ) {
+	wpseo_description_test();
+	// Renew the options after the test
+	$options = get_option( 'wpseo' );
+}
+if ( isset( $_GET['checkmetadesc'] ) ) {
+	// Clean up the referrer url for later use
+	if ( isset( $_SERVER['REQUEST_URI'] ) ) {
+		$_SERVER['REQUEST_URI'] = remove_query_arg( array( 'nonce', 'checkmetadesc' ), $_SERVER['REQUEST_URI'] );
+	}
+}
+
+
+
+$wpseo_admin_pages->admin_header( true, WPSEO_Options::get_group_name( 'wpseo' ), 'wpseo' );
+
+do_action( 'wpseo_all_admin_notices' );
 
 if ( is_array( $options['blocking_files'] ) && count( $options['blocking_files'] ) > 0 ) {
 	echo '<p id="blocking_files" class="wrong">'
@@ -98,13 +117,6 @@ if ( is_array( $options['blocking_files'] ) && count( $options['blocking_files']
 }
 
 
-if ( ( ! isset( $options['theme_has_description'] ) || ( ( isset( $options['theme_has_description'] ) && $options['theme_has_description'] === true ) || $options['theme_description_found'] !== '' ) ) || ( isset( $_GET['checkmetadesc'] ) && check_admin_referer( 'wpseo-check-metadesc', 'nonce' ) ) ) {
-	wpseo_description_test();
-	// Renew the options after the test
-	$options = get_option( 'wpseo' );
-}
-
-
 if ( $options['theme_description_found'] !== '' ) {
 	echo '<p id="metadesc_found notice" class="wrong settings_error">'
 		. '<a href="' . esc_url( add_query_arg( array( 'nonce' => wp_create_nonce( 'wpseo-fix-metadesc' ) ), admin_url( 'admin.php?page=wpseo_dashboard&fixmetadesc' ) ) ) . '" class="button fixit">' . __( 'Fix it.', 'wordpress-seo' ) . '</a>'
@@ -115,17 +127,19 @@ if ( $options['theme_description_found'] !== '' ) {
 }
 
 
-if ( strpos( get_option( 'permalink_structure' ), '%postname%' ) === false && $options['ignore_permalink'] === false )
+if ( strpos( get_option( 'permalink_structure' ), '%postname%' ) === false && $options['ignore_permalink'] === false ) {
 	echo '<p id="wrong_permalink" class="wrong">'
 		. '<a href="' . esc_url( admin_url( 'options-permalink.php' ) ) . '" class="button fixit">' . __( 'Fix it.', 'wordpress-seo' ) . '</a>'
 		. '<a href="javascript:wpseo_setIgnore(\'permalink\',\'wrong_permalink\',\'' . esc_js( wp_create_nonce( 'wpseo-ignore' ) ) . '\');" class="button fixit">' . __( 'Ignore.', 'wordpress-seo' ) . '</a>'
 		. __( 'You do not have your postname in the URL of your posts and pages, it is highly recommended that you do. Consider setting your permalink structure to <strong>/%postname%/</strong>.', 'wordpress-seo' ) . '</p>';
+}
 
-if ( get_option( 'page_comments' ) && $options['ignore_page_comments'] === false )
+if ( get_option( 'page_comments' ) && $options['ignore_page_comments'] === false ) {
 	echo '<p id="wrong_page_comments" class="wrong">'
 		. '<a href="javascript:setWPOption(\'page_comments\',\'0\',\'wrong_page_comments\',\'' . esc_js( wp_create_nonce( 'wpseo-setoption' ) ) . '\');" class="button fixit">' . __( 'Fix it.', 'wordpress-seo' ) . '</a>'
 		. '<a href="javascript:wpseo_setIgnore(\'page_comments\',\'wrong_page_comments\',\'' . esc_js( wp_create_nonce( 'wpseo-ignore' ) ) . '\');" class="button fixit">' . __( 'Ignore.', 'wordpress-seo' ) . '</a>'
 		. __( 'Paging comments is enabled, this is not needed in 999 out of 1000 cases, so the suggestion is to disable it, to do that, simply uncheck the box before "Break comments into pages..."', 'wordpress-seo' ) . '</p>';
+}
 
 echo '<h2>' . __( 'General', 'wordpress-seo' ) . '</h2>';
 
@@ -134,7 +148,7 @@ if ( $options['ignore_tour'] === true ) {
 	echo '<p class="desc label">' . __( 'Take this tour to quickly learn about the use of this plugin.', 'wordpress-seo' ) . '</p>';
 }
 
-echo '<label class="select">' . __( 'Default Settings:', 'wordpress-seo' ) . '</label><a class="button-secondary" href="' . esc_url( add_query_arg( array( 'nonce' => wp_create_nonce( 'wpseo_reset_defaults' ) ), admin_url( 'admin.php?page=wpseo_dashboard&wpseo_reset_defaults' ) ) ) . '">' . __( 'Reset Default Settings', 'wordpress-seo' ) . '</a>';
+echo '<label class="select">' . __( 'Default Settings:', 'wordpress-seo' ) . '</label><a onclick="if( !confirm(\'' . __( 'Are you sure you want to reset your SEO settings?', 'wordpress-seo' ) . '\') ) return false;" class="button-secondary" href="' . esc_url( add_query_arg( array( 'nonce' => wp_create_nonce( 'wpseo_reset_defaults' ) ), admin_url( 'admin.php?page=wpseo_dashboard&wpseo_reset_defaults' ) ) ) . '">' . __( 'Reset Default Settings', 'wordpress-seo' ) . '</a>';
 echo '<p class="desc label">' . __( 'If you want to restore a site to the default WordPress SEO settings, press this button.', 'wordpress-seo' ) . '</p>';
 
 echo '<h2>' . __( 'Tracking', 'wordpress-seo' ) . '</h2>';

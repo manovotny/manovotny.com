@@ -17,7 +17,7 @@ Here's a [guide on how to install WordPress SEO in your WordPress site](https://
 If you want to run the Git version though, you have two options:
 
 * You can clone the GitHub repository: https://github.com/yoast/wordpress-seo.git
-* Download it directly as a ZIP file: https://github.com/yoast/wordpress-seo/archive/master.zip
+* Downloading it directly unfortunately won't work as the .zip file doesn't contain the submodules.
 
 This will download the latest development version of WordPress SEO by Yoast. While this version is usually stable,
 it is not recommended for use in a production environment.
@@ -29,7 +29,7 @@ If you find an issue, [let us know here](https://github.com/yoast/wordpress-seo/
 Support
 -------
 This is a developer's portal for WordPress SEO by Yoast and should not be used for support. Please visit the
-[support forums](http://wordpress.org/support/plugin/wordpress-seo).
+[support forums](https://wordpress.org/support/plugin/wordpress-seo).
 
 Contributions
 -------------

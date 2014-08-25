@@ -25,58 +25,69 @@ global $wpseo_admin_pages;
 	<div class="tabwrapper">
 		<div id="extensions" class="wpseotab">
 			<?php
-				if ( ! class_exists( 'WPSEO_Premium' ) ) {
+			$extensions = array();
+
+			if ( ! class_exists( 'WPSEO_Premium' ) ) {
+				$extensions['seo-premium'] = (object) array(
+					'url'   => 'https://yoast.com/wordpress/plugins/seo-premium/',
+					'title' => __( 'WordPress SEO Premium', 'wordpress-seo' ),
+					'desc'  => __( 'The premium version of WordPress SEO with more features & support.', 'wordpress-seo' ),
+				);
+			}
+			if ( ! class_exists( 'wpseo_Video_Sitemap' ) ) {
+				$extensions['video-seo'] = (object) array(
+					'url'   => 'https://yoast.com/wordpress/plugins/video-seo/',
+					'title' => __( 'Video SEO', 'wordpress-seo' ),
+					'desc'  => __( 'Optimize your videos to show them off in search results and get more clicks!', 'wordpress-seo' ),
+				);
+			}
+			if ( ! class_exists( 'WPSEO_News' ) ) {
+				$extensions['news-seo'] = (object) array(
+					'url'   => 'https://yoast.com/wordpress/plugins/news-seo/',
+					'title' => __( 'News SEO', 'wordpress-seo' ),
+					'desc'  => __( 'Are you in Google News? Increase your traffic from Google News by optimizing for it!', 'wordpress-seo' ),
+				);
+			}
+			if ( ! defined( 'WPSEO_LOCAL_VERSION' ) ) {
+				$extensions['local-seo'] = (object) array(
+					'url'   => 'https://yoast.com/wordpress/plugins/local-seo/',
+					'title' => __( 'Local SEO', 'wordpress-seo' ),
+					'desc'  => __( 'Rank better locally and in Google Maps, without breaking a sweat!', 'wordpress-seo' ),
+				);
+			}
+			if ( class_exists( 'Woocommerce' ) && ! class_exists( 'Yoast_WooCommerce_SEO' ) ) {
+				$extensions['woocommerce-seo'] = (object) array(
+					'url'   => 'https://yoast.com/wordpress/plugins/yoast-woocommerce-seo/',
+					'title' => __( 'Yoast WooCommerce SEO', 'wordpress-seo' ),
+					'desc'  => __( 'Seamlessly integrate WooCommerce with WordPress SEO and get extra features!', 'wordpress-seo' )
+				);
+			}
+
+			foreach ( $extensions as $id => $extension ) {
+				$utm = '#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=extension-page-banners';
 			?>
-			<div class="extension seo-premium">
-				<a target="_blank" href="https://yoast.com/wordpress/plugins/seo-premium/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=extension-page-banners"><h3>WordPress SEO Premium</h3></a>
-				<p>The premium version of WordPress SEO with more features & support.</p>
-				<p><a target="_blank" href="https://yoast.com/wordpress/plugins/seo-premium/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=extension-page-banners" class="button-primary">Get this extension</a></p>
+			<div class="extension <?php echo esc_attr( $id ); ?>">
+				<a target="_blank" href="<?php echo esc_url( $extension->url . $utm ); ?>">
+					<h3><?php echo esc_html( $extension->title ); ?></h3>
+				</a>
+				<p><?php echo esc_html( $extension->desc ); ?></p>
+				<p><a target="_blank" href="<?php echo esc_url( $extension->url . $utm ); ?>" class="button-primary">
+					<?php esc_html_e( 'Get this extension', 'wordpress-seo' ); ?>
+				</a></p>
 			</div>
 			<?php
-				}
-				if ( ! class_exists( 'wpseo_Video_Sitemap' ) ) {
-			?>
-			<div class="extension video-seo">
-				<a target="_blank" href="https://yoast.com/wordpress/plugins/video-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=extension-page-banners"><h3>Video SEO</h3></a>
-				<p>Optimize your videos to show them off in search results and get more clicks!</p>
-				<p><a target="_blank" href="https://yoast.com/wordpress/plugins/video-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=extension-page-banners" class="button-primary">Get this extension</a></p>
-			</div>
-			<?php
-				}
-				if ( ! defined( 'WPSEO_LOCAL_VERSION' ) ) {
-			?>
-			<div class="extension local-seo">
-				<a target="_blank" href="https://yoast.com/wordpress/plugins/local-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=extension-page-banners"><h3>Local SEO</h3></a>
-				<p>Rank better locally and in Google Maps, without breaking a sweat!</p>
-				<p><a target="_blank" href="https://yoast.com/wordpress/plugins/local-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=extension-page-banners" class="button-primary">Get this extension</a></p>
-			</div>
-			<?php
-				}
-				if ( ! class_exists( 'wpseo_Video_Manual' ) ) {
-			?>
-			<div class="extension video-manuals">
-				<a target="_blank" href="https://yoast.com/wordpress/plugins/video-manual-wordpress-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=extension-page-banners"><h3>WordPress SEO Training Videos</h3></a>
-				<p>Spend less time training your clients on how to use the WordPress SEO plugin!</p>
-				<p><a target="_blank" href="https://yoast.com/wordpress/plugins/video-manual-wordpress-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=extension-page-banners" class="button-primary">Get this extension</a></p>
-			</div>
-			<?php
-				}
-				if ( class_exists( 'Woocommerce' ) && ! class_exists( 'Yoast_WooCommerce_SEO' ) ) {
-			?>
-			<div class="extension woocommerce-seo">
-				<a target="_blank" href="https://yoast.com/wordpress/plugins/yoast-woocommerce-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=extension-page-banners"><h3>Yoast WooCommerce SEO</h3></a>
-				<p>Seamlessly integrate WooCommerce with WordPress SEO and get extra features!</p>
-				<p><a target="_blank" href="https://yoast.com/wordpress/plugins/yoast-woocommerce-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=extension-page-banners" class="button-primary">Get this extension</a></p>
-			</div>
-			<?php
-				}
+			}
 			?>
 		</div>
 		<div id="licenses" class="wpseotab">
+			<?php
 
-			<?php settings_errors(); ?>
-
-			<?php do_action('wpseo_licenses_forms'); ?>
+				/**
+				 * Display license page
+				 */
+				settings_errors();
+				do_action( 'wpseo_licenses_forms' );
+			?>
 		</div>
 	</div>
 

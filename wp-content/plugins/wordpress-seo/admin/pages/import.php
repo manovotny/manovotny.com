@@ -116,7 +116,7 @@ if ( isset( $_POST['import'] ) || isset( $_GET['import'] ) ) {
 		$taxonomies = get_taxonomies( array( 'public' => true ), 'names' );
 		if ( is_array( $taxonomies ) && $taxonomies !== array() ) {
 			foreach ( $taxonomies as $tax ) {
-				$options['title-tax-'.$tax] = $template;
+				$options[ 'title-tax-'.$tax ] = $template;
 			}
 		}
 		unset( $taxonomies, $tax, $template );
@@ -276,10 +276,10 @@ if ( isset( $_POST['import'] ) || isset( $_GET['import'] ) ) {
 		if ( is_array( $optold ) && $optold !== array() ) {
 			foreach ( $optold as $opt => $val ) {
 				if ( is_bool( $val ) && $val == true ) {
-					$optnew['breadcrumbs-' . $opt] = true;
+					$optnew[ 'breadcrumbs-' . $opt ] = true;
 				}
 				else {
-					$optnew['breadcrumbs-' . $opt] = $val;
+					$optnew[ 'breadcrumbs-' . $opt ] = $val;
 				}
 			}
 			unset( $opt, $val );
@@ -291,6 +291,17 @@ if ( isset( $_POST['import'] ) || isset( $_GET['import'] ) ) {
 		}
 		unset( $optold, $optnew );
 	}
+
+	// Allow custom import actions
+	do_action( 'wpseo_handle_import' );
+
+	/**
+	 * Allow customization of import&export message
+	 * @api  string  $msg  The message.
+	 */
+	$msg = apply_filters( 'wpseo_import_message', $msg );
+
+	// Check if we've deleted old data and adjust message to match it
 	if ( $replace ) {
 		$msg .= __( ', and old data deleted.', 'wordpress-seo' );
 	}
@@ -299,13 +310,14 @@ if ( isset( $_POST['import'] ) || isset( $_GET['import'] ) ) {
 	}
 }
 
+
 $wpseo_admin_pages->admin_header( false );
 if ( $msg != '' ) {
 	echo '<div id="message" class="message updated" style="width:94%;"><p>' . $msg . '</p></div>';
 }
 
 $content  = '<p>' . __( 'No doubt you\'ve used an SEO plugin before if this site isn\'t new. Let\'s make it easy on you, you can import the data below. If you want, you can import first, check if it was imported correctly, and then import &amp; delete. No duplicate data will be imported.', 'wordpress-seo' ) . '</p>';
-$content .= '<p>' . sprintf( __( 'If you\'ve used another SEO plugin, try the %sSEO Data Transporter%s plugin to move your data into this plugin, it rocks!', 'wordpress-seo' ), '<a href="http://wordpress.org/extend/plugins/seo-data-transporter/">', '</a>' ) . '</p>';
+$content .= '<p>' . sprintf( __( 'If you\'ve used another SEO plugin, try the %sSEO Data Transporter%s plugin to move your data into this plugin, it rocks!', 'wordpress-seo' ), '<a href="https://wordpress.org/plugins/seo-data-transporter/">', '</a>' ) . '</p>';
 // @todo [JRF => whomever] add action for form tag
 $content .= '<form action="" method="post" accept-charset="' . esc_attr( get_bloginfo( 'charset' ) ) . '">';
 $content .= wp_nonce_field( 'wpseo-import', '_wpnonce', true, false );
@@ -318,16 +330,28 @@ $content .= $wpseo_admin_pages->checkbox( 'deleteolddata', __( 'Delete the old d
 $content .= '<br/>';
 $content .= '<input type="submit" class="button-primary" name="import" value="' . __( 'Import', 'wordpress-seo' ) . '" />';
 $content .= '<br/><br/>';
+
 $content .= '<h2>' . __( 'Import settings from other plugins', 'wordpress-seo' ) . '</h2>';
 $content .= $wpseo_admin_pages->checkbox( 'importrobotsmeta', __( 'Import from Robots Meta (by Yoast)?', 'wordpress-seo' ) );
 $content .= $wpseo_admin_pages->checkbox( 'importrssfooter', __( 'Import from RSS Footer (by Yoast)?', 'wordpress-seo' ) );
 $content .= $wpseo_admin_pages->checkbox( 'importbreadcrumbs', __( 'Import from Yoast Breadcrumbs?', 'wordpress-seo' ) );
+
+/**
+ * Allow option of importing from other 'other' plugins
+ * @api  string  $content  The content containing all import and export methods
+ */
+$content = apply_filters( 'wpseo_import_other_plugins', $content );
+
 $content .= '<br/>';
 $content .= '<input type="submit" class="button-primary" name="import" value="' . __( 'Import', 'wordpress-seo' ) . '" />';
 $content .= '</form><br/>';
 
 $wpseo_admin_pages->postbox( 'import', __( 'Import', 'wordpress-seo' ), $content );
 
+/**
+ * Allow adding a custom import block
+ * @api  WPSEO_Admin  $this  The WPSEO_Admin object
+ */
 do_action( 'wpseo_import', $this );
 
 // @todo [JRF => whomever] add action for form tag
@@ -378,7 +402,7 @@ elseif ( isset( $_FILES['settings_import_file'] ) ) {
 		if ( ! defined( 'DIRECTORY_SEPARATOR' ) ) {
 			define( 'DIRECTORY_SEPARATOR', '/' );
 		}
-		$p_path   = $upload_dir['basedir'] . DIRECTORY_SEPARATOR . 'wpseo-import' . DIRECTORY_SEPARATOR;
+		$p_path = $upload_dir['basedir'] . DIRECTORY_SEPARATOR . 'wpseo-import' . DIRECTORY_SEPARATOR;
 
 		if ( ! isset( $GLOBALS['wp_filesystem'] ) || ! is_object( $GLOBALS['wp_filesystem'] ) ) {
 			WP_Filesystem();
@@ -387,7 +411,7 @@ elseif ( isset( $_FILES['settings_import_file'] ) ) {
 		$unzipped = unzip_file( $file['file'], $p_path );
 		if ( ! is_wp_error( $unzipped ) ) {
 			$filename = $p_path . 'settings.ini';
-			if ( @is_file( $filename ) && is_readable( $filename) ) {
+			if ( @is_file( $filename ) && is_readable( $filename ) ) {
 				$options = parse_ini_file( $filename, true );
 
 				if ( is_array( $options ) && $options !== array() ) {
@@ -414,7 +438,6 @@ elseif ( isset( $_FILES['settings_import_file'] ) ) {
 				}
 				else {
 					$content .= '<p><strong>' . __( 'Settings could not be imported:', 'wordpress-seo' ) . ' ' . __( 'No settings found in file.', 'wordpress-seo' ) . '</strong></p>';
-	
 				}
 				unset( $options, $name, $optgroup );
 			}
