@@ -3,8 +3,8 @@ Contributors: tommcfarlin
 Donate link: http://tommcfarlin.com/projects/post-message
 Tags: post
 Requires at least: 3.4.1
-Tested up to: 3.8.0
-Stable tag: 2.0.0
+Tested up to: 3.9.0
+Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,9 @@ For more information or to follow the project, check out the [project page](http
 2. The Single Post Message rendered between the title and the post content
 
 == Changelog ==
+
+= 2.1.0 =
+* Verifying WordPress 3.9 compatibility
 
 = 2.0.0 =
 * Implementing the singleton pattern
