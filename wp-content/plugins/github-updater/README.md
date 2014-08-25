@@ -1,4 +1,12 @@
 # GitHub Updater
+* Contributors: [Andy Fragen](https://github.com/afragen), [Gary Jones](https://github.com/GaryJones), [Seth Carstens](https://github.com/scarstens), [contributors](https://github.com/afragen/github-updater/graphs/contributors)
+* Tags: plugin, theme, update, updater
+* Requires at least: 3.8
+* Tested up to: 3.9.1
+* Stable tag: master
+* License: GPLv2 or later
+* License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
 
 A simple plugin to enable automatic updates to your GitHub or Bitbucket hosted WordPress plugins and themes.
 
@@ -17,9 +25,6 @@ or
 `GitHub Plugin URI: https://github.com/afragen/github-updater`
 
 ...where the above URI leads to the __owner/repository__ of your theme or plugin. The URI may be in the format `https://github.com/<owner>/<repo>` or the short format `<owner>/<repo>`.
-
-## Requirements
- * WordPress 3.4 (tested up to 3.9)
 
 ## Installation
 
@@ -69,7 +74,7 @@ GitHub Branch:    master
 
 ### Plugins 
 
-There must be a `GitHub Plugin URI` or `Bitbucket Plugin URI` declaration in the plugin's header.
+There must be a `GitHub Plugin URI` or `Bitbucket Plugin URI` declaration in the plugin's header. The plugin's primary file **must** be named similarly to the repo name.
 
 ~~~php
 /*
@@ -87,11 +92,7 @@ GitHub Branch:     master
 */
 ~~~
 
-Optional headers `GitHub Access Token`, `GitHub Branch`, `GitHub Timeout`, `Bitbucket Branch`, and `Bitbucket Timeout` are available but not required.
-
-## Tagging
-
-If `GitHub Branch` or `Bitbucket Branch` is not specified (or is set to `master`), then the latest tag will be used. GitHub Updater will preferentially use a tag over a branch in this instance.
+Optional headers `GitHub Access Token`, `GitHub Branch`, and `Bitbucket Branch` are available but not required.
 
 ## Branch Support
 
@@ -100,6 +101,10 @@ To specify a branch that you would like to use for updating, just add a `GitHub 
 The default state is either `GitHub Branch: master` or nothing at all. They are equivalent.
 
 If you want to update against branch of your repository other than `master` and have that branch push updates out to users make sure you specify the testing branch in a header, i.e. `GitHub Branch: develop`. When you want users to update against the release branch just have them manually change the header to `GitHub Branch: master` or remove it completely. Tags will be ignored when a branch other than `master` is specified. In this case I would suggest semantic versioning similar to the following, `<major>.<minor>.<patch>.<development>`.
+
+## Tagging
+
+If `GitHub Branch` or `Bitbucket Branch` is not specified (or is set to `master`), then the latest tag will be used. GitHub Updater will preferentially use a tag over a branch in this instance.
 
 ## Bitbucket Support
 
@@ -123,15 +128,29 @@ In order to specify a private repository you will need to obtain a [personal acc
 
 The header should be in the following format: `Bitbucket Plugin URI: https://<user>:<password>@bitbucket.org/<owner>/<repo>` or `Bitbucket Theme URI: https://<user>:<password>@bitbucket.org/<owner>/<repo>`
 
-## Setting Transient Timeout
+Regrettably, I still get an error when trying to download a Bitbucket private repository. I could use some [help in figuring this one out](https://github.com/afragen/github-updater/issues/59).
 
-The default number of hours for a plugin/theme's transient to expire is 4 hours. You may add an optional header, `GitHub Timeout` or `Bitbucket Timeout` to set a different transient timeout. The header will accept numeric values representing the number of hours for the plugin/theme's transient timeout. These values are floats.
+## Deleting Transients
+
+If you use the **Check Again** button in the WordPress Updates screen then all the transients will be deleted and the API will be queried again. Be careful about refreshing the browser window after this as you may be continually deleting the transients.
+
+## Hosting Plugin in WP.org Repository
+
+If you develop your plugin on GitHub and it also resides in the WP.org repo, the plugin will preferentially pull updates from WP.org if `GitHub Branch: master`. If `GitHub Branch` is anything other than `master` then the update will pull from GitHub. Make sure that the version of your plugin uploaded to WP.org has `GitHub Branch: master`.
+
+The same applies for Bitbucket hosted plugins.
 
 ## Issues
 
 Please log issues on the GitHub at https://github.com/afragen/github-updater/issues
 
-If you are using a WordPress Multisite installation, the plugin should be network activated.
+If you are using a WordPress Multisite installation, the plugin **should** be network activated.
+
+When first downloading and installing a plugin from GitHub you might have to do the following.
+
+1. Unzip the archive.
+2. Fix the folder name to remove to extra stuff GitHub adds to the download, like _-master_.
+3. Copy the folder to your plugins directory.
 
 ## ChangeLog
 
@@ -143,6 +162,8 @@ This plugin's theme updater class was based upon [Whitelabel Framework's updater
 
 The plugin updater class was based upon [codepress/github-plugin-updater](https://github.com/codepress/github-plugin-updater).
 
-Built by [Andy Fragen](https://github.com/afragen), [Gary Jones](https://github/GaryJones) and [contributors](https://github.com/afragen/github-updater/graphs/contributors)
-
 Includes [Michel Fortin](https://github/com/michelf)'s [PHP-Markdown](https://github.com/michelf/php-markdown) for rendering ChangeLogs.
+
+## Pull Requests
+
+Please fork and submit pull requests against the `develop` branch.
