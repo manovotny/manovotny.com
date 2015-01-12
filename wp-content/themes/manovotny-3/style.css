@@ -27,6 +27,15 @@ GitHub Theme URI: https://github.com/manovotny/manovotny.com
     font-weight:  700;
 }
 
+code {
+    white-space: normal;
+}
+
+#comments .response-list .response-text code {
+    overflow-x: inherit;
+    display: inline-block;
+}
+
 #masthead,
 #credit {
 
