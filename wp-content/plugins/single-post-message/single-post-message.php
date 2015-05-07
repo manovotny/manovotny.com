@@ -8,13 +8,13 @@
  * @author    Tom McFarlin <tom@tommcfarlin.com>
  * @license   GPL-2.0+
  * @link      http://tommcfarlin.com
- * @copyright 2012 - 2014 Tom McFarlin
+ * @copyright 2012 - 2015 Tom McFarlin
  *
  * @wordpress-plugin
  * Plugin Name: Single Post Message
  * Plugin URI: http://tommcfarlin.com/single-post-message
  * Description: Easily add short messages and announcements above posts. Displays in the RSS feed and on the blog.
- * Version: 2.1.0
+ * Version: 2.3.0
  * Author: Tom McFarlin
  * Author URI: http://tommcfarlin.com
  * Author Email: tom@tommcfarlin.com
