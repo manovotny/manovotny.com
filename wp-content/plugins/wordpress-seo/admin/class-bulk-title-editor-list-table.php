@@ -1,92 +1,85 @@
 <?php
 /**
- * @package Admin
+ * @package WPSEO\Admin\Bulk Editor
+ * @since      1.5.0
  */
 
-if ( ! defined( 'WPSEO_VERSION' ) ) {
-	header( 'Status: 403 Forbidden' );
-	header( 'HTTP/1.1 403 Forbidden' );
-	exit();
-}
+/**
+ * Implements table for bulk title editing.
+ */
+class WPSEO_Bulk_Title_Editor_List_Table extends WPSEO_Bulk_List_Table {
 
-
-if ( ! class_exists( 'WPSEO_Bulk_Title_Editor_List_Table' ) ) {
 	/**
+	 * Current type for this class will be title
 	 *
+	 * @var string
 	 */
-	class WPSEO_Bulk_Title_Editor_List_Table extends WPSEO_Bulk_List_Table {
-
-		/**
-		 * Current type for this class will be title
-		 *
-		 * @var string
-		 */
-		protected $page_type = 'title';
+	protected $page_type = 'title';
 
 
-		/**
-		 * Settings with are used in __construct
-		 *
-		 * @var array
-		 */
-		protected $settings = array(
-			'singular' => 'wpseo_bulk_title',
-			'plural'   => 'wpseo_bulk_titles',
-			'ajax'     => true,
+	/**
+	 * Settings with are used in __construct
+	 *
+	 * @var array
+	 */
+	protected $settings = array(
+		'singular' => 'wpseo_bulk_title',
+		'plural'   => 'wpseo_bulk_titles',
+		'ajax'     => true,
+	);
+
+	/**
+	 * The field in the database where meta field is saved.
+	 * @var string
+	 */
+	protected $target_db_field = 'title';
+
+	/**
+	 * The columns shown on the table
+	 *
+	 * @return array
+	 */
+	public function get_columns() {
+
+		$columns = array(
+			'col_existing_yoast_seo_title' => __( 'Existing Yoast SEO Title', 'wordpress-seo' ),
+			'col_new_yoast_seo_title'      => __( 'New Yoast SEO Title', 'wordpress-seo' ),
 		);
 
-		/**
-		 * The columns shown on the table
-		 *
-		 * @return array
-		 */
-		function get_columns() {
-			return $columns = array(
-				'col_page_title'               => __( 'WP Page Title', 'wordpress-seo' ),
-				'col_post_type'                => __( 'Post Type', 'wordpress-seo' ),
-				'col_post_status'              => __( 'Post Status', 'wordpress-seo' ),
-				'col_post_date'                => __( 'Publication date', 'wordpress-seo' ),
-				'col_page_slug'                => __( 'Page URL/Slug', 'wordpress-seo' ),
-				'col_existing_yoast_seo_title' => __( 'Existing Yoast SEO Title', 'wordpress-seo' ),
-				'col_new_yoast_seo_title'      => __( 'New Yoast SEO Title', 'wordpress-seo' ),
-				'col_row_action'               => __( 'Action', 'wordpress-seo' ),
-			);
+		return $this->merge_columns( $columns );
+	}
+
+	/**
+	 * Parse the title columns
+	 *
+	 * @param string $column_name
+	 * @param object $record
+	 * @param string $attributes
+	 *
+	 * @return string
+	 */
+	protected function parse_page_specific_column( $column_name, $record, $attributes ) {
+
+		// Fill meta data if exists in $this->meta_data
+		$meta_data = ( ! empty( $this->meta_data[ $record->ID ] ) ) ? $this->meta_data[ $record->ID ] : array();
+
+		switch ( $column_name ) {
+			case 'col_existing_yoast_seo_title':
+				// TODO inconsistent echo/return behavior R.
+				echo $this->parse_meta_data_field( $record->ID, $attributes );
+				break;
+
+			case 'col_new_yoast_seo_title':
+				return sprintf(
+					'<input type="text" id="%1$s" name="%1$s" class="wpseo-new-title" data-id="%2$s" />',
+					'wpseo-new-title-' . $record->ID,
+					$record->ID
+				);
+				break;
 		}
 
-		/**
-		 * Method for setting the meta data, which belongs to the records that will be shown on the current page
-		 *
-		 * This method will loop through the current items ($this->items) for getting the post_id. With this data
-		 * ($needed_ids) the method will query the meta-data table for getting the title.
-		 *
-		 */
-		function get_meta_data() {
-
-			global $wpdb;
-
-			$needed_ids = array();
-			foreach ( $this->items AS $item ) {
-				$needed_ids[] = $item->ID;
-			}
-
-			$post_ids  = "'" . implode( "', '", $needed_ids ) . "'";
-			$meta_data = $wpdb->get_results(
-				"
-				 	SELECT *
-				 	FROM {$wpdb->postmeta}
-				 	WHERE post_id IN({$post_ids}) && meta_key = '" . WPSEO_Meta::$meta_prefix . "title'
-				"
-			);
-
-			foreach ( $meta_data AS $row ) {
-				$this->meta_data[$row->post_id][$row->meta_key] = $row->meta_value;
-			}
+		unset( $meta_data );
+	}
 
 
-			// Little housekeeping
-			unset( $needed_ids, $post_ids, $meta_data );
-
-		}
-
-	} /* End of class */
-} /* End of class-exists wrapper */
+} /* End of class */

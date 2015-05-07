@@ -1,92 +1,76 @@
 <?php
 /**
- * @package Admin
+ * @package WPSEO\Admin\Bulk Editor
+ * @since      1.5.0
  */
 
-if ( ! defined( 'WPSEO_VERSION' ) ) {
-	header( 'Status: 403 Forbidden' );
-	header( 'HTTP/1.1 403 Forbidden' );
-	exit();
-}
+/**
+ * Implements table for bulk description editing.
+ */
+class WPSEO_Bulk_Description_List_Table extends WPSEO_Bulk_List_Table {
 
-
-if ( ! class_exists( 'WPSEO_Bulk_Description_List_Table' ) ) {
 	/**
+	 * Current type for this class will be (meta) description.
 	 *
+	 * @var string
 	 */
-	class WPSEO_Bulk_Description_List_Table extends WPSEO_Bulk_List_Table {
+	protected $page_type = 'description';
 
+	/**
+	 * Settings with are used in __construct
+	 *
+	 * @var array
+	 */
+	protected $settings = array(
+		'singular' => 'wpseo_bulk_description',
+		'plural'   => 'wpseo_bulk_descriptions',
+		'ajax'     => true,
+	);
 
-		/**
-		 * Current type for this class will be (meta) description.
-		 *
-		 * @var string
-		 */
-		protected $page_type = 'description';
+	/**
+	 * The field in the database where meta field is saved.
+	 * @var string
+	 */
+	protected $target_db_field = 'metadesc';
 
-		/**
-		 * Settings with are used in __construct
-		 *
-		 * @var array
-		 */
-		protected $settings = array(
-			'singular' => 'wpseo_bulk_description',
-			'plural'   => 'wpseo_bulk_descriptions',
-			'ajax'     => true,
+	/**
+	 * The columns shown on the table
+	 *
+	 * @return array
+	 */
+	public function get_columns() {
+		$columns = array(
+			'col_existing_yoast_seo_metadesc' => __( 'Existing Yoast Meta Description', 'wordpress-seo' ),
+			'col_new_yoast_seo_metadesc'      => __( 'New Yoast Meta Description', 'wordpress-seo' ),
 		);
 
-		/**
-		 * The columns shown on the table
-		 *
-		 * @return array
-		 */
-		function get_columns() {
-			return $columns = array(
-				'col_page_title'                  => __( 'WP Page Title', 'wordpress-seo' ),
-				'col_post_type'                   => __( 'Post Type', 'wordpress-seo' ),
-				'col_post_status'                 => __( 'Post Status', 'wordpress-seo' ),
-				'col_post_date'                   => __( 'Publication date', 'wordpress-seo' ),
-				'col_page_slug'                   => __( 'Page URL/Slug', 'wordpress-seo' ),
-				'col_existing_yoast_seo_metadesc' => __( 'Existing Yoast Meta Description', 'wordpress-seo' ),
-				'col_new_yoast_seo_metadesc'      => __( 'New Yoast Meta Description', 'wordpress-seo' ),
-				'col_row_action'                  => __( 'Action', 'wordpress-seo' ),
-			);
+		return $this->merge_columns( $columns );
+	}
+
+	/**
+	 * Parse the metadescription
+	 *
+	 * @param string $column_name
+	 * @param object $record
+	 * @param string $attributes
+	 *
+	 * @return string
+	 */
+	protected function parse_page_specific_column( $column_name, $record, $attributes ) {
+		switch ( $column_name ) {
+			case 'col_new_yoast_seo_metadesc':
+				return sprintf(
+					'<textarea id="%1$s" name="%1$s" class="wpseo-new-metadesc" data-id="%2$s"></textarea>',
+					'wpseo-new-metadesc-' . $record->ID,
+					$record->ID
+				);
+				break;
+
+			case 'col_existing_yoast_seo_metadesc':
+				// TODO inconsistent return/echo behavior R.
+				echo $this->parse_meta_data_field( $record->ID, $attributes );
+				break;
 		}
+	}
 
-		/**
-		 * Method for setting the meta data, which belongs to the records that will be shown on the current page
-		 *
-		 * This method will loop through the current items ($this->items) for getting the post_id. With this data
-		 * ($needed_ids) the method will query the meta-data table for getting the metadescription.
-		 *
-		 */
-		function get_meta_data() {
-
-			global $wpdb;
-
-			$needed_ids = array();
-			foreach ( $this->items AS $item ) {
-				$needed_ids[] = $item->ID;
-			}
-
-			$post_ids  = "'" . implode( "', '", $needed_ids ) . "'";
-			$meta_data = $wpdb->get_results(
-				"
-				 	SELECT *
-				 	FROM {$wpdb->postmeta}
-				 	WHERE post_id IN({$post_ids}) && meta_key = '" . WPSEO_Meta::$meta_prefix . "metadesc'
-				"
-			);
-
-			foreach ( $meta_data AS $row ) {
-				$this->meta_data[$row->post_id][$row->meta_key] = $row->meta_value;
-			}
-
-			// Little housekeeping
-			unset( $needed_ids, $post_ids, $meta_data );
-
-		}
-
-
-	} /* End of class */
-} /* End of class-exists wrapper */
+} /* End of class */

@@ -12,14 +12,17 @@ function yst_clean(str) {
 	return str;
 }
 
-function ptest(str, p) {
-	str = yst_clean(str);
+function ptest( str, p ) {
+	str = yst_clean( str );
 	str = str.toLowerCase();
-	var r = str.match(p);
-	if (r != null)
+	str = removeLowerCaseDiacritics( str );
+	var r = str.match( p );
+
+	if ( r != null ){
 		return '<span class="good">Yes (' + r.length + ')</span>';
-	else
-		return '<span class="wrong">No</span>';
+	}
+
+	return '<span class="wrong">No</span>';
 }
 
 function removeLowerCaseDiacritics(str) {
@@ -79,12 +82,15 @@ function removeLowerCaseDiacritics(str) {
 function yst_testFocusKw() {
 	// Retrieve focus keyword and trim
 	var focuskw = jQuery.trim(jQuery('#' + wpseoMetaboxL10n.field_prefix + 'focuskw').val());
+
 	focuskw = yst_escapeFocusKw(focuskw).toLowerCase();
 
-	var postname = jQuery('#editable-post-name-full').text();
-	var url = wpseoMetaboxL10n.wpseo_permalink_template.replace('%postname%', postname).replace('http://', '');
+	if (jQuery('#editable-post-name-full').length) {
+		var postname = jQuery('#editable-post-name-full').text();
+		var url = wpseoMetaboxL10n.wpseo_permalink_template.replace('%postname%', postname).replace('http://', '');
+	}
+	var p = new RegExp("(^|[ \s\n\r\t\.,'\(\"\+;!?:\-])" + removeLowerCaseDiacritics( focuskw ) + "($|[ \s\n\r\t.,'\)\"\+!?:;\-])", 'gim');
 
-	var p = new RegExp("(^|[ \s\n\r\t\.,'\(\"\+;!?:\-])" + focuskw + "($|[ \s\n\r\t.,'\)\"\+!?:;\-])", 'gim');
 	//remove diacritics of a lower cased focuskw for url matching in foreign lang
 	var focuskwNoDiacritics = removeLowerCaseDiacritics(focuskw);
 	var p2 = new RegExp(focuskwNoDiacritics.replace(/\s+/g, "[-_\\\//]"), 'gim');
@@ -95,10 +101,14 @@ function yst_testFocusKw() {
 	if (focuskw != '') {
 		var html = '<p>' + wpseoMetaboxL10n.keyword_header + '</p>';
 		html += '<ul>';
-		html += '<li>' + wpseoMetaboxL10n.article_header_text + ptest(jQuery('#title').val(), p) + '</li>';
+		if (jQuery('#title').length) {
+			html += '<li>' + wpseoMetaboxL10n.article_header_text + ptest(jQuery('#title').val(), p) + '</li>';
+		}
 		html += '<li>' + wpseoMetaboxL10n.page_title_text + ptest(jQuery('#wpseosnippet_title').text(), p) + '</li>';
 		html += '<li>' + wpseoMetaboxL10n.page_url_text + ptest(url, p2) + '</li>';
-		html += '<li>' + wpseoMetaboxL10n.content_text + ptest(jQuery('#content').val(), p) + '</li>';
+		if (jQuery('#content').length) {
+			html += '<li>' + wpseoMetaboxL10n.content_text + ptest(jQuery('#content').val(), p) + '</li>';
+		}
 		html += '<li>' + wpseoMetaboxL10n.meta_description_text + ptest(metadesc, p) + '</li>';
 		html += '</ul>';
 		focuskwresults.html(html);
@@ -108,8 +118,13 @@ function yst_testFocusKw() {
 }
 
 function yst_replaceVariables(str, callback) {
+	if (typeof str === "undefined") {
+		return '';
+	}
 	// title
-	str = str.replace(/%%title%%/g, jQuery('#title').val());
+	if (jQuery('#title').length) {
+		str = str.replace(/%%title%%/g, jQuery('#title').val());
+	}
 
 	// These are added in the head for performance reasons.
 	str = str.replace(/%%sitedesc%%/g, wpseoMetaboxL10n.sitedesc);
@@ -126,15 +141,18 @@ function yst_replaceVariables(str, callback) {
 
 	str = str.replace(/%%focuskw%%/g, jQuery('#yoast_wpseo_focuskw').val() );
 	// excerpt
-	var excerpt = yst_clean(jQuery("#excerpt").val());
-	str = str.replace(/%%excerpt_only%%/g, excerpt);
-	if ('' == excerpt) {
-		excerpt = jQuery("#content").val().replace(/(<([^>]+)>)/ig,"").substring(0,wpseoMetaboxL10n.wpseo_meta_desc_length-1);
+	var excerpt = '';
+	if (jQuery('#excerpt').length) {
+		excerpt = yst_clean(jQuery("#excerpt").val());
+		str = str.replace(/%%excerpt_only%%/g, excerpt);
+	}
+	if ('' == excerpt && jQuery('#content').length) {
+		excerpt = jQuery('#content').val().replace(/(<([^>]+)>)/ig,"").substring(0,wpseoMetaboxL10n.wpseo_meta_desc_length-1);
 	}
 	str = str.replace(/%%excerpt%%/g, excerpt);
 
 	// parent page
-	if ( jQuery('#parent_id option:selected').text() != wpseoMetaboxL10n.no_parent_text ) {
+	if (jQuery('#parent_id').length && jQuery('#parent_id option:selected').text() != wpseoMetaboxL10n.no_parent_text ) {
 		str = str.replace(/%%parent_title%%/g, jQuery('#parent_id option:selected').text());
 	}
 
@@ -150,7 +168,8 @@ function yst_replaceVariables(str, callback) {
 			if (replacedVars[matches[i]] != undefined) {
 				str = str.replace(matches[i], replacedVars[matches[i]]);
 			} else {
-				replaceableVar = matches[i];
+				var replaceableVar = matches[i];
+
 				// create the cache already, so we don't do the request twice.
 				replacedVars[replaceableVar] = '';
 				jQuery.post(ajaxurl, {
@@ -161,10 +180,9 @@ function yst_replaceVariables(str, callback) {
 						}, function (data) {
 							if (data) {
 								replacedVars[replaceableVar] = data;
-								yst_replaceVariables(str, callback);
-							} else {
-								yst_replaceVariables(str, callback);
 							}
+
+							yst_replaceVariables(str, callback);
 						}
 				);
 			}
@@ -205,8 +223,7 @@ function yst_updateTitle(force) {
 		var placeholder_title = divHtml.html(title).text();
 		titleElm.attr('placeholder', placeholder_title);
 
-		// and now the snippet preview title
-		title = yst_boldKeywords(title, false);
+		title = sanitize_title( title );
 
 		jQuery('#wpseosnippet_title').html(title);
 
@@ -222,6 +239,17 @@ function yst_updateTitle(force) {
 		yst_testFocusKw();
 	});
 }
+
+function sanitize_title( title ) {
+
+	title = yst_clean(title);
+
+	// and now the snippet preview title
+	title = yst_boldKeywords(title, false);
+
+	return title;
+}
+
 
 function yst_updateDesc() {
 	var desc = jQuery.trim(yst_clean(jQuery('#' + wpseoMetaboxL10n.field_prefix + 'metadesc').val()));
@@ -248,8 +276,8 @@ function yst_updateDesc() {
 
 			jQuery('#' + wpseoMetaboxL10n.field_prefix + 'metadesc-length').html(len);
 
-			desc = yst_trimDesc(desc);
-			desc = yst_boldKeywords(desc, false);
+			desc = sanitize_desc( desc );
+
 			// Clear the autogen description.
 			snippet.find('.desc span.autogen').html('');
 			// Set our new one.
@@ -262,8 +290,16 @@ function yst_updateDesc() {
 		snippet.find('.desc span.content').html('');
 		yst_testFocusKw();
 
-		desc = jQuery("#content").val();
-		desc = yst_clean(desc);
+		if ( typeof tinyMCE !== "undefined" && tinyMCE.get('excerpt') !== null) {
+			desc = tinyMCE.get('excerpt').getContent();
+			desc = yst_clean(desc);
+		}
+
+		if ( typeof tinyMCE !== "undefined" && tinyMCE.get('content') !== null && desc.length === 0) {
+			desc = tinyMCE.get('content').getContent();
+
+			desc = yst_clean(desc);
+		}
 
 		var focuskw = yst_escapeFocusKw(jQuery.trim(jQuery('#' + wpseoMetaboxL10n.field_prefix + 'focuskw').val()));
 		if (focuskw != '') {
@@ -276,12 +312,21 @@ function yst_updateDesc() {
 		} else {
 			desc = desc.substr(0, wpseoMetaboxL10n.wpseo_meta_desc_length);
 		}
-		desc = yst_boldKeywords(desc, false);
-		desc = yst_trimDesc(desc);
+
+		desc = sanitize_desc( desc );
+
 		snippet.find('.desc span.autogen').html(desc);
 	}
 
 }
+
+function sanitize_desc(desc) {
+	desc = yst_trimDesc(desc);
+	desc = yst_boldKeywords(desc, false);
+
+	return desc;
+}
+
 
 function yst_trimDesc(desc) {
 	if (desc.length > wpseoMetaboxL10n.wpseo_meta_desc_length) {
@@ -296,8 +341,10 @@ function yst_trimDesc(desc) {
 }
 
 function yst_updateURL() {
-	var name = jQuery('#editable-post-name-full').text();
-	var url = wpseoMetaboxL10n.wpseo_permalink_template.replace('%postname%', name).replace('http://', '');
+	if (jQuery('#editable-post-name-full').length) {
+		var name = jQuery('#editable-post-name-full').text();
+		var url = wpseoMetaboxL10n.wpseo_permalink_template.replace('%postname%', name).replace('http://', '');
+	}
 	url = yst_boldKeywords(url, true);
 	jQuery('#wpseosnippet').find('.url').html(url);
 	yst_testFocusKw();
@@ -428,12 +475,24 @@ jQuery(document).ready(function () {
 	jQuery('#' + wpseoMetaboxL10n.field_prefix + 'metadesc').keyup(function () {
 		yst_updateDesc();
 	});
-	jQuery('#excerpt').keyup(function () {
-		yst_updateDesc();
-	});
-	jQuery('#content').focusout(function () {
-		yst_updateDesc();
-	});
+
+	// Set time out because of tinymce is initialized later then this is done
+	setTimeout(
+		function() {
+			yst_updateSnippet();
+
+			// Adding events to content and excerpt
+			if( typeof tinyMCE !== "undefined" && tinyMCE.get( 'content' ) !== null ) {
+				tinyMCE.get( 'content' ).on( 'blur', yst_updateDesc );
+			}
+
+			if( typeof tinyMCE !== "undefined" && tinyMCE.get( 'excerpt' ) !== null ) {
+				tinyMCE.get( 'excerpt' ).on( 'blur', yst_updateDesc );
+			}
+		},
+		500
+	);
+
 	var focuskwhelptriggered = false;
 	jQuery(document).on('change', '#' + wpseoMetaboxL10n.field_prefix + 'focuskw', function () {
 		var focuskwhelpElm = jQuery('#focuskwhelp');
@@ -448,31 +507,34 @@ jQuery(document).ready(function () {
 		yst_updateSnippet();
 	});
 
+	jQuery(".yoast_help").qtip(
+		{
+			content: {
+				attr: 'alt'
+			},
+			position: {
+				my: 'bottom left',
+				at: 'top center'
+			},
+			style   : {
+				tip: {
+					corner: true
+				},
+				classes : 'yoast-qtip qtip-rounded qtip-blue'
+			},
+			show    : {
+				when: {
+					event: 'mouseover'
+				}
+			},
+			hide    : {
+				fixed: true,
+				when : {
+					event: 'mouseout'
+				}
+			}
 
-	jQuery(".yoast_help").qtip({
-		position: {
-			corner: {
-				target : 'topMiddle',
-				tooltip: 'bottomLeft'
-			}
-		},
-		show    : {
-			when: {
-				event: 'mouseover'
-			}
-		},
-		hide    : {
-			fixed: true,
-			when : {
-				event: 'mouseout'
-			}
-		},
-		style   : {
-			tip : 'bottomLeft',
-			name: 'blue'
 		}
-	});
-
-	yst_updateSnippet();
+	);
 
 });
