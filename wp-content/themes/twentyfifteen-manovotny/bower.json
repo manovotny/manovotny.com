@@ -1,0 +1,22 @@
+{
+    "name": "manovotny",
+    "version": "1.0.0",
+    "description": "Custom Twenty Fifteen WordPress child theme for Michael Novotny/",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/manovotny/manovotny.com.git"
+    },
+    "keywords": [
+        "wordpress"
+    ],
+    "authors": [
+        {
+            "name": "Michael Novotny",
+            "email": "manovotny@gmail.com",
+            "homepage": "http://manovotny.com"
+        }
+    ],
+    "devDependencies": {
+        "grunticon-templates": "git://github.com/manovotny/grunticon-templates.git#^1.0.1"
+    }
+}

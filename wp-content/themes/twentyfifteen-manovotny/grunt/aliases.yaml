@@ -1,0 +1,73 @@
+# Default
+#----------------------------------------------------------------------------------
+
+default:
+  - build
+
+# Setup
+#----------------------------------------------------------------------------------
+
+init:
+  - replace
+  - rename
+  - shell:init
+  - build
+
+refresh:
+  - shell:refresh
+
+update:
+  - shell:update
+  - build
+
+upgrade:
+  - shell:upgrade
+
+# Build
+#----------------------------------------------------------------------------------
+
+build:
+  - clean:build
+  - curl
+  - lint
+  - test
+  - js
+  - css
+  - images
+
+lint:
+  - jshint
+  - jscs
+  - phplint
+  - scsslint
+
+test:
+  - phpunit
+
+js:
+  - browserify
+
+css:
+  - sass
+  - autoprefixer
+  - cssmin
+
+images:
+  - imagemin:svg
+  - grunticon
+  - imagemin:png
+
+# Release
+#----------------------------------------------------------------------------------
+
+release:
+  - build
+  - makepot
+  - replace:project_version
+  - replace:update_project
+
+# Deploy
+#----------------------------------------------------------------------------------
+
+deploy:
+  - clean:deploy

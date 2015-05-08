@@ -1,0 +1,41 @@
+{
+    "name": "manovotny/manovotny",
+    "version": "1.0.0",
+    "description": "Custom Twenty Fifteen WordPress child theme for Michael Novotny/",
+    "type": "project",
+    "homepage": "https://github.com/manovotny/manovotny.com",
+    "authors": [
+        {
+            "name": "Michael Novotny",
+            "email": "manovotny@gmail.com",
+            "homepage": "http://manovotny.com",
+            "role": "Developer"
+        }
+    ],
+    "license": "GPL-3.0+",
+    "keywords": [
+        "wordpress"
+    ],
+    "require": {
+
+    },
+    "require-dev": {
+        "manovotny/wp-phpunit-helpers": "~1.0",
+        "phpunit/phpunit": "4.1.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src"
+        ],
+        "files": [
+            "manovotny.php"
+        ]
+    },
+    "autoload-dev": {
+        "classmap": [
+            "vendor/phpunit",
+            "vendor/sebastian",
+            "vendor/symfony"
+        ]
+    }
+}
