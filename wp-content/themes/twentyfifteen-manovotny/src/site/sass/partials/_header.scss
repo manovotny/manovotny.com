@@ -1,0 +1,19 @@
+.logo {
+    display: block;
+    margin-bottom: 8px;
+}
+
+@media (max-width: 767px) {
+    .site-title a {
+        font-size: 80%;
+    }
+
+    .logo {
+        background-size: cover;
+        display: inline-block;
+        height: 19px;
+        margin-bottom: -3px;
+        margin-right: 5px;
+        width: 50px;
+    }
+}

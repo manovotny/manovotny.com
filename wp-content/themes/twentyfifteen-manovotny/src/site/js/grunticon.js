@@ -3,7 +3,7 @@
     'use strict';
 
     function init() {
-        $('.site-branding').prepend('<span class="logo"></span>');
+        $('.site-title a').prepend('<span class="logo"></span>');
     }
 
     init();
