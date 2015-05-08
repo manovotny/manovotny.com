@@ -19,7 +19,7 @@ module.exports = (function () {
             name: 'Michael Novotny',
             slug: 'manovotny',
             url: 'https://github.com/manovotny/manovotny.com',
-            version: '1.0.0'
+            version: '4.0.0'
         },
         translations: {
             domain: 'manovotny',
