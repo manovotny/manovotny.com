@@ -1,0 +1,13 @@
+.wp-post-image {
+    height: 300px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.entry-content a {
+    color: #0493cd;
+
+    &:hover {
+        color: #09b5fb;
+    }
+}
