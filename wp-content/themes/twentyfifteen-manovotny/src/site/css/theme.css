@@ -27,3 +27,8 @@
 
 .site-footer {
   display: none; }
+
+.single-post-message {
+  font-family: inherit !important;
+  font-size: 90% !important;
+  margin-bottom: 1.6em !important; }
