@@ -7,3 +7,6 @@
   color: #0493cd; }
   .entry-content a:hover {
     color: #09b5fb; }
+
+.site-footer {
+  display: none; }
