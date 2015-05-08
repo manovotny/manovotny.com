@@ -1,6 +1,10 @@
 .logo {
     display: block;
     margin-bottom: 8px;
+
+    &:hover {
+        opacity: .5;
+    }
 }
 
 @media (max-width: 767px) {
