@@ -25,7 +25,7 @@ class Manovotny {
      *
      * @var string
      */
-    protected $version = '4.0.0';
+    protected $version = '4.0.1';
 
     /* Public
     ---------------------------------------------------------------------------------- */
