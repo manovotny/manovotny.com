@@ -18,7 +18,7 @@
  }
 
 .wp-post-image {
-  height: 300px;
+  height: 150px;
   object-fit: cover;
   width: 100%; }
 
@@ -26,6 +26,16 @@
   color: #0493cd; }
   .entry-content a:hover {
     color: #09b5fb; }
+
+@media (min-width: 769px) {
+  .wp-post-image {
+    height: 225px; }
+ }
+
+@media (min-width: 1025px) {
+  .wp-post-image {
+    height: 300px; }
+ }
 
 .site-footer {
   display: none; }
