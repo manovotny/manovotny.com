@@ -1,1 +1,0 @@
-/Users/manovotny/Dropbox/Projects/Michael Novotny/website/wp-content/plugins/query-monitor/wp-content/db.php

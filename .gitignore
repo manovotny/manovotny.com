@@ -1,26 +1,4 @@
 *.iml
+_site
 .DS_Store
 .idea
-bower_components
-config/runtime.json
-node_modules
-/wp-content/themes/*manovotny*/vendor
-
-# WordPress
-/license.txt
-/index.php
-/readme.html
-/sitemap.xml
-/sitemap.xml.gz
-/wp-*.php
-/wp-admin/
-/wp-content/index.php
-/wp-content/plugins/index.php
-/wp-content/themes/index.php
-/wp-content/themes/twentyten
-/wp-content/themes/twentyeleven
-/wp-content/themes/twentytwelve
-/wp-content/upgrade/*
-/wp-content/uploads/
-/wp-includes/
-/xmlrpc.php

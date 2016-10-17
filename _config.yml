@@ -1,0 +1,10 @@
+# site settings
+
+copyright_start_date: 2010
+description: I am a developer. I make things.
+title: Michael Novotny
+
+# build settings
+
+baseurl: ''
+timezone: America/Chicago
