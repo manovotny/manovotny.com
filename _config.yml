@@ -7,4 +7,5 @@ title: Michael Novotny
 # build settings
 
 baseurl: ''
+permalink: /:title/
 timezone: America/Chicago
