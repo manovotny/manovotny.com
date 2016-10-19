@@ -8,4 +8,7 @@ title: Michael Novotny
 
 baseurl: ''
 permalink: /:title/
+sass:
+  sass_dir: _scss
+  style: compressed
 timezone: America/Chicago
