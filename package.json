@@ -1,0 +1,21 @@
+{
+  "name": "manovotny.com",
+  "description": "The Jekyll site for manovotny.com.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Michael Novotny",
+    "email": "manovotny@gmail.com",
+    "url": "htts://manovotny.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manovotny/manovotny.com.git"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "scripts": {
+    "start": "bundle exec jekyll serve"
+  }
+}
