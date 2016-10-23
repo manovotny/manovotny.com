@@ -16,6 +16,13 @@
     "node": ">=6"
   },
   "scripts": {
-    "start": "bundle exec jekyll serve"
+    "eslint": "eslint . --ext .json --ext .js --ignore-pattern \"_site\"",
+    "start": "bundle exec jekyll serve",
+    "stylelint": "stylelint \"_sass/**/*.scss\" --syntax scss",
+    "test": "npm run eslint && npm run stylelint"
+  },
+  "dependencies": {
+    "eslint-config-get-off-my-lawn": "1.1.0",
+    "stylelint-config-get-off-my-lawn": "1.0.0"
   }
 }

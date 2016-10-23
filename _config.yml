@@ -1,7 +1,7 @@
 # site settings
 
 copyright_start_date: 2010
-description: I am a developer. I make things.
+description: I'm a JavaScript developer who loves open source, standards, best practices, learning, and sharing what I learn. Development is a lifestyle, not a job.
 title: Michael Novotny
 
 # build settings
@@ -9,6 +9,5 @@ title: Michael Novotny
 baseurl: ''
 permalink: /:title/
 sass:
-  sass_dir: _scss
   style: compressed
 timezone: America/Chicago

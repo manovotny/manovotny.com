@@ -2,20 +2,31 @@
 layout: default
 ---
 
-<section class="profile">
-    <img class="gravatar" src="//www.gravatar.com/avatar/60cb31e323d15f1c0fc1a59ac17ba484?s=200" alt="Michael Novotny" />
+<section class="profile column">
+    <!--<img class="gravatar" src="//www.gravatar.com/avatar/60cb31e323d15f1c0fc1a59ac17ba484?s=300" alt="Michael Novotny" />-->
+    <img class="gravatar" src="/images/gravatar.jpg" alt="Michael Novotny" />
     <h1 class="title">{{site.title}}</h1>
     <h2 class="subtitle">{{site.description}}</h2>
+    <nav class="navigation">
+        <ul class="navigation-items">
+            <li class="navigation-item">
+                <a href="#" title="Twitter">
+                    {% include icons/twitter.svg %}
+                    Twitter
+                </a>
+            </li>
+            <li class="navigation-item">
+                <a href="#" title="Blog">
+                    {% include icons/medium.svg %}
+                    Medium
+                </a>
+            </li>
+            <li class="navigation-item">
+                <a href="#" title="GitHub">
+                    {% include icons/github.svg %}
+                    GitHub
+                </a>
+            </li>
+        </ul>
+    </nav>
 </section>
-<h3>Current Projects</h3>
-<ul>
-    <li>Project A</li>
-    <li>Project B</li>
-    <li>Project C</li>
-</ul>
-<h3>Recent Posts</h3>
-<ul>
-    <li>Post A</li>
-    <li>Post B</li>
-    <li>Post C</li>
-</ul>
