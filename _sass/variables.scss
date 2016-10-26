@@ -1,0 +1,48 @@
+$colors: (
+    border: #eee,
+    background: #11313c,
+    muted: #9eabb3
+);
+
+$fonts: (
+    merriweather: #{Merriweather, serif},
+    opensans: #{'Open Sans', sans-serif}
+);
+
+$sizes: (
+    gravatar: 120px,
+    header: 150px,
+    icons: 24px
+);
+
+$spacing: (
+    extrasmall: 8px,
+    small: 12px,
+    normal: 24px,
+    large: 48px
+);
+
+@function lookup($map, $mapName, $key) {
+    @if map-has-key($map, $key) {
+        @return map-get($map, $key);
+    }
+
+    @warn 'The `#{$mapName}` map does not contain a `#{$key}` key.';
+    @return null;
+}
+
+@function colors($key) {
+    @return lookup($colors, colors, $key);
+}
+
+@function fonts($key) {
+    @return lookup($fonts, fonts, $key);
+}
+
+@function sizes($key) {
+    @return lookup($sizes, sizes, $key);
+}
+
+@function spacing($key) {
+    @return lookup($spacing, spacing, $key);
+}

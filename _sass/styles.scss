@@ -1,39 +1,7 @@
-$background-color: #11313c;
-$light-gray-color: #9eabb3;
-$fancy-border-color: #eee;
-
-$open-sans-font: 'Open Sans', sans-serif;
-
-$column-max-width: 675px;
-$column-min-width: 320px;
-
-$gravatar-size: 120px;
-$header-size: 150px;
-$icon-size: 24px;
-
-$spacing: 24px;
-$spacing-large: $spacing * 2;
-$spacing-small: $spacing / 2;
-$spacing-extra-small: $spacing / 3;
-
-@mixin list-no-bullets {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
 /* stylelint-disable selector-no-type */
-@mixin list-inline {
-    @include list-no-bullets;
-
-    li {
-        display: inline-block;
-    }
-}
-
 html {
     box-sizing: border-box;
-    min-width: $column-min-width;
+    min-width: 320px;
 }
 
 *,
@@ -45,7 +13,7 @@ html {
 body {
     background-color: #fff;
     color: #50585d;
-    font-family: Merriweather, serif;
+    font-family: fonts(merriweather);
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     line-height: 1.5;
@@ -56,14 +24,14 @@ body {
 
 .column {
     margin: 0 auto;
-    max-width: $column-max-width;
+    max-width: 675px;
 }
 
 .header {
-    background-color: $background-color;
+    background-color: colors(background);
     background-image: url('/images/background.jpg');
     background-size: cover;
-    height: $header-size;
+    height: sizes(header);
 }
 
 .navigation-items {
@@ -71,14 +39,14 @@ body {
 }
 
 .navigation-item {
-    margin-bottom: $spacing;
+    margin-bottom: spacing(normal);
 
     &:last-child {
         margin-right: 0;
     }
 
     a {
-        color: $light-gray-color;
+        color: colors(muted);
         display: inline-block;
         font-style: italic;
         text-decoration: none;
@@ -86,21 +54,21 @@ body {
 
     svg {
         display: inline-block;
-        height: $icon-size;
-        margin-right: $spacing-extra-small;
+        height: sizes(icons);
+        margin-right: spacing(extrasmall);
         vertical-align: middle;
-        width: $icon-size;
+        width: sizes(icons);
     }
 }
 
 .profile {
-    border-bottom: 1px solid $fancy-border-color;
-    margin: -($gravatar-size / 2) auto $spacing;
-    padding: 0 $spacing $spacing-small;
+    border-bottom: 1px solid colors(border);
+    margin: -(sizes(gravatar) / 2) auto spacing(normal);
+    padding: 0 spacing(normal) spacing(small);
     position: relative;
 
     &::after {
-        border: $fancy-border-color 1px solid;
+        border: 1px solid colors(border);
         border-radius: 100%;
         bottom: -5px;
         box-shadow: #fff 0 0 0 5px;
@@ -117,28 +85,28 @@ body {
 .gravatar {
     border: #fff 5px solid;
     border-radius: 50%;
-    height: $gravatar-size;
-    width: $gravatar-size;
+    height: sizes(gravatar);
+    width: sizes(gravatar);
 }
 
 .title {
     color: #2e2e2e;
-    font-family: $open-sans-font;
+    font-family: fonts(opensans);
     font-size: 42px;
     font-weight: bold;
     letter-spacing: -2px;
     line-height: 1.15;
-    margin: $spacing-extra-small 0 $spacing-small;
+    margin: spacing(extrasmall) 0 spacing(small);
     text-indent: -3px;
     text-rendering: geometricPrecision;
 }
 
 .subtitle {
-    font-family: $open-sans-font;
+    font-family: fonts(opensans);
     font-size: 18px;
     font-weight: 200;
     line-height: 1.5;
-    margin: 0 0 $spacing;
+    margin: 0 0 spacing(normal);
 }
 
 .heading {
@@ -147,12 +115,12 @@ body {
 }
 
 .main {
-    margin-bottom: $spacing-large;
+    margin-bottom: spacing(large);
 }
 
 .footer {
-    background-color: $background-color;
-    padding: $spacing-extra-small 0;
+    background-color: colors(background);
+    padding: spacing(extrasmall) 0;
 
     &.sticky {
         bottom: 0;
@@ -163,13 +131,13 @@ body {
 }
 
 .copyright {
-    color: $light-gray-color;
+    color: colors(muted);
     font-size: .8em;
 }
 
 @media (min-width: 768px) {
     .header {
-        height: $header-size * 2;
+        height: sizes(header) * 2;
     }
 
     .title {
@@ -177,7 +145,7 @@ body {
     }
 
     .profile {
-        padding-bottom: $spacing-large;
+        padding-bottom: spacing(large);
     }
 
     .navigation-items {
@@ -186,6 +154,6 @@ body {
 
     .navigation-item {
         margin-bottom: 0;
-        margin-right: $spacing-large;
+        margin-right: spacing(large);
     }
 }

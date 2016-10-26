@@ -2,4 +2,6 @@
 # Front matter required by jekyll, do not remove!
 ---
 
-@import 'site';
+@import 'variables';
+@import 'mixins';
+@import 'styles';

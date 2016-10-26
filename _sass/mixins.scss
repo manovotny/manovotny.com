@@ -1,0 +1,15 @@
+@mixin list-no-bullets {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* stylelint-disable selector-no-type */
+@mixin list-inline {
+    @include list-no-bullets;
+
+    li {
+        display: inline-block;
+    }
+}
+/* stylelint-enable selector-no-type */
