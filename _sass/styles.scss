@@ -90,15 +90,9 @@ body {
 }
 
 .title {
-    color: #2e2e2e;
-    font-family: fonts(opensans);
+    @include heading;
+
     font-size: 42px;
-    font-weight: bold;
-    letter-spacing: -2px;
-    line-height: 1.15;
-    margin: spacing(extrasmall) 0 spacing(small);
-    text-indent: -3px;
-    text-rendering: geometricPrecision;
 }
 
 .subtitle {
@@ -110,8 +104,13 @@ body {
 }
 
 .heading {
-    color: #333;
-    font-weight: normal;
+    @include heading;
+
+    font-size: 32px;
+
+    svg {
+        vertical-align: middle;
+    }
 }
 
 .main {

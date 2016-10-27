@@ -13,3 +13,14 @@
     }
 }
 /* stylelint-enable selector-no-type */
+
+@mixin heading {
+    color: #2e2e2e;
+    font-family: fonts(opensans);
+    font-weight: bold;
+    letter-spacing: -2px;
+    line-height: 1.15;
+    margin: spacing(extrasmall) 0 spacing(small);
+    text-indent: -3px;
+    text-rendering: geometricPrecision;
+}

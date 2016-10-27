@@ -1,15 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% include head.html %}
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=GvJ0MMLokO">
+        <link rel="icon" type="image/png" href="/favicon-32x32.png?v=GvJ0MMLokO" sizes="32x32">
+        <link rel="icon" type="image/png" href="/favicon-16x16.png?v=GvJ0MMLokO" sizes="16x16">
+        <link rel="manifest" href="/manifest.json?v=GvJ0MMLokO">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg?v=GvJ0MMLokO" color="#4a9885">
+        <link rel="shortcut icon" href="/favicon.ico?v=GvJ0MMLokO">
+        <meta name="theme-color" content="#ffffff">
+
+        {% if page.redirect == null %}
+            <title>{{site.title}} - {{site.description}}</title>
+            <link rel="canonical" href="{{page.url}}" />
+            <meta name="description" content="{{site.title}} - {{site.description}}" />
+        {% else %}
+            <title>Redirecting...</title>
+            <link rel="canonical" href="{{page.redirect}}" />
+            <meta http-equiv="refresh" content="0; url={{page.redirect}}" />
+        {% endif %}
+
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+        <link rel="stylesheet" href="{{site.baseurl}}/css/styles.css">
+    </head>
     <body>
-        {% include header.html %}
+        <header class="header"></header>
+        <section class="profile column">
+            <img class="gravatar" src="//www.gravatar.com/avatar/60cb31e323d15f1c0fc1a59ac17ba484?s=300" alt="Michael Novotny" />
+            <h1 class="title">{{site.title}}</h1>
+            <h2 class="subtitle">{{site.description}}</h2>
+            <nav class="navigation">
+                <ul class="navigation-items">
+                    <li class="navigation-item">
+                        <a href="#" title="Twitter">
+                            {% include icons/twitter.svg %}
+                            Twitter
+                        </a>
+                    </li>
+                    <li class="navigation-item">
+                        <a href="#" title="Blog">
+                            {% include icons/medium.svg %}
+                            Medium
+                        </a>
+                    </li>
+                    <li class="navigation-item">
+                        <a href="#" title="GitHub">
+                            {% include icons/github.svg %}
+                            GitHub
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </section>
         <main class="main">
             {% if page.redirect != null %}
-                <h2>Redirecting…</h2>
+                <h3 class="heading">Redirecting...</h3>
                 <a href="{{page.redirect}}">Click here if you are not redirected.</a>
             {% endif %}
             {{content}}
         </main>
-        {% include footer.html %}
+        <footer class="footer">
+            <p class="copyright">&copy; Copyright {{site.copyright_start_date}} - {{site.time | date: '%Y'}} {{site.title}}</p>
+        </footer>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', '{{site.google_analytics}}', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+        <script src="{{site.baseurl}}/js/bundle.js" async></script>
     </body>
 </html>

@@ -17,7 +17,7 @@
   },
   "scripts": {
     "eslint": "eslint . --ext .json --ext .js --ignore-pattern \"_site\"",
-    "start": "bundle exec jekyll serve --incremental",
+    "start": "bundle exec jekyll serve",
     "stylelint": "stylelint \"_sass/**/*.scss\" --syntax scss",
     "test": "npm run eslint && npm run stylelint"
   },
