@@ -12,13 +12,17 @@ html {
 
 body {
     background-color: #fff;
-    color: #50585d;
+    color: colors(text);
     font-family: fonts(merriweather);
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     line-height: 1.5;
     text-align: center;
     text-rendering: optimizeLegibility;
+}
+
+a {
+    color: colors(text);
 }
 /* stylelint-enable selector-no-type */
 
@@ -46,7 +50,7 @@ body {
     }
 
     a {
-        color: colors(muted);
+        color: colors(light);
         display: inline-block;
         font-style: italic;
         text-decoration: none;
@@ -130,7 +134,7 @@ body {
 }
 
 .copyright {
-    color: colors(muted);
+    color: colors(light);
     font-size: .8em;
 }
 
