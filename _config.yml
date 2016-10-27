@@ -7,6 +7,13 @@ title: Michael Novotny
 # build settings
 
 baseurl: ''
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - npm-debug.log
+  - package.json
+  - README.md
+  - website.iml
 permalink: /:title/
 sass:
   style: compressed
