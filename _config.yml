@@ -11,12 +11,14 @@ baseurl: ''
 exclude:
   - Gemfile
   - Gemfile.lock
+  - node_modules
   - npm-debug.log
   - package.json
   - README.md
   - website.iml
 gems:
   - jekyll-seo-tag
+  - jekyll-sitemap
 permalink: /:title/
 sass:
   style: compressed
