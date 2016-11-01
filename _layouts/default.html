@@ -29,6 +29,12 @@
             <meta name="description" content="{{page.description}}" />
         {% endif %}
 
+        {% if site.search_engines == true and page.sitemap != false  %}
+            <meta name="robots" content="follow, index">
+        {% else %}
+            <meta name="robots" content="nofollow, noindex">
+        {% endif %}
+
         {% seo %}
 
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
