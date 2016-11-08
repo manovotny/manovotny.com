@@ -1,3 +1,39 @@
+@mixin clearfix {
+    &::after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+@mixin code {
+    background-color: #f3f3f3;
+    border-radius: 2px;
+    font-family: Inconsolata, monospace, sans-serif;
+    font-size: 16px;
+    padding: 3px 6px;
+}
+
+@mixin divider {
+    border-bottom: 1px solid colors(border);
+    position: relative;
+
+    &::after {
+        background-color: #fff;
+        border: 1px solid colors(border);
+        border-radius: 100%;
+        bottom: -4px;
+        box-shadow: #fff 0 0 0 5px;
+        content: '';
+        display: block;
+        height: 7px;
+        left: 50%;
+        margin-left: -5px;
+        position: absolute;
+        width: 7px;
+    }
+}
+
 @mixin list-no-bullets {
     list-style: none;
     margin: 0;

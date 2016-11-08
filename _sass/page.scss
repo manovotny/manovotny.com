@@ -1,0 +1,24 @@
+.page {
+    .header {
+        @include divider;
+
+        background: transparent;
+        height: auto;
+        padding: spacing(normal);
+
+        .title {
+            display: inline-block;
+            font-size: 24px;
+            margin: 0 0 0 spacing(extrasmall);
+            vertical-align: middle;
+        }
+    }
+
+    .gravatar {
+        border-width: 0;
+        height: 60px;
+        margin-bottom: 0;
+        vertical-align: middle;
+        width: 60px;
+    }
+}

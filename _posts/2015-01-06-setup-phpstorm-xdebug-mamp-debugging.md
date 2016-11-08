@@ -1,7 +1,7 @@
 ---
 title: How To Setup and Configure PhpStorm, Xdebug, and MAMP for Debugging
 description: Learn how to setup and configure PhpStorm for debugging with MAMP and Xdebug.
-layout: default
+layout: page
 ---
 
 # How To Setup and Configure PhpStorm, Xdebug, and MAMP for Debugging
@@ -20,17 +20,17 @@ Fortunately, Xdebug is already included with MAMP, so there is nothing we need t
 
 You can enable Xdebug within MAMP by checking the Activate Xdebug option under the PHP tab. And that should be it, at least for MAMP 3.
 
-![Activate Xdebug in MAMP]({{ site.url }}/images/mamp-pro-activate-xdebug.jpg)
+![Activate Xdebug in MAMP]({{site.url}}/images{{page.url}}mamp-pro-activate-xdebug.jpg)
 
 *For most of you reading this, you can just stop here and move onto the PhpStorm section.*
 
 However, if you are using an older verion of MAMP, or if you want to ensure that MAMP 3 is indeed configured correctly, you’ll first need to identify what version of PHP you’re using with MAMP. Simply navigate to the PHP section in MAMP and take note of what you’re default PHP version is.
 
-![MAMP default PHP version]({{ site.url }}/images/mamp-pro-default-php-version.jpg)
+![MAMP default PHP version]({{site.url}}/images{{page.url}}mamp-pro-default-php-version.jpg)
 
 If you’re running a more advanced setup in MAMP PRO, with different PHP versions for each hosts, head to your Hosts section to see what PHP version you’re running for the particular host you’re wanting to debug.
 
-![MAMP PHP versions per host]({{ site.url }}/images/mamp-pro-hosts-php-version.jpg)
+![MAMP PHP versions per host]({{site.url}}/images{{page.url}}mamp-pro-hosts-php-version.jpg)
 
 With the PHP version identified, you’ll want to open and edit the corresponding `php.ini` file to enable Xdebug by navigating to `File > Edit Template > PHP > PHP [VERSION] php.ini`.
 
@@ -71,11 +71,11 @@ You’ll use whatever host and port you’ve configured within MAMP. For this ex
 
 If you're running just MAMP (the non-pro version) or if you didn't create a custom host, or if you didn't customize the ports within MAMP, then you'd probably be using `localhost` with a port of `8888` for the configuration below.
 
-![PhpStorm Xdebug configuration]({{ site.url }}/images/phpstorm-php-xdebug-configuration.gif)
+![PhpStorm Xdebug configuration]({{site.url}}/images{{page.url}}phpstorm-php-xdebug-configuration.gif)
 
 Once this is complete, you should see the Debug configuration you just created in the upper right part of PhpStorm.
 
-![PhpStorm debug icon]({{ site.url }}/images/phpstorm-debug.jpg)
+![PhpStorm debug icon]({{site.url}}/images{{page.url}}phpstorm-debug.jpg)
 
 And that should be it!
 
@@ -83,4 +83,4 @@ Set a breakpoint in PhpStorm by clicking in the margin of an open PHP file, clic
 
 Gone are the days of the antiquated `var_dump` as you fumble around to discover what is going on!
 
-![PhpStorm debug breakpoint example]({{ site.url }}/images/phpstorm-breakpoint-example.jpg)
+![PhpStorm debug breakpoint example]({{site.url}}/images{{page.url}}phpstorm-breakpoint-example.jpg)

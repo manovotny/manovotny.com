@@ -1,7 +1,7 @@
 ---
 title: How To Fix WordPress Admin Styles Not Loading
 description: Are your WordPress admin styles not loading? This post will guide you through a fix so they start loading again.
-layout: default
+layout: page
 ---
 
 # How To Fix WordPress Admin Styles Not Loading
@@ -12,7 +12,7 @@ When I got a brand new computer, I took the opportunity to clean up my local dev
 
 I got everything setup and I was settling in for a good evening of side project work when I saw this in my WordPress admin.
 
-![Screenshot of WordPress admin styles not loading]({{ site.url }}/images/wordpress-admin-missing-styles.jpg)
+![Screenshot of WordPress admin styles not loading]({{site.url}}/images{{page.url}}wordpress-admin-missing-styles.jpg)
 
 WordPress admin CSS styles missing.
 
