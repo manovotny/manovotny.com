@@ -14,6 +14,9 @@
                 <a href="{{page.redirect}}">Click here if you are not redirected.</a>
             {% endif %}
             {{content}}
+            {% if page.permalink != '/404.html' %}
+            {% include questions.html %}
+            {% endif %}
         </article>
         {% include footer.html %}
     </body>

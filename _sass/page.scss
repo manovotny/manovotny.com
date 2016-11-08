@@ -1,6 +1,6 @@
 .page {
     .header {
-        @include divider;
+        @include divider-bottom;
 
         background: transparent;
         height: auto;
@@ -20,5 +20,11 @@
         margin-bottom: 0;
         vertical-align: middle;
         width: 60px;
+    }
+
+    .questions {
+        @include divider-top;
+
+        margin-top: spacing(large);
     }
 }

@@ -120,7 +120,7 @@ hr {
 }
 
 .profile {
-    @include divider;
+    @include divider-bottom;
 
     margin: -(sizes(gravatar) / 2) auto spacing(normal);
     padding: 0 spacing(normal) spacing(small);

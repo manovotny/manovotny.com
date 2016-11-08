@@ -15,22 +15,44 @@
 }
 
 @mixin divider {
-    border-bottom: 1px solid colors(border);
     position: relative;
+}
+
+@mixin divider-dot {
+    background-color: #fff;
+    border: 1px solid colors(border);
+    border-radius: 100%;
+    box-shadow: #fff 0 0 0 5px;
+    content: '';
+    display: block;
+    height: 7px;
+    left: 50%;
+    margin-left: -5px;
+    position: absolute;
+    width: 7px;
+}
+
+@mixin divider-bottom {
+    @include divider;
+
+    border-bottom: 1px solid colors(border);
 
     &::after {
-        background-color: #fff;
-        border: 1px solid colors(border);
-        border-radius: 100%;
+        @include divider-dot;
+
         bottom: -4px;
-        box-shadow: #fff 0 0 0 5px;
-        content: '';
-        display: block;
-        height: 7px;
-        left: 50%;
-        margin-left: -5px;
-        position: absolute;
-        width: 7px;
+    }
+}
+
+@mixin divider-top {
+    @include divider;
+
+    border-top: 1px solid colors(border);
+
+    &::before {
+        @include divider-dot;
+
+        top: -4px;
     }
 }
 
