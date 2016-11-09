@@ -59,11 +59,16 @@
 }
 
 /* stylelint-disable selector-no-type */
-@mixin list-inline {
+@mixin list-inline($space: spacing(large)) {
     @include list-no-bullets;
 
     li {
         display: inline-block;
+        margin-right: $space;
+
+        &:last-child {
+            margin-right: 0;
+        }
     }
 }
 /* stylelint-enable selector-no-type */

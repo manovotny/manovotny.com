@@ -86,17 +86,13 @@ hr {
 }
 
 .navigation-items {
-    @include list-inline;
+    @include list-no-bullets;
     text-align: center;
 }
 
 .navigation-item {
     font-size: 16px;
-    margin-right: spacing(normal);
-
-    &:last-child {
-        margin-right: 0;
-    }
+    margin-bottom: spacing(normal);
 
     a {
         color: colors(light);
@@ -227,22 +223,23 @@ hr {
     }
 }
 
-@media (min-width: 768px) {
-    .header {
-        height: sizes(header) * 2;
-    }
-
-    .title {
-        font-size: 50px;
-    }
-
+@media (min-width: breakpoints(iphoneplus)) {
     .navigation-items {
         @include list-inline;
     }
 
     .navigation-item {
         margin-bottom: 0;
-        margin-right: spacing(large);
+    }
+}
+
+@media (min-width: breakpoints(ipad)) {
+    .header {
+        height: sizes(header) * 2;
+    }
+
+    .title {
+        font-size: 50px;
     }
 
     .content {
