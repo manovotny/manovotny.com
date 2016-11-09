@@ -6,6 +6,8 @@ layout: page
 
 # How To Setup and Configure PhpStorm, Xdebug, and MAMP for Debugging
 
+{% include date.html %}
+
 I must have read 8 - 10 articles scattered about the internet to finally get [PhpStorm](https://www.jetbrains.com/phpstorm/) setup to do debugging with [Xdebug](http://xdebug.org/) and [MAMP](http://www.mamp.info/). Each article seemed to be missing one key piece of the puzzle. After a few days mucking with everything, I was able finally able to get it figured out.
 
 So your initial setup isn’t as frustrating as mine was, I thought I'd share how I was able to get it all wired up and hopefully save you some time.

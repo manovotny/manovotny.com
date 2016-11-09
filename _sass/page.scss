@@ -22,6 +22,17 @@
         width: 60px;
     }
 
+    .content {
+        h1 {
+            margin-bottom: spacing(extrasmall);
+        }
+
+        .date {
+            display: block;
+            margin-bottom: spacing(normal);
+        }
+    }
+
     .questions {
         @include divider-top;
 

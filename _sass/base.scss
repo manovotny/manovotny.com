@@ -183,6 +183,12 @@ hr {
         margin: 0 auto;
         max-width: 100%;
     }
+
+    .date,
+    .description {
+        font-size: 16px;
+        font-style: italic;
+    }
 }
 
 .footer {
@@ -228,11 +234,6 @@ hr {
     .item {
         font-size: 18px;
         margin-bottom: 0;
-    }
-
-    .note {
-        font-size: 16px;
-        font-style: italic;
     }
 }
 

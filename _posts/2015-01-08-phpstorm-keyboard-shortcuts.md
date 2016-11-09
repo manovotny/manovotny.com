@@ -6,6 +6,8 @@ layout: page
 
 # Timesaving PhpStorm Keyboard & Mouse Shortcuts to Increase Productivity
 
+{% include date.html %}
+
 Some developers will pass over [PhpStorm](https://www.jetbrains.com/phpstorm/) (or other [JetBrains products](https://www.jetbrains.com/products.html)) because it doesn’t embody the same look and feel of a typical Mac application, which is unfortunate. PhpStorm is a powerhouse packed with productivity boosting features, that once you use them, you will never be able to use a standard text editor again.
 
 I know that most text editors do have a wealth of plugins that offer some of the same functionality below, but in my experience, the implementation and execution of those plugins usually do not match in quality to what PhpStorm offers out of the box.

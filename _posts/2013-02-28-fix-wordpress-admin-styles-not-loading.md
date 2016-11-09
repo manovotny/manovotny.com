@@ -6,6 +6,8 @@ layout: page
 
 # How To Fix WordPress Admin Styles Not Loading
 
+{% include date.html %}
+
 This is one of those articles you tuck away in your favorite “read it later” app because it will most likely not be applicable right now, but when it does happen, you will be glad you saved this.
 
 When I got a brand new computer, I took the opportunity to clean up my local development environment. That meant a fresh installation of MAMP Pro and some new databases.
