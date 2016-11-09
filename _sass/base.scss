@@ -70,7 +70,7 @@ hr {
 
 .column {
     margin: 0 auto;
-    max-width: 740px;
+    max-width: 768px;
 }
 
 .header {
@@ -205,6 +205,37 @@ hr {
     font-size: .8em;
 }
 
+.panel {
+    vertical-align: top;
+    padding: 0 spacing(small);
+
+    .title {
+        font-size: 24px;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+}
+
+.list {
+    @include list-no-bullets;
+
+    a {
+        text-decoration: none;
+    }
+
+    .item {
+        font-size: 18px;
+        margin-bottom: 0;
+    }
+
+    .note {
+        font-size: 16px;
+        font-style: italic;
+    }
+}
+
 @media (min-width: 768px) {
     .header {
         height: sizes(header) * 2;
@@ -233,5 +264,10 @@ hr {
         h2 {
             font-size: 36px;
         }
+    }
+
+    .panel {
+        display: inline-block;
+        width: 49.5%;
     }
 }
