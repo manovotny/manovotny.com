@@ -34,15 +34,13 @@ code {
 
 kbd {
     @include code;
-
+    background-color: #333;
     color: #fff;
     font-weight: bold;
-    background-color: #333;
 }
 
 pre {
     @include code;
-
     line-height: 1.4em;
     margin: 0 0 spacing(normal);
     overflow-x: auto;
@@ -55,15 +53,15 @@ pre {
 }
 
 hr {
-    margin: spacing(normal) 0 spacing(extralarge);
     border: 0;
+    margin: spacing(normal) 0 spacing(extralarge);
     text-align: center;
 
     &::before {
         content: '...';
+        display: inline-block;
         letter-spacing: 1em;
         line-height: 1;
-        display: inline-block;
     }
 }
 /* stylelint-enable selector-no-type */
@@ -74,9 +72,7 @@ hr {
 }
 
 .header {
-    background: #4ca2cd;
-    background: -webkit-linear-gradient(to left, #67b26f , #4ca2cd);
-    background: linear-gradient(to left, #67b26f , #4ca2cd);
+    background: linear-gradient(to left, #67b26f, #4ca2cd);
     height: sizes(header);
     text-align: center;
 
@@ -91,7 +87,6 @@ hr {
 
 .navigation-items {
     @include list-inline;
-
     text-align: center;
 }
 
@@ -121,7 +116,6 @@ hr {
 
 .profile {
     @include divider-bottom;
-
     margin: -(sizes(gravatar) / 2) auto spacing(normal);
     padding: 0 spacing(normal) spacing(small);
     position: relative;
@@ -137,7 +131,6 @@ hr {
 
 .title {
     @include heading;
-
     font-size: 42px;
 }
 
@@ -151,7 +144,6 @@ hr {
 
 .heading {
     @include heading;
-
     font-size: 32px;
 
     svg {
@@ -160,20 +152,18 @@ hr {
 }
 
 .content {
-    color: #3A4145;
+    color: #3a4145;
     margin-bottom: spacing(normal);
     padding: spacing(normal);
 
     h1 {
         @include heading;
-
         font-size: 32px;
         margin-bottom: spacing(normal);
     }
 
     h2 {
         @include heading;
-
         font-size: 24px;
         margin: spacing(large) 0 spacing(small);
     }
@@ -193,7 +183,7 @@ hr {
 
 .footer {
     background-color: #fafafa;
-    border-top: #eeeeee 1px solid;
+    border-top: #eee 1px solid;
     padding-top: spacing(normal);
     text-align: center;
 
@@ -212,8 +202,8 @@ hr {
 }
 
 .panel {
-    vertical-align: top;
     padding: 0 spacing(small);
+    vertical-align: top;
 
     .title {
         font-size: 24px;

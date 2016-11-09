@@ -1,8 +1,8 @@
 @mixin clearfix {
     &::after {
+        clear: both;
         content: '';
         display: table;
-        clear: both;
     }
 }
 
@@ -34,24 +34,20 @@
 
 @mixin divider-bottom {
     @include divider;
-
     border-bottom: 1px solid colors(border);
 
     &::after {
         @include divider-dot;
-
         bottom: -4px;
     }
 }
 
 @mixin divider-top {
     @include divider;
-
     border-top: 1px solid colors(border);
 
     &::before {
         @include divider-dot;
-
         top: -4px;
     }
 }

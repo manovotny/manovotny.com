@@ -1,7 +1,6 @@
 .page {
     .header {
         @include divider-bottom;
-
         background: transparent;
         height: auto;
         padding: spacing(normal);
@@ -35,7 +34,6 @@
 
     .questions {
         @include divider-top;
-
         margin-top: spacing(large);
     }
 }
