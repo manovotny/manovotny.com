@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% include head.html %}
+    <body class="{{page.layout}}">
+        <header class="header column">
+            <a href="{{site.url}}/" title="{{site.title}}">
+                {% include gravatar.html %}
+                <p class="title">{{site.title}}</p>
+            </a>
+        </header>
+        <article class="content column">
+            {% if page.redirect != null %}
+                <h3 class="heading">Redirecting...</h3>
+                <a href="{{page.redirect}}">Click here if you are not redirected.</a>
+            {% endif %}
+            {{content}}
+            {% if page.permalink != '/404.html' %}
+            {% include questions.html %}
+            {% endif %}
+        </article>
+        {% include footer.html %}
+    </body>
+</html>
