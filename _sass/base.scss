@@ -172,8 +172,10 @@ hr {
 
     .date,
     .description {
-        font-size: 16px;
-        font-style: italic;
+        color: colors(light);
+        font-family: fonts(opensans);
+        font-size: 14px;
+        text-transform: uppercase;
     }
 }
 
