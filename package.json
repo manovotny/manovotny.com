@@ -29,7 +29,9 @@
     "react-dom": "16.2.0"
   },
   "devDependencies": {
+    "babel-plugin-styled-components": "1.4.0",
     "eslint": "4.15.0",
-    "eslint-config-get-off-my-lawn": "3.0.1"
+    "eslint-config-get-off-my-lawn": "3.0.1",
+    "styled-components": "2.4.0"
   }
 }
