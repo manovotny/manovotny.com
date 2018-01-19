@@ -20,8 +20,10 @@
     "dev": "next",
     "eslint": "eslint . --ext .json --ext .js",
     "build": "next build && next export -o .next-export",
+    "lint": "yarn stylelint && yarn eslint",
     "start": "next start",
-    "test": "yarn eslint"
+    "stylelint": "stylelint \"**/*.js\"",
+    "test": "yarn lint"
   },
   "dependencies": {
     "next": "4.2.3",
@@ -32,6 +34,9 @@
     "babel-plugin-styled-components": "1.4.0",
     "eslint": "4.15.0",
     "eslint-config-get-off-my-lawn": "3.0.1",
-    "styled-components": "2.4.0"
+    "styled-components": "2.4.0",
+    "stylelint-config-get-off-my-lawn": "2.0.0",
+    "stylelint-config-styled-components": "0.1.1",
+    "stylelint-processor-styled-components": "1.2.2"
   }
 }
