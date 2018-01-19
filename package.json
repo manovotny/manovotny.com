@@ -20,7 +20,8 @@
     "dev": "next",
     "eslint": "eslint . --ext .json --ext .js",
     "build": "next build && next export -o .next-export",
-    "start": "next start"
+    "start": "next start",
+    "test": "yarn eslint"
   },
   "dependencies": {
     "next": "4.2.3",
