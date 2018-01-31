@@ -1,41 +1,21 @@
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=GvJ0MMLokO">
-    <link rel="icon" type="image/png" href="/favicon-32x32.png?v=GvJ0MMLokO" sizes="32x32">
-    <link rel="icon" type="image/png" href="/favicon-16x16.png?v=GvJ0MMLokO" sizes="16x16">
-    <link rel="manifest" href="/manifest.json?v=GvJ0MMLokO">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg?v=GvJ0MMLokO" color="#4a9885">
-    <link rel="shortcut icon" href="/favicon.ico?v=GvJ0MMLokO">
-    <meta name="theme-color" content="#ffffff">
 
-    {% if page.url == '/' %}
-        <title>{{site.title}} - {{site.description}}</title>
-        <link rel="canonical" href="{{page.url}}" />
-        <meta name="description" content="{{site.description}}" />
     {% elsif page.permalink == '/404.html' %}
         <title>{{page.description}} - {{site.title}}</title>
+
+
     {% elsif page.redirect != null %}
         <title>Redirecting...</title>
-        <link rel="canonical" href="{{page.redirect}}" />
         <meta http-equiv="refresh" content="0; url={{page.redirect}}" />
+
+
     {% else %}
         <title>{{page.title}} - {{site.title}}</title>
-        <link rel="canonical" href="{{page.url}}" />
         <meta name="description" content="{{page.description}}" />
     {% endif %}
 
-    {% if site.search_engines == true and page.sitemap != false  %}
-        <meta name="robots" content="follow, index">
-    {% else %}
-        <meta name="robots" content="nofollow, noindex">
-    {% endif %}
 
     {% seo %}
 
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
-    <link rel="stylesheet" href="{{site.baseurl}}/css/styles.css">
 </head>

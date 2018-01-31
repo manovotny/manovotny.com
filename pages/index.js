@@ -1,12 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
 
-const StyledTitle = styled.h1`
-    color: #f00;
-    font-size: 100px;
-`;
+import Layout from '../components/Layout';
+import {description, title} from '../utils/site';
 
-const Welcome = () =>
-    <StyledTitle>{'Welcome to next.js!'}</StyledTitle>;
+const Page = () =>
+    <Layout
+        description={description}
+        title={`${title} - ${description}`}
+        keywords={'KEYS'}
+    >
+        <p>{'Content'}</p>
+    </Layout>;
 
-export default Welcome;
+export default Page;
