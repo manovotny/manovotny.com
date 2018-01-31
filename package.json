@@ -17,23 +17,25 @@
     "yarn": ">=1.3.2"
   },
   "scripts": {
-    "dev": "next",
+    "dev": "node server.js",
     "eslint": "eslint . --ext .json --ext .js",
-    "build": "next build && next export -o .next-export",
+    "build": "next build && next export -o .next-export && mv -v .next-export/static/* .next-export/ && rm -rf .next-export/static",
     "lint": "yarn stylelint && yarn eslint",
-    "start": "next start",
+    "start": "NODE_ENV=production node server.js",
     "stylelint": "stylelint \"**/*.js\"",
     "test": "yarn lint"
   },
   "dependencies": {
     "next": "4.2.3",
     "react": "16.2.0",
-    "react-dom": "16.2.0"
+    "react-dom": "16.2.0",
+    "styled-reset": "1.0.1"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "1.4.0",
     "eslint": "4.15.0",
     "eslint-config-get-off-my-lawn": "3.0.1",
+    "globby": "7.1.1",
     "styled-components": "2.4.0",
     "stylelint-config-get-off-my-lawn": "2.0.0",
     "stylelint-config-styled-components": "0.1.1",
