@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import {Fragment} from 'react';
 
+import Footer from './Footer';
+
 const Layout = ({children, description, title = 'Michael Novotny', keywords, searchEngines}) =>
     <Fragment>
         <Head>
@@ -41,6 +43,7 @@ const Layout = ({children, description, title = 'Michael Novotny', keywords, sea
             <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
         </Head>
         {children}
+        <Footer />
     </Fragment>;
 
 export default Layout;
