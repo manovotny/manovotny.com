@@ -1,75 +1,3 @@
-.column {
-    margin: 0 auto;
-    max-width: 768px;
-}
-
-.header {
-    background: linear-gradient(to left, #67b26f, #4ca2cd);
-    height: sizes(header);
-    text-align: center;
-
-    a {
-        text-decoration: none;
-    }
-}
-
-.navigation {
-    margin-bottom: spacing(normal);
-}
-
-.navigation-items {
-    @include list-no-bullets;
-    text-align: center;
-}
-
-.navigation-item {
-    font-size: 16px;
-    margin-bottom: spacing(normal);
-
-    a {
-        color: colors(light);
-        display: inline-block;
-        font-style: italic;
-        text-decoration: none;
-    }
-
-    svg {
-        display: inline-block;
-        height: sizes(icons);
-        margin-right: spacing(extrasmall);
-        vertical-align: middle;
-        width: sizes(icons);
-    }
-}
-
-.profile {
-    @include divider-bottom;
-    margin: -(sizes(gravatar) / 2) auto spacing(normal);
-    padding: 0 spacing(normal) spacing(small);
-    position: relative;
-    text-align: center;
-}
-
-.gravatar {
-    border: #fff 5px solid;
-    border-radius: 50%;
-    height: sizes(gravatar);
-    width: sizes(gravatar);
-}
-
-.title {
-    @include heading;
-    font-size: 42px;
-}
-
-.subtitle {
-    font-family: fonts(opensans);
-    font-size: 18px;
-    font-weight: 200;
-    line-height: 1.5;
-    margin: 0 0 spacing(normal);
-}
-
 .heading {
     @include heading;
     font-size: 32px;
@@ -80,10 +8,6 @@
 }
 
 .content {
-    color: #3a4145;
-    margin-bottom: spacing(normal);
-    padding: spacing(normal);
-
     h1 {
         @include heading;
         font-size: 32px;
@@ -111,19 +35,6 @@
     }
 }
 
-.panel {
-    padding: 0 spacing(small);
-    vertical-align: top;
-
-    .title {
-        font-size: 24px;
-
-        &:first-child {
-            margin-top: 0;
-        }
-    }
-}
-
 .list {
     @include list-no-bullets;
 
@@ -137,25 +48,7 @@
     }
 }
 
-@media (min-width: breakpoints(iphoneplus)) {
-    .navigation-items {
-        @include list-inline;
-    }
-
-    .navigation-item {
-        margin-bottom: 0;
-    }
-}
-
 @media (min-width: breakpoints(ipad)) {
-    .header {
-        height: sizes(header) * 2;
-    }
-
-    .title {
-        font-size: 50px;
-    }
-
     .content {
         font-size: 18px;
 

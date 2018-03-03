@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import {Fragment} from 'react';
 
+import Header from './Header';
 import Footer from './Footer';
 
 const Layout = ({children, description, title = 'Michael Novotny', keywords, searchEngines}) =>
@@ -42,6 +43,7 @@ const Layout = ({children, description, title = 'Michael Novotny', keywords, sea
             <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" />
             <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
         </Head>
+        <Header />
         {children}
         <Footer />
     </Fragment>;

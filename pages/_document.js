@@ -28,8 +28,8 @@ export default class StyledComponentsDocument extends Document {
                     {this.props.styleTags}
                 </Head>
                 <body>
-                    <Main/>
-                    <NextScript/>
+                    <Main />
+                    <NextScript />
                 </body>
             </html>
         );

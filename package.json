@@ -32,6 +32,7 @@
     "styled-reset": "1.0.1"
   },
   "devDependencies": {
+    "babel-plugin-inline-react-svg": "0.5.2",
     "babel-plugin-styled-components": "1.4.0",
     "eslint": "4.15.0",
     "eslint-config-get-off-my-lawn": "3.0.1",

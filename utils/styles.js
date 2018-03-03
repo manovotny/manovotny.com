@@ -12,6 +12,11 @@ export const colors = {
     text: '#50585d'
 };
 
+export const column = `
+    margin: 0 auto;
+    max-width: 768px;
+`;
+
 export const fonts = {
     merriweather: 'Merriweather, serif',
     opensans: '\'Open Sans\', sans-serif'
@@ -37,7 +42,6 @@ export const global = `
     html {
         box-sizing: border-box;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-        line-height: 1.25;
         min-width: 320px;
         
         *,
@@ -50,7 +54,6 @@ export const global = `
     body {
         background-color: #fff;
         color: ${colors.text};
-        //font-family: fonts(merriweather);
         font-size: 16px;
         -webkit-font-smoothing: antialiased;
         line-height: 1.75;
@@ -101,4 +104,82 @@ export const global = `
             line-height: 1;
         }
     }
+`;
+
+
+export const clearfix = `
+    &::after {
+        clear: both;
+        content: '';
+        display: table;
+    }
+`;
+
+export const code = `
+    background-color: #f3f3f3;
+    border-radius: 2px;
+    font-family: Inconsolata, monospace, sans-serif;
+    font-size: 16px;
+    padding: 3px 6px;
+`;
+
+export const divider = `
+    position: relative;
+`;
+
+export const dividerDot = `
+    background-color: #fff;
+    border: 1px solid ${colors.border};
+    border-radius: 100%;
+    box-shadow: #fff 0 0 0 5px;
+    content: '';
+    display: block;
+    height: 7px;
+    left: 50%;
+    margin-left: -5px;
+    position: absolute;
+    width: 7px;
+`;
+
+export const dividerBottom = `
+    ${divider}
+    border-bottom: 1px solid ${colors.border};
+
+    &::after {
+        ${dividerDot}
+        bottom: -4px;
+    }
+`;
+
+export const dividerTop = `
+    ${divider}
+    border-top: 1px solid ${colors.border};
+
+    &::before {
+        ${dividerDot}
+        top: -4px;
+    }
+`;
+
+export const listNoBullets = `
+    list-style: none;
+    margin: 0;
+    padding: 0;
+`;
+
+export const listInline = (space = spacing.large) => `
+    ${listNoBullets}
+
+    li {
+        display: inline-block;
+        margin-right: ${space};
+
+    &:last-child {
+        margin-right: 0;
+    }
+`;
+
+export const heading = `
+    font-weight: bold;
+    line-height: 1.5;
 `;
