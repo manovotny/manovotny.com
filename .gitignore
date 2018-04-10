@@ -1,8 +1,5 @@
-*.iml
-_site
+*.log
 .DS_Store
 .idea
-.jekyll-metadata
-.sass-cache
+.next*
 node_modules
-npm-debug.log

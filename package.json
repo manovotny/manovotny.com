@@ -1,28 +1,36 @@
 {
-  "name": "manovotny.com",
-  "description": "The Jekyll site for manovotny.com.",
-  "version": "1.0.0",
-  "author": {
-    "name": "Michael Novotny",
-    "email": "manovotny@gmail.com",
-    "url": "htts://manovotny.com"
-  },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/manovotny/manovotny.com.git"
-  },
-  "engines": {
-    "node": ">=6"
-  },
-  "scripts": {
-    "eslint": "eslint . --ext .json --ext .js --ignore-pattern \"_site\"",
-    "start": "bundle exec jekyll serve",
-    "stylelint": "stylelint \"_sass/**/*.scss\" --syntax scss",
-    "test": "npm run eslint && npm run stylelint"
-  },
-  "dependencies": {
-    "eslint-config-get-off-my-lawn": "1.1.0",
-    "stylelint-config-get-off-my-lawn": "1.0.1"
-  }
+    "name": "manovotny.com",
+    "description": "manovotny.com",
+    "version": "1.0.0",
+    "author": {
+        "name": "Michael Novotny",
+        "email": "manovotny@gmail.com",
+        "url": "https://manovotny.com"
+    },
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/manovotny/manovotny.com.git"
+    },
+    "engines": {
+        "node": ">=8.11.1",
+        "yarn": ">=1.5.1"
+    },
+    "main": "server.js",
+    "scripts": {
+        "dev": "node .",
+        "build": "next build",
+        "preexport": "npm run build",
+        "export": "next export -o .next-export",
+        "prestart": "npm run export",
+        "start": "serve out"
+    },
+    "dependencies": {
+        "express": "4.15.3",
+        "isomorphic-unfetch": "2.0.0",
+        "next": "5.1.0",
+        "react": "16.0.0",
+        "react-dom": "16.0.0",
+        "serve": "5.2.2"
+    }
 }
