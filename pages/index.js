@@ -19,11 +19,12 @@ const Content = styled.main`
     }
 `;
 
-const Page = () =>
+const Page = ({url}) =>
     <Layout
-        description={description}
-        title={`${title} - ${description}`}
+        description={'Are your WordPress admin styles not loading? This post will guide you through a fix so they start loading again.'}
         keywords={'KEYS'}
+        title={`How To Fix WordPress Admin Styles Not Loading - ${title}`}
+        url={url}
     >
         <Profile />
         <Content>

@@ -4,7 +4,7 @@ import {injectGlobal, ServerStyleSheet} from 'styled-components';
 import {global} from '../utils/styles';
 
 export default class StyledComponentsDocument extends Document {
-    static getInitialProps({pathname, renderPage}) {
+    static getInitialProps({renderPage}) {
         const sheet = new ServerStyleSheet();
         const page = renderPage((App) => (props) => sheet.collectStyles(<App {...props} />));
         const styleTags = sheet.getStyleElement();
@@ -15,7 +15,6 @@ export default class StyledComponentsDocument extends Document {
 
         return {
             ...page,
-            pathname,
             styleTags
         };
     }
@@ -24,7 +23,6 @@ export default class StyledComponentsDocument extends Document {
         return (
             <html lang="en">
                 <Head>
-                    <link rel="canonical" href={this.props.pathname} />
                     {this.props.styleTags}
                 </Head>
                 <body>

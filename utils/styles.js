@@ -62,6 +62,7 @@ export const global = `
     
     a {
         color: ${colors.text};
+        cursor: pointer;
     }
     
     p {

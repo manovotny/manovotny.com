@@ -67,7 +67,7 @@ const Writings = () =>
                 </Link>
             </Project>
             <Project>
-                <Link href="fix-wordpress-admin-styles-not-loading">
+                <Link href={{pathname: '/post'}} as="/fix-wordpress-admin-styles-not-loading">
                     <Link2>
                         <ProjectName>{'How To Fix WordPress Admin Styles Not Loading'}</ProjectName>
                         <ProjectDescription>{'February 28, 2013'}</ProjectDescription>
