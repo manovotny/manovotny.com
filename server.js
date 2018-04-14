@@ -1,6 +1,9 @@
 const getPort = require('get-port');
 const express = require('express');
 const next = require('next');
+const {parse} = require('url');
+
+const {getRoutes} = require('./utils/routes');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
@@ -10,16 +13,19 @@ app.prepare()
     .then(async () => {
         const server = express();
         const port = await getPort({port: 3000});
+        const routes = await getRoutes();
 
-        server.get('/post/:id', (request, response) =>
-            app.render(request, response, '/post', {
-                id: request.params.id
-            })
-        );
+        server.get('*', (request, response) => {
+            const parsedUrl = parse(request.url, true);
+            const {pathname} = parsedUrl;
+            const route = routes[pathname];
 
-        server.get('*', (request, response) =>
-            handle(request, response)
-        );
+            if (route) {
+                return app.render(request, response, route.page);
+            }
+
+            return handle(request, response);
+        });
 
         server.listen(port, (error) => {
             if (error) {

@@ -23,12 +23,12 @@
         "preexport": "npm run build",
         "export": "next export -o .next-export",
         "prestart": "npm run export",
-        "start": "serve out"
+        "start": "serve .next-export"
     },
     "dependencies": {
         "babel-plugin-styled-components": "1.5.1",
         "express": "4.16.3",
-        "isomorphic-unfetch": "2.0.0",
+        "globby": "8.0.1",
         "next": "5.1.0",
         "react": "16.3.1",
         "react-dom": "16.3.1",
