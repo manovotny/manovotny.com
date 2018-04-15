@@ -26,6 +26,8 @@
         "start": "serve .next-export"
     },
     "dependencies": {
+        "@zeit/next-mdxc": "0.0.3",
+        "babel-plugin-inline-react-svg": "0.5.2",
         "babel-plugin-styled-components": "1.5.1",
         "express": "4.16.3",
         "globby": "8.0.1",

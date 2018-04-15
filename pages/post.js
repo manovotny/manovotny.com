@@ -1,15 +1,10 @@
-import Link from 'next/link';
-import {Component} from 'react';
+const Post = ({url}) => {
+    const file = `../posts${url.asPath}.mdx`;
+    const Markdown = require(`../posts${url.asPath}.mdx`).default;
 
-export default class extends Component {
-    render() {
-        return (
-            <main>
-                <h1>{this.props.url.asPath}</h1>
-                <Link href='/'>
-                    <a>Go back to home</a>
-                </Link>
-            </main>
-        )
-    }
-}
+    return (
+        <Markdown />
+    );
+};
+
+export default Post;
