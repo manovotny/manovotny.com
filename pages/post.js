@@ -78,9 +78,13 @@ const Article = styled.article`
     }
 `;
 
+const removeTrailingSlashOnNextStaticSiteExports = (path) =>
+    // https://github.com/zeit/next.js/pull/3283
+    path.endsWith('/') ? path.slice(0, -1) : path;
+
 const Post = ({url}) => {
-    const filename = url.asPath.endsWith('/') ? url.asPath.slice(0, -1) : url.asPath;
-    const markdown = require(`../posts${filename}.mdx`);
+    const path = removeTrailingSlashOnNextStaticSiteExports(url.asPath);
+    const markdown = require(`../posts${path}.mdx`);
     const Markdown = markdown.default;
     const meta = markdown.meta;
     const dt = DateTime.fromISO(meta.date);
