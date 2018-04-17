@@ -1,9 +1,6 @@
 import Head from 'next/head';
 import {Fragment} from 'react';
 
-import Header from './Header';
-import Footer from './Footer';
-
 const Layout = ({children, description, title = 'Michael Novotny', keywords, searchEngines, url}) => {
     return (
         <Fragment>
@@ -43,9 +40,7 @@ const Layout = ({children, description, title = 'Michael Novotny', keywords, sea
                 <link rel="shortcut icon" href="/favicon.ico"/>
                 <link rel="canonical" href={url.asPath}/>
             </Head>
-            <Header/>
             {children}
-            <Footer/>
         </Fragment>
     );
 };

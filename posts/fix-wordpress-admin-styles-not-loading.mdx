@@ -1,12 +1,15 @@
 ---
 title: How To Fix WordPress Admin Styles Not Loading
 description: Are your WordPress admin styles not loading? This post will guide you through a fix so they start loading again.
-layout: page
+date: 2013-02-28
 ---
+prop date
+prop dateTime
+prop route
 
 # How To Fix WordPress Admin Styles Not Loading
 
-DATE DATE DATE DATE DATE
+<time dateTime={dateTime}>{date}</time>
 
 This is one of those articles you tuck away in your favorite “read it later” app because it will most likely not be applicable right now, but when it does happen, you will be glad you saved this.
 
@@ -14,7 +17,7 @@ When I got a brand new computer, I took the opportunity to clean up my local dev
 
 I got everything setup and I was settling in for a good evening of side project work when I saw this in my WordPress admin.
 
-![Screenshot of WordPress admin styles not loading]({{site.url}}/images{{page.url}}wordpress-admin-missing-styles.jpg)
+<img title="Screenshot of WordPress admin styles not loading" src={`/images${route}/wordpress-admin-missing-styles.jpg`} />
 
 WordPress admin CSS styles missing.
 
@@ -32,13 +35,13 @@ And let me be clear... I do not encourage WordPress core hacks, but in the momen
 
 In the `wp-admin/load-styles.php` file, find this line of code...
 
-```
+```bash
 error_reporting(0);
 ```
 
 ...and change it to this...
 
-```
+```bash
 error_reporting( E_ALL | E_STRICT );
 ```
 
@@ -50,7 +53,7 @@ Bizarre...
 
 A non-WordPress core hack that might work for some is to add the following code to you wp-config.php file.
 
-```
+```bash
 define( ‘CONCATENATE_SCRIPTS’, false );
 define( ‘SCRIPT_DEBUG’, true );
 ```

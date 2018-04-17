@@ -18,7 +18,6 @@ const StyledSection = styled.section`
 
 const StyledTitle = styled.h1`
     ${heading}
-    color: #2e2e2e;
     font-size: 42px;
     margin-bottom: 15px;
     

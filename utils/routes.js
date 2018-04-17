@@ -1,4 +1,4 @@
-const path = require('path');
+const {parse} = require('path');
 
 const globby = require('globby');
 
@@ -16,8 +16,8 @@ module.exports.getRoutes = async () => {
     const posts = await globby('./posts/*');
 
     posts.forEach((post) => {
-        const file = path.parse(post).name;
-        const route = `/${file}`;
+        const path = parse(post).name;
+        const route = `/${path}`;
 
         routes[route] = {
             page: '/post'

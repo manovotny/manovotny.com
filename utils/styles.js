@@ -36,21 +36,27 @@ export const spacing = {
     extralarge: '72px'
 };
 
+export const code = `
+    background-color: #f3f3f3;
+    border-radius: 2px;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 16px;
+    padding: 3px 6px;
+`;
+
 export const global = `
-    ${reset}
-            
     html {
         box-sizing: border-box;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
         min-width: 320px;
-        
+
         *,
         *::before,
         *::after {
             box-sizing: inherit;
         }
-    }    
-            
+    }
+
     body {
         background-color: #fff;
         color: ${colors.text};
@@ -59,45 +65,45 @@ export const global = `
         line-height: 1.75;
         text-rendering: optimizeLegibility;
     }
-    
+
     a {
         color: ${colors.text};
         cursor: pointer;
     }
-    
+
     p {
         margin: 0 0 ${spacing.normal};
     }
-    
+
     code {
-        @include code;
+        ${code}
     }
-    
+
     kbd {
-        @include code;
+        ${code}
         background-color: #333;
         color: #fff;
         font-weight: bold;
     }
-    
+
     pre {
-        @include code;
+        ${code}
         line-height: 1.4em;
         margin: 0 0 ${spacing.normal};
         overflow-x: auto;
         padding: ${spacing.normal};
         white-space: pre;
-    
+
         code {
             padding: 0;
         }
     }
-    
+
     hr {
         border: 0;
         margin: ${spacing.normal} 0 ${spacing.extralarge};
         text-align: center;
-    
+
         &::before {
             content: '...';
             display: inline-block;
@@ -107,21 +113,12 @@ export const global = `
     }
 `;
 
-
 export const clearfix = `
     &::after {
         clear: both;
         content: '';
         display: table;
     }
-`;
-
-export const code = `
-    background-color: #f3f3f3;
-    border-radius: 2px;
-    font-family: Inconsolata, monospace, sans-serif;
-    font-size: 16px;
-    padding: 3px 6px;
 `;
 
 export const divider = `
@@ -181,6 +178,8 @@ export const listInline = (space = spacing.large) => `
 `;
 
 export const heading = `
+    color: #2e2e2e;
     font-weight: bold;
-    line-height: 1.5;
+    letter-spacing: -1px;
+    line-height: 1.15;
 `;

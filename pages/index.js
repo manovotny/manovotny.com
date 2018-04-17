@@ -8,6 +8,9 @@ import Writings from '../components/Writings';
 import {description, title} from '../utils/site';
 import {breakpoints, column, spacing} from '../utils/styles';
 
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+
 const Content = styled.main`
     ${column}
     color: #3a4145;
@@ -26,11 +29,13 @@ const Page = ({url}) =>
         title={`How To Fix WordPress Admin Styles Not Loading - ${title}`}
         url={url}
     >
+        <Header/>
         <Profile />
         <Content>
             <Projects />
             <Writings />
         </Content>
+        <Footer/>
     </Layout>;
 
 export default Page;
