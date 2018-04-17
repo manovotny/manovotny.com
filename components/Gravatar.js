@@ -11,8 +11,9 @@ const StyledImage = styled.img`
     width: ${sizes.gravatar};
 `;
 
-const Gravatar = () =>
+const Gravatar = ({className}) =>
     <StyledImage
+        className={className}
         alt="Michael Novotny"
         src={`${gravatar}?s=300`}
     />;
