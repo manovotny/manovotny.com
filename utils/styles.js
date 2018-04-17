@@ -1,3 +1,4 @@
+import {injectGlobal} from 'styled-components';
 import reset from 'styled-reset';
 
 export const breakpoints = {
@@ -44,7 +45,9 @@ export const code = `
     padding: 3px 6px;
 `;
 
-export const global = `
+export const global = () => injectGlobal`
+    ${reset}
+
     html {
         box-sizing: border-box;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -180,6 +183,5 @@ export const listInline = (space = spacing.large) => `
 export const heading = `
     color: #2e2e2e;
     font-weight: bold;
-    letter-spacing: -1px;
-    line-height: 1.15;
+    line-height: 1.25;
 `;

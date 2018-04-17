@@ -1,5 +1,8 @@
 import Head from 'next/head';
 import {Fragment} from 'react';
+import {global} from "../utils/styles";
+
+global();
 
 const Layout = ({children, description, title = 'Michael Novotny', keywords, searchEngines, url}) => {
     return (
