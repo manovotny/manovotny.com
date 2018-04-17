@@ -24,9 +24,8 @@ const Content = styled.main`
 
 const Page = ({url}) =>
     <Layout
-        description={'Are your WordPress admin styles not loading? This post will guide you through a fix so they start loading again.'}
-        keywords={'KEYS'}
-        title={`How To Fix WordPress Admin Styles Not Loading - ${title}`}
+        description={description}
+        title={`${title} - ${description}`}
         url={url}
     >
         <Header/>

@@ -94,7 +94,6 @@ const Post = ({url}) => {
     return (
         <Layout
             description={meta.description}
-            keywords={'KEYS'}
             title={`${meta.title} - ${title}`}
             url={url.asPath}
         >
