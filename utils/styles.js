@@ -133,6 +133,7 @@ export const clearfix = `
 
 export const divider = `
     position: relative;
+    width: 100%;
 `;
 
 export const dividerDot = `
