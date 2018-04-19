@@ -14,6 +14,7 @@ export const colors = {
 };
 
 export const column = `
+    flex: 1;
     margin: 0 auto;
     max-width: 768px;
 `;
@@ -113,6 +114,12 @@ export const global = () => injectGlobal`
             letter-spacing: 1em;
             line-height: 1;
         }
+    }
+    
+    #__next {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
     }
 `;
 
