@@ -1,4 +1,3 @@
-import {DateTime} from 'luxon';
 import Link from "next/link";
 import styled from 'styled-components';
 
@@ -85,11 +84,8 @@ const removeTrailingSlashOnNextStaticSiteExports = (path) =>
 const Post = ({url}) => {
     const path = removeTrailingSlashOnNextStaticSiteExports(url.asPath);
     const markdown = require(`../posts${path}.mdx`);
+    const {meta} = markdown;
     const Markdown = markdown.default;
-    const meta = markdown.meta;
-    const dt = DateTime.fromISO(meta.date);
-    const date = dt.toLocaleString(DateTime.DATE_FULL);
-    const datetime = dt.toISO();
 
     return (
         <Layout
@@ -106,11 +102,7 @@ const Post = ({url}) => {
                 </Link>
             </Header>
             <Article>
-                <Markdown
-                    date={date}
-                    dateTime={datetime}
-                    route={url.asPath}
-                />
+                <Markdown />
                 <Questions />
             </Article>
             <Footer />

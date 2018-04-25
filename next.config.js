@@ -1,8 +1,8 @@
-const withMdxc = require('@zeit/next-mdxc');
+const withMDX = require('@zeit/next-mdx')();
 
 const {getRoutes} = require('./utils/routes');
 
-module.exports = withMdxc({
+module.exports = withMDX({
     async exportPathMap () {
         return await getRoutes();
     }
