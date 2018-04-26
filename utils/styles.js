@@ -17,6 +17,7 @@ export const column = `
     flex: 1;
     margin: 0 auto;
     max-width: 768px;
+    width: 100%;
 `;
 
 export const fonts = {
@@ -121,6 +122,12 @@ export const global = () => injectGlobal`
         flex-direction: column;
         min-height: 100vh;
     }
+    
+    @media (min-width: ${breakpoints.ipad}) {
+        body {
+            font-size: 18px;
+        }
+    }
 `;
 
 export const clearfix = `
@@ -192,4 +199,6 @@ export const heading = `
     color: #2e2e2e;
     font-weight: bold;
     line-height: 1.25;
+    letter-spacing: -1px;
+    text-rendering: geometricPrecision;
 `;

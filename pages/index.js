@@ -8,7 +8,7 @@ import Writings from '../components/Writings';
 import {description, title} from '../utils/site';
 import {breakpoints, column, spacing} from '../utils/styles';
 
-import Header from '../components/Header';
+import Hero from '../components/Hero';
 import Footer from '../components/Footer';
 
 const Content = styled.main`
@@ -26,9 +26,9 @@ const Page = ({url}) =>
     <Layout
         description={description}
         title={`${title} - ${description}`}
-        url={url}
+        url={url.asPath}
     >
-        <Header/>
+        <Hero/>
         <Profile />
         <Content>
             <Projects />

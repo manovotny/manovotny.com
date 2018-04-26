@@ -1,38 +1,13 @@
-import Link from "next/link";
 import styled from 'styled-components';
 
-import Gravatar from "../components/Gravatar";
 import Footer from "../components/Footer";
 import Layout from "../components/Layout";
 import Questions from "../components/Questions";
+import Header from "../components/Header";
 import {title} from "../utils/site";
 import {breakpoints, colors, column, dividerBottom, heading, spacing} from "../utils/styles";
 
-const Header = styled.header`
-    ${column}
-    ${dividerBottom}
-    
-    background: transparent;
-    height: auto;
-    padding: ${spacing.normal};
-    text-align: center;
-`;
 
-const Gravatar2 = styled(Gravatar)`
-    border-width: 0;
-    height: 60px;
-    margin-bottom: 0;
-    vertical-align: middle;
-    width: 60px;
-`;
-
-const Title = styled.p`
-    ${heading}
-    display: inline-block;
-    font-size: 24px;
-    margin: 0 0 0 ${spacing.extrasmall};
-    vertical-align: middle;
-`;
 
 const Article = styled.article`
     ${column}
@@ -93,14 +68,7 @@ const Post = ({url}) => {
             title={`${meta.title} - ${title}`}
             url={url.asPath}
         >
-            <Header>
-                <Link href="/">
-                    <a>
-                        <Gravatar2 />
-                        <Title>{title}</Title>
-                    </a>
-                </Link>
-            </Header>
+            <Header />
             <Article>
                 <Markdown />
                 <Questions />

@@ -19,16 +19,16 @@ const Layout = ({children, description, title = 'Michael Novotny', keywords, sea
                     name="viewport"
                 />
                 {description &&
-                <meta
-                    content={description}
-                    name="description"
-                />
+                    <meta
+                        content={description}
+                        name="description"
+                    />
                 }
                 {keywords &&
-                <meta
-                    content={keywords}
-                    name="keywords"
-                />
+                    <meta
+                        content={keywords}
+                        name="keywords"
+                    />
                 }
                 <meta
                     content={`${process.env.production && searchEngines ? 'follow, index' : 'nofollow, noindex'}`}
@@ -41,7 +41,9 @@ const Layout = ({children, description, title = 'Michael Novotny', keywords, sea
                 <link rel="manifest" href="/manifest.json"/>
                 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#4a9885"/>
                 <link rel="shortcut icon" href="/favicon.ico"/>
-                <link rel="canonical" href={url.asPath}/>
+                {url &&
+                    <link rel="canonical" href={url}/>
+                }
             </Head>
             {children}
         </Fragment>
