@@ -6,18 +6,16 @@ import GitHubIcon from '../icons/github.svg';
 import TwitterIcon from '../icons/twitter.svg';
 
 import {breakpoints, colors, dividerBottom, heading, listInline, listNoBullets, sizes, spacing} from '../utils/styles';
-import {description, title} from '../utils/site';
 
 const StyledNavigation = styled.nav`
     margin-bottom: ${spacing.normal};
 `;
 
 const StyledNavigationItems = styled.ul`
-    ${listNoBullets}
     text-align: center;
     
     @media (min-width: ${breakpoints.iphoneplus}) {
-        ${listInline()}
+        ${listInline}
     }
 `;
 

@@ -20,11 +20,6 @@ export const column = `
     width: 100%;
 `;
 
-export const fonts = {
-    merriweather: 'Merriweather, serif',
-    opensans: '\'Open Sans\', sans-serif'
-};
-
 export const sizes = {
     gravatar: '120px',
     header: '150px',
@@ -130,14 +125,6 @@ export const global = () => injectGlobal`
     }
 `;
 
-export const clearfix = `
-    &::after {
-        clear: both;
-        content: '';
-        display: table;
-    }
-`;
-
 export const divider = `
     position: relative;
     width: 100%;
@@ -177,18 +164,10 @@ export const dividerTop = `
     }
 `;
 
-export const listNoBullets = `
-    list-style: none;
-    margin: 0;
-    padding: 0;
-`;
-
-export const listInline = (space = spacing.large) => `
-    ${listNoBullets}
-
+export const listInline = `
     li {
         display: inline-block;
-        margin-right: ${space};
+        margin-right: ${spacing.large};
 
     &:last-child {
         margin-right: 0;

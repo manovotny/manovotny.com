@@ -1,10 +1,8 @@
 import Head from 'next/head';
 import {Fragment} from 'react';
-import {global} from "../utils/styles";
+import {withRouter} from 'next/router';
 
-global();
-
-const Layout = ({children, description, title = 'Michael Novotny', keywords, searchEngines, url}) => {
+const Page = ({children, description, title = 'Michael Novotny', keywords, router, searchEngines}) => {
     return (
         <Fragment>
             <Head>
@@ -41,8 +39,8 @@ const Layout = ({children, description, title = 'Michael Novotny', keywords, sea
                 <link rel="manifest" href="/manifest.json"/>
                 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#4a9885"/>
                 <link rel="shortcut icon" href="/favicon.ico"/>
-                {url &&
-                    <link rel="canonical" href={url}/>
+                {router && router.asPath &&
+                    <link rel="canonical" href={router.asPath}/>
                 }
             </Head>
             {children}
@@ -50,4 +48,4 @@ const Layout = ({children, description, title = 'Michael Novotny', keywords, sea
     );
 };
 
-export default Layout;
+export default withRouter(Page);

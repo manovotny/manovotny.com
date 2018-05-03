@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Layout from '../components/Layout';
+import Page from '../components/Page';
 import Profile from '../components/Profile';
 import Projects from '../components/Projects';
 import Writings from '../components/Writings';
@@ -22,11 +22,10 @@ const Content = styled.main`
     }
 `;
 
-const Page = ({url}) =>
-    <Layout
+const Index = () =>
+    <Page
         description={description}
         title={`${title} - ${description}`}
-        url={url.asPath}
     >
         <Hero/>
         <Profile />
@@ -35,6 +34,6 @@ const Page = ({url}) =>
             <Writings />
         </Content>
         <Footer/>
-    </Layout>;
+    </Page>;
 
-export default Page;
+export default Index;

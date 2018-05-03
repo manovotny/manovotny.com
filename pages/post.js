@@ -1,13 +1,12 @@
 import styled from 'styled-components';
+import {withRouter} from 'next/router';
 
 import Footer from "../components/Footer";
-import Layout from "../components/Layout";
+import Page from "../components/Page";
 import Questions from "../components/Questions";
 import Header from "../components/Header";
 import {title} from "../utils/site";
 import {breakpoints, colors, column, dividerBottom, heading, spacing} from "../utils/styles";
-
-
 
 const Article = styled.article`
     ${column}
@@ -56,17 +55,16 @@ const removeTrailingSlashOnNextStaticSiteExports = (path) =>
     // https://github.com/zeit/next.js/pull/3283
     path.endsWith('/') ? path.slice(0, -1) : path;
 
-const Post = ({url}) => {
-    const path = removeTrailingSlashOnNextStaticSiteExports(url.asPath);
+const Post = ({router}) => {
+    const path = removeTrailingSlashOnNextStaticSiteExports(router.asPath);
     const markdown = require(`../posts${path}.mdx`);
     const {meta} = markdown;
     const Markdown = markdown.default;
 
     return (
-        <Layout
+        <Page
             description={meta.description}
             title={`${meta.title} - ${title}`}
-            url={url.asPath}
         >
             <Header />
             <Article>
@@ -74,8 +72,8 @@ const Post = ({url}) => {
                 <Questions />
             </Article>
             <Footer />
-        </Layout>
+        </Page>
     );
 };
 
-export default Post;
+export default withRouter(Post);
