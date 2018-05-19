@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import {withRouter} from 'next/router';
 
-import Footer from "../components/Footer";
-import Page from "../components/Page";
-import Questions from "../components/Questions";
-import Header from "../components/Header";
+import Footer from "../components/footer";
+import Page from "../components/page";
+import Questions from "../components/post/questions";
+import Header from "../components/post/header";
 import {title} from "../utils/site";
 import {breakpoints, colors, column, dividerBottom, heading, spacing} from "../utils/styles";
 

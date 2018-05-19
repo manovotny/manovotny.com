@@ -1,9 +1,9 @@
 import {Component} from 'react';
 
 import BoltIcon from "../icons/bolt.svg";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import Layout from "../components/Page";
+import Footer from "../components/footer";
+import Header from "../components/post/header";
+import Page from "../components/page";
 import {title} from "../utils/site";
 import {breakpoints, spacing, column, heading} from "../utils/styles";
 import styled from "styled-components";
@@ -44,7 +44,7 @@ export default class Error extends Component {
             : 'Something went terribly wrong.';
 
         return (
-            <Layout
+            <Page
                 description="Not found."
                 title={`${errorTitle} - ${title}`}
             >
@@ -58,7 +58,7 @@ export default class Error extends Component {
                     <p>Sorry about that!</p>
                 </Article>
                 <Footer />
-            </Layout>
+            </Page>
         )
     }
 }

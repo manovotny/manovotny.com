@@ -20,12 +20,6 @@ export const column = `
     width: 100%;
 `;
 
-export const sizes = {
-    gravatar: '120px',
-    header: '150px',
-    icons: '24px'
-};
-
 export const spacing = {
     extrasmall: '8px',
     small: '12px',

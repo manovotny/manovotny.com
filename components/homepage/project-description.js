@@ -1,0 +1,16 @@
+import React from 'react';
+import styled from 'styled-components';
+
+import {colors} from '../../utils/styles';
+
+const StyledProjectDescription = styled.h4`
+    color: ${colors.light};
+    font-size: 14px;
+    font-weight: lighter;
+    text-transform: uppercase;
+`;
+
+const ProjectDescription = ({children}) =>
+    <StyledProjectDescription>{children}</StyledProjectDescription>;
+
+export default ProjectDescription;

@@ -1,15 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Page from '../components/Page';
-import Profile from '../components/Profile';
-import Projects from '../components/Projects';
-import Writings from '../components/Writings';
+import Page from '../components/page';
 import {description, title} from '../utils/site';
 import {breakpoints, column, spacing} from '../utils/styles';
 
-import Hero from '../components/Hero';
-import Footer from '../components/Footer';
+import Header from '../components/homepage/header';
+import Articles from '../components/homepage/articles';
+import Projects from '../components/homepage/projects';
+import Footer from '../components/footer';
 
 const Content = styled.main`
     ${column}
@@ -27,11 +26,10 @@ const Index = () =>
         description={description}
         title={`${title} - ${description}`}
     >
-        <Hero/>
-        <Profile />
+        <Header />
         <Content>
             <Projects />
-            <Writings />
+            <Articles />
         </Content>
         <Footer/>
     </Page>;
