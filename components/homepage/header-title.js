@@ -1,5 +1,5 @@
 import {title} from "../../utils/site";
-import {breakpoints, heading} from "../../utils/styles";
+import {heading} from "../../utils/styles";
 import styled from "styled-components";
 
 const StyledHeaderTitle = styled.h1`
@@ -7,7 +7,7 @@ const StyledHeaderTitle = styled.h1`
     font-size: 42px;
     margin-bottom: 15px;
     
-    @media (min-width: ${breakpoints.ipad}) {
+    @media (min-width: 768px) {
         font-size: 50px;
     }
 `;

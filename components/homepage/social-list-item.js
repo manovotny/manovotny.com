@@ -1,14 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import {breakpoints, spacing} from '../../utils/styles';
+import {spacing} from '../../utils/styles';
 
 const SocialListItem = styled.li`
-    font-size: 16px;
+    display: block;
     margin-bottom: ${spacing.normal};
     
-    @media (min-width: ${breakpoints.iphoneplus}) {
-        margin-bottom: 0;
+    @media (min-width: 376px) {
+        display: inline-block;
+        margin-right: ${spacing.large};
+        
+        &:last-child {
+            margin-right: 0;
+        }        
     }
 `;
 

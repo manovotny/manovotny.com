@@ -38,7 +38,7 @@ const Article = styled.article`
         text-transform: uppercase;
     }
     
-    @media (min-width: ${breakpoints.ipad}) {
+    @media (min-width: 768px) {
         font-size: 18px;
 
         h1 {

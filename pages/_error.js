@@ -5,7 +5,7 @@ import Footer from "../components/footer";
 import Header from "../components/post/header";
 import Page from "../components/page";
 import {title} from "../utils/site";
-import {breakpoints, spacing, column, heading} from "../utils/styles";
+import {spacing, column, heading} from "../utils/styles";
 import styled from "styled-components";
 
 const Article = styled.article`

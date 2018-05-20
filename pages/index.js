@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Page from '../components/page';
 import {description, title} from '../utils/site';
-import {breakpoints, column, spacing} from '../utils/styles';
+import {column, spacing} from '../utils/styles';
 
 import Header from '../components/homepage/header';
 import Articles from '../components/homepage/articles';
@@ -15,10 +15,6 @@ const Content = styled.main`
     color: #3a4145;
     margin-bottom: ${spacing.normal};
     padding: ${spacing.normal};
-    
-    @media (min-width: ${breakpoints.ipad}) {
-        font-size: 18px;
-    }
 `;
 
 const Index = () =>

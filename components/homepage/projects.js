@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import projects from '../../data/projects';
-import {breakpoints, spacing} from '../../utils/styles';
+import {spacing} from '../../utils/styles';
 
 import Project from './project';
 import ProjectsTitle from './projects-title';
@@ -12,7 +12,7 @@ const StyledProjects = styled.section`
     margin-bottom: ${spacing.normal};
     vertical-align: top;
     
-    @media (min-width: ${breakpoints.ipad}) {
+    @media (min-width: 768px) {
         display: inline-block;
         width: 49.5%;
     }

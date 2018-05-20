@@ -1,10 +1,13 @@
 import {injectGlobal} from 'styled-components';
 import reset from 'styled-reset';
 
-export const breakpoints = {
-    iphoneplus: '414px',
-    ipad: '768px'
-};
+const code = `
+    background-color: #f3f3f3;
+    border-radius: 2px;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 16px;
+    padding: 3px 6px;
+`;
 
 export const colors = {
     border: '#eee',
@@ -27,14 +30,6 @@ export const spacing = {
     large: '48px',
     extralarge: '72px'
 };
-
-export const code = `
-    background-color: #f3f3f3;
-    border-radius: 2px;
-    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    font-size: 16px;
-    padding: 3px 6px;
-`;
 
 export const global = () => injectGlobal`
     ${reset}
@@ -112,7 +107,7 @@ export const global = () => injectGlobal`
         min-height: 100vh;
     }
     
-    @media (min-width: ${breakpoints.ipad}) {
+    @media (min-width: 768px) {
         body {
             font-size: 18px;
         }
@@ -155,16 +150,6 @@ export const dividerTop = `
     &::before {
         ${dividerDot}
         top: -4px;
-    }
-`;
-
-export const listInline = `
-    li {
-        display: inline-block;
-        margin-right: ${spacing.large};
-
-    &:last-child {
-        margin-right: 0;
     }
 `;
 

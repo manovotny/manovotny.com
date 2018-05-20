@@ -5,19 +5,12 @@ import AmaIcon from '../../icons/ama.svg';
 import GitHubIcon from '../../icons/github.svg';
 import TwitterIcon from '../../icons/twitter.svg';
 
-import {spacing} from '../../utils/styles';
-
-import SocialList from './social-list';
 import SocialListItem from './social-list-item';
 import SocialLink from './social-link';
 
-const StyledSocial = styled.nav`
-    margin-bottom: ${spacing.normal};
-`;
-
 const Social = () =>
-    <StyledSocial>
-        <SocialList>
+    <nav>
+        <ul>
             <SocialListItem>
                 <SocialLink
                     href="https://twitter.com/manovotny"
@@ -45,7 +38,7 @@ const Social = () =>
                     {'AMA'}
                 </SocialLink>
             </SocialListItem>
-        </SocialList>
-    </StyledSocial>;
+        </ul>
+    </nav>;
 
 export default Social;
