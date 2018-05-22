@@ -1,5 +1,6 @@
 import {title} from "../../utils/site";
-import {heading, spacing} from "../../utils/styles";
+import {heading} from "../../styles/mixins";
+import {spacing} from "../../styles/vars";
 import styled from "styled-components";
 
 const StyledHeaderTitle = styled.p`

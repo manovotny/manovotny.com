@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import projects from '../../data/projects';
-import {spacing} from '../../utils/styles';
+import {spacing} from '../../styles/vars';
 
 import Project from './project';
 import ProjectsTitle from './projects-title';

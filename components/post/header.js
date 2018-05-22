@@ -1,7 +1,8 @@
 import Link from "next/link";
 import {title} from "../../utils/site";
 import Gravatar from "./gravatar";
-import {dividerBottom, spacing} from "../../utils/styles";
+import {dividerBottom} from "../../styles/mixins";
+import {spacing} from "../../styles/vars";
 import styled from "styled-components";
 
 import HeaderTitle from './header-title';

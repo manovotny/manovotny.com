@@ -1,6 +1,8 @@
 import {injectGlobal} from 'styled-components';
 import reset from 'styled-reset';
 
+import {colors, spacing} from "./vars";
+
 const code = `
     background-color: #f3f3f3;
     border-radius: 2px;
@@ -9,13 +11,6 @@ const code = `
     padding: 3px 6px;
 `;
 
-export const colors = {
-    border: '#eee',
-    background: '#0a6159',
-    light: '#9eabb3',
-    text: '#50585d'
-};
-
 export const column = `
     flex: 1;
     margin: 0 auto;
@@ -23,13 +18,26 @@ export const column = `
     width: 100%;
 `;
 
-export const spacing = {
-    extrasmall: '8px',
-    small: '12px',
-    normal: '24px',
-    large: '48px',
-    extralarge: '72px'
-};
+export const dividerBottom = `
+    position: relative;
+    width: 100%;
+    border-bottom: 1px solid ${colors.border};
+
+    &::after {
+        background-color: #fff;
+        border: 1px solid ${colors.border};
+        border-radius: 100%;
+        box-shadow: #fff 0 0 0 5px;
+        content: '';
+        display: block;
+        height: 7px;
+        left: 50%;
+        margin-left: -5px;
+        position: absolute;
+        width: 7px;
+        bottom: -4px;
+    }
+`;
 
 export const global = () => injectGlobal`
     ${reset}
@@ -111,27 +119,6 @@ export const global = () => injectGlobal`
         body {
             font-size: 18px;
         }
-    }
-`;
-
-export const dividerBottom = `
-    position: relative;
-    width: 100%;
-    border-bottom: 1px solid ${colors.border};
-
-    &::after {
-        background-color: #fff;
-        border: 1px solid ${colors.border};
-        border-radius: 100%;
-        box-shadow: #fff 0 0 0 5px;
-        content: '';
-        display: block;
-        height: 7px;
-        left: 50%;
-        margin-left: -5px;
-        position: absolute;
-        width: 7px;
-        bottom: -4px;
     }
 `;
 

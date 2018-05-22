@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import {spacing} from '../../utils/styles';
-import {description, title} from '../../utils/site';
+import {spacing} from '../../styles/vars';
+import {description} from '../../utils/site';
 
 const StyledHeaderDescription = styled.h2`
     font-size: 18px;

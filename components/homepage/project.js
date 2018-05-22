@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import {spacing} from '../../utils/styles';
+import {spacing} from '../../styles/vars';
 
 import ProjectDescription from './project-description';
 import ProjectLink from './project-link';

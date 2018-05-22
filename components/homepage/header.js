@@ -1,7 +1,8 @@
 import React, {Fragment} from 'react';
 import styled from 'styled-components';
 
-import {column, dividerBottom, spacing} from '../../utils/styles';
+import {column, dividerBottom} from '../../styles/mixins';
+import {spacing} from '../../styles/vars';
 
 import HeaderBackground from './header-background';
 import HeaderDescription from './header-description';

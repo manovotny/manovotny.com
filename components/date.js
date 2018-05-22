@@ -1,7 +1,7 @@
 import {DateTime} from 'luxon';
 import styled from 'styled-components';
 
-import {colors} from "../utils/styles";
+import {colors} from "../styles/vars";
 
 const StyledDate = styled.time`
     color: ${colors.light};

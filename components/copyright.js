@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import {title} from '../utils/site';
-import {colors} from '../utils/styles';
+import {colors} from '../styles/vars';
 
 const StyledCopyright = styled.p`
     color: ${colors.light};

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import {spacing} from '../../utils/styles';
+import {spacing} from '../../styles/vars';
 
 import ArticleDate from './article-date';
 import ArticleTitle from './article-title';

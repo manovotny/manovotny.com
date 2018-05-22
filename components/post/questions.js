@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import {spacing} from "../../utils/styles";
+import {spacing} from "../../styles/vars";
 
 const Section = styled.section`
     margin-top: ${spacing.large};

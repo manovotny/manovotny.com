@@ -1,5 +1,5 @@
 import {title} from "../../utils/site";
-import {heading} from "../../utils/styles";
+import {heading} from "../../styles/mixins";
 import styled from "styled-components";
 
 const StyledHeaderTitle = styled.h1`

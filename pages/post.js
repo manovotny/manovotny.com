@@ -6,7 +6,8 @@ import Page from "../components/page";
 import Questions from "../components/post/questions";
 import Header from "../components/post/header";
 import {title} from "../utils/site";
-import {colors, column, dividerBottom, heading, spacing} from "../utils/styles";
+import {column, dividerBottom, heading} from "../styles/mixins";
+import {colors, spacing} from "../styles/vars";
 
 const Article = styled.article`
     ${column}

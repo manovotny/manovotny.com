@@ -1,7 +1,7 @@
 import React from 'react'
 import App, {Container} from 'next/app'
 
-import {global} from "../utils/styles";
+import {global} from "../styles/mixins";
 
 global();
 

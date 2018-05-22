@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 import Page from '../components/page';
 import {description, title} from '../utils/site';
-import {column, spacing} from '../utils/styles';
+import {column} from '../styles/mixins';
+import {spacing} from '../styles/vars';
 
 import Header from '../components/homepage/header';
 import Articles from '../components/homepage/articles';

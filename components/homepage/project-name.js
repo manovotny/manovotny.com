@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import {heading} from '../../utils/styles';
+import {heading} from '../../styles/mixins';
 
 const StyledProjectName = styled.h4`
     ${heading}
