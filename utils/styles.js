@@ -114,42 +114,24 @@ export const global = () => injectGlobal`
     }
 `;
 
-export const divider = `
+export const dividerBottom = `
     position: relative;
     width: 100%;
-`;
-
-export const dividerDot = `
-    background-color: #fff;
-    border: 1px solid ${colors.border};
-    border-radius: 100%;
-    box-shadow: #fff 0 0 0 5px;
-    content: '';
-    display: block;
-    height: 7px;
-    left: 50%;
-    margin-left: -5px;
-    position: absolute;
-    width: 7px;
-`;
-
-export const dividerBottom = `
-    ${divider}
     border-bottom: 1px solid ${colors.border};
 
     &::after {
-        ${dividerDot}
+        background-color: #fff;
+        border: 1px solid ${colors.border};
+        border-radius: 100%;
+        box-shadow: #fff 0 0 0 5px;
+        content: '';
+        display: block;
+        height: 7px;
+        left: 50%;
+        margin-left: -5px;
+        position: absolute;
+        width: 7px;
         bottom: -4px;
-    }
-`;
-
-export const dividerTop = `
-    ${divider}
-    border-top: 1px solid ${colors.border};
-
-    &::before {
-        ${dividerDot}
-        top: -4px;
     }
 `;
 

@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
-import {dividerTop, spacing} from "../../utils/styles";
+import {spacing} from "../../utils/styles";
 
 const Section = styled.section`
-    ${dividerTop}
     margin-top: ${spacing.large};
 `;
 

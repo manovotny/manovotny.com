@@ -6,7 +6,7 @@ import Page from "../components/page";
 import Questions from "../components/post/questions";
 import Header from "../components/post/header";
 import {title} from "../utils/site";
-import {breakpoints, colors, column, dividerBottom, heading, spacing} from "../utils/styles";
+import {colors, column, dividerBottom, heading, spacing} from "../utils/styles";
 
 const Article = styled.article`
     ${column}
@@ -38,6 +38,10 @@ const Article = styled.article`
         text-transform: uppercase;
     }
     
+    p:last-child {
+        margin-bottom: 0;
+    }
+    
     @media (min-width: 768px) {
         font-size: 18px;
 
@@ -49,6 +53,11 @@ const Article = styled.article`
             font-size: 36px;
         }
     }
+`;
+
+const MarkdownWrapper = styled.section`
+    ${dividerBottom}
+    padding-bottom: ${spacing.large};
 `;
 
 const removeTrailingSlashOnNextStaticSiteExports = (path) =>
@@ -68,7 +77,9 @@ const Post = ({router}) => {
         >
             <Header />
             <Article>
-                <Markdown />
+                <MarkdownWrapper>
+                    <Markdown />
+                </MarkdownWrapper>
                 <Questions />
             </Article>
             <Footer />
