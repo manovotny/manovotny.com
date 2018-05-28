@@ -24,6 +24,12 @@ const Article = styled.article`
         font-size: 24px;
         margin: ${spacing.large} 0 ${spacing.small};
     }
+    
+    h3 {
+        ${heading}
+        font-size: 20px;
+        margin: ${spacing.normal} 0 ${spacing.small};
+    }
 
     img {
         display: block;
@@ -47,11 +53,15 @@ const Article = styled.article`
         font-size: 18px;
 
         h1 {
-            font-size: 50px;
+            font-size: 48px;
         }
 
         h2 {
             font-size: 36px;
+        }
+
+        h3 {
+            font-size: 24px;
         }
     }
 `;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {spacing} from "../../styles/vars";
 
 const Section = styled.section`
-    margin-top: ${spacing.large};
+    margin-bottom: ${spacing.large};
 `;
 
 const Questions = () =>
