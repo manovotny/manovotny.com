@@ -5,7 +5,7 @@ import {spacing} from '../../styles/vars';
 
 import ArticleDate from './article-date';
 import ArticleTitle from './article-title';
-import ArticleLink from './article-link';
+import ArticleLink from '../article-link';
 
 const StyledArticle = styled.li`
     margin-bottom: ${spacing.normal};
@@ -17,7 +17,10 @@ const StyledArticle = styled.li`
 
 const Article = ({article}) =>
     <StyledArticle>
-        <ArticleLink slug={article.slug}>
+        <ArticleLink
+            slug={article.slug}
+            underline={false}
+        >
             <ArticleTitle>{article.title}</ArticleTitle>
             <ArticleDate>{article.date}</ArticleDate>
         </ArticleLink>

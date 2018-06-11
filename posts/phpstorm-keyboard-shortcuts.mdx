@@ -1,4 +1,5 @@
 import Date from '../components/date';
+import ArticleLink from '../components/article-link';
 
 export const meta = {
     date: '2015-01-08',
@@ -42,7 +43,7 @@ Ok. With All that out of the way, below are the default keyboard shortcuts that 
 
 Starting in PhpStorm 7, I believe, JetBrains decided to hide the Tool Windows, by default, to declutter the UI. To reveal the Tool Windows on the sides and bottom of IDE, just double press / tap the command keys.
 
-<img 
+<img
     title="PhpStorm reveal tool windows keyboard shortcut screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-keyboard-shortcut-reveal-tool-windows.gif`}
 />
@@ -54,7 +55,7 @@ Starting in PhpStorm 7, I believe, JetBrains decided to hide the Tool Windows, b
 
 Find Action is like the super keyboard shortcut. You can use it to search for shortcuts and IDE actions (aka. things you can do that don’t even have keyboard shortcuts). This is helpful for discovering shortcuts you don’t already know or for jogging your memory by typing in a keyword or phrase.
 
-<img 
+<img
     title="PhpStorm find action keyboard shortcut screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-keyboard-shortcut-find-action.gif`}
 />
@@ -68,7 +69,7 @@ Navigate File is just a fancy name to mean "open files".
 
 Navigate File also support searching for files with wildcards, title case, file extension, etc..
 
-<img 
+<img
     title="PhpStorm navigate file keyboard shortcut screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-keyboard-shortcut-navigate-file.gif`}
 />
@@ -82,7 +83,7 @@ Using this, you can rename practically anything, such as variables, functions, f
 
 Not only that, but it will automatically refactor all places these things are within the entire project.
 
-<img 
+<img
     title="PhpStorm rename keyboard shortcut screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-keyboard-shortcut-rename.gif`}
 />
@@ -96,7 +97,7 @@ This is a super fancy name for "fix problems". Show Intention Actions is for any
 
 Use this wherever you see a yellow or red squiggly line underneath something.
 
-<img 
+<img
     title="PhpStorm show intention actions keyboard shortcut screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-keyboard-shortcut-show-intention-actions.gif`}
 />
@@ -110,7 +111,7 @@ Yes, PhpStorm has a fully functional Terminal baked right into it. This is incre
 
 No context switching, no fumbling for the right window. Just seamless productivity.
 
-<img 
+<img
     title="PhpStorm open terminal keyboard shortcut screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-keyboard-shortcut-open-terminal.gif`}
 />
@@ -124,7 +125,7 @@ Use the New command when you have a folder selected in the project window and yo
 
 You can even create nested files and directories with the same command.
 
-<img 
+<img
     title="PhpStorm new keyboard shortcut screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-keyboard-shortcut-new.gif`}
 />
@@ -140,7 +141,7 @@ You can refine scope to a particular folder, do a reclusive search, match case, 
 
 And if you have anything selected, that will automatically become the search term.
 
-<img 
+<img
     title="PhpStorm find in path keyboard shortcut screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-keyboard-shortcut-find-in-path.gif`}
 />
@@ -154,7 +155,7 @@ This is also known as Clipboard History.
 
 This keeps a running log of things you’ve copied within PhpStorm and you can use it pretty much anywhere within PhpStorm, including the find / replace fields, extracting variables, extracting methods, renaming, etc.
 
-<img 
+<img
     title="PhpStorm paste from histroy keyboard shortcut screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-keyboard-shortcut-paste-from-history.gif`}
 />
@@ -172,7 +173,7 @@ These shortcuts move whatever line of code the cursor is on up or down a single 
 
 Very handy for changing the order of an array or declared variables. And most times, it will even shuffle the commas around appropriately too!
 
-<img 
+<img
     title="PhpStorm move line up and down keyboard shortcut screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-keyboard-shortcut-move-line-up-and-down.gif`}
 />
@@ -186,7 +187,7 @@ These work much like the Move Line Up / Down shortcuts, but these will move whol
 
 Think along the lines of entire functions, objects, or arrays instead of just a single part of those things.
 
-<img 
+<img
     title="PhpStorm move statement up and down keyboard shortcut screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-keyboard-shortcut-move-statement-up-and-down.gif`}
 />
@@ -196,9 +197,9 @@ Think along the lines of entire functions, objects, or arrays instead of just a 
 * Mac: <kbd>F7</kbd> (Step Into), <kbd>F8</kbd> (Step Over), and <kbd>⌥⌘R</kbd> (Resume)
 * Windows: <kbd>F7</kbd> (Step Into), <kbd>F8</kbd> (Step Over), and <kbd>F9</kbd> (Resume)
 
-Once you [setup and launch a debugging session](/setup-phpstorm-xdebug-mamp-debugging), I use these shortcuts to navigate through the code with ease.
+Once you <ArticleLink slug="setup-phpstorm-xdebug-mamp-debugging" title="How To Setup and Configure PhpStorm, Xdebug, and MAMP for Debugging" underline={true}>setup and launch a debugging session</ArticleLink>, I use these shortcuts to navigate through the code with ease.
 
-<img 
+<img
     title="PhpStorm debugging keyboard shortcut screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-keyboard-shortcut-debugging.gif`}
 />
@@ -210,9 +211,10 @@ Once you [setup and launch a debugging session](/setup-phpstorm-xdebug-mamp-debu
 
 These shortcuts will gradually increase or decrease what you have selected, at logical breaking points, and even within strings!
 
+
 This is one of those features that wish was available in any application or operating system once you start to use it.
 
-<img 
+<img
     title="PhpStorm extend and shrink selection keyboard shortcut screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-keyboard-shortcut-extend-and-shrink-selection.gif`}
 />
@@ -226,7 +228,7 @@ Extract Variable works by taking whatever you have selected and creating a new v
 
 This even works for Less / Sass variables too!
 
-<img 
+<img
     title="PhpStorm extract variable keyboard shortcut screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-keyboard-shortcut-extract-variable.gif`}
 />
@@ -238,7 +240,7 @@ This even works for Less / Sass variables too!
 
 Extract Method works by taking whatever you have selected and creating a new method / function out of it, including any necessary parameters.
 
-<img 
+<img
     title="PhpStorm extract method keyboard shortcut screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-keyboard-shortcut-extract-method.gif`}
 />
@@ -252,7 +254,7 @@ Inline is the opposite of the extract shortcuts mentioned above.
 
 It will take variables and methods and will bring them back inline where they are in use.
 
-<img 
+<img
     title="PhpStorm inline keyboard shortcut screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-keyboard-shortcut-inline.gif`}
 />
@@ -266,7 +268,7 @@ This shortcut will duplicate the line of code the cursor is on, if nothing is se
 
 If something is selected, it will duplicate whatever is selected.
 
-<img 
+<img
     title="PhpStorm duplicate line or block keyboard shortcut screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-keyboard-shortcut-duplicate-line-or-block.gif`}
 />
@@ -280,7 +282,7 @@ This shortcut will remove the line of code the cursor is on, if nothing is selec
 
 If something is selected, it will remove whatever lines are selected.
 
-<img 
+<img
     title="PhpStorm delete line keyboard shortcut screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-keyboard-shortcut-delete-line.gif`}
 />
@@ -296,7 +298,7 @@ Code Completion works by offering suggestions for variables and methods to compl
 
 Most of the time, this will just work on its own, but if you're typing really fast, then you can explicitly invoke it with the shortcut.
 
-<img 
+<img
     title="PhpStorm code completion keyboard shortcut screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-keyboard-shortcut-code-completion.gif`}
 />
@@ -309,7 +311,7 @@ No problem! PhpStorm has this covered in what they call Keymap. Just navigate to
 
 In the Keymap, you can search for actions by their name or by their assigned keyboard shortcut.
 
-<img 
+<img
     title="PhpStorm keymap searching screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-keymap-searching.gif`}
 />
@@ -318,7 +320,7 @@ For example, I use the Split Vertically action all the time, so I can have two e
 
 Split Vertically doesn’t have a keyboard shortcut by default, so add it to the Keymap, and you’re ready to go! I chose <kbd>⌃⌥⌘V</kbd> as my Split Vertically shortcut.
 
-<img 
+<img
     title="PhpStorm split vertically keyboard shortcut screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-keyboard-shortcut-split-vertically.gif`}
 />
@@ -337,7 +339,7 @@ Once you get cranking away, the IDE can get pretty busy with all kinds of panels
 
 Just double-click any editor tab to hide all the open Tool Windows. And double-click again to bring them all back.
 
-<img 
+<img
     title="PhpStorm hide and reveal tool windows mouse shortcut screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-mouse-shortcut-hide-and-reveal-tool-windows.gif`}
 />
@@ -348,7 +350,7 @@ When I have multiple editor windows open, I am constantly moving things around, 
 
 Simply double-click on the space between the split editors to evenly redistribute them.
 
-<img 
+<img
     title="PhpStorm redistribute editor windows mouse shortcut screencast"
     src={`/images/phpstorm-keyboard-shortcuts/phpstorm-mouse-shortcut-redistribute-editor-windows.gif`}
 />

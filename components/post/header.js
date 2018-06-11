@@ -20,7 +20,10 @@ const StyledHeader = styled.header`
 
 const Header = () =>
     <StyledHeader>
-        <Link href="/">
+        <Link
+            href="/"
+            prefetch
+        >
             <a>
                 <Gravatar />
                 <HeaderTitle>{title}</HeaderTitle>
