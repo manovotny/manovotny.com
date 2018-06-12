@@ -13,6 +13,21 @@ const Article = styled.article`
     ${column}
     padding: ${spacing.normal};
     
+    blockquote {
+        border-left: 4px solid #333;
+        background-color: #f5f5f5;
+        border-radius: 2px;
+        padding: ${spacing.small} ${spacing.normal};
+        font-style: italic;
+        font-weight: bold;
+        margin-bottom: ${spacing.normal};
+        color: #333;
+    }
+    
+    em {
+        font-style: italic;
+    }
+    
     h1 {
         ${heading}
         font-size: 32px;
@@ -45,8 +60,34 @@ const Article = styled.article`
         text-transform: uppercase;
     }
     
-    p:last-child {
+    ol,
+    ul {
+        margin-bottom: ${spacing.normal};
+        
+        p {
+            margin-bottom: 0;
+        }
+    }
+    
+    ol {
+        list-style-type: decimal;
+        
+    }
+    
+    ul {
+        list-style-type: disc;
+    }
+    
+    li {
+        margin-left: ${spacing.normal};
+    }
+    
+    *:last-child {
         margin-bottom: 0;
+    }
+    
+    strong {
+        font-weight: bold;
     }
     
     @media (min-width: 768px) {
