@@ -9,101 +9,27 @@ import {title} from "../utils/site";
 import {column, dividerBottom, heading} from "../styles/mixins";
 import {colors, spacing} from "../styles/vars";
 
+import Blockquote from "../components/post/elements/blockquote";
+import Em from "../components/post/elements/em";
+import H1 from "../components/post/elements/h1";
+import H2 from "../components/post/elements/h2";
+import H3 from "../components/post/elements/h3";
+import Img from "../components/post/elements/img";
+import Li from "../components/post/elements/li";
+import Ol from "../components/post/elements/ol";
+import Strong from "../components/post/elements/strong";
+import Ul from "../components/post/elements/ul";
+
 const Article = styled.article`
     ${column}
     padding: ${spacing.normal};
-    
-    blockquote {
-        border-left: 4px solid #333;
-        background-color: #f5f5f5;
-        border-radius: 2px;
-        padding: ${spacing.small} ${spacing.normal};
-        font-style: italic;
-        font-weight: bold;
-        margin-bottom: ${spacing.normal};
-        color: #333;
-    }
-    
-    em {
-        font-style: italic;
-    }
-    
-    h1 {
-        ${heading}
-        font-size: 32px;
-        margin: 0;
-    }
-
-    h2 {
-        ${heading}
-        font-size: 24px;
-        margin: ${spacing.large} 0 ${spacing.small};
-    }
-    
-    h3 {
-        ${heading}
-        font-size: 20px;
-        margin: ${spacing.normal} 0 ${spacing.small};
-    }
-
-    img {
-        display: block;
-        margin: 0 auto ${spacing.normal};
-        max-width: 100%;
-    }
-
-    time {
-        color: ${colors.light};
-        display: block;
-        font-size: 14px;
-        margin: 8px 0 24px;
-        text-transform: uppercase;
-    }
-    
-    ol,
-    ul {
-        margin-bottom: ${spacing.normal};
-        
-        p {
-            margin-bottom: 0;
-        }
-    }
-    
-    ol {
-        list-style-type: decimal;
-        
-    }
-    
-    ul {
-        list-style-type: disc;
-    }
-    
-    li {
-        margin-left: ${spacing.normal};
-    }
     
     *:last-child {
         margin-bottom: 0;
     }
     
-    strong {
-        font-weight: bold;
-    }
-    
     @media (min-width: 768px) {
         font-size: 18px;
-
-        h1 {
-            font-size: 48px;
-        }
-
-        h2 {
-            font-size: 36px;
-        }
-
-        h3 {
-            font-size: 24px;
-        }
     }
 `;
 
@@ -130,7 +56,20 @@ const Post = ({router}) => {
             <Header />
             <Article>
                 <MarkdownWrapper>
-                    <Markdown />
+                    <Markdown
+                        components={{
+                            blockquote: Blockquote,
+                            em: Em,
+                            h1: H1,
+                            h2: H2,
+                            h3: H3,
+                            img: Img,
+                            li: Li,
+                            ol: Ol,
+                            strong: Strong,
+                            ul: Ul
+                        }}
+                    />
                 </MarkdownWrapper>
                 <Questions />
             </Article>
