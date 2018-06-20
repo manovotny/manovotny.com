@@ -1,10 +1,13 @@
 import Date from '../components/date';
+import Post from '../components/post'
 
 export const meta = {
     date: '2013-02-28',
     description: 'Are your WordPress admin styles not loading? This post will guide you through a fix so they start loading again.',
     title: 'How To Fix WordPress Admin Styles Not Loading'
 }
+
+export default ({children}) => <Post meta={meta}>{children}</Post>
 
 # How To Fix WordPress Admin Styles Not Loading
 

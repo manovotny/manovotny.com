@@ -1,11 +1,14 @@
-import Date from '../components/date';
-import ArticleLink from '../components/article-link';
+import Date from '../components/date'
+import Post from '../components/post'
+import ArticleLink from '../components/article-link'
 
 export const meta = {
     date: '2015-01-08',
     description: 'Learn and use these timesaving PhpStorm keyboard shortcuts to increase your productivity.',
     title: 'Timesaving PhpStorm Keyboard Shortcuts to Increase Productivity'
 }
+
+export default ({children}) => <Post meta={meta}>{children}</Post>
 
 # Timesaving PhpStorm Keyboard & Mouse Shortcuts to Increase Productivity
 

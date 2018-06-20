@@ -6,8 +6,6 @@ const express = require('express');
 const next = require('next');
 const {parse} = require('url');
 
-const {getRoutes} = require('./utils/routes');
-
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
 const handle = app.getRequestHandler();
@@ -16,18 +14,11 @@ app.prepare()
     .then(async () => {
         const server = express();
         const port = await getPort({port: 3000});
-        const routes = await getRoutes();
         const staticFiles = await globby('static/**/*');
         const rootFiles = staticFiles.map((file) => file.replace('static/', '/'));
 
         server.get('*', (request, response) => {
             const parsedUrl = parse(request.url, true);
-            const {pathname} = parsedUrl;
-            const route = routes[pathname];
-
-            if (route) {
-                return app.render(request, response, route.page);
-            }
 
             if (rootFiles.includes(parsedUrl.pathname)) {
                 const path = join(__dirname, 'static', parsedUrl.pathname);

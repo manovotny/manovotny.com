@@ -8,8 +8,7 @@ const StyledArticleLink = styled.a`
 
 const ArticleLink = (props) =>
     <Link
-        as={`/${props.slug}`}
-        href={{pathname: '/post'}}
+        href={`/${props.slug}`}
         prefetch
     >
         <StyledArticleLink {...props}>{props.children}</StyledArticleLink>

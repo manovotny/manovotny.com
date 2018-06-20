@@ -1,9 +1,22 @@
-const withMDX = require('@zeit/next-mdx')();
+module.exports = {
+    pageExtensions: [
+        'js',
+        'mdx'
+    ],
+    webpack: (config, {defaultLoaders}) => {
+        config.module.rules.push({
+            test: /\.mdx?$/,
+            use: [
+                defaultLoaders.babel,
+                {
+                    loader: '@mdx-js/loader',
+                    options: {
+                        mdPlugins: []
+                    }
+                }
+            ]
+        });
 
-const {getRoutes} = require('./utils/routes');
-
-module.exports = withMDX({
-    async exportPathMap () {
-        return await getRoutes();
+        return config;
     }
-});
+};

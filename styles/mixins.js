@@ -98,7 +98,7 @@ export const global = () => injectGlobal`
 
     hr {
         border: 0;
-        margin: ${spacing.normal} 0 ${spacing.large};
+        margin: ${spacing.large};
         text-align: center;
 
         &::before {

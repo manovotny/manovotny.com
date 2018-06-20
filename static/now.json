@@ -1,0 +1,8 @@
+{
+    "static": {
+        "cleanUrls": true,
+        "directoryListing": false,
+        "renderSingle": true,
+        "trailingSlash": false
+    }
+}
