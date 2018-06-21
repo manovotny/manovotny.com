@@ -19,7 +19,7 @@
     "main": "server.js",
     "scripts": {
         "dev": "node .",
-        "export": "next build && rimraf .next-export && next export -o .next-export && cpx \".next-export/static/**/*\" .next-export && rimraf .next-export/static",
+        "export": "node scripts/export.js",
         "start": "npm run export && serve .next-export"
     },
     "dependencies": {
@@ -39,8 +39,9 @@
         "styled-reset": "1.3.4"
     },
     "devDependencies": {
-        "cpx": "1.5.0",
+        "execa": "0.10.0",
         "get-port": "3.2.0",
-        "rimraf": "2.6.2"
+        "listr": "0.14.1",
+        "shelljs": "0.8.2"
     }
 }
