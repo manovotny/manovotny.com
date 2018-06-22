@@ -7,7 +7,7 @@ import {spacing} from '../../styles/vars';
 import HeaderBackground from './header-background';
 import HeaderDescription from './header-description';
 import HeaderTitle from './header-title';
-import Gravatar from './gravatar';
+import Avatar from './avatar';
 import Social from './social';
 
 const StyledHeader = styled.section`
@@ -23,7 +23,7 @@ const Header = () =>
     <Fragment>
         <HeaderBackground/>
         <StyledHeader>
-            <Gravatar />
+            <Avatar />
             <HeaderTitle/>
             <HeaderDescription/>
             <Social />

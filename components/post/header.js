@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {title} from "../../utils/site";
-import Gravatar from "./gravatar";
+import Avatar from "./avatar";
 import {dividerBottom} from "../../styles/mixins";
 import {spacing} from "../../styles/vars";
 import styled from "styled-components";
@@ -25,7 +25,7 @@ const Header = () =>
             prefetch
         >
             <a>
-                <Gravatar />
+                <Avatar />
                 <HeaderTitle>{title}</HeaderTitle>
             </a>
         </Link>
