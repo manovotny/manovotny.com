@@ -1,11 +1,12 @@
 import React from 'react'
+import withGA from "next-ga";
 import App, {Container} from 'next/app'
 
 import {global} from "../styles/mixins";
 
 global();
 
-export default class CustomApp extends App {
+class CustomApp extends App {
     render() {
         const {Component, pageProps} = this.props;
 
@@ -16,3 +17,5 @@ export default class CustomApp extends App {
         );
     }
 }
+
+export default withGA('UA-27106984-1')(CustomApp);
