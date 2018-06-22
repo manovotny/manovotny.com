@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import {spacing} from '../../styles/vars';
 
 import ArticleDate from './article-date';
-import ArticleTitle from './article-title';
 import ArticleLink from '../article-link';
+import H4 from '../elements/h4';
 
 const StyledArticle = styled.li`
     margin-bottom: ${spacing.normal};
@@ -21,7 +21,7 @@ const Article = ({article}) =>
             slug={article.slug}
             underline={false}
         >
-            <ArticleTitle>{article.title}</ArticleTitle>
+            <H4>{article.title}</H4>
             <ArticleDate>{article.date}</ArticleDate>
         </ArticleLink>
     </StyledArticle>;

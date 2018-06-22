@@ -1,4 +1,4 @@
-import {spacing} from "../../../styles/vars";
+import {spacing} from "../../styles/vars";
 import styled from "styled-components";
 
 const Blockquote = styled.blockquote`

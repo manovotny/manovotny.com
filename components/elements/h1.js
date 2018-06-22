@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import {heading} from "../../../styles/mixins";
+import {heading} from "../../styles/mixins";
+import title from "title";
 
-const H1 = styled.h1`
+const StyledH1 = styled.h1`
     ${heading}
     font-size: 32px;
     margin: 0;
@@ -10,5 +11,8 @@ const H1 = styled.h1`
         font-size: 48px;
     }
 `;
+
+const H1 = ({children}) =>
+    <StyledH1>{title(children)}</StyledH1>;
 
 export default H1;

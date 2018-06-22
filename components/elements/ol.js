@@ -1,13 +1,13 @@
-import {spacing} from "../../../styles/vars";
+import {spacing} from "../../styles/vars";
 import styled from "styled-components";
 
-const Ul = styled.ul`
+const Ol = styled.ol`
     margin-bottom: ${spacing.normal};
-    list-style-type: disc;
+    list-style-type: decimal;
     
     p {
         margin-bottom: 0;
     }
 `;
 
-export default Ul;
+export default Ol;

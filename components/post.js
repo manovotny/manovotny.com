@@ -9,16 +9,16 @@ import {title} from "../utils/site";
 import {column, dividerBottom} from "../styles/mixins";
 import {spacing} from "../styles/vars";
 
-import Blockquote from "./post/elements/blockquote";
-import Em from "./post/elements/em";
-import H1 from "./post/elements/h1";
-import H2 from "./post/elements/h2";
-import H3 from "./post/elements/h3";
-import Img from "./post/elements/img";
-import Li from "./post/elements/li";
-import Ol from "./post/elements/ol";
-import Strong from "./post/elements/strong";
-import Ul from "./post/elements/ul";
+import Blockquote from "./elements/blockquote";
+import Em from "./elements/em";
+import H1 from "./elements/h1";
+import H2 from "./elements/h2";
+import H3 from "./elements/h3";
+import Img from "./elements/img";
+import Li from "./elements/li";
+import Ol from "./elements/ol";
+import Strong from "./elements/strong";
+import Ul from "./elements/ul";
 
 const components = {
     blockquote: Blockquote,

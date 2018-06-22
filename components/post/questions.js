@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import {spacing} from "../../styles/vars";
 
-import H2 from './elements/h2';
+import H2 from '../elements/h2';
 
 const Section = styled.section`
     margin-bottom: ${spacing.large};
