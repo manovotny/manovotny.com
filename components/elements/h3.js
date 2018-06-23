@@ -1,7 +1,7 @@
 import {spacing} from '../../styles/vars';
 import styled from 'styled-components';
 import {heading} from '../../styles/mixins';
-import title from 'title';
+import titleStyle from '../../utils/title-style';
 
 const StyledH3 = styled.h3`
     ${heading} font-size: 20px;
@@ -12,6 +12,6 @@ const StyledH3 = styled.h3`
     }
 `;
 
-const H3 = ({children}) => <StyledH3>{title(children)}</StyledH3>;
+const H3 = ({children}) => <StyledH3>{titleStyle(children)}</StyledH3>;
 
 export default H3;

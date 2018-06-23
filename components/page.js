@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import {Fragment} from 'react';
 import {withRouter} from 'next/router';
+import titleStyle from '../utils/title-style';
 
 const Page = ({
     children,
@@ -13,7 +14,7 @@ const Page = ({
     return (
         <Fragment>
             <Head>
-                <title>{title}</title>
+                <title>{titleStyle(title)}</title>
                 <meta charSet="utf-8" />
                 <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
                 <meta

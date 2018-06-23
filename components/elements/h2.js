@@ -1,7 +1,7 @@
 import {spacing} from '../../styles/vars';
 import styled from 'styled-components';
 import {heading} from '../../styles/mixins';
-import title from 'title';
+import titleStyle from '../../utils/title-style';
 
 const StyledH2 = styled.h2`
     ${heading} font-size: 24px;
@@ -12,6 +12,6 @@ const StyledH2 = styled.h2`
     }
 `;
 
-const H2 = ({children}) => <StyledH2>{title(children)}</StyledH2>;
+const H2 = ({children}) => <StyledH2>{titleStyle(children)}</StyledH2>;
 
 export default H2;
