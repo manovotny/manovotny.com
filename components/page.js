@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import {withRouter} from 'next/router';
-import React, {Fragment} from 'react';
+import React from 'react';
 
 import titleStyle from '../utils/title-style';
 
@@ -13,7 +13,7 @@ const Page = ({
     searchEngines
 }) => {
     return (
-        <Fragment>
+        <>
             <Head>
                 <title>{titleStyle(title)}</title>
                 <meta charSet="utf-8" />
@@ -65,7 +65,7 @@ const Page = ({
                     )}
             </Head>
             {children}
-        </Fragment>
+        </>
     );
 };
 

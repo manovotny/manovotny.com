@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import {column, dividerBottom} from '../../styles/mixins';
@@ -20,7 +20,7 @@ const StyledHeader = styled.section`
 `;
 
 const Header = () => (
-    <Fragment>
+    <>
         <HeaderBackground />
         <StyledHeader>
             <Avatar />
@@ -28,7 +28,7 @@ const Header = () => (
             <HeaderDescription />
             <Social />
         </StyledHeader>
-    </Fragment>
+    </>
 );
 
 export default Header;
