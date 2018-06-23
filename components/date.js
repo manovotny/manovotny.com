@@ -1,7 +1,7 @@
 import {DateTime} from 'luxon';
 import styled from 'styled-components';
 
-import {colors} from "../styles/vars";
+import {colors} from '../styles/vars';
 
 const StyledDate = styled.time`
     color: ${colors.light};
@@ -16,9 +16,7 @@ const Date = ({children}) => {
     const date = dt.toLocaleString(DateTime.DATE_FULL);
     const dateTime = dt.toISO();
 
-    return (
-        <StyledDate dateTime={dateTime}>{date}</StyledDate>
-    );
+    return <StyledDate dateTime={dateTime}>{date}</StyledDate>;
 };
 
 export default Date;

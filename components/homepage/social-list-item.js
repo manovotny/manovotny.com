@@ -6,14 +6,14 @@ import {spacing} from '../../styles/vars';
 const SocialListItem = styled.li`
     display: block;
     margin-bottom: ${spacing.normal};
-    
+
     @media (min-width: 376px) {
         display: inline-block;
         margin-right: ${spacing.large};
-        
+
         &:last-child {
             margin-right: 0;
-        }        
+        }
     }
 `;
 

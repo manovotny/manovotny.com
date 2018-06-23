@@ -4,7 +4,9 @@ import {ServerStyleSheet} from 'styled-components';
 export default class CustomDocument extends Document {
     static getInitialProps({renderPage}) {
         const sheet = new ServerStyleSheet();
-        const page = renderPage((App) => (props) => sheet.collectStyles(<App {...props} />));
+        const page = renderPage((App) => (props) =>
+            sheet.collectStyles(<App {...props} />)
+        );
         const styleTags = sheet.getStyleElement();
 
         return {
@@ -16,9 +18,7 @@ export default class CustomDocument extends Document {
     render() {
         return (
             <html lang="en">
-                <Head>
-                    {this.props.styleTags}
-                </Head>
+                <Head>{this.props.styleTags}</Head>
                 <body>
                     <Main />
                     <NextScript />

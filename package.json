@@ -1,7 +1,7 @@
 {
     "name": "manovotny.com",
     "description": "manovotny.com",
-    "version": "1.0.0",
+    "version": "0.0.0",
     "author": {
         "name": "Michael Novotny",
         "email": "manovotny@gmail.com",
@@ -20,6 +20,9 @@
     "scripts": {
         "dev": "node .",
         "export": "node scripts/export.js",
+        "precommit": "npm run pretty-quick",
+        "prettier": "prettier --write \"**/*.{js,json,md,mdx}\"",
+        "pretty-quick": "pretty-quick --staged",
         "start": "npm run export && serve .next-export"
     },
     "dependencies": {
@@ -43,7 +46,10 @@
     "devDependencies": {
         "execa": "0.10.0",
         "get-port": "3.2.0",
+        "husky": "0.14.3",
         "listr": "0.14.1",
+        "prettier": "1.13.5",
+        "pretty-quick": "1.6.0",
         "shelljs": "0.8.2"
     }
 }

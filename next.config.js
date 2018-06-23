@@ -1,8 +1,5 @@
 module.exports = {
-    pageExtensions: [
-        'js',
-        'mdx'
-    ],
+    pageExtensions: ['js', 'mdx'],
     webpack: (config, {defaultLoaders}) => {
         config.module.rules.push({
             test: /\.mdx?$/,

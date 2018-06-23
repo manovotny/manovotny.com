@@ -19,15 +19,16 @@ const StyledHeader = styled.section`
     text-align: center;
 `;
 
-const Header = () =>
+const Header = () => (
     <Fragment>
-        <HeaderBackground/>
+        <HeaderBackground />
         <StyledHeader>
             <Avatar />
-            <HeaderTitle/>
-            <HeaderDescription/>
+            <HeaderTitle />
+            <HeaderDescription />
             <Social />
         </StyledHeader>
-    </Fragment>;
+    </Fragment>
+);
 
 export default Header;

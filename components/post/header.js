@@ -1,16 +1,14 @@
-import Link from "next/link";
-import {title} from "../../utils/site";
-import Avatar from "./avatar";
-import {dividerBottom} from "../../styles/mixins";
-import {spacing} from "../../styles/vars";
-import styled from "styled-components";
+import Link from 'next/link';
+import {title} from '../../utils/site';
+import Avatar from './avatar';
+import {dividerBottom} from '../../styles/mixins';
+import {spacing} from '../../styles/vars';
+import styled from 'styled-components';
 
 import HeaderTitle from './header-title';
 
 const StyledHeader = styled.header`
-    ${dividerBottom}
-    
-    margin: 0 auto;
+    ${dividerBottom} margin: 0 auto;
     max-width: 768px;
     background: transparent;
     height: auto;
@@ -18,17 +16,15 @@ const StyledHeader = styled.header`
     text-align: center;
 `;
 
-const Header = () =>
+const Header = () => (
     <StyledHeader>
-        <Link
-            href="/"
-            prefetch
-        >
+        <Link href="/" prefetch>
             <a>
                 <Avatar />
                 <HeaderTitle>{title}</HeaderTitle>
             </a>
         </Link>
-    </StyledHeader>;
+    </StyledHeader>
+);
 
 export default Header;

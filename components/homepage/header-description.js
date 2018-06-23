@@ -10,7 +10,8 @@ const StyledHeaderDescription = styled.h2`
     margin: 0 0 ${spacing.normal};
 `;
 
-const HeaderDescription = () =>
-    <StyledHeaderDescription>{description}</StyledHeaderDescription>;
+const HeaderDescription = () => (
+    <StyledHeaderDescription>{description}</StyledHeaderDescription>
+);
 
 export default HeaderDescription;

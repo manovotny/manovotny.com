@@ -13,9 +13,10 @@ const StyledFooter = styled.footer`
     text-align: center;
 `;
 
-const Footer = () =>
+const Footer = () => (
     <StyledFooter>
         <Copyright />
-    </StyledFooter>;
+    </StyledFooter>
+);
 
 export default Footer;

@@ -9,21 +9,19 @@ import H4 from '../elements/h4';
 
 const StyledArticle = styled.li`
     margin-bottom: ${spacing.normal};
-    
+
     &:last-child {
-        margin-bottom: 0;    
+        margin-bottom: 0;
     }
 `;
 
-const Article = ({article}) =>
+const Article = ({article}) => (
     <StyledArticle>
-        <ArticleLink
-            slug={article.slug}
-            underline={false}
-        >
+        <ArticleLink slug={article.slug} underline={false}>
             <H4>{article.title}</H4>
             <ArticleDate>{article.date}</ArticleDate>
         </ArticleLink>
-    </StyledArticle>;
+    </StyledArticle>
+);
 
 export default Article;

@@ -18,11 +18,16 @@ const tasks = new Listr([
         title: 'Exporting site'
     },
     {
-        task: () => cp('-r', `${exportDirectory}/static/*`, `${exportDirectory}`),
+        task: () =>
+            cp('-r', `${exportDirectory}/static/*`, `${exportDirectory}`),
         title: 'Copying static files to root'
     },
     {
-        task: () => mv(`${exportDirectory}/_error/index.html`, `${exportDirectory}/404.html`),
+        task: () =>
+            mv(
+                `${exportDirectory}/_error/index.html`,
+                `${exportDirectory}/404.html`
+            ),
         title: 'Moving 404 page to root'
     },
     {
@@ -41,7 +46,8 @@ const tasks = new Listr([
 
 console.log(`Generating static site...`); // eslint-disable-line no-console
 
-tasks.run()
+tasks
+    .run()
     .then(() => console.log(`Export complete! 🎉`))
     .catch((error) => {
         console.error(error);

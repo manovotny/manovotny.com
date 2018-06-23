@@ -1,13 +1,13 @@
 import {Component} from 'react';
 
-import BoltIcon from "../icons/bolt.svg";
-import Footer from "../components/footer";
-import Header from "../components/post/header";
-import Page from "../components/page";
-import {title} from "../utils/site";
-import {column, heading} from "../styles/mixins";
-import {spacing} from "../styles/vars";
-import styled from "styled-components";
+import BoltIcon from '../icons/bolt.svg';
+import Footer from '../components/footer';
+import Header from '../components/post/header';
+import Page from '../components/page';
+import {title} from '../utils/site';
+import {column, heading} from '../styles/mixins';
+import {spacing} from '../styles/vars';
+import styled from 'styled-components';
 
 const Article = styled.article`
     ${column}
@@ -27,32 +27,27 @@ const Article = styled.article`
     }
 `;
 
-
 export default class Error extends Component {
     static getInitialProps({res, err}) {
         const statusCode = res ? res.statusCode : err ? err.statusCode : null;
 
-        return {statusCode}
+        return {statusCode};
     }
 
     render() {
         const {statusCode} = this.props;
-        const errorTitle = statusCode === 404
-            ? 'Not Found'
-            : 'Error';
-        const message = statusCode === 404
-            ? 'Whatever it was you were looking for no longer exists.'
-            : 'Something went terribly wrong.';
+        const errorTitle = statusCode === 404 ? 'Not Found' : 'Error';
+        const message =
+            statusCode === 404
+                ? 'Whatever it was you were looking for no longer exists.'
+                : 'Something went terribly wrong.';
 
         return (
-            <Page
-                description="Not found."
-                title={`${errorTitle} - ${title}`}
-            >
+            <Page description="Not found." title={`${errorTitle} - ${title}`}>
                 <Header />
                 <Article>
                     <h3>
-                        <BoltIcon/>
+                        <BoltIcon />
                         Oops!
                     </h3>
                     <p>{message}</p>
@@ -60,6 +55,6 @@ export default class Error extends Component {
                 </Article>
                 <Footer />
             </Page>
-        )
+        );
     }
 }

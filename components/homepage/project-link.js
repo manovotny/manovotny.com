@@ -5,11 +5,8 @@ const StlyedProjectLink = styled.a`
     text-decoration: none;
 `;
 
-const ProjectLink = ({children, href}) =>
-    <StlyedProjectLink
-        href={href}
-    >
-        {children}
-    </StlyedProjectLink>;
+const ProjectLink = ({children, href}) => (
+    <StlyedProjectLink href={href}>{children}</StlyedProjectLink>
+);
 
 export default ProjectLink;

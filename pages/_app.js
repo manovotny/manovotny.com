@@ -1,8 +1,8 @@
-import React from 'react'
-import withGA from "next-ga";
-import App, {Container} from 'next/app'
+import React from 'react';
+import withGA from 'next-ga';
+import App, {Container} from 'next/app';
 
-import {global} from "../styles/mixins";
+import {global} from '../styles/mixins';
 
 global();
 

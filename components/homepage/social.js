@@ -8,7 +8,7 @@ import TwitterIcon from '../../icons/twitter.svg';
 import SocialListItem from './social-list-item';
 import SocialLink from './social-link';
 
-const Social = () =>
+const Social = () => (
     <nav>
         <ul>
             <SocialListItem>
@@ -16,29 +16,24 @@ const Social = () =>
                     href="https://twitter.com/manovotny"
                     title="Twitter"
                 >
-                    <TwitterIcon/>
+                    <TwitterIcon />
                     {'Twitter'}
                 </SocialLink>
             </SocialListItem>
             <SocialListItem>
-                <SocialLink
-                    href="https://github.com/manovotny"
-                    title="GitHub"
-                >
-                    <GitHubIcon/>
+                <SocialLink href="https://github.com/manovotny" title="GitHub">
+                    <GitHubIcon />
                     {'GitHub'}
                 </SocialLink>
             </SocialListItem>
             <SocialListItem>
-                <SocialLink
-                    href="https://github.com/manovotny/ama"
-                    title="AMA"
-                >
-                    <AmaIcon/>
+                <SocialLink href="https://github.com/manovotny/ama" title="AMA">
+                    <AmaIcon />
                     {'AMA'}
                 </SocialLink>
             </SocialListItem>
         </ul>
-    </nav>;
+    </nav>
+);
 
 export default Social;

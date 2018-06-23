@@ -11,24 +11,22 @@ const StyledProjects = styled.section`
     padding: 0 ${spacing.small};
     margin-bottom: ${spacing.normal};
     vertical-align: top;
-    
+
     @media (min-width: 768px) {
         display: inline-block;
         width: 49.5%;
     }
 `;
 
-const Projects = () =>
+const Projects = () => (
     <StyledProjects>
         <ProjectsTitle>{'Projects'}</ProjectsTitle>
         <ul>
             {projects.map((project) => (
-                <Project
-                    key={project.name}
-                    project={project}
-                />
+                <Project key={project.name} project={project} />
             ))}
         </ul>
-    </StyledProjects>;
+    </StyledProjects>
+);
 
 export default Projects;

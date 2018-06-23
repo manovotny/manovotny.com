@@ -1,7 +1,7 @@
 import {injectGlobal} from 'styled-components';
 import reset from 'styled-reset';
 
-import {colors, spacing} from "./vars";
+import {colors, spacing} from './vars';
 
 const code = `
     background-color: #f3f3f3;

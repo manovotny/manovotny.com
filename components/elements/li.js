@@ -1,5 +1,5 @@
-import {spacing} from "../../styles/vars";
-import styled from "styled-components";
+import {spacing} from '../../styles/vars';
+import styled from 'styled-components';
 
 const Li = styled.li`
     margin-left: ${spacing.normal};

@@ -8,10 +8,8 @@ const StyledAvatar = styled.img`
     width: 60px;
 `;
 
-const Avatar = () =>
-    <StyledAvatar
-        alt="Michael Novotny"
-        src={'/images/avatar.jpg'}
-    />;
+const Avatar = () => (
+    <StyledAvatar alt="Michael Novotny" src={'/images/avatar.jpg'} />
+);
 
 export default Avatar;
