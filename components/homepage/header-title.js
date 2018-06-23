@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 import {heading} from '../../styles/mixins';
-import {title} from '../../utils/site';
 
 const StyledHeaderTitle = styled.h1`
     ${heading} font-size: 42px;
@@ -13,6 +12,8 @@ const StyledHeaderTitle = styled.h1`
     }
 `;
 
-const HeaderTitle = () => <StyledHeaderTitle>{title}</StyledHeaderTitle>;
+const HeaderTitle = () => (
+    <StyledHeaderTitle>{'Michael Novotny'}</StyledHeaderTitle>
+);
 
 export default HeaderTitle;

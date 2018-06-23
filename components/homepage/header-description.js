@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 import {spacing} from '../../styles/vars';
-import {description} from '../../utils/site';
 
 const StyledHeaderDescription = styled.h2`
     font-size: 18px;
@@ -11,7 +10,11 @@ const StyledHeaderDescription = styled.h2`
 `;
 
 const HeaderDescription = () => (
-    <StyledHeaderDescription>{description}</StyledHeaderDescription>
+    <StyledHeaderDescription>
+        {
+            'JavaScript developer. Open source contributor. Insatiable learner. Standards and best practices enthusiast. Development is a lifestyle, not a job.'
+        }
+    </StyledHeaderDescription>
 );
 
 export default HeaderDescription;

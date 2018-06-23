@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import {dividerBottom} from '../../styles/mixins';
 import {spacing} from '../../styles/vars';
-import {title} from '../../utils/site';
 import Link from '../link';
 
 import Avatar from './avatar';
@@ -22,7 +21,7 @@ const Header = () => (
     <StyledHeader>
         <Link>
             <Avatar />
-            <HeaderTitle>{title}</HeaderTitle>
+            <HeaderTitle>{'Michael Novotny'}</HeaderTitle>
         </Link>
     </StyledHeader>
 );

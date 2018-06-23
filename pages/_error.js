@@ -7,7 +7,6 @@ import Header from '../components/post/header';
 import BoltIcon from '../icons/bolt.svg';
 import {column, heading} from '../styles/mixins';
 import {spacing} from '../styles/vars';
-import {title} from '../utils/site';
 
 const Article = styled.article`
     ${column}
@@ -28,7 +27,7 @@ const Article = styled.article`
 `;
 
 const Error = () => (
-    <Page description="Not found." title={`Not Found - ${title}`}>
+    <Page description="Not found." title="Not Found - Michael Novotny">
         <Header />
         <Article>
             <h3>
