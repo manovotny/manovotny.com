@@ -1,5 +1,6 @@
-import {spacing} from '../../styles/vars';
 import styled from 'styled-components';
+
+import {spacing} from '../../styles/vars';
 
 const Ol = styled.ol`
     margin-bottom: ${spacing.normal};

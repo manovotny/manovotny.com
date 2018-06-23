@@ -1,4 +1,6 @@
+import React from 'react';
 import styled from 'styled-components';
+
 import {heading} from '../../styles/mixins';
 import titleStyle from '../../utils/title-style';
 

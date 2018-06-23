@@ -1,12 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import AmaIcon from '../../icons/ama.svg';
 import GitHubIcon from '../../icons/github.svg';
 import TwitterIcon from '../../icons/twitter.svg';
 
-import SocialListItem from './social-list-item';
 import SocialLink from './social-link';
+import SocialListItem from './social-list-item';
 
 const Social = () => (
     <nav>

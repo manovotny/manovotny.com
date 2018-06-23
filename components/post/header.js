@@ -1,10 +1,12 @@
-import Link from 'next/link';
-import {title} from '../../utils/site';
-import Avatar from './avatar';
-import {dividerBottom} from '../../styles/mixins';
-import {spacing} from '../../styles/vars';
+import React from 'react';
 import styled from 'styled-components';
 
+import {dividerBottom} from '../../styles/mixins';
+import {spacing} from '../../styles/vars';
+import {title} from '../../utils/site';
+import Link from '../link';
+
+import Avatar from './avatar';
 import HeaderTitle from './header-title';
 
 const StyledHeader = styled.header`
@@ -18,11 +20,9 @@ const StyledHeader = styled.header`
 
 const Header = () => (
     <StyledHeader>
-        <Link href="/" prefetch>
-            <a>
-                <Avatar />
-                <HeaderTitle>{title}</HeaderTitle>
-            </a>
+        <Link>
+            <Avatar />
+            <HeaderTitle>{title}</HeaderTitle>
         </Link>
     </StyledHeader>
 );

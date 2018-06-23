@@ -1,6 +1,8 @@
-import {title} from '../../utils/site';
-import {heading} from '../../styles/mixins';
+import React from 'react';
 import styled from 'styled-components';
+
+import {heading} from '../../styles/mixins';
+import {title} from '../../utils/site';
 
 const StyledHeaderTitle = styled.h1`
     ${heading} font-size: 42px;

@@ -1,10 +1,10 @@
 const {join} = require('path');
-
-const globby = require('globby');
-const getPort = require('get-port');
-const express = require('express');
-const next = require('next');
 const {parse} = require('url');
+
+const express = require('express');
+const getPort = require('get-port');
+const globby = require('globby');
+const next = require('next');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
@@ -33,6 +33,6 @@ app.prepare().then(async () => {
             throw error;
         }
 
-        console.log(`> Ready on http://localhost:${port}`);
+        console.log(`> Ready on http://localhost:${port}`); // eslint-disable-line no-console
     });
 });

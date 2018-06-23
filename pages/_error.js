@@ -1,13 +1,13 @@
-import {Component} from 'react';
+import React, {Component} from 'react';
+import styled from 'styled-components';
 
-import BoltIcon from '../icons/bolt.svg';
 import Footer from '../components/footer';
-import Header from '../components/post/header';
 import Page from '../components/page';
-import {title} from '../utils/site';
+import Header from '../components/post/header';
+import BoltIcon from '../icons/bolt.svg';
 import {column, heading} from '../styles/mixins';
 import {spacing} from '../styles/vars';
-import styled from 'styled-components';
+import {title} from '../utils/site';
 
 const Article = styled.article`
     ${column}
@@ -27,9 +27,19 @@ const Article = styled.article`
     }
 `;
 
+const getStatusCode = (res, err) => {
+    if (res) {
+        return res.statusCode;
+    } else if (err) {
+        return err.statusCode;
+    }
+
+    return null;
+};
+
 export default class Error extends Component {
     static getInitialProps({res, err}) {
-        const statusCode = res ? res.statusCode : err ? err.statusCode : null;
+        const statusCode = getStatusCode(res, err);
 
         return {statusCode};
     }
@@ -48,10 +58,10 @@ export default class Error extends Component {
                 <Article>
                     <h3>
                         <BoltIcon />
-                        Oops!
+                        {'Oops!'}
                     </h3>
                     <p>{message}</p>
-                    <p>Sorry about that!</p>
+                    <p>{'Sorry about that!'}</p>
                 </Article>
                 <Footer />
             </Page>

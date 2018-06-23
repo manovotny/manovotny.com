@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import {spacing} from '../../styles/vars';
 
 const Img = styled.img`

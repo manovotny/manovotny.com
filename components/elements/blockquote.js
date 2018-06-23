@@ -1,5 +1,6 @@
-import {spacing} from '../../styles/vars';
 import styled from 'styled-components';
+
+import {spacing} from '../../styles/vars';
 
 const Blockquote = styled.blockquote`
     border-left: 4px solid #333;

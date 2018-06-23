@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import articles from '../../data/articles';
 import {spacing} from '../../styles/vars';
 
-import ArticlesTitle from './articles-title';
 import Article from './article';
-import articles from '../../data/articles';
+import ArticlesTitle from './articles-title';
 
 const StyledArticles = styled.section`
     padding: 0 ${spacing.small};
@@ -23,7 +23,7 @@ const Articles = () => (
         <ArticlesTitle>{'Articles'}</ArticlesTitle>
         <ul>
             {articles.map((article) => (
-                <Article key={article.slug} article={article} />
+                <Article article={article} key={article.slug} />
             ))}
         </ul>
     </StyledArticles>

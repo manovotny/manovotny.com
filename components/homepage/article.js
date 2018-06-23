@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 import {spacing} from '../../styles/vars';
+import Link from '../link';
+import H4 from '../elements/h4';
 
 import ArticleDate from './article-date';
-import ArticleLink from '../article-link';
-import H4 from '../elements/h4';
 
 const StyledArticle = styled.li`
     margin-bottom: ${spacing.normal};
@@ -17,10 +17,10 @@ const StyledArticle = styled.li`
 
 const Article = ({article}) => (
     <StyledArticle>
-        <ArticleLink slug={article.slug} underline={false}>
+        <Link slug={article.slug} underline={false}>
             <H4>{article.title}</H4>
             <ArticleDate>{article.date}</ArticleDate>
-        </ArticleLink>
+        </Link>
     </StyledArticle>
 );
 

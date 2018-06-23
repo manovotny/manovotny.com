@@ -1,7 +1,9 @@
-import {title} from '../../utils/site';
+import React from 'react';
+import styled from 'styled-components';
+
 import {heading} from '../../styles/mixins';
 import {spacing} from '../../styles/vars';
-import styled from 'styled-components';
+import {title} from '../../utils/site';
 
 const StyledHeaderTitle = styled.p`
     ${heading} display: inline-block;

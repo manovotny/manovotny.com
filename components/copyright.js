@@ -1,7 +1,8 @@
+import React from 'react';
 import styled from 'styled-components';
 
-import {title} from '../utils/site';
 import {colors} from '../styles/vars';
+import {title} from '../utils/site';
 
 const StyledCopyright = styled.p`
     color: ${colors.light};

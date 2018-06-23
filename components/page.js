@@ -1,6 +1,7 @@
 import Head from 'next/head';
-import {Fragment} from 'react';
 import {withRouter} from 'next/router';
+import React, {Fragment} from 'react';
+
 import titleStyle from '../utils/title-style';
 
 const Page = ({
@@ -33,34 +34,34 @@ const Page = ({
                     }`}
                     name="robots"
                 />
-                <meta name="theme-color" content="#ffffff" />
+                <meta content="#ffffff" name="theme-color" />
                 <link
+                    href="/apple-touch-icon.png"
                     rel="apple-touch-icon"
                     sizes="180x180"
-                    href="/apple-touch-icon.png"
                 />
                 <link
-                    rel="icon"
-                    type="image/png"
                     href="/favicon-32x32.png"
-                    sizes="32x32"
-                />
-                <link
                     rel="icon"
+                    sizes="32x32"
                     type="image/png"
-                    href="/favicon-16x16.png"
-                    sizes="16x16"
                 />
-                <link rel="manifest" href="/manifest.json" />
                 <link
-                    rel="mask-icon"
-                    href="/safari-pinned-tab.svg"
-                    color="#4a9885"
+                    href="/favicon-16x16.png"
+                    rel="icon"
+                    sizes="16x16"
+                    type="image/png"
                 />
-                <link rel="shortcut icon" href="/favicon.ico" />
+                <link href="/manifest.json" rel="manifest" />
+                <link
+                    color="#4a9885"
+                    href="/safari-pinned-tab.svg"
+                    rel="mask-icon"
+                />
+                <link href="/favicon.ico" rel="shortcut icon" />
                 {router &&
                     router.asPath && (
-                        <link rel="canonical" href={router.asPath} />
+                        <link href={router.asPath} rel="canonical" />
                     )}
             </Head>
             {children}

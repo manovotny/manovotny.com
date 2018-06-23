@@ -1,13 +1,10 @@
-import styled from 'styled-components';
 import {MDXProvider} from '@mdx-js/tag';
+import React from 'react';
+import styled from 'styled-components';
 
-import Footer from '../components/footer';
-import Page from '../components/page';
-import Questions from './post/questions';
-import Header from './post/header';
-import {title} from '../utils/site';
 import {column, dividerBottom} from '../styles/mixins';
 import {spacing} from '../styles/vars';
+import {title} from '../utils/site';
 
 import Blockquote from './elements/blockquote';
 import Em from './elements/em';
@@ -19,6 +16,10 @@ import Li from './elements/li';
 import Ol from './elements/ol';
 import Strong from './elements/strong';
 import Ul from './elements/ul';
+import Footer from './footer';
+import Page from './page';
+import Header from './post/header';
+import Questions from './post/questions';
 
 const components = {
     blockquote: Blockquote,

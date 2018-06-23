@@ -48,7 +48,7 @@ console.log(`Generating static site...`); // eslint-disable-line no-console
 
 tasks
     .run()
-    .then(() => console.log(`Export complete! 🎉`))
+    .then(() => console.log(`Export complete! 🎉`)) // eslint-disable-line no-console
     .catch((error) => {
-        console.error(error);
+        console.error(error); // eslint-disable-line no-console
     });
