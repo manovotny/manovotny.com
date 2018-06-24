@@ -1,26 +1,2 @@
----
-layout: null
-permalink: /robots.txt
----
-
-{% assign noIndexPages = site.pages | where: 'sitemap', false %}
-{% assign noIndexDocuments = site.documents | where: 'sitemap', false %}
-
-# www.robotstxt.org/
-# www.google.com/support/webmasters/bin/answer.py?hl=en&answer=156449
-
 User-agent: *
-Sitemap: {{site.url}}/sitemap.xml
-
-{% if site.search_engines == true %}
-    {% if noIndexDocuments or noIndexPages %}
-        {% for item in noIndexPages %}
-            Disallow: {{item.url}}
-        {% endfor %}
-        {% for item in noIndexDocuments %}
-            Disallow: {{item.url}}
-        {% endfor %}
-    {% endif %}
-{% else %}
-    Disallow: /
-{% endif %}
+Sitemap: https://manovotny.com/sitemap.xml
