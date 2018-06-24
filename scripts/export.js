@@ -41,6 +41,10 @@ const tasks = new Listr([
     {
         task: () => rm('-rf', `${exportDirectory}/static`),
         title: 'Removing static directory'
+    },
+    {
+        task: () => execa('node', ['./scripts/sitemap.js']),
+        title: 'Generating sitemap'
     }
 ]);
 
