@@ -49,7 +49,9 @@ const MarkdownWrapper = styled.section`
 
 const Post = ({children, meta}) => (
     <Page
+        date={meta.date}
         description={meta.description}
+        image={meta.image}
         title={`${meta.title} - Michael Novotny`}
     >
         <Header />

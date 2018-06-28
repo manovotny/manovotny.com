@@ -2,20 +2,26 @@ import Head from 'next/head';
 import {withRouter} from 'next/router';
 import React from 'react';
 
+import {dateTime} from '../utils/date-format';
 import titleStyle from '../utils/title-style';
 
 const Page = ({
     children,
+    date,
     description,
+    image,
     title = 'Michael Novotny',
     keywords,
-    router,
-    searchEngines
+    router
 }) => {
+    const styledTitle = titleStyle(title);
+    const url = router && router.asPath ? router.asPath : undefined;
+    const featuredImage = `https://manovotny.com${image}`;
+
     return (
         <>
             <Head>
-                <title>{titleStyle(title)}</title>
+                <title>{styledTitle}</title>
                 <meta charSet="utf-8" />
                 <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
                 <meta
@@ -26,14 +32,7 @@ const Page = ({
                     <meta content={description} name="description" />
                 )}
                 {keywords && <meta content={keywords} name="keywords" />}
-                <meta
-                    content={`${
-                        process.env.production && searchEngines
-                            ? 'follow, index'
-                            : 'nofollow, noindex'
-                    }`}
-                    name="robots"
-                />
+                <meta content="follow, index" name="robots" />
                 <meta content="#ffffff" name="theme-color" />
                 <link
                     href="/apple-touch-icon.png"
@@ -59,10 +58,26 @@ const Page = ({
                     rel="mask-icon"
                 />
                 <link href="/favicon.ico" rel="shortcut icon" />
-                {router &&
-                    router.asPath && (
-                        <link href={router.asPath} rel="canonical" />
-                    )}
+                {url && <link href={url} rel="canonical" />}
+                <meta content="en_US" property="og:locale" />
+                <meta content={styledTitle} property="og:title" />
+                <meta content={description} property="og:description" />
+                <meta content={url} property="og:url" />
+                {featuredImage && (
+                    <>
+                        <meta content={featuredImage} property="og:image" />
+                        <meta content={description} property="og:image:alt" />
+                    </>
+                )}
+                {date && (
+                    <>
+                        <meta content="article" property="og:type" />
+                        <meta
+                            content={dateTime(date)}
+                            property="article:published_time"
+                        />
+                    </>
+                )}
             </Head>
             {children}
         </>

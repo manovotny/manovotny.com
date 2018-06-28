@@ -1,8 +1,8 @@
-import {DateTime} from 'luxon';
 import React from 'react';
 import styled from 'styled-components';
 
 import {colors} from '../styles/vars';
+import {dateTime, full} from '../utils/date-format';
 
 const StyledDate = styled.time`
     color: ${colors.light};
@@ -12,12 +12,8 @@ const StyledDate = styled.time`
     text-transform: uppercase;
 `;
 
-const Date = ({children}) => {
-    const dt = DateTime.fromISO(children);
-    const date = dt.toLocaleString(DateTime.DATE_FULL);
-    const dateTime = dt.toISO();
-
-    return <StyledDate dateTime={dateTime}>{date}</StyledDate>;
-};
+const Date = ({children}) => (
+    <StyledDate dateTime={dateTime(children)}>{full(children)}</StyledDate>
+);
 
 export default Date;

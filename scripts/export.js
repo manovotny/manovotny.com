@@ -18,6 +18,10 @@ const tasks = new Listr([
         title: 'Exporting site'
     },
     {
+        task: () => rm('-rf', `${exportDirectory}/**/*.pxd/`),
+        title: 'Removing unnecessary files'
+    },
+    {
         task: () =>
             cp('-r', `${exportDirectory}/static/*`, `${exportDirectory}`),
         title: 'Copying static files to root'

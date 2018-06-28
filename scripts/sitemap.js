@@ -23,16 +23,16 @@ const removeTrailingSlash = (text) =>
                             : parsed.dir + parsed.base;
 
                     return `
-                    <url>
-                        <loc>${`https://manovotny.com${removeTrailingSlash(
-                            loc
-                        )}`}</loc>
-                    </url>
-                `;
+                        <url>
+                            <loc>${`https://manovotny.com${removeTrailingSlash(
+                                loc
+                            )}`}</loc>
+                        </url>
+                    `;
                 })
                 .join('')}
         </urlset>
     `;
 
-    fs.writeFileSync(`${dir}/sitemap.xml`, prettifyXml(sitemap));
+    fs.writeFileSync(`${dir}/sitemap.xml`, prettifyXml(sitemap)); // eslint-disable-line no-sync
 })();
