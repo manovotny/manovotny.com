@@ -14,14 +14,14 @@ const Page = ({
     keywords,
     router
 }) => {
-    const styledTitle = titleStyle(title);
+    const formattedTitle = titleStyle(title);
     const url = router && router.asPath ? router.asPath : undefined;
     const featuredImage = `https://manovotny.com${image}`;
 
     return (
         <>
             <Head>
-                <title>{styledTitle}</title>
+                <title>{formattedTitle}</title>
                 <meta charSet="utf-8" />
                 <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
                 <meta
@@ -60,7 +60,7 @@ const Page = ({
                 <link href="/favicon.ico" rel="shortcut icon" />
                 {url && <link href={url} rel="canonical" />}
                 <meta content="en_US" property="og:locale" />
-                <meta content={styledTitle} property="og:title" />
+                <meta content={formattedTitle} property="og:title" />
                 <meta content={description} property="og:description" />
                 <meta content={url} property="og:url" />
                 {featuredImage && (
@@ -78,6 +78,9 @@ const Page = ({
                         />
                     </>
                 )}
+                <meta content="summary_large_image" name="twitter:card" />
+                <meta content="@manovotny" name="twitter:site" />
+                <meta content="@manovotny" name="twitter:creator" />
             </Head>
             {children}
         </>
