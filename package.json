@@ -27,7 +27,7 @@
     ],
     "scripts": {
         "dev": "next",
-        "deploy": "cd out && now",
+        "deploy": "yarn export && cd out && now",
         "export": "node scripts/export.js",
         "lint": "eslint . --ext .json --ext .js",
         "precommit": "yarn pretty-quick",
