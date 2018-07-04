@@ -26,13 +26,13 @@
         "utils"
     ],
     "scripts": {
-        "dev": "node server.js",
+        "dev": "next",
         "export": "node scripts/export.js",
         "lint": "eslint . --ext .json --ext .js",
         "precommit": "yarn pretty-quick",
         "prettier": "prettier --write \"**/*.{js,json,md,mdx}\"",
         "pretty-quick": "pretty-quick --staged",
-        "start": "yarn export && serve .next-export",
+        "start": "yarn export && serve out",
         "test": "yarn lint"
     },
     "dependencies": {
@@ -54,8 +54,6 @@
         "eslint-config-get-off-my-lawn": "4.0.0",
         "eslint-config-prettier": "2.9.0",
         "execa": "0.10.0",
-        "express": "4.16.3",
-        "get-port": "3.2.0",
         "globby": "8.0.1",
         "husky": "0.14.3",
         "listr": "0.14.1",

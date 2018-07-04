@@ -8,14 +8,14 @@ const removeTrailingSlash = (text) =>
     text.endsWith('/') ? text.slice(0, -1) : text;
 
 (async () => {
-    const dir = '.next-export';
+    const dir = 'out';
     const pages = await globby(`${dir}/**/*.html`);
     const sitemap = `
         <?xml version="1.0" encoding="UTF-8"?>
         <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
             ${pages
                 .map((page) => {
-                    const path = page.replace('.next-export', '');
+                    const path = page.replace(dir, '');
                     const parsed = parse(path);
                     const loc =
                         parsed.name === 'index'

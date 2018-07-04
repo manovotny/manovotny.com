@@ -1,5 +1,6 @@
 *.log
 .DS_Store
 .idea
-.next*
+.next
 node_modules
+out

@@ -2,7 +2,7 @@ const {cp, mv, rm} = require('shelljs');
 const execa = require('execa');
 const Listr = require('listr');
 
-const exportDirectory = '.next-export';
+const exportDirectory = 'out';
 
 const tasks = new Listr([
     {
@@ -14,7 +14,7 @@ const tasks = new Listr([
         title: 'Building site'
     },
     {
-        task: () => execa('next', ['export', '-o', exportDirectory]),
+        task: () => execa('next', ['export']),
         title: 'Exporting site'
     },
     {
@@ -23,7 +23,7 @@ const tasks = new Listr([
     },
     {
         task: () =>
-            cp('-r', `${exportDirectory}/static/*`, `${exportDirectory}`),
+            cp('-r', `${exportDirectory}/static/root/*`, `${exportDirectory}`),
         title: 'Copying static files to root'
     },
     {
@@ -43,8 +43,8 @@ const tasks = new Listr([
         title: 'Removing _error directory'
     },
     {
-        task: () => rm('-rf', `${exportDirectory}/static`),
-        title: 'Removing static directory'
+        task: () => rm('-rf', `${exportDirectory}/static/root`),
+        title: 'Removing static root directory'
     },
     {
         task: () => execa('node', ['./scripts/sitemap.js']),

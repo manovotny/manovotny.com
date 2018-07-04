@@ -9,7 +9,7 @@ const StyledAvatar = styled.img`
 `;
 
 const Avatar = () => (
-    <StyledAvatar alt="Michael Novotny" src={'/images/avatar.jpg'} />
+    <StyledAvatar alt="Michael Novotny" src={'/static/images/avatar.jpg'} />
 );
 
 export default Avatar;
