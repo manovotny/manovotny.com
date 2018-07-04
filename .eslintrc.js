@@ -1,7 +1,11 @@
 module.exports = {
-    extends: 'get-off-my-lawn',
+    extends: ['get-off-my-lawn', 'prettier'],
     rules: {
-        'no-magic-numbers': 0,
-        'no-var': 0
+        'arrow-body-style': 0,
+        complexity: 0,
+        'react/jsx-closing-bracket-location': 0,
+        'react/jsx-closing-tag-location': 0,
+        'react/jsx-max-props-per-line': 0,
+        'react/prop-types': 0
     }
 };
