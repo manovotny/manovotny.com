@@ -8,10 +8,13 @@ const StyledArticleLink = styled.a`
 
 const CustomLink = (props) => {
     const slug = props.slug || '';
+    const href = `/${slug}`;
 
     return (
-        <Link href={`/${slug}`} prefetch>
-            <StyledArticleLink {...props}>{props.children}</StyledArticleLink>
+        <Link href={href} prefetch>
+            <StyledArticleLink href={href} {...props}>
+                {props.children}
+            </StyledArticleLink>
         </Link>
     );
 };
