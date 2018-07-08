@@ -15,7 +15,7 @@ jobs:
             - node-modules-{{ checksum "yarn.lock" }}
       - run:
           name: Installing yarn
-          run: curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
+          command: curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
       - run:
           name: Installing dependencies
           command: yarn
