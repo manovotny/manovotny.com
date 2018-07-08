@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:8.11.3
+      - image: mhart/alpine-node:8.11.3
     steps:
       - checkout
       - restore_cache:
@@ -13,9 +13,6 @@ jobs:
           name: Restoring node_modules
           keys:
             - node-modules-{{ checksum "yarn.lock" }}
-      - run:
-          name: Installing yarn
-          command: curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
       - run:
           name: Installing dependencies
           command: yarn
