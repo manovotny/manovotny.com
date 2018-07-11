@@ -1,5 +1,6 @@
 {
-    "alias": "manovotny.now.sh",
+    "alias": "manovotny.com",
+    "name": "manovotny",
     "static": {
         "cleanUrls": true,
         "directoryListing": false,

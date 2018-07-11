@@ -52,11 +52,11 @@ const tasks = new Listr([
     }
 ]);
 
-console.log(`Generating static site...`); // eslint-disable-line no-console
+console.log(`Generating static site...`);
 
 tasks
     .run()
-    .then(() => console.log(`Export complete! 🎉`)) // eslint-disable-line no-console
+    .then(() => console.log(`Export complete! 🎉`))
     .catch((error) => {
-        console.error(error); // eslint-disable-line no-console
+        console.error(error);
     });
