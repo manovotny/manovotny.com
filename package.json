@@ -33,6 +33,7 @@
         "precommit": "yarn pretty-quick",
         "prettier": "prettier --write \"**/*.{js,json,md,mdx}\"",
         "pretty-quick": "pretty-quick --staged",
+        "release": "cd out && now alias",
         "start": "yarn export && serve out",
         "test": "yarn lint"
     },
