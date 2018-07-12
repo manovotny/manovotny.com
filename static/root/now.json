@@ -4,17 +4,6 @@
     "static": {
         "cleanUrls": true,
         "directoryListing": false,
-        "headers": [
-            {
-                "headers": [
-                    {
-                        "key": "Cache-Control",
-                        "value": "public, max-age=31536000, immutable"
-                    }
-                ],
-                "source": "/_next/**/*.js"
-            }
-        ],
         "renderSingle": true,
         "trailingSlash": false
     },
