@@ -14,9 +14,11 @@ const Page = ({
     keywords,
     router
 }) => {
+    const domain = 'https://manovotny.com';
     const formattedTitle = titleStyle(title);
     const url = router && router.asPath ? router.asPath : undefined;
-    const featuredImage = `https://manovotny.com${image}`;
+    const canonical = url && url === '/' ? domain : domain + url;
+    const featuredImage = domain + image;
 
     return (
         <>
@@ -63,7 +65,7 @@ const Page = ({
                     rel="mask-icon"
                 />
                 <link href="/static/favicons/favicon.ico" rel="shortcut icon" />
-                {url && <link href={url} rel="canonical" />}
+                {url && <link href={canonical} rel="canonical" />}
                 <meta content="en_US" property="og:locale" />
                 <meta content={formattedTitle} property="og:title" />
                 <meta content={description} property="og:description" />
