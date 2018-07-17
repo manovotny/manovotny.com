@@ -1,5 +1,6 @@
 {
-    "alias": "manovotny.now.sh",
+    "alias": "manovotny.com",
+    "name": "manovotny",
     "static": {
         "cleanUrls": true,
         "directoryListing": false,
@@ -11,7 +12,7 @@
                         "value": "public, max-age=31536000, immutable"
                     }
                 ],
-                "source": "/_next/**/*.js"
+                "source": "/**/*"
             }
         ],
         "renderSingle": true,
