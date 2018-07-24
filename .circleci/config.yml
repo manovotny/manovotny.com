@@ -6,26 +6,18 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          name: Restoring yarn cache
+          name: Restoring dependencies
           keys:
-            - yarn-cache
-      - restore_cache:
-          name: Restoring node_modules
-          keys:
-            - node-modules-{{ checksum "yarn.lock" }}
+            - dependencies-v1-{{ checksum "yarn.lock" }}
       - run:
           name: Installing dependencies
           command: yarn
       - save_cache:
-          name: Saving yarn cache
+          name: Saving dependencies
           paths:
             - ~/.cache/yarn
-          key: yarn-cache
-      - save_cache:
-          name: Saving node_modules
-          paths:
             - node_modules
-          key: node-modules-{{ checksum "yarn.lock" }}
+          key: dependencies-v1-{{ checksum "yarn.lock" }}
       - run:
           name: Running tests
           command: yarn test
