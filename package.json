@@ -35,12 +35,17 @@
         "imageoptim:jpg": "imageoptim --no-imageoptim --jpegmini \"static/**/*.jpg\"",
         "imageoptim:png": "imageoptim --no-imageoptim --imagealpha \"static/**/*.png\"",
         "lint": "eslint . --ext .json --ext .js",
-        "precommit": "yarn pretty-quick",
+        "precommit": "lint-staged",
         "prettier": "prettier --write \"**/*.{js,json,md,mdx}\"",
-        "pretty-quick": "pretty-quick --staged",
         "release": "cd out && now alias",
         "start": "yarn export && serve out",
         "test": "yarn lint"
+    },
+    "lint-staged": {
+        "*.{js,json,md,mdx}": ["prettier --write", "git add"],
+        "*.gif": ["imageoptim", "git add"],
+        "*.jpg": ["imageoptim --no-imageoptim --jpegmini", "git add"],
+        "*.png": ["imageoptim --no-imageoptim --imagealpha", "git add"]
     },
     "dependencies": {
         "@mdx-js/mdx": "0.12.0",
@@ -65,10 +70,10 @@
         "globby": "8.0.1",
         "husky": "0.14.3",
         "imageoptim-cli": "2.0.3",
+        "lint-staged": "7.2.0",
         "listr": "0.14.1",
         "prettier": "1.13.7",
         "prettify-xml": "1.2.0",
-        "pretty-quick": "1.6.0",
         "react-dom": "16.4.1",
         "serve": "9.1.2",
         "shelljs": "0.8.2",
