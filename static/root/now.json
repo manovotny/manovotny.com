@@ -36,12 +36,12 @@
                     {
                         "key": "Content-Security-Policy",
                         "value":
-                            "default-src https:; report-uri https://manovotny.report-uri.com/r/d/csp/enforce"
+                            "default-src https: 'unsafe-inline'; img-src 'self'; script-src 'self' 'unsafe-inline'; report-uri https://manovotny.report-uri.com/r/d/csp/enforce"
                     },
                     {
                         "key": "Feature-Policy",
                         "value":
-                            "geolocation 'self'; notifications 'self'; push 'self'; microphone 'self'; camera 'self'"
+                            "geolocation 'self'; microphone 'self'; camera 'self'"
                     },
                     {
                         "key": "Referrer-Policy",
