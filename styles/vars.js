@@ -1,7 +1,7 @@
 export const colors = {
     background: '#0a6159',
-    border: '#ededed',
-    light: '#9eabb3',
+    border: '#dcdcdc',
+    light: '#68737a',
     text: '#50585d'
 };
 

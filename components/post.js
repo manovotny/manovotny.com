@@ -33,7 +33,7 @@ const components = {
     ul: Ul
 };
 
-const Article = styled.article`
+const Main = styled.main`
     ${column}
     padding: ${spacing.normal};
     
@@ -42,7 +42,7 @@ const Article = styled.article`
     }
 `;
 
-const MarkdownWrapper = styled.section`
+const MarkdownWrapper = styled.article`
     ${dividerBottom}
     padding-bottom: ${spacing.large};
 `;
@@ -55,12 +55,12 @@ const Post = ({children, meta}) => (
         title={`${meta.title} - Michael Novotny`}
     >
         <Header />
-        <Article>
+        <Main>
             <MDXProvider components={components}>
                 <MarkdownWrapper>{children}</MarkdownWrapper>
             </MDXProvider>
             <Questions />
-        </Article>
+        </Main>
         <Footer />
     </Page>
 );
