@@ -75,7 +75,7 @@
         "prettier": "1.13.7",
         "prettify-xml": "1.2.0",
         "react-dom": "16.4.1",
-        "serve": "9.1.2",
+        "serve": "9.4.0",
         "shelljs": "0.8.2",
         "webpack-bundle-analyzer": "2.13.1"
     }
