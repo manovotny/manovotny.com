@@ -20,7 +20,7 @@ const StyledHeader = styled.section`
 `;
 
 const Header = () => (
-    <>
+    <header>
         <HeaderBackground />
         <StyledHeader>
             <Avatar />
@@ -28,7 +28,7 @@ const Header = () => (
             <HeaderDescription />
             <Social />
         </StyledHeader>
-    </>
+    </header>
 );
 
 export default Header;

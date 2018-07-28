@@ -21,7 +21,7 @@ const Header = () => (
     <StyledHeader>
         <Link>
             <Avatar />
-            <HeaderTitle>{'Michael Novotny'}</HeaderTitle>
+            <HeaderTitle />
         </Link>
     </StyledHeader>
 );
