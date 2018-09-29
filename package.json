@@ -28,7 +28,7 @@
     "scripts": {
         "analyze": "cross-env ANALYZE=true next build",
         "dev": "next",
-        "deploy": "yarn export && cd out && now",
+        "deploy": "node scripts/deploy.js",
         "export": "node scripts/export.js",
         "imageoptim": "yarn imageoptim:gif && imageoptim:jpg && imageoptim:png",
         "imageoptim:gif": "imageoptim \"static/**/*.gif\"",
@@ -37,15 +37,27 @@
         "lint": "eslint . --ext .json --ext .js",
         "precommit": "lint-staged",
         "prettier": "prettier --write \"**/*.{js,json,md,mdx}\"",
-        "release": "cd out && now alias",
+        "release": "now alias https://manovotny.now.sh manovotny.com",
         "start": "yarn export && serve out",
         "test": "yarn lint"
     },
     "lint-staged": {
-        "*.{js,json,md,mdx}": ["prettier --write", "git add"],
-        "*.gif": ["imageoptim", "git add"],
-        "*.jpg": ["imageoptim --no-imageoptim --jpegmini", "git add"],
-        "*.png": ["imageoptim --no-imageoptim --imagealpha", "git add"]
+        "*.{js,json,md,mdx}": [
+            "prettier --write",
+            "git add"
+        ],
+        "*.gif": [
+            "imageoptim",
+            "git add"
+        ],
+        "*.jpg": [
+            "imageoptim --no-imageoptim --jpegmini",
+            "git add"
+        ],
+        "*.png": [
+            "imageoptim --no-imageoptim --imagealpha",
+            "git add"
+        ]
     },
     "dependencies": {
         "@mdx-js/mdx": "0.12.0",
@@ -67,6 +79,7 @@
         "eslint-config-get-off-my-lawn": "4.0.0",
         "eslint-config-prettier": "2.9.0",
         "execa": "0.10.0",
+        "execa-output": "1.0.0",
         "globby": "8.0.1",
         "husky": "0.14.3",
         "imageoptim-cli": "2.0.3",
