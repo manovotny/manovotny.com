@@ -1,5 +1,5 @@
 const {cp, mv, rm} = require('shelljs');
-const execa = require('execa');
+const execao = require('execa-output');
 const Listr = require('listr');
 
 const exportDirectory = 'out';
@@ -10,11 +10,11 @@ const tasks = new Listr([
         title: 'Removing export directory'
     },
     {
-        task: () => execa('next', ['build']),
+        task: () => execao('next', ['build']),
         title: 'Building site'
     },
     {
-        task: () => execa('next', ['export']),
+        task: () => execao('next', ['export']),
         title: 'Exporting site'
     },
     {
@@ -47,7 +47,7 @@ const tasks = new Listr([
         title: 'Removing static root directory'
     },
     {
-        task: () => execa('node', ['./scripts/sitemap.js']),
+        task: () => execao('node', ['./scripts/sitemap.js']),
         title: 'Generating sitemap'
     }
 ]);
