@@ -1478,10 +1478,10 @@ babel-messages@^6.23.0:
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-inline-react-svg@0.5.3:
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/babel-plugin-inline-react-svg/-/babel-plugin-inline-react-svg-0.5.3.tgz#8bad925d6efacf1e55332ff1851edc85de6c881c"
-  integrity sha512-GgcsOrckVwxFSEappyq/ytCQd5yMu9KDERmbIf4diObaLlh2URONlFwjrQQ5vTdx9iVynRYu/7CktpGCEws2jA==
+babel-plugin-inline-react-svg@0.5.4:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/babel-plugin-inline-react-svg/-/babel-plugin-inline-react-svg-0.5.4.tgz#bc818f351cd9d78f5b3bfa7cc1da5f83e7b4010a"
+  integrity sha512-Pr/J5kicFEpIvwooR3mytJWXfyGXoP4gp4QzTdN0jLoa7lU2OJVyhHMm17ekA3okxwbLaQehSc0kV/UVrj343w==
   dependencies:
     babel-template "^6.26.0"
     babel-traverse "^6.26.0"

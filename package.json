@@ -76,7 +76,7 @@
     },
     "devDependencies": {
         "@zeit/next-mdx": "1.1.0",
-        "babel-plugin-inline-react-svg": "0.5.3",
+        "babel-plugin-inline-react-svg": "0.5.4",
         "babel-plugin-styled-components": "1.5.1",
         "cross-env": "5.2.0",
         "eslint": "4.19.1",
