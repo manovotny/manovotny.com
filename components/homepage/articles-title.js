@@ -10,8 +10,6 @@ const StyledArticlesTitle = styled.h3`
     margin-bottom: ${spacing.normal};
 `;
 
-const ArticlesTitle = ({children}) => (
-    <StyledArticlesTitle>{children}</StyledArticlesTitle>
-);
+const ArticlesTitle = ({children}) => <StyledArticlesTitle>{children}</StyledArticlesTitle>;
 
 export default ArticlesTitle;

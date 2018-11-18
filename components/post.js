@@ -48,12 +48,7 @@ const MarkdownWrapper = styled.article`
 `;
 
 const Post = ({children, meta}) => (
-    <Page
-        date={meta.date}
-        description={meta.description}
-        image={meta.image}
-        title={`${meta.title} - Michael Novotny`}
-    >
+    <Page date={meta.date} description={meta.description} image={meta.image} title={`${meta.title} - Michael Novotny`}>
         <Header />
         <Main>
             <MDXProvider components={components}>

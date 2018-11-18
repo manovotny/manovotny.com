@@ -22,16 +22,11 @@ const tasks = new Listr([
         title: 'Removing unnecessary files'
     },
     {
-        task: () =>
-            cp('-r', `${exportDirectory}/static/root/*`, `${exportDirectory}`),
+        task: () => cp('-r', `${exportDirectory}/static/root/*`, `${exportDirectory}`),
         title: 'Copying static files to root'
     },
     {
-        task: () =>
-            mv(
-                `${exportDirectory}/_error/index.html`,
-                `${exportDirectory}/404.html`
-            ),
+        task: () => mv(`${exportDirectory}/_error/index.html`, `${exportDirectory}/404.html`),
         title: 'Moving 404 page to root'
     },
     {

@@ -35,7 +35,7 @@
         "imageoptim:jpg": "imageoptim --no-imageoptim --jpegmini \"static/**/*.jpg\"",
         "imageoptim:png": "imageoptim --no-imageoptim --imagealpha \"static/**/*.png\"",
         "lint": "eslint . --ext .json --ext .js",
-        "prettier": "prettier --write \"**/*.{js,json,md,mdx,yml}\"",
+        "prettier": "prettier --write \"**/*.{html,js,json,md,mdx,mjs,yml}\"",
         "release": "now alias https://manovotny.now.sh manovotny.com",
         "start": "yarn export && serve out",
         "test": "yarn lint"
@@ -46,7 +46,7 @@
         }
     },
     "lint-staged": {
-        "*.{js,json,md,mdx,yml}": [
+        "*.{html,js,json,md,mdx,mjs,yml}": [
             "prettier --write",
             "git add"
         ],
@@ -80,16 +80,15 @@
         "babel-plugin-styled-components": "1.5.1",
         "cross-env": "5.2.0",
         "eslint": "4.19.1",
-        "eslint-config-get-off-my-lawn": "4.0.1",
-        "eslint-config-prettier": "3.1.0",
+        "eslint-config-get-off-my-lawn-prettier": "1.0.0",
         "execa": "1.0.0",
         "execa-output": "2.0.0",
         "globby": "8.0.1",
-        "husky": "1.0.1",
+        "husky": "1.1.4",
         "imageoptim-cli": "2.0.3",
-        "lint-staged": "7.3.0",
-        "listr": "0.14.2",
-        "prettier": "1.14.3",
+        "lint-staged": "8.0.5",
+        "listr": "0.14.3",
+        "prettier": "1.15.2",
         "prettify-xml": "1.2.0",
         "react-dom": "16.5.2",
         "serve": "10.0.2",

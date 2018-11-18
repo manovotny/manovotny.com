@@ -10,8 +10,7 @@ const StyledCopyright = styled.p`
 `;
 
 const Copyright = () => (
-    <StyledCopyright
-    >{`© Copyright 2010 - ${new Date().getFullYear()} Michael Novotny`}</StyledCopyright>
+    <StyledCopyright>{`© Copyright 2010 - ${new Date().getFullYear()} Michael Novotny`}</StyledCopyright>
 );
 
 export default Copyright;

@@ -7,8 +7,7 @@ export default [
     {
         date: 'January 06, 2015',
         slug: 'setup-phpstorm-xdebug-mamp-debugging',
-        title:
-            'How To Setup and Configure PhpStorm, Xdebug, and MAMP for Debugging'
+        title: 'How To Setup and Configure PhpStorm, Xdebug, and MAMP for Debugging'
     },
     {
         date: 'February 28, 2013',

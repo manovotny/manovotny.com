@@ -12,8 +12,6 @@ const StyledDate = styled.time`
     text-transform: uppercase;
 `;
 
-const Date = ({children}) => (
-    <StyledDate dateTime={dateTime(children)}>{full(children)}</StyledDate>
-);
+const Date = ({children}) => <StyledDate dateTime={dateTime(children)}>{full(children)}</StyledDate>;
 
 export default Date;

@@ -10,8 +10,6 @@ const StyledArticleDate = styled.h4`
     text-transform: uppercase;
 `;
 
-const ArticleDate = ({children}) => (
-    <StyledArticleDate>{children}</StyledArticleDate>
-);
+const ArticleDate = ({children}) => <StyledArticleDate>{children}</StyledArticleDate>;
 
 export default ArticleDate;

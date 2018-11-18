@@ -10,8 +10,6 @@ const StyledProjectDescription = styled.h4`
     text-transform: uppercase;
 `;
 
-const ProjectDescription = ({children}) => (
-    <StyledProjectDescription>{children}</StyledProjectDescription>
-);
+const ProjectDescription = ({children}) => <StyledProjectDescription>{children}</StyledProjectDescription>;
 
 export default ProjectDescription;

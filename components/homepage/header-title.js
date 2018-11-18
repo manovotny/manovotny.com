@@ -12,8 +12,6 @@ const StyledHeaderTitle = styled.h1`
     }
 `;
 
-const HeaderTitle = () => (
-    <StyledHeaderTitle>{'Michael Novotny'}</StyledHeaderTitle>
-);
+const HeaderTitle = () => <StyledHeaderTitle>{'Michael Novotny'}</StyledHeaderTitle>;
 
 export default HeaderTitle;
