@@ -12,7 +12,7 @@ const StyledHeaderDescription = styled.h2`
 const HeaderDescription = () => (
     <StyledHeaderDescription>
         {
-            'JavaScript developer. Open source contributor. Insatiable learner. Standards and best practices enthusiast. Development is a lifestyle, not a job.'
+            'Developer. Insatiable learner. Lots of ❤️ for open source, JavaScript, enabling others, and open browser tabs. Development is a lifestyle, not a job.'
         }
     </StyledHeaderDescription>
 );
