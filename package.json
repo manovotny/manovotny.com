@@ -64,8 +64,8 @@
         ]
     },
     "dependencies": {
-        "@mdx-js/mdx": "0.16.0",
-        "@mdx-js/tag": "0.16.0",
+        "@mdx-js/mdx": "0.16.5",
+        "@mdx-js/tag": "0.16.1",
         "luxon": "1.4.1",
         "next": "7.0.2",
         "next-ga": "2.3.4",
@@ -96,6 +96,6 @@
         "webpack-bundle-analyzer": "3.0.3"
     },
     "resolutions": {
-        "@mdx-js/mdx": "0.16.0"
+        "@mdx-js/mdx": "0.16.5"
     }
 }
