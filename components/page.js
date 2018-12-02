@@ -5,6 +5,8 @@ import React from 'react';
 import {dateTime} from '../utils/date-format';
 import titleStyle from '../utils/title-style';
 
+import GlobalStyle from './GlobalStyle';
+
 const Page = ({children, date, description, image, title = 'Michael Novotny', keywords, router}) => {
     const domain = 'https://manovotny.com';
     const formattedTitle = titleStyle(title);
@@ -52,6 +54,7 @@ const Page = ({children, date, description, image, title = 'Michael Novotny', ke
                 <meta content="@manovotny" name="twitter:site" />
                 <meta content="@manovotny" name="twitter:creator" />
             </Head>
+            <GlobalStyle />
             {children}
         </>
     );
