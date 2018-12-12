@@ -66,7 +66,7 @@
     "dependencies": {
         "@mdx-js/mdx": "0.16.5",
         "@mdx-js/tag": "0.16.1",
-        "luxon": "1.4.1",
+        "date-fns": "1.29.0",
         "next": "7.0.2",
         "next-ga": "2.3.4",
         "react": "16.6.3",
