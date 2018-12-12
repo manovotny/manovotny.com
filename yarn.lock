@@ -795,10 +795,25 @@
     unist-builder "^1.0.1"
     unist-util-visit "^1.3.0"
 
-"@mdx-js/tag@0.16.1":
-  version "0.16.1"
-  resolved "https://registry.yarnpkg.com/@mdx-js/tag/-/tag-0.16.1.tgz#d4a58971832e0a514594ae36839a5a0e7d0e1880"
-  integrity sha512-f1HOiurOECamWbNe8fX+5Dw2/+IAZwCjwi1kPnO0e/HtEbIyyskcBhJttbW4BJMFCw5GYljExE745z4cHCqo8A==
+"@mdx-js/mdx@0.16.6":
+  version "0.16.6"
+  resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-0.16.6.tgz#9b9ea113bcfc0945ec48f17db7aceb63e604c2a7"
+  integrity sha512-OJDun9/lt8c5tIWVNwjgFIkHtSWR3HOS+CmM5nW3BJKY5i4RSeVLekWkcCMpzujZtBF1frbjTM4bF9fD6LN8mQ==
+  dependencies:
+    change-case "^3.0.2"
+    detab "^2.0.0"
+    mdast-util-to-hast "^4.0.0"
+    remark-parse "^6.0.0"
+    remark-squeeze-paragraphs "^3.0.1"
+    to-style "^1.3.3"
+    unified "^7.0.0"
+    unist-builder "^1.0.1"
+    unist-util-visit "^1.3.0"
+
+"@mdx-js/tag@0.16.6":
+  version "0.16.6"
+  resolved "https://registry.yarnpkg.com/@mdx-js/tag/-/tag-0.16.6.tgz#af340b15a8ed6794bcae5d10611792b28238fa0c"
+  integrity sha512-cTv+DLNEUPjAExizE2ujdUxQ6OO3z/ttzeh2JAweMh5uLfWHceSQiX9sbl16AYuV00MiOu//6gHoa+Ob2NZxNA==
 
 "@mdx-js/tag@^0.15.6":
   version "0.15.6"
@@ -1470,7 +1485,16 @@ babel-plugin-react-require@3.0.0:
   resolved "https://registry.yarnpkg.com/babel-plugin-react-require/-/babel-plugin-react-require-3.0.0.tgz#2e4e7b4496b93a654a1c80042276de4e4eeb20e3"
   integrity sha1-Lk57RJa5OmVKHIAEInbeTk7rIOM=
 
-babel-plugin-styled-components@1.9.2, "babel-plugin-styled-components@>= 1":
+babel-plugin-styled-components@1.9.4:
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/babel-plugin-styled-components/-/babel-plugin-styled-components-1.9.4.tgz#5f2c34d31237c6ee1e86453cc5fa488b97136669"
+  integrity sha512-FIACAvgJsUasYA+CdhPMWUIXWCdUUirz7fL9FGQYNNuOls+bs9OUWWHYVM2W9gjVoS2TXdEMqcOVVyG3Hagd/g==
+  dependencies:
+    "@babel/helper-annotate-as-pure" "^7.0.0"
+    babel-plugin-syntax-jsx "^6.18.0"
+    lodash "^4.17.10"
+
+"babel-plugin-styled-components@>= 1":
   version "1.9.2"
   resolved "https://registry.yarnpkg.com/babel-plugin-styled-components/-/babel-plugin-styled-components-1.9.2.tgz#0e6a6587454dcb1c9a362a8fd31fc0b075ccd260"
   integrity sha512-McnheW8RkBkur/mQw7rEwQO/oUUruQ/nIIj5LIRpsVL8pzG1oo1Y53xyvAYeOfamIrl4/ta7g1G/kuTR1ekO3A==
@@ -2408,7 +2432,12 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-date-fns@1.29.0, date-fns@^1.27.2:
+date-fns@1.30.1:
+  version "1.30.1"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
+  integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
+
+date-fns@^1.27.2:
   version "1.29.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.29.0.tgz#12e609cdcb935127311d04d33334e2960a2a54e6"
   integrity sha512-lbTXWZ6M20cWH8N9S6afb0SBm6tMk+uUg6z3MqHPKE9atmsY3kJkTm8vKe93izJ2B2+q5MV990sM2CHgtAZaOw==
@@ -7207,10 +7236,10 @@ styled-jsx@3.1.0:
     stylis "3.5.3"
     stylis-rule-sheet "0.0.10"
 
-styled-reset@1.6.1:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/styled-reset/-/styled-reset-1.6.1.tgz#80ec719bbcfffa6f7c1bd7781aec2c93145aa47d"
-  integrity sha512-XpEXPrE8HJB1s1s9w1EyZ3ML5zy2dDRhia0M9tvom+NZx+CZ8Z5TDDF/UppHqOd44cwP6CG3cxmTNfc/9bsSgw==
+styled-reset@1.6.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/styled-reset/-/styled-reset-1.6.2.tgz#29bc122e29d174d51d60da80cff0e7b782daeafc"
+  integrity sha512-hfG0c6ET6SrS0PTW2lpfuoZc9RkRnCpHgdT59aIF0ssCWMkZ2qPuKsCxSozOSTHKUhPqxxMWAzjd3tWcPbrP4w==
 
 stylis-rule-sheet@0.0.10, stylis-rule-sheet@^0.0.10:
   version "0.0.10"

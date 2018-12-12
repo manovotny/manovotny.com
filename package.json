@@ -64,20 +64,20 @@
         ]
     },
     "dependencies": {
-        "@mdx-js/mdx": "0.16.5",
-        "@mdx-js/tag": "0.16.1",
-        "date-fns": "1.29.0",
+        "@mdx-js/mdx": "0.16.6",
+        "@mdx-js/tag": "0.16.6",
+        "date-fns": "1.30.1",
         "next": "7.0.2",
         "next-ga": "2.3.4",
         "react": "16.6.3",
         "styled-components": "4.1.2",
-        "styled-reset": "1.6.1",
+        "styled-reset": "1.6.2",
         "title": "3.4.0"
     },
     "devDependencies": {
         "@zeit/next-mdx": "1.2.0",
         "babel-plugin-inline-react-svg": "1.0.1",
-        "babel-plugin-styled-components": "1.9.2",
+        "babel-plugin-styled-components": "1.9.4",
         "cross-env": "5.2.0",
         "eslint": "4.19.1",
         "eslint-config-get-off-my-lawn-prettier": "1.0.0",
@@ -96,6 +96,6 @@
         "webpack-bundle-analyzer": "3.0.3"
     },
     "resolutions": {
-        "@mdx-js/mdx": "0.16.5"
+        "@mdx-js/mdx": "0.16.6"
     }
 }
