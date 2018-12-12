@@ -9,7 +9,6 @@ const StyledDate = styled.time`
     display: block;
     font-size: 14px;
     margin: 8px 0 24px;
-    text-transform: uppercase;
 `;
 
 const Date = ({children}) => <StyledDate dateTime={dateTime(children)}>{full(children)}</StyledDate>;

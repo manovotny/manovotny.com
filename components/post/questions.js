@@ -10,8 +10,7 @@ const Section = styled.section`
 
 const Questions = () => (
     <Section>
-        <H2>{'Questions?'}</H2>
-        <p>{'Have a question about this post or anything else?'}</p>
+        <H2>{'Questions, Comments, or More?'}</H2>
         <p>
             {'Ask away on '}
             <a href="https://twitter.com/manovotny" title="Twitter">

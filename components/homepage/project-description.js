@@ -7,7 +7,6 @@ const StyledProjectDescription = styled.h4`
     color: ${colors.light};
     font-size: 14px;
     font-weight: lighter;
-    text-transform: uppercase;
 `;
 
 const ProjectDescription = ({children}) => <StyledProjectDescription>{children}</StyledProjectDescription>;
