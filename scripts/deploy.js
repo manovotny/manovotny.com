@@ -1,7 +1,6 @@
 const execa = require('execa');
 const execao = require('execa-output');
 const Listr = require('listr');
-const {cd} = require('shelljs');
 
 const exportDirectory = 'out';
 
@@ -11,18 +10,14 @@ const tasks = new Listr([
         title: 'Exporting site'
     },
     {
-        task: () => cd(exportDirectory),
-        title: 'Switching to export directory'
-    },
-    {
         task: (ctx) =>
-            execa.stdout('now').then((result) => {
+            execa.stdout('now', [exportDirectory]).then((result) => {
                 ctx.url = result;
             }),
         title: 'Running now'
     },
     {
-        task: (ctx) => execa('now', ['alias', ctx.url, 'manovotny.now.sh']),
+        task: (ctx) => execao('now', ['alias', ctx.url, 'manovotny.now.sh']),
         title: 'Aliasing site'
     }
 ]);

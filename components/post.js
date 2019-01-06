@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import {column, dividerBottom} from '../styles/mixins';
 import {spacing} from '../styles/vars';
+import titleStyle from '../utils/title-style';
 
 import Blockquote from './elements/blockquote';
 import Em from './elements/em';
@@ -52,7 +53,7 @@ const Post = ({children, meta}) => (
         date={meta.date}
         description={meta.description}
         image={meta.image}
-        title={`${meta.title} - Michael Novotny`}
+        title={`${titleStyle(meta.title)} - Michael Novotny`}
     >
         <Header />
         <Main>

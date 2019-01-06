@@ -4,8 +4,7 @@ const fs = require('fs');
 const globby = require('globby');
 const prettifyXml = require('prettify-xml');
 
-const removeTrailingSlash = (text) =>
-    text.endsWith('/') ? text.slice(0, -1) : text;
+const removeTrailingSlash = (text) => (text.endsWith('/') ? text.slice(0, -1) : text);
 
 (async () => {
     const dir = 'out';
@@ -17,16 +16,11 @@ const removeTrailingSlash = (text) =>
                 .map((page) => {
                     const path = page.replace(dir, '');
                     const parsed = parse(path);
-                    const loc =
-                        parsed.name === 'index'
-                            ? parsed.dir
-                            : parsed.dir + parsed.base;
+                    const loc = parsed.name === 'index' ? parsed.dir : parsed.dir + parsed.base;
 
                     return `
                         <url>
-                            <loc>${`https://manovotny.com${removeTrailingSlash(
-                                loc
-                            )}`}</loc>
+                            <loc>${`https://manovotny.com${removeTrailingSlash(loc)}`}</loc>
                         </url>
                     `;
                 })

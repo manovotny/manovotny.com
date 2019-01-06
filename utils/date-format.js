@@ -1,13 +1,5 @@
-import {DateTime} from 'luxon';
+import format from 'date-fns/format';
 
-export const dateTime = (date) => {
-    const dt = DateTime.fromISO(date);
+export const dateTime = (date) => new Date(date).toISOString();
 
-    return dt.toISO();
-};
-
-export const full = (date) => {
-    const dt = DateTime.fromISO(date);
-
-    return dt.toLocaleString(DateTime.DATE_FULL);
-};
+export const full = (date) => format(date, 'MMMM D, YYYY');

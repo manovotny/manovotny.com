@@ -35,13 +35,11 @@
                 "headers": [
                     {
                         "key": "Content-Security-Policy",
-                        "value":
-                            "default-src https:; img-src 'self'; script-src 'self' 'unsafe-inline' *.google-analytics.com; style-src 'unsafe-inline'; report-uri https://manovotny.report-uri.com/r/d/csp/enforce"
+                        "value": "default-src https:; img-src 'self'; script-src 'self' 'unsafe-inline' *.google-analytics.com; style-src 'unsafe-inline'; report-uri https://manovotny.report-uri.com/r/d/csp/enforce"
                     },
                     {
                         "key": "Feature-Policy",
-                        "value":
-                            "geolocation 'self'; microphone 'self'; camera 'self'"
+                        "value": "geolocation 'self'; microphone 'self'; camera 'self'"
                     },
                     {
                         "key": "Referrer-Policy",

@@ -11,8 +11,6 @@ const StyledDate = styled.time`
     margin: 8px 0 24px;
 `;
 
-const Date = ({children}) => (
-    <StyledDate dateTime={dateTime(children)}>{full(children)}</StyledDate>
-);
+const Date = ({children}) => <StyledDate dateTime={dateTime(children)}>{full(children)}</StyledDate>;
 
 export default Date;

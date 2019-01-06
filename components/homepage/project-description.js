@@ -9,8 +9,6 @@ const StyledProjectDescription = styled.h4`
     font-weight: lighter;
 `;
 
-const ProjectDescription = ({children}) => (
-    <StyledProjectDescription>{children}</StyledProjectDescription>
-);
+const ProjectDescription = ({children}) => <StyledProjectDescription>{children}</StyledProjectDescription>;
 
 export default ProjectDescription;

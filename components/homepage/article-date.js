@@ -9,8 +9,6 @@ const StyledArticleDate = styled.h4`
     font-weight: lighter;
 `;
 
-const ArticleDate = ({children}) => (
-    <StyledArticleDate>{children}</StyledArticleDate>
-);
+const ArticleDate = ({children}) => <StyledArticleDate>{children}</StyledArticleDate>;
 
 export default ArticleDate;

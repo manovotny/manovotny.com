@@ -11,10 +11,7 @@ const Social = () => (
     <nav>
         <ul>
             <SocialListItem>
-                <SocialLink
-                    href="https://twitter.com/manovotny"
-                    title="Twitter"
-                >
+                <SocialLink href="https://twitter.com/manovotny" title="Twitter">
                     <TwitterIcon />
                     {'Twitter'}
                 </SocialLink>

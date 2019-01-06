@@ -30,33 +30,28 @@ export default [
         name: 'chance-path-object'
     },
     {
-        description:
-            'A highly opinionated, sharable config of ESLint rules to produce beautiful, readable JavaScript.',
+        description: 'A highly opinionated, sharable config of ESLint rules to produce beautiful, readable JavaScript.',
         link: 'https://www.npmjs.com/package/eslint-config-get-off-my-lawn',
         name: 'eslint-config-get-off-my-lawn'
     },
     {
         description:
             'A highly opinionated, sharable config of ESLint rules to produce beautiful, readable JavaScript, optimized for seamless use with Prettier.',
-        link:
-            'https://www.npmjs.com/package/eslint-config-get-off-my-lawn-prettier',
+        link: 'https://www.npmjs.com/package/eslint-config-get-off-my-lawn-prettier',
         name: 'eslint-config-get-off-my-lawn-prettier'
     },
     {
-        description:
-            'Highly opinionated, ESLint plugin with custom rules to produce beautiful, readable JavaScript.',
+        description: 'Highly opinionated, ESLint plugin with custom rules to produce beautiful, readable JavaScript.',
         link: 'https://www.npmjs.com/package/eslint-plugin-get-off-my-lawn',
         name: 'eslint-plugin-get-off-my-lawn'
     },
     {
-        description:
-            'A utility to display command output when using execa with listr.',
+        description: 'A utility to display command output when using execa with listr.',
         link: 'https://www.npmjs.com/package/execa-output',
         name: 'execa-output'
     },
     {
-        description:
-            'A node script to run or generate rsync scripts for backups.',
+        description: 'A node script to run or generate rsync scripts for backups.',
         link: 'https://www.npmjs.com/package/rsync-generator',
         name: 'rsync-generator'
     },

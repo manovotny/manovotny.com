@@ -1,10 +1,7 @@
 import React from 'react';
+import Router from 'next/router';
 import withGA from 'next-ga';
 import App, {Container} from 'next/app';
-
-import {global} from '../styles/mixins';
-
-global();
 
 class CustomApp extends App {
     render() {
@@ -18,4 +15,4 @@ class CustomApp extends App {
     }
 }
 
-export default withGA('UA-27106984-1')(CustomApp);
+export default withGA('UA-27106984-1', Router)(CustomApp);
