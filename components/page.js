@@ -3,13 +3,11 @@ import {withRouter} from 'next/router';
 import React from 'react';
 
 import {dateTime} from '../utils/date-format';
-import titleStyle from '../utils/title-style';
 
 import GlobalStyle from './GlobalStyle';
 
 const Page = ({children, date, description, image, title = 'Michael Novotny', keywords, router}) => {
     const domain = 'https://manovotny.com';
-    const formattedTitle = titleStyle(title);
     const url = router && router.asPath ? router.asPath : undefined;
     const canonical = url && url === '/' ? domain : domain + url;
     const featuredImage = domain + image;
@@ -17,7 +15,7 @@ const Page = ({children, date, description, image, title = 'Michael Novotny', ke
     return (
         <>
             <Head>
-                <title>{formattedTitle}</title>
+                <title>{title}</title>
                 <meta charSet="utf-8" />
                 <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
                 <meta content="width=device-width, initial-scale=1" name="viewport" />
@@ -35,7 +33,7 @@ const Page = ({children, date, description, image, title = 'Michael Novotny', ke
                 <link href="/static/favicons/favicon.ico" rel="shortcut icon" />
                 {url && <link href={canonical} rel="canonical" />}
                 <meta content="en_US" property="og:locale" />
-                <meta content={formattedTitle} property="og:title" />
+                <meta content={title} property="og:title" />
                 <meta content={description} property="og:description" />
                 <meta content={url} property="og:url" />
                 {featuredImage && (

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import {column, dividerBottom} from '../styles/mixins';
 import {spacing} from '../styles/vars';
+import titleStyle from '../utils/title-style';
 
 import Blockquote from './elements/blockquote';
 import Em from './elements/em';
@@ -48,7 +49,12 @@ const MarkdownWrapper = styled.article`
 `;
 
 const Post = ({children, meta}) => (
-    <Page date={meta.date} description={meta.description} image={meta.image} title={`${meta.title} - Michael Novotny`}>
+    <Page
+        date={meta.date}
+        description={meta.description}
+        image={meta.image}
+        title={`${titleStyle(meta.title)} - Michael Novotny`}
+    >
         <Header />
         <Main>
             <MDXProvider components={components}>
