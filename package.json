@@ -27,17 +27,17 @@
     ],
     "scripts": {
         "analyze": "cross-env ANALYZE=true next build",
+        "build": "cross-env NODE_ENV=production next build",
         "dev": "next",
-        "deploy": "node scripts/deploy.js",
-        "export": "node scripts/export.js",
+        "export": "next export -o dist",
         "imageoptim": "yarn imageoptim:gif && yarn imageoptim:jpg && yarn imageoptim:png",
         "imageoptim:gif": "imageoptim \"static/**/*.gif\"",
         "imageoptim:jpg": "imageoptim --no-imageoptim --jpegmini \"static/**/*.jpg\"",
         "imageoptim:png": "imageoptim --no-imageoptim --imagealpha \"static/**/*.png\"",
         "lint": "eslint . --ext .json --ext .js",
+        "now-build": "yarn build && yarn export",
         "prettier": "prettier --write \"**/*.{html,js,json,md,mdx,mjs,yml}\"",
-        "release": "now alias https://manovotny.now.sh manovotny.com",
-        "start": "yarn export && serve out",
+        "start": "cross-env NODE_ENV=production next start",
         "test": "yarn lint"
     },
     "husky": {
@@ -91,7 +91,6 @@
         "prettier": "1.15.3",
         "prettify-xml": "1.2.0",
         "react-dom": "16.7.0",
-        "serve": "10.1.1",
         "shelljs": "0.8.3",
         "webpack-bundle-analyzer": "3.0.3"
     },

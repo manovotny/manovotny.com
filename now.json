@@ -1,0 +1,11 @@
+{
+    "alias": ["manovotny.com"],
+    "builds": [
+        {
+            "src": "package.json",
+            "use": "@now/static-build"
+        }
+    ],
+    "name": "manovotny",
+    "version": 2
+}
