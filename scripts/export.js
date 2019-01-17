@@ -1,4 +1,4 @@
-const {cp, mv, rm} = require('shelljs');
+const {cp, rm} = require('shelljs');
 const execao = require('execa-output');
 const Listr = require('listr');
 
