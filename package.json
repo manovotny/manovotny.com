@@ -13,7 +13,7 @@
         "url": "git+https://github.com/manovotny/manovotny.com.git"
     },
     "engines": {
-        "node": "8.12.0",
+        "node": "8.10.0",
         "yarn": ">=1.5.1"
     },
     "files": [
