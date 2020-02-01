@@ -1,6 +1,3 @@
 module.exports = {
-    extends: 'get-off-my-lawn',
-    rules: {
-        'react/prop-types': 0
-    }
+    extends: 'get-off-my-lawn'
 };
