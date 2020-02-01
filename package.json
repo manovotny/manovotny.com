@@ -13,7 +13,7 @@
         "url": "git+https://github.com/manovotny/manovotny.com.git"
     },
     "engines": {
-        "node": "8.10.0",
+        "node": "12.13.1",
         "yarn": ">=1.5.1"
     },
     "files": [
@@ -29,13 +29,11 @@
         "analyze": "cross-env ANALYZE=true next build",
         "build": "cross-env NODE_ENV=production next build",
         "dev": "next",
-        "export": "node scripts/export.js",
         "imageoptim": "yarn imageoptim:gif && yarn imageoptim:jpg && yarn imageoptim:png",
         "imageoptim:gif": "imageoptim \"static/**/*.gif\"",
         "imageoptim:jpg": "imageoptim --no-imageoptim --jpegmini \"static/**/*.jpg\"",
         "imageoptim:png": "imageoptim --no-imageoptim --imagealpha \"static/**/*.png\"",
         "lint": "eslint . --ext .json --ext .js",
-        "now-build": "yarn build && yarn export",
         "prettier": "prettier --write \"**/*.{html,js,json,md,mdx,mjs,yml}\"",
         "start": "cross-env NODE_ENV=production next start",
         "test": "yarn lint"
@@ -49,53 +47,31 @@
         "*.{html,js,json,md,mdx,mjs,yml}": [
             "prettier --write",
             "git add"
-        ],
-        "*.gif": [
-            "imageoptim",
-            "git add"
-        ],
-        "*.jpg": [
-            "imageoptim --no-imageoptim --jpegmini",
-            "git add"
-        ],
-        "*.png": [
-            "imageoptim --no-imageoptim --imagealpha",
-            "git add"
         ]
     },
     "dependencies": {
-        "@mdx-js/mdx": "0.16.6",
-        "@mdx-js/tag": "0.16.6",
+        "@mdx-js/mdx": "1.5.5",
+        "@mdx-js/tag": "0.20.3",
         "date-fns": "1.30.1",
-        "next": "7.0.2",
-        "next-ga": "2.3.4",
-        "react": "16.7.0",
-        "styled-components": "4.1.3",
-        "styled-reset": "1.6.4",
-        "title": "3.4.0"
+        "globby": "11.0.0",
+        "next": "9.2.0",
+        "react": "16.12.0",
+        "styled-components": "5.0.0",
+        "styled-reset": "4.0.9",
+        "title": "3.4.1"
     },
     "devDependencies": {
         "@zeit/next-mdx": "1.2.0",
-        "babel-plugin-inline-react-svg": "1.0.1",
-        "babel-plugin-styled-components": "1.10.0",
-        "cpy": "7.0.1",
-        "cross-env": "5.2.0",
-        "del": "3.0.0",
-        "eslint": "4.19.1",
-        "eslint-config-get-off-my-lawn-prettier": "1.0.0",
-        "execa": "1.0.0",
-        "execa-output": "2.0.0",
-        "globby": "9.0.0",
-        "husky": "1.3.1",
-        "imageoptim-cli": "2.3.4",
-        "lint-staged": "8.1.0",
-        "listr": "0.14.3",
-        "prettier": "1.15.3",
-        "prettify-xml": "1.2.0",
-        "react-dom": "16.7.0",
-        "webpack-bundle-analyzer": "3.0.3"
-    },
-    "resolutions": {
-        "@mdx-js/mdx": "0.16.6"
+        "babel-plugin-inline-react-svg": "1.1.0",
+        "babel-plugin-styled-components": "1.10.6",
+        "cross-env": "6.0.3",
+        "eslint": "6.8.0",
+        "eslint-config-get-off-my-lawn": "5.0.1",
+        "husky": "3.0.9",
+        "imageoptim-cli": "3.0.2",
+        "lint-staged": "9.4.2",
+        "prettier": "1.19.1",
+        "react-dom": "16.12.0",
+        "webpack-bundle-analyzer": "3.6.0"
     }
 }

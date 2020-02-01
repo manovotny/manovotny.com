@@ -2,22 +2,52 @@ import Document, {Head, Main, NextScript} from 'next/document';
 import React from 'react';
 import {ServerStyleSheet} from 'styled-components';
 
-export default class CustomDocument extends Document {
-    static getInitialProps({renderPage}) {
-        const sheet = new ServerStyleSheet();
-        const page = renderPage((App) => (props) => sheet.collectStyles(<App {...props} />));
-        const styleTags = sheet.getStyleElement();
+const GA_TRACKING_ID = 'UA-27106984-1';
 
-        return {
-            ...page,
-            styleTags
-        };
+class CustomDocument extends Document {
+    static async getInitialProps(ctx) {
+        const sheet = new ServerStyleSheet();
+        const originalRenderPage = ctx.renderPage;
+
+        try {
+            // eslint-disable-next-line no-param-reassign
+            ctx.renderPage = () =>
+                originalRenderPage({
+                    enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />)
+                });
+            const initialProps = await Document.getInitialProps(ctx);
+
+            return {
+                ...initialProps,
+                styles: (
+                    <>
+                        {initialProps.styles}
+                        {sheet.getStyleElement()}
+                    </>
+                )
+            };
+        } finally {
+            sheet.seal();
+        }
     }
 
     render() {
         return (
             <html lang="en">
-                <Head>{this.props.styleTags}</Head>
+                <Head>
+                    <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
+                    <script
+                        // eslint-disable-next-line react/no-danger
+                        dangerouslySetInnerHTML={{
+                            __html: `
+                                window.dataLayer = window.dataLayer || [];
+                                function gtag(){dataLayer.push(arguments);}
+                                gtag('js', new Date());
+                                gtag('config', '${GA_TRACKING_ID}');
+                            `
+                        }}
+                    />
+                </Head>
                 <body>
                     <Main />
                     <NextScript />
@@ -26,3 +56,5 @@ export default class CustomDocument extends Document {
         );
     }
 }
+
+export default CustomDocument;
