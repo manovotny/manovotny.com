@@ -26,16 +26,11 @@
         "utils"
     ],
     "scripts": {
-        "analyze": "cross-env ANALYZE=true next build",
-        "build": "cross-env NODE_ENV=production next build",
+        "build": "next build",
         "dev": "next",
-        "imageoptim": "yarn imageoptim:gif && yarn imageoptim:jpg && yarn imageoptim:png",
-        "imageoptim:gif": "imageoptim \"static/**/*.gif\"",
-        "imageoptim:jpg": "imageoptim --no-imageoptim --jpegmini \"static/**/*.jpg\"",
-        "imageoptim:png": "imageoptim --no-imageoptim --imagealpha \"static/**/*.png\"",
         "lint": "eslint . --ext .json --ext .js",
         "prettier": "prettier --write \"**/*.{html,js,json,md,mdx,mjs,yml}\"",
-        "start": "cross-env NODE_ENV=production next start",
+        "start": "next start",
         "test": "yarn lint"
     },
     "husky": {
@@ -64,14 +59,11 @@
         "@zeit/next-mdx": "1.2.0",
         "babel-plugin-inline-react-svg": "1.1.0",
         "babel-plugin-styled-components": "1.10.6",
-        "cross-env": "6.0.3",
         "eslint": "6.2.1",
         "eslint-config-get-off-my-lawn": "5.0.1",
         "husky": "3.0.9",
-        "imageoptim-cli": "3.0.2",
         "lint-staged": "9.4.2",
         "prettier": "1.19.1",
-        "react-dom": "16.12.0",
-        "webpack-bundle-analyzer": "3.6.0"
+        "react-dom": "16.12.0"
     }
 }
