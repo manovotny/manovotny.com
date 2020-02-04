@@ -16,7 +16,7 @@ const Content = styled.main`
 `;
 
 const description =
-    'Developer. Insatiable learner. Lots of ❤️ for open source, JavaScript, enabling others, and open browser tabs. Development is a lifestyle, not a job.';
+    'Director of Software Engineering at Hy-Vee. Into open source, JavaScript, learning new things, and enabling others. Development is a lifestyle, not a job.';
 
 const Index = () => (
     <Page description={description} title={`Michael Novotny - ${description}`}>
