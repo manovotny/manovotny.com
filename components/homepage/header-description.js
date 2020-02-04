@@ -11,8 +11,10 @@ const StyledHeaderDescription = styled.h2`
 
 const HeaderDescription = () => (
     <StyledHeaderDescription>
+        {'Director of Software Engineering at '}
+        <a href="https://hy-vee.com">{'Hy-Vee'}</a>
         {
-            'Developer. Insatiable learner. Lots of ❤️ for open source, JavaScript, enabling others, and open browser tabs. Development is a lifestyle, not a job.'
+            '. Into open source, JavaScript, learning new things, and enabling others. Development is a lifestyle, not a job.'
         }
     </StyledHeaderDescription>
 );
