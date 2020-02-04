@@ -26,7 +26,7 @@
         "utils"
     ],
     "scripts": {
-        "build": "next build",
+        "build": "rimraf .next && next build",
         "dev": "next",
         "lint": "eslint . --ext .json --ext .js",
         "prettier": "prettier --write \"**/*.{html,js,json,md,mdx,mjs,yml}\"",
@@ -46,9 +46,8 @@
     },
     "dependencies": {
         "@mdx-js/mdx": "1.5.5",
-        "@mdx-js/tag": "0.20.3",
+        "@mdx-js/react": "1.5.5",
         "date-fns": "1.30.1",
-        "globby": "11.0.0",
         "next": "9.2.0",
         "react": "16.12.0",
         "styled-components": "5.0.0",
@@ -56,14 +55,19 @@
         "title": "3.4.1"
     },
     "devDependencies": {
-        "@zeit/next-mdx": "1.2.0",
+        "@mapbox/rehype-prism": "0.4.0",
+        "@mdx-js/loader": "1.5.5",
+        "@next/mdx": "9.2.1",
+        "@prettier/plugin-xml": "0.7.0",
         "babel-plugin-inline-react-svg": "1.1.0",
         "babel-plugin-styled-components": "1.10.6",
         "eslint": "6.2.1",
         "eslint-config-get-off-my-lawn": "5.0.1",
+        "globby": "11.0.0",
         "husky": "3.0.9",
         "lint-staged": "9.4.2",
         "prettier": "1.19.1",
-        "react-dom": "16.12.0"
+        "react-dom": "16.12.0",
+        "rimraf": "3.0.1"
     }
 }

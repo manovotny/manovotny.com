@@ -1,41 +1,19 @@
-const {ANALYZE} = process.env;
-const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
+const rehypePrism = require('@mapbox/rehype-prism');
 
-module.exports = {
-    experimental: {
-        modern: true,
-        rewrites: () => [
-            {
-                destination: '/api/sitemap',
-                source: '/sitemap.xml'
-            }
-        ]
-    },
+const withMDX = require('@next/mdx')({
+    extension: /\.(mdx)?$/,
+    options: {
+        rehypePlugins: [rehypePrism]
+    }
+});
+
+module.exports = withMDX({
     pageExtensions: ['js', 'mdx'],
-    webpack: (config, {defaultLoaders, isServer}) => {
-        if (ANALYZE) {
-            config.plugins.push(
-                new BundleAnalyzerPlugin({
-                    analyzerMode: 'server',
-                    analyzerPort: isServer ? 8888 : 8889,
-                    openAnalyzer: true
-                })
-            );
+    target: 'serverless',
+    webpack(config, {isServer}) {
+        if (isServer) {
+            require('./scripts/generate-sitemap');
         }
-
-        config.module.rules.push({
-            test: /\.mdx?$/u,
-            use: [
-                defaultLoaders.babel,
-                {
-                    loader: '@mdx-js/loader',
-                    options: {
-                        mdPlugins: []
-                    }
-                }
-            ]
-        });
-
         return config;
     }
-};
+});

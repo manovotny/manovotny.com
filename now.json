@@ -1,18 +1,7 @@
 {
-    "version": 2,
-    "name": "manovotny",
     "alias": ["manovotny.com"],
-    "builds": [
-        {
-            "src": "package.json",
-            "use": "@now/next"
-        }
-    ],
-    "routes": [
-        {
-            "src": "/(.*\\.(js|jpg|json|css|ico|png)$)",
-            "dest": "/$1",
-            "headers": {"cache-control": "public,max-age=31536000,immutable"}
-        }
-    ]
+    "cleanUrls": true,
+    "name": "manovotny",
+    "trailingSlash": false,
+    "version": 2
 }
