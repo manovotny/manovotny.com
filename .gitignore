@@ -1,6 +1,5 @@
 *.log
 .DS_Store
-.idea
 .next
-dist
+public/sitemap.xml
 node_modules

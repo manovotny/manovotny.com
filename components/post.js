@@ -1,4 +1,4 @@
-import {MDXProvider} from '@mdx-js/tag';
+import {MDXProvider} from '@mdx-js/react';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -37,7 +37,7 @@ const components = {
 const Main = styled.main`
     ${column}
     padding: ${spacing.normal};
-    
+
     @media (min-width: 768px) {
         font-size: 18px;
     }

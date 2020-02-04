@@ -1,11 +1,7 @@
 {
     "alias": ["manovotny.com"],
-    "builds": [
-        {
-            "src": "package.json",
-            "use": "@now/static-build"
-        }
-    ],
+    "cleanUrls": true,
     "name": "manovotny",
+    "trailingSlash": false,
     "version": 2
 }

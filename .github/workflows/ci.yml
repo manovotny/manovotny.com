@@ -1,17 +1,21 @@
-name: ci
+name: pull-request
 on: pull_request
 jobs:
     test:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v1
+            - name: Checkout
+              uses: actions/checkout@v1
               with:
                   fetch-depth: 1
+            - name: Read .nvmrc
+              run: echo ::set-output name=value::$(cat .nvmrc)
+              id: nvmrc
             - name: Setup Node.js
               uses: actions/setup-node@v1
               with:
-                  node-version: 8.10.0
-            - name: Installing dependencies
+                  node-version: '${{steps.nvmrc.outputs.value}}'
+            - name: Install dependencies
               run: yarn install --frozen-lockfile
-            - name: Running tests
+            - name: Run tests
               run: yarn test
