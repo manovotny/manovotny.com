@@ -16,11 +16,12 @@ const prettier = require('prettier');
                     const path = page.replace('pages', '');
                     const parsed = parse(path);
                     const loc = parsed.name === 'index' ? parsed.dir : parsed.dir + parsed.name;
+
                     return `
-                    <url>
-                        <loc>${`https://manovotny.com${removeTrailingSlash(loc)}`}</loc>
-                    </url>
-                `;
+                        <url>
+                            <loc>${`https://manovotny.com${removeTrailingSlash(loc)}`}</loc>
+                        </url>
+                    `;
                 })
                 .join('')}
         </urlset>
