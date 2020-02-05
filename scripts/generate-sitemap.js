@@ -5,21 +5,28 @@ const globby = require('globby');
 const prettier = require('prettier');
 
 (async () => {
-    const removeTrailingSlash = (text) => (text.endsWith('/') ? text.slice(0, -1) : text);
     const prettierConfig = await prettier.resolveConfig('./.prettierrc.js');
-    const pages = await globby(['pages/**/*', '!pages/**/_*']);
+    const pages = await globby(['**/*', '!_{app,document,error}.js', '!api'], {cwd: 'pages'});
     const sitemap = `
         <?xml version="1.0" encoding="UTF-8"?>
         <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
             ${pages
                 .map((page) => {
-                    const path = page.replace('pages', '');
-                    const parsed = parse(path);
-                    const loc = parsed.name === 'index' ? parsed.dir : parsed.dir + parsed.name;
+                    const parsed = parse(page);
+
+                    let loc = 'https://manovotny.com';
+
+                    if (parsed.dir.length) {
+                        loc += `/${parsed.dir}`;
+                    }
+
+                    if (parsed.name !== 'index') {
+                        loc += `/${parsed.name}`;
+                    }
 
                     return `
                         <url>
-                            <loc>${`https://manovotny.com${removeTrailingSlash(loc)}`}</loc>
+                            <loc>${loc}</loc>
                         </url>
                     `;
                 })
