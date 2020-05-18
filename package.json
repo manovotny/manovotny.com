@@ -33,7 +33,7 @@
         "prettier": "prettier --write \"**/*.{html,js,json,md,mdx,mjs,yml}\"",
         "prettier:check": "prettier --check \"**/*.{js,json,md,yml}\"",
         "start": "next start",
-        "test": "yarn lint && yarn pretter:check"
+        "test": "yarn lint && yarn prettier:check"
     },
     "husky": {
         "hooks": {
