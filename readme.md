@@ -1,6 +1,6 @@
 # manovotny.com
 
-> My personal website.
+> My website built with Next.js, MDX, Tailwind, and Vercel.
 
 Built using:
 
