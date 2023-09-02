@@ -4,8 +4,7 @@
 
 Built using:
 
--   [Next.js](https://nextjs.org/)
--   [Now](https://zeit.co/now)
--   [MDX](https://github.com/mdx-js/mdx)
--   [Prettier](https://prettier.io/)
--   [styled-components](https://www.styled-components.com/)
+-   [Next.js](https://nextjs.org/) + [App Router](https://nextjs.org/docs/app)
+-   [MDX](https://mdxjs.com/)
+-   [Tailwind CSS](https://tailwindcss.com/)
+-   [Vercel]()

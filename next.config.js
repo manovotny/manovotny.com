@@ -1,18 +1,12 @@
-const rehypePrism = require('@mapbox/rehype-prism');
-const withMDX = require('@next/mdx')({
-    options: {
-        rehypePlugins: [rehypePrism]
-    }
-});
+const withMDX = require("@next/mdx")();
 
-module.exports = withMDX({
-    pageExtensions: ['js', 'mdx'],
-    target: 'serverless',
-    webpack: (config, {isServer}) => {
-        if (isServer) {
-            require('./scripts/generate-sitemap');
-        }
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+    experimental: {
+        mdxRs: true,
+        serverActions: true,
+    },
+    pageExtensions: ["jsx", "mdx", "tsx"],
+};
 
-        return config;
-    }
-});
+module.exports = withMDX(nextConfig);

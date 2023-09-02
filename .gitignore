@@ -1,5 +1,4 @@
 *.log
 .DS_Store
 .next
-public/sitemap.xml
 node_modules

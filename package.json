@@ -34,16 +34,25 @@
         "*": "prettier --write --ignore-unknown"
     },
     "dependencies": {
+        "@mdx-js/loader": "2.3.0",
+        "@mdx-js/react": "2.3.0",
+        "@next/mdx": "13.4.19",
         "next": "13.4.19",
         "react": "18.2.0",
         "react-dom": "18.2.0"
     },
     "devDependencies": {
+        "@tailwindcss/typography": "0.5.9",
+        "@types/mdx": "2.0.7",
         "@vercel/git-hooks": "1.0.0",
+        "autoprefixer": "10.4.15",
         "eslint": "8.8.0",
         "eslint-config-get-off-my-lawn": "7.2.0",
         "lint-staged": "14.0.1",
+        "postcss": "8.4.29",
         "prettier": "3.0.3",
-        "prettier-config-get-off-my-lawn": "1.0.0"
+        "prettier-plugin-tailwindcss": "0.5.4",
+        "tailwindcss": "3.3.3",
+        "typescript": "5.2.2"
     }
 }
