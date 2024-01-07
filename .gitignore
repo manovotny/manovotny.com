@@ -1,5 +1,6 @@
 *.log
+*.tsbuildinfo
 .DS_Store
 .next
-public/sitemap.xml
+next-env.d.ts
 node_modules

@@ -1,18 +1,15 @@
-const rehypePrism = require('@mapbox/rehype-prism');
-const withMDX = require('@next/mdx')({
-    options: {
-        rehypePlugins: [rehypePrism]
-    }
-});
+const withMDX = require("@next/mdx")();
 
-module.exports = withMDX({
-    pageExtensions: ['js', 'mdx'],
-    target: 'serverless',
-    webpack: (config, {isServer}) => {
-        if (isServer) {
-            require('./scripts/generate-sitemap');
-        }
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+    eslint: {
+        // Disabling on production builds because we're running checks on PRs via GitHub Actions.
+        ignoreDuringBuilds: true,
+    },
+    experimental: {
+        mdxRs: true,
+    },
+    pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
+};
 
-        return config;
-    }
-});
+module.exports = withMDX(nextConfig);
