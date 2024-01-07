@@ -1,4 +1,6 @@
 *.log
+*.tsbuildinfo
 .DS_Store
 .next
+next-env.d.ts
 node_modules

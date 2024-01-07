@@ -9,7 +9,7 @@ const nextConfig = {
     experimental: {
         mdxRs: true,
     },
-    pageExtensions: ["jsx", "mdx", "tsx"],
+    pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
 };
 
 module.exports = withMDX(nextConfig);
