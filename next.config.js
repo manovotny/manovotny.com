@@ -8,7 +8,6 @@ const nextConfig = {
     },
     experimental: {
         mdxRs: true,
-        serverActions: true,
     },
     pageExtensions: ["jsx", "mdx", "tsx"],
 };
