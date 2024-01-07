@@ -10,21 +10,18 @@ jobs:
                   access_token: ${{ github.token }}
             - name: Checkout repo
               uses: actions/checkout@v3
-            - name: Setup pnpm
-              uses: pnpm/action-setup@v2
             - name: Set node version
               uses: actions/setup-node@v3
               with:
-                  cache: "pnpm"
                   node-version-file: ".nvmrc"
             - name: Cache node_modules
               id: node-modules-cache
               uses: actions/cache@v3
               with:
                   path: "**/node_modules"
-                  key: node-modules-cache-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  key: node-modules-cache-${{ hashFiles('**/package-lock.json') }}
             - name: Install dependencies
               if: steps.node-modules-cache.outputs.cache-hit != 'true'
-              run: pnpm install
+              run: npm ci
             - name: Run tests
-              run: pnpm test
+              run: npm test
