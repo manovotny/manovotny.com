@@ -1,7 +1,6 @@
-const withMDX = require("@next/mdx")();
+import type { NextConfig } from "next";
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
     eslint: {
         // Disabling on production builds because we're running checks on PRs via GitHub Actions.
         ignoreDuringBuilds: true,
@@ -12,4 +11,4 @@ const nextConfig = {
     pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
 };
 
-module.exports = withMDX(nextConfig);
+export default nextConfig;
