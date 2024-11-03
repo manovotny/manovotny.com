@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import createMDX from "@next/mdx";
 
 const nextConfig: NextConfig = {
     eslint: {
@@ -8,7 +9,9 @@ const nextConfig: NextConfig = {
     experimental: {
         mdxRs: true,
     },
-    pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
+    pageExtensions: ["mdx", "ts", "tsx"],
 };
 
-export default nextConfig;
+const withMDX = createMDX({});
+
+export default withMDX(nextConfig);
