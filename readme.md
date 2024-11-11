@@ -1,10 +1,10 @@
 # manovotny.com
 
-> My website built with Next.js, MDX, Tailwind, and Vercel.
+> My website. Built with Next.js, MDX, and Tailwind. Deployed on Vercel.
 
 Built using:
 
--   [Next.js](https://nextjs.org/) + [App Router](https://nextjs.org/docs/app)
--   [MDX](https://mdxjs.com/)
--   [Tailwind CSS](https://tailwindcss.com/)
--   [Vercel]()
+- [Next.js](https://nextjs.org/)
+- [MDX](https://mdxjs.com/)
+- [Tailwind](https://tailwindcss.com/)
+- [Vercel](https://vercel.com)
