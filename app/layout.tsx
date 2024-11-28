@@ -23,9 +23,9 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang="en" className={geistSans.className}>
-        <body className="tracking-tight antialiased">
-          <div className="flex min-h-screen flex-col justify-between bg-white p-8 pt-0 text-gray-900 md:pt-8">
-            <main className="mx-auto w-full max-w-[60ch] space-y-6">
+        <body className="bg bg-neutral-50 text-neutral-900 antialiased">
+          <div className="flex min-h-screen flex-col justify-between p-8 pt-0 md:pt-8">
+            <main className="mx-auto w-full max-w-3xl space-y-6">
               {children}
             </main>
             <Footer />

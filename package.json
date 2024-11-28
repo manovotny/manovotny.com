@@ -24,7 +24,7 @@
   "scripts": {
     "check": "npm-check -u",
     "build": "next build",
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "lint": "next lint",
     "prettier": "prettier --write --ignore-unknown .",
     "prettier:check": "prettier --check --ignore-unknown .",
@@ -46,6 +46,7 @@
     "next-view-transitions": "0.3.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "rehype-unwrap-images": "1.0.0",
     "sugar-high": "0.7.5"
   },
   "devDependencies": {

@@ -21,18 +21,10 @@
 
 html {
   min-width: 360px;
-  scrollbar-gutter: stable;
 }
 
 body {
   text-rendering: optimizeLegibility;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  text-wrap: balance;
 }
 
 pre {
@@ -80,10 +72,6 @@ code:not(pre code) span {
 
 pre code span {
   font-weight: 500;
-}
-
-hr {
-  color: var(--color-gray-200);
 }
 
 /* Remove Safari input shadow on mobile */

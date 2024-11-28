@@ -1,14 +1,16 @@
 import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
+import rehypeUnwrapImages from "rehype-unwrap-images";
 
 const nextConfig: NextConfig = {
   eslint: {
-    // Disabling on production builds because we're running checks on PRs via GitHub Actions.
+    // Disabled on builds because we're running checks on PRs via GitHub Actions.
     ignoreDuringBuilds: true,
   },
-  experimental: {
-    mdxRs: true,
-  },
+  // Disabled because `--turbo` does not support remark/rehype plugins yet.
+  // experimental: {
+  //   mdxRs: true,
+  // },
   images: {
     remotePatterns: [
       {
@@ -34,6 +36,11 @@ const nextConfig: NextConfig = {
   },
 };
 
-const withMDX = createMDX({});
+const withMDX = createMDX({
+  options: {
+    rehypePlugins: [rehypeUnwrapImages],
+    remarkPlugins: [],
+  },
+});
 
 export default withMDX(nextConfig);

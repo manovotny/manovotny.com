@@ -2,10 +2,12 @@ import React, { ComponentPropsWithoutRef } from "react";
 import { Link } from "next-view-transitions";
 import type { MDXComponents } from "mdx/types";
 import { highlight } from "sugar-high";
+import Image from "next/image";
 
 const components: MDXComponents = {
   a: ({ href, children, ...props }: ComponentPropsWithoutRef<"a">) => {
-    const className = "text-blue-500 hover:text-blue-700";
+    const className = "text-blue-500 hover:underline";
+
     if (href?.startsWith("/")) {
       return (
         <Link href={href} className={className} {...props}>
@@ -13,6 +15,7 @@ const components: MDXComponents = {
         </Link>
       );
     }
+
     if (href?.startsWith("#")) {
       return (
         <a href={href} className={className} {...props}>
@@ -20,6 +23,7 @@ const components: MDXComponents = {
         </a>
       );
     }
+
     return (
       <a
         href={href}
@@ -40,22 +44,35 @@ const components: MDXComponents = {
   ),
   code: ({ children, ...props }: ComponentPropsWithoutRef<"code">) => {
     const codeHTML = highlight(children as string);
+
     return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
   },
   em: (props: ComponentPropsWithoutRef<"em">) => (
     <em className="font-medium" {...props} />
   ),
   h1: (props: ComponentPropsWithoutRef<"h1">) => (
-    <h1 className="fade-in mb-0 pt-12 font-medium" {...props} />
+    <h1
+      className="fade-in mb-0 pt-12 text-lg font-medium text-balance"
+      {...props}
+    />
   ),
   h2: (props: ComponentPropsWithoutRef<"h2">) => (
-    <h2 className="mt-8 mb-3 font-medium text-gray-800" {...props} />
+    <h2
+      className="mt-8 mb-3 font-medium text-balance text-gray-800"
+      {...props}
+    />
   ),
   h3: (props: ComponentPropsWithoutRef<"h3">) => (
-    <h3 className="mt-8 mb-3 font-medium text-gray-800" {...props} />
+    <h3
+      className="mt-8 mb-3 font-medium text-balance text-gray-800"
+      {...props}
+    />
   ),
   h4: (props: ComponentPropsWithoutRef<"h4">) => (
-    <h4 className="font-medium" {...props} />
+    <h4 className="font-medium text-balance" {...props} />
+  ),
+  hr: (props: ComponentPropsWithoutRef<"hr">) => (
+    <hr className="mx-auto h-px w-11/12 bg-gray-200" {...props} />
   ),
   li: (props: ComponentPropsWithoutRef<"li">) => (
     <li className="pl-1" {...props} />
