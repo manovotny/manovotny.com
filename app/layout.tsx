@@ -1,7 +1,20 @@
 import type { Metadata } from "next";
 import { ViewTransitions } from "next-view-transitions";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+
+const geistMono = Geist_Mono({
+  display: "swap",
+  preload: true,
+  subsets: ["latin"],
+});
+const geistSans = Geist({
+  display: "swap",
+  preload: true,
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://manovotny.com"),
@@ -19,7 +32,10 @@ export default function RootLayout({
 }>) {
   return (
     <ViewTransitions>
-      <html lang="en">
+      <html
+        lang="en"
+        className={`${geistSans.className} ${geistMono.className}`}
+      >
         <body className="text-lg bg-neutral-50 text-neutral-900 scheme-light dark:bg-black dark:text-neutral-300 dark:scheme-dark">
           <div className="p-8 pt-0 md:pt-8 flex min-h-screen flex-col justify-between">
             <main className="max-w-3xl space-y-6 mx-auto w-full">
@@ -27,6 +43,7 @@ export default function RootLayout({
             </main>
             <Footer />
             <Analytics />
+            <SpeedInsights />
           </div>
         </body>
       </html>

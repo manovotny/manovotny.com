@@ -10,7 +10,7 @@ Code.theme = {
   darkSelector: "body.scheme-dark",
 };
 Code.className =
-  "text-sm border border-neutral-200 dark:border-neutral-700 shadow-xs";
+  "**:font-[Geist_Mono] text-sm border border-neutral-200 dark:border-neutral-700 shadow-xs";
 Code.lineNumbers = true;
 
 const components: MDXComponents = {
@@ -49,7 +49,7 @@ const components: MDXComponents = {
   code: ({ children, ...props }: ComponentPropsWithoutRef<"code">) => {
     return (
       <code
-        className="text-sm rounded-md border border-neutral-200 bg-white px-[4px] py-[5px] break-words whitespace-pre-wrap shadow-xs dark:border-neutral-700 dark:bg-neutral-800"
+        className="text-sm rounded-md border border-neutral-200 bg-white px-[4px] py-[5px] font-[Geist_Mono] break-words whitespace-pre-wrap shadow-xs dark:border-neutral-700 dark:bg-neutral-800"
         {...props}
       >
         {children}
