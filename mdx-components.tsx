@@ -56,9 +56,6 @@ const components: MDXComponents = {
       </code>
     );
   },
-  em: (props: ComponentPropsWithoutRef<"em">) => (
-    <em className="font-medium" {...props} />
-  ),
   h1: (props: ComponentPropsWithoutRef<"h1">) => (
     <h1
       className="fade-in mb-0 pt-12 text-lg font-medium text-balance"
@@ -93,9 +90,6 @@ const components: MDXComponents = {
     <ol className="space-y-2 pl-5 list-decimal text-neutral-800" {...props} />
   ),
   pre: Code,
-  strong: (props: ComponentPropsWithoutRef<"strong">) => (
-    <strong className="font-medium" {...props} />
-  ),
   ul: (props: ComponentPropsWithoutRef<"ul">) => (
     <ul className="space-y-1 pl-5 list-disc text-neutral-800" {...props} />
   ),
