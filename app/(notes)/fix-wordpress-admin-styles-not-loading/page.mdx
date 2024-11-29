@@ -15,17 +15,17 @@ I recently got a brand new computer and took the opportunity to clean up my loca
 I got everything setup and I was settling in for a good evening of side hustle when I saw this in my WordPress admin.
 
 <figure>
-  <div className="rounded-lg border bg-white p-2 drop-shadow-md">
+  <div className="p-2 rounded-lg border border-neutral-200 bg-white shadow-xs dark:border-neutral-700 dark:bg-neutral-800">
     <Image
       alt="WordPress admin styles not loading"
-      className="rounded-lg border"
+      className="rounded-md border border-neutral-200"
       height={513}
       sizes="(min-width: 1024px) 768px, 100vw"
       src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/fix-wordpress-admin-styles-not-loading/wordpress-admin-missing-styles-F5grUw0JHvEfq6It4dLBHzRIXklRoy.jpg"
       width={768}
     />
   </div>
-  <figcaption className="pt-4 text-center text-sm text-neutral-500">
+  <figcaption className="pt-4 text-sm text-center text-neutral-500 dark:text-neutral-400">
     {"WordPress admin styles not loading"}
   </figcaption>
 </figure>
@@ -42,13 +42,13 @@ And let me be clear... I **_do not_** encourage WordPress core hacks, but in the
 
 In the `wp-admin/load-styles.php` file, find this line of code...
 
-```
+```php
 error_reporting(0);
 ```
 
 ...and change it to this...
 
-```
+```php
 error_reporting( E_ALL | E_STRICT );
 ```
 
@@ -60,7 +60,7 @@ Bizarre... I know.
 
 A user suggested, non-WordPress core hack that might work for some is to add the following code to your `wp-config.php` file, _before_ any `require_once` calls.
 
-```
+```php
 define( ‘CONCATENATE_SCRIPTS’, false );
 define( ‘SCRIPT_DEBUG’, true );
 ```

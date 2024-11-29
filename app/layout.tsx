@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
 import { ViewTransitions } from "next-view-transitions";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
-
-const geistSans = Geist({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://manovotny.com"),
@@ -22,10 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <ViewTransitions>
-      <html lang="en" className={geistSans.className}>
-        <body className="bg bg-neutral-50 text-neutral-900 antialiased">
-          <div className="flex min-h-screen flex-col justify-between p-8 pt-0 md:pt-8">
-            <main className="mx-auto w-full max-w-3xl space-y-6">
+      <html lang="en">
+        <body className="text-lg bg-neutral-50 text-neutral-900 scheme-light dark:bg-black dark:text-neutral-300 dark:scheme-dark">
+          <div className="p-8 pt-0 md:pt-8 flex min-h-screen flex-col justify-between">
+            <main className="max-w-3xl space-y-6 mx-auto w-full">
               {children}
             </main>
             <Footer />
@@ -46,7 +43,7 @@ function Footer() {
 
   return (
     <footer className="mt-12">
-      <div className="flex justify-center gap-8">
+      <div className="gap-8 flex justify-center">
         {links.map((link) => (
           <a
             key={link.name}
