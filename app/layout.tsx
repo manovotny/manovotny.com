@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { ViewTransitions } from "next-view-transitions";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -31,23 +30,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ViewTransitions>
-      <html
-        lang="en"
-        className={`${geistSans.className} ${geistMono.className}`}
-      >
-        <body className="text-lg bg-neutral-50 text-neutral-900 scheme-light dark:bg-black dark:text-neutral-300 dark:scheme-dark">
-          <div className="p-8 pt-0 md:pt-8 flex min-h-screen flex-col justify-between">
-            <main className="max-w-3xl space-y-6 mx-auto w-full">
-              {children}
-            </main>
-            <Footer />
-            <Analytics />
-            <SpeedInsights />
-          </div>
-        </body>
-      </html>
-    </ViewTransitions>
+    <html
+      lang="en"
+      className={`${geistSans.className} ${geistMono.className} min-w-80`}
+    >
+      <body className="bg-neutral-50 text-lg text-neutral-800 scheme-light dark:bg-neutral-900 dark:text-white dark:scheme-dark">
+        <div className="flex min-h-screen flex-col justify-between p-8 pt-0 md:pt-8">
+          <main className="mx-auto w-full max-w-3xl space-y-6">{children}</main>
+          <Footer />
+          <Analytics />
+          <SpeedInsights />
+        </div>
+      </body>
+    </html>
   );
 }
 
@@ -60,7 +55,7 @@ function Footer() {
 
   return (
     <footer className="mt-12">
-      <div className="gap-8 flex justify-center">
+      <div className="flex justify-center gap-10">
         {links.map((link) => (
           <a
             key={link.name}

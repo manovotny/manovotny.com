@@ -1,7 +1,7 @@
 import React, { ComponentPropsWithoutRef } from "react";
-import { Link } from "next-view-transitions";
 import type { MDXComponents } from "mdx/types";
 import { Code } from "bright";
+import Link from "next/link";
 
 Code.theme = {
   dark: "github-dark",
@@ -49,7 +49,7 @@ const components: MDXComponents = {
   code: ({ children, ...props }: ComponentPropsWithoutRef<"code">) => {
     return (
       <code
-        className="text-sm rounded-md border border-neutral-200 bg-white px-[4px] py-[5px] font-[Geist_Mono] break-words whitespace-pre-wrap shadow-xs dark:border-neutral-700 dark:bg-neutral-800"
+        className="rounded-md border border-neutral-200 bg-white px-[4px] py-[5px] font-[Geist_Mono] text-sm break-words whitespace-pre-wrap shadow-xs dark:border-neutral-700 dark:bg-neutral-800"
         {...props}
       >
         {children}
@@ -79,7 +79,7 @@ const components: MDXComponents = {
   ),
   hr: (props: ComponentPropsWithoutRef<"hr">) => (
     <hr
-      className="h-px mx-auto w-11/12 border-neutral-200 dark:border-neutral-700"
+      className="mx-auto h-px w-11/12 border-neutral-200 dark:border-neutral-700"
       {...props}
     />
   ),
@@ -87,11 +87,11 @@ const components: MDXComponents = {
     <li className="pl-1" {...props} />
   ),
   ol: (props: ComponentPropsWithoutRef<"ol">) => (
-    <ol className="space-y-2 pl-5 list-decimal text-neutral-800" {...props} />
+    <ol className="list-decimal space-y-2 pl-5 text-neutral-800" {...props} />
   ),
   pre: Code,
   ul: (props: ComponentPropsWithoutRef<"ul">) => (
-    <ul className="space-y-1 pl-5 list-disc text-neutral-800" {...props} />
+    <ul className="list-disc space-y-1 pl-5 text-neutral-800" {...props} />
   ),
 };
 
