@@ -1,0 +1,41 @@
+import { Link } from "@/components/link";
+
+const links = [
+  { name: "X", url: "https://x.com/manovotny" },
+  { name: "LinkedIn", url: "https://linkedin.com/in/manovotny" },
+  { name: "Bluesky", url: "https://bsky.app/profile/manovotny.com" },
+  { name: "GitHub", url: "https://github.com/manovotny" },
+  { name: "Email", url: "mailto:manovotny@gmail.com" },
+];
+
+export function Footer() {
+  return (
+    <footer className="mt-auto flex justify-center pt-16 text-sm text-neutral-500">
+      <a
+        className="hidden text-neutral-500 hover:text-neutral-500 md:block"
+        href="/"
+      >
+        {"manovotny.com"}
+      </a>
+      <nav className="flex md:ml-auto">
+        <ul className="flex gap-2">
+          {links.map((link) => (
+            <li
+              className="after:pl-2 after:content-['•'] last:after:content-['']"
+              key={link.url}
+            >
+              <Link
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-neutral-500 transition-colors duration-200"
+              >
+                {link.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </footer>
+  );
+}

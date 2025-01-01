@@ -1,7 +1,7 @@
 import React, { ComponentPropsWithoutRef } from "react";
 import type { MDXComponents } from "mdx/types";
 import { Code } from "bright";
-import Link from "next/link";
+import { Link } from "@/components/link";
 
 Code.theme = {
   dark: "github-dark",
@@ -14,38 +14,7 @@ Code.className =
 Code.lineNumbers = true;
 
 const components: MDXComponents = {
-  a: ({ href, children, ...props }: ComponentPropsWithoutRef<"a">) => {
-    const className =
-      "text-blue-500 dark:text-blue-400 underline-offset-3 hover:underline";
-
-    if (href?.startsWith("/")) {
-      return (
-        <Link href={href} className={className} {...props}>
-          {children}
-        </Link>
-      );
-    }
-
-    if (href?.startsWith("#")) {
-      return (
-        <a href={href} className={className} {...props}>
-          {children}
-        </a>
-      );
-    }
-
-    return (
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={className}
-        {...props}
-      >
-        {children}
-      </a>
-    );
-  },
+  a: Link,
   code: ({ children, ...props }: ComponentPropsWithoutRef<"code">) => {
     return (
       <code
@@ -57,29 +26,17 @@ const components: MDXComponents = {
     );
   },
   h1: (props: ComponentPropsWithoutRef<"h1">) => (
-    <h1
-      className="fade-in mb-0 pt-12 text-lg font-medium text-balance"
-      {...props}
-    />
+    <h1 className="mb-6 text-2xl font-bold text-balance" {...props} />
   ),
   h2: (props: ComponentPropsWithoutRef<"h2">) => (
-    <h2
-      className="mt-8 mb-3 font-medium text-balance text-neutral-800"
-      {...props}
-    />
+    <h2 className="my-6 text-xl font-bold text-balance" {...props} />
   ),
   h3: (props: ComponentPropsWithoutRef<"h3">) => (
-    <h3
-      className="mt-8 mb-3 font-medium text-balance text-neutral-800"
-      {...props}
-    />
-  ),
-  h4: (props: ComponentPropsWithoutRef<"h4">) => (
-    <h4 className="font-medium text-balance" {...props} />
+    <h3 className="my-6 text-lg font-bold text-balance" {...props} />
   ),
   hr: (props: ComponentPropsWithoutRef<"hr">) => (
     <hr
-      className="mx-auto h-px w-11/12 border-neutral-200 dark:border-neutral-700"
+      className="mx-auto mt-8 mb-10 h-px w-11/12 border-neutral-200 dark:border-neutral-700"
       {...props}
     />
   ),
@@ -88,6 +45,9 @@ const components: MDXComponents = {
   ),
   ol: (props: ComponentPropsWithoutRef<"ol">) => (
     <ol className="list-decimal space-y-2 pl-5 text-neutral-800" {...props} />
+  ),
+  p: (props: ComponentPropsWithoutRef<"p">) => (
+    <p className="mb-6 last:mb-0" {...props} />
   ),
   pre: Code,
   ul: (props: ComponentPropsWithoutRef<"ul">) => (
