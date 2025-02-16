@@ -1,6 +1,6 @@
 import { Link } from "@/components/link";
 
-export function Headline() {
+export function Bio() {
   return (
     <h1 className="text-2xl">
       <span className="font-bold">Michael Novotny</span>
