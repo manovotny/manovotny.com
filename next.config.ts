@@ -8,9 +8,7 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   // Disabled because `--turbo` does not support remark/rehype plugins yet.
-  // experimental: {
-  //   mdxRs: true,
-  // },
+  // experimental: { mdxRs: true },
   images: {
     remotePatterns: [
       {
@@ -37,10 +35,7 @@ const nextConfig: NextConfig = {
 };
 
 const withMDX = createMDX({
-  options: {
-    rehypePlugins: [rehypeUnwrapImages],
-    remarkPlugins: [],
-  },
+  options: { rehypePlugins: [rehypeUnwrapImages], remarkPlugins: [] },
 });
 
 export default withMDX(nextConfig);
