@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Link } from "@/components/link";
 
 export function Header() {
