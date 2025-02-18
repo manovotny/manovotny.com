@@ -8,13 +8,13 @@ const links = [
   { name: "Email", url: "mailto:manovotny@gmail.com" },
 ];
 
+const linkClassNames =
+  "text-neutral-500 hover:text-neutral-500 dark:text-neutral-400 dark:hover:text-neutral-400";
+
 export function Footer() {
   return (
-    <footer className="mt-auto flex justify-center pt-16 text-sm text-neutral-500">
-      <a
-        className="hidden text-neutral-500 hover:text-neutral-500 md:block"
-        href="/"
-      >
+    <footer className="mt-auto flex justify-center pt-16 text-sm">
+      <a className={`hidden md:block ${linkClassNames}`} href="/">
         {"manovotny.com"}
       </a>
       <nav className="flex md:ml-auto">
@@ -28,7 +28,7 @@ export function Footer() {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-neutral-500 transition-colors duration-200"
+                className={`transition-all duration-200 ${linkClassNames}`}
               >
                 {link.name}
               </Link>
