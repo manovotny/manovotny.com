@@ -21,6 +21,15 @@ const components: MDXComponents = {
   h3: (props: ComponentPropsWithoutRef<"h3">) => (
     <h3 className="my-6 text-lg font-bold text-balance" {...props} />
   ),
+  h4: (props: ComponentPropsWithoutRef<"h4">) => (
+    <h4 className="my-4 font-bold text-balance" {...props} />
+  ),
+  h5: (props: ComponentPropsWithoutRef<"h5">) => (
+    <h5 className="my-4 font-bold text-balance" {...props} />
+  ),
+  h6: (props: ComponentPropsWithoutRef<"h6">) => (
+    <h6 className="my-4 font-bold text-balance" {...props} />
+  ),
   hr: (props: ComponentPropsWithoutRef<"hr">) => (
     <hr
       className="mx-auto mt-8 mb-10 h-px w-11/12 border-neutral-200 dark:border-neutral-700"
