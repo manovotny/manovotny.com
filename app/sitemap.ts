@@ -29,6 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `https://manovotny.com${route}`,
     lastModified: new Date().toISOString(),
   }));
+  const sitemap = [...routes, ...notes];
 
-  return [...routes, ...notes];
+  return sitemap;
 }
