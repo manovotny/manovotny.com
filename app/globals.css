@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --breakpoint-xs: 32rem;
+}
+
 :root {
   --sh-class: light-dark(var(--color-purple-700), var(--color-purple-400));
   --sh-identifier: ""; /* objects */
@@ -22,10 +26,10 @@ pre {
 }
 
 .sh__line {
-  @apply px-3;
+  @apply px-4;
 
   &:before {
-    @apply mr-6 inline-block w-6 text-right text-neutral-400;
+    @apply xs:inline-block mr-6 hidden w-6 text-right text-neutral-400;
     content: counter(sh-line-number);
     counter-increment: sh-line-number 1;
   }
