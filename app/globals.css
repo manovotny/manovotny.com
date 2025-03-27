@@ -16,13 +16,13 @@ pre {
   @apply mb-6 overflow-x-scroll overscroll-x-contain rounded-md border border-neutral-200 bg-white py-5 text-[13px] shadow-xs **:font-[Geist_Mono] dark:border-neutral-800 dark:bg-neutral-950;
 
   code {
-    @apply w-full;
+    @apply grid;
     counter-reset: sh-line-number;
   }
 }
 
 .sh__line {
-  @apply w-[100vw] px-6;
+  @apply px-3;
 
   &:before {
     @apply mr-6 inline-block w-6 text-right text-neutral-400;
