@@ -27,7 +27,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.className} ${geistMono.className} min-w-[360px]`}
     >
-      <body className="bg-neutral-50 text-lg text-neutral-800 scheme-light dark:bg-neutral-900 dark:text-neutral-200 dark:scheme-dark">
+      <body className="bg-neutral-50 text-lg text-neutral-800 scheme-light dark:bg-black dark:text-neutral-200 dark:scheme-dark">
         <div className="mx-auto flex min-h-screen w-full max-w-3xl flex-col space-y-6 p-8 pt-0 md:pt-8">
           <Header />
           <main>{children}</main>
