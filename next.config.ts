@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
 import rehypeUnwrapImages from "rehype-unwrap-images";
+import remarkSugarHigh from "remark-sugar-high";
 
 const nextConfig: NextConfig = {
   eslint: {
@@ -35,7 +36,10 @@ const nextConfig: NextConfig = {
 };
 
 const withMDX = createMDX({
-  options: { rehypePlugins: [rehypeUnwrapImages], remarkPlugins: [] },
+  options: {
+    rehypePlugins: [rehypeUnwrapImages],
+    remarkPlugins: [remarkSugarHigh],
+  },
 });
 
 export default withMDX(nextConfig);
