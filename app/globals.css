@@ -14,22 +14,21 @@
 
 pre {
   @apply mb-6 overflow-x-scroll rounded-md border border-neutral-200 bg-white py-5 text-[13px] shadow-xs **:font-[Geist_Mono] dark:border-neutral-800 dark:bg-neutral-950;
-}
 
-pre code {
-  counter-reset: sh-line-number;
+  code {
+    @apply w-full;
+    counter-reset: sh-line-number;
+  }
 }
 
 .sh__line {
-  @apply w-[100vw] px-5;
-}
+  @apply w-[100vw] px-6;
 
-.sh__line::before {
-  content: counter(sh-line-number);
-  counter-increment: sh-line-number 1;
-  margin-right: 24px;
-  text-align: right;
-  color: #a4a4a4;
+  &:before {
+    @apply mr-6 inline-block w-6 text-right text-neutral-400;
+    content: counter(sh-line-number);
+    counter-increment: sh-line-number 1;
+  }
 }
 
 .sh__line--highlighted {
