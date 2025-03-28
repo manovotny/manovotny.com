@@ -9,7 +9,7 @@ export function Header() {
         href="/"
       >
         <Logo />
-        <p className="mt-[-4px] h-[28px] transform text-2xl font-extralight transition-transform duration-[400ms] group-hover:translate-y-[-33px]">
+        <p className="mt-[-4px] h-[28px] transform text-2xl font-light transition-transform duration-[400ms] group-hover:translate-y-[-33px]">
           <span className="block origin-[right_center] rotate-0 transform transition-transform duration-[400ms] group-hover:rotate-12">
             Michael Novotny
           </span>
