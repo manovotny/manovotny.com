@@ -16,7 +16,8 @@ const geistSans = Geist({ display: "swap", preload: true, subsets: ["latin"] });
 export const metadata: Metadata = {
   metadataBase: new URL("https://manovotny.com"),
   title: { default: "Michael Novotny", template: "%s | Michael Novotny" },
-  description: "TODO",
+  description:
+    "Software developer, stock trader, coffee enthusiast. Currently leading Content at Vercel.",
 };
 
 export default function RootLayout({
