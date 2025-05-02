@@ -1,14 +1,20 @@
 import { Image } from "@/components/image";
 
-export const metadata = {
+export const data = {
   date: "2013-02-28",
   description:
     "Are your WordPress admin styles not loading? This post will guide you through a fix so they start loading again.",
-  image: "/images/fix-wordpress-admin-styles-not-loading/featured-image.jpg",
   title: "How To Fix WordPress Admin Styles Not Loading",
 };
 
-# How To Fix WordPress Admin Styles Not Loading
+export const metadata = {
+  ...data,
+  openGraph: {
+    images: `/api/og-image?title=${encodeURIComponent(data.title)}`,
+  },
+};
+
+# {data.title}
 
 I recently got a brand new computer and took the opportunity to clean up my local development environment. That meant a fresh installation of [MAMP Pro](https://www.mamp.info) and some new databases.
 

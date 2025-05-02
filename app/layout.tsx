@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import "./globals.css";
+import { baseUrl } from "@/lib/environment";
 
 const geistMono = Geist_Mono({
   display: "swap",
@@ -14,7 +15,7 @@ const geistMono = Geist_Mono({
 const geistSans = Geist({ display: "swap", preload: true, subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://manovotny.com"),
+  metadataBase: new URL(baseUrl),
   title: { default: "Michael Novotny", template: "%s | Michael Novotny" },
   description:
     "Software developer, stock trader, coffee enthusiast. Currently leading Content at Vercel.",
@@ -32,6 +33,9 @@ export const metadata: Metadata = {
       media: "(prefers-color-scheme: dark)",
     },
   ],
+  openGraph: {
+    images: `/api/og-image`,
+  },
 };
 
 export default function RootLayout({
