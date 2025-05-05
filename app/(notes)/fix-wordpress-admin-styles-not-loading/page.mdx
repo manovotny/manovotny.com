@@ -1,3 +1,4 @@
+import { FormattedDate } from "@/components/formatted-date";
 import { Image } from "@/components/image";
 
 export const data = {
@@ -15,6 +16,8 @@ export const metadata = {
 };
 
 # {data.title}
+
+<FormattedDate date={data.date} />
 
 I recently got a brand new computer and took the opportunity to clean up my local development environment. That meant a fresh installation of [MAMP Pro](https://www.mamp.info) and some new databases.
 
