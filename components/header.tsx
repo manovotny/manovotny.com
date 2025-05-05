@@ -10,10 +10,10 @@ export function Header() {
       >
         <Logo />
         <p className="mt-[-4px] h-[28px] transform text-2xl font-light transition-transform duration-[400ms] group-hover:translate-y-[-33px]">
-          <span className="block origin-[right_center] rotate-0 transform transition-transform duration-[400ms] group-hover:rotate-12">
+          <span className="block origin-[right_center] transform transition-transform duration-[400ms]">
             Michael Novotny
           </span>
-          <span className="block origin-[left_center] rotate-12 transform transition-transform duration-[400ms] group-hover:rotate-0">
+          <span className="block origin-[left_center] transform transition-transform duration-[400ms]">
             manovotny
           </span>
         </p>
