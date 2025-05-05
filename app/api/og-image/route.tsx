@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { Logo } from "@/components/icons/logo-dot";
+import { Logo } from "@/components/icons/logo";
 
 // https://developers.google.com/fonts/docs/css2
 async function loadGoogleFont(font: string, weight: number, text: string) {
