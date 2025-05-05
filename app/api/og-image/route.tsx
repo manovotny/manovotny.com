@@ -66,9 +66,14 @@ export async function GET(request: Request) {
         ],
       },
     );
-  } catch (e: any) {
-    console.log(`${e.message}`);
-    return new Response("Failed to generate og image", {
+  } catch (error: unknown) {
+    const errorMessage = "Failed to generate og image";
+
+    console.log(
+      `${errorMessage}: ${error instanceof Error ? error.message : error}`,
+    );
+
+    return new Response(errorMessage, {
       status: 500,
     });
   }
