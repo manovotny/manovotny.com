@@ -1,5 +1,5 @@
 import { Link } from "@/components/link";
-import { Logo } from "@/components/icons/logo-dot";
+import { Logo } from "@/components/icons/logo";
 
 export function Header() {
   return (
