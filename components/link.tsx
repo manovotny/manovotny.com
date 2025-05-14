@@ -30,13 +30,7 @@ export function Link({
   }
 
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={classNames}
-      {...props}
-    >
+    <a href={href} rel="noopener noreferrer" className={classNames} {...props}>
       {children}
     </a>
   );
