@@ -1,5 +1,9 @@
 *.log
+*.tsbuildinfo
 .DS_Store
+.env*
 .next
-public/sitemap.xml
+.vercel
+.vscode
+next-env.d.ts
 node_modules

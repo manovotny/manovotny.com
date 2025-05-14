@@ -1,75 +1,75 @@
 {
-    "name": "manovotny.com",
-    "description": "My personal website.",
-    "version": "0.0.0",
-    "author": {
-        "name": "Michael Novotny",
-        "email": "manovotny@gmail.com",
-        "url": "https://manovotny.com"
-    },
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/manovotny/manovotny.com.git"
-    },
-    "engines": {
-        "node": ">=14.0.0",
-        "yarn": ">=1.0.0"
-    },
-    "files": [
-        "components",
-        "data",
-        "icons",
-        "pages",
-        "static",
-        "styles",
-        "utils"
-    ],
-    "scripts": {
-        "build": "rimraf .next && next build",
-        "dev": "next",
-        "eslint": "eslint . --ext .json --ext .js",
-        "lint": "yarn eslint",
-        "prettier": "prettier --write \"**/*.{html,js,json,md,mdx,mjs,yml}\"",
-        "prettier:check": "prettier --check \"**/*.{js,json,md,yml}\"",
-        "start": "next start",
-        "test": "yarn lint && yarn prettier:check"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
-    "lint-staged": {
-        "*.{html,js,json,md,mdx,mjs,yml}": [
-            "prettier --write",
-            "git add"
-        ]
-    },
-    "dependencies": {
-        "@mdx-js/mdx": "1.5.5",
-        "@mdx-js/react": "1.5.5",
-        "date-fns": "1.30.1",
-        "next": "9.2.0",
-        "react": "16.12.0",
-        "styled-components": "5.0.0",
-        "styled-reset": "4.0.9",
-        "title": "3.4.1"
-    },
-    "devDependencies": {
-        "@mapbox/rehype-prism": "0.4.0",
-        "@mdx-js/loader": "1.5.5",
-        "@next/mdx": "9.2.1",
-        "@prettier/plugin-xml": "0.7.0",
-        "babel-plugin-inline-react-svg": "1.1.0",
-        "babel-plugin-styled-components": "1.10.6",
-        "eslint": "6.2.1",
-        "eslint-config-get-off-my-lawn": "5.0.1",
-        "globby": "11.0.0",
-        "husky": "3.0.9",
-        "lint-staged": "9.4.2",
-        "prettier": "2.0.5",
-        "react-dom": "16.12.0",
-        "rimraf": "3.0.1"
-    }
+  "name": "manovotny.com",
+  "description": "My website built with Next.js, MDX, Tailwind, and Vercel.",
+  "version": "2.0.0",
+  "private": true,
+  "author": {
+    "name": "Michael Novotny",
+    "email": "manovotny@gmail.com",
+    "url": "https://manovotny.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manovotny/manovotny.com.git"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "files": [
+    "app",
+    "components",
+    "lib",
+    "mdx-components.tsx"
+  ],
+  "scripts": {
+    "check": "npm-check -u",
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "next lint",
+    "lint-staged": "lint-staged",
+    "prettier": "prettier --write --ignore-unknown .",
+    "prettier:check": "prettier --check --ignore-unknown .",
+    "start": "next start",
+    "test": "npm run lint && npm run prettier:check && tsc"
+  },
+  "git": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*": "prettier --write --ignore-unknown"
+  },
+  "dependencies": {
+    "@mdx-js/loader": "3.1.0",
+    "@mdx-js/react": "3.1.0",
+    "@next/mdx": "15.3.2",
+    "@vercel/analytics": "1.5.0",
+    "@vercel/speed-insights": "1.2.0",
+    "clsx": "2.1.1",
+    "git-jiggy": "2.1.1",
+    "next": "15.3.2",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "rehype-unwrap-images": "1.0.0",
+    "remark-sugar-high": "0.6.0",
+    "tailwind-merge": "3.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.1.6",
+    "@types/mdx": "2.0.13",
+    "@types/node": "22.15.17",
+    "@types/react": "19.1.4",
+    "@types/react-dom": "19.1.5",
+    "@vercel/git-hooks": "1.0.0",
+    "autoprefixer": "10.4.21",
+    "eslint": "9.26.0",
+    "eslint-config-next": "15.3.2",
+    "lint-staged": "16.0.0",
+    "npm-check": "6.0.1",
+    "postcss": "8.5.3",
+    "prettier": "3.5.3",
+    "prettier-plugin-tailwindcss": "0.6.11",
+    "tailwindcss": "4.1.6",
+    "typescript": "5.8.3"
+  }
 }

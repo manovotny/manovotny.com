@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  --breakpoint-xs: 32rem;
+}
+
+:root {
+  --sh-class: light-dark(var(--color-purple-700), var(--color-purple-400));
+  --sh-identifier: ""; /* objects */
+  --sh-sign: ""; /* brackets, parentheses, curly braces, commas, math symbols */
+  --sh-property: light-dark(var(--color-pink-700), var(--color-pink-500));
+  --sh-entity: light-dark(var(--color-green-700), var(--color-green-500));
+  --sh-jsxliterals: ""; /* text in JSX */
+  --sh-string: light-dark(var(--color-green-700), var(--color-green-500));
+  --sh-keyword: light-dark(var(--color-pink-700), var(--color-pink-500));
+  --sh-comment: var(--color-gray-400);
+}
+
+pre {
+  @apply mb-6 overflow-x-scroll overscroll-x-contain rounded-md border border-neutral-200 bg-white py-5 text-[13px] shadow-xs **:font-[Geist_Mono] dark:border-neutral-800 dark:bg-neutral-950;
+
+  code {
+    @apply grid;
+    counter-reset: sh-line-number;
+  }
+}
+
+.sh__line {
+  @apply px-4;
+
+  &:before {
+    @apply xs:inline-block mr-6 hidden w-6 text-right text-neutral-400;
+    content: counter(sh-line-number);
+    counter-increment: sh-line-number 1;
+  }
+}
+
+.sh__line--highlighted {
+  @apply relative block bg-blue-100 after:absolute after:top-0 after:bottom-0 after:left-0 after:w-[2px] after:bg-blue-500 after:content-[""] dark:bg-blue-950 dark:after:bg-blue-400;
+}
