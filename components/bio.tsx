@@ -5,12 +5,9 @@ export function Bio() {
     <h1 className="text-2xl">
       <span className="font-bold">Michael Novotny</span>
       <span className="font-extralight text-neutral-500 dark:text-neutral-400">
-        —software developer, investor/trader, avid coffee drinker. Currently
-        leading Content at{" "}
-        <Link href="https://vercel.com" target="_blank">
-          Vercel
-        </Link>
-        .
+        —software developer, stock investor/trader, avid coffee drinker.
+        Currently leading Content at{" "}
+        <Link href="https://vercel.com/home">Vercel</Link>.
       </span>
     </h1>
   );
