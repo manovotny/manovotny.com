@@ -13,11 +13,11 @@ const linkClassNames =
 
 export function Footer() {
   return (
-    <footer className="mt-auto flex justify-center pt-16 text-sm">
+    <footer className="mb-0 flex grow items-end pt-16 text-sm">
       <a className={`hidden md:block ${linkClassNames}`} href="/">
         {"manovotny.com"}
       </a>
-      <nav className="flex md:ml-auto">
+      <nav className="flex md:grow md:justify-end">
         <ul className="flex gap-2">
           {links.map((link) => (
             <li
