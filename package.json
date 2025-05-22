@@ -31,7 +31,8 @@
     "prettier": "prettier --write --ignore-unknown .",
     "prettier:check": "prettier --check --ignore-unknown .",
     "start": "next start",
-    "test": "npm run lint && npm run prettier:check && tsc"
+    "test": "npm run lint && npm run prettier:check && tsc && npm run test:unit",
+    "test:unit": "tsx --test './tests/**/*.test.*'"
   },
   "git": {
     "pre-commit": "lint-staged"
@@ -64,12 +65,14 @@
     "autoprefixer": "10.4.21",
     "eslint": "9.26.0",
     "eslint-config-next": "15.3.2",
+    "globby": "14.1.0",
     "lint-staged": "16.0.0",
     "npm-check": "6.0.1",
     "postcss": "8.5.3",
     "prettier": "3.5.3",
     "prettier-plugin-tailwindcss": "0.6.11",
     "tailwindcss": "4.1.6",
+    "tsx": "4.19.4",
     "typescript": "5.8.3"
   }
 }
