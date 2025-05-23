@@ -4,8 +4,8 @@ import { Image } from "@/components/image";
 export const data = {
   date: "2013-02-28",
   description:
-    "Are your WordPress admin styles not loading? This post will guide you through a fix so they start loading again.",
-  title: "How To Fix WordPress Admin Styles Not Loading",
+    "Fix missing CSS styles in the WordPress admin with a quick workaround. Change one line of code to restore your dashboard styles instantly.",
+  title: "How to fix WordPress admin styles not loading",
 };
 
 export const metadata = {
@@ -19,9 +19,7 @@ export const metadata = {
 
 <FormattedDate date={data.date} />
 
-I recently got a brand new computer and took the opportunity to clean up my local development environment. That meant a fresh installation of [MAMP Pro](https://www.mamp.info) and some new databases.
-
-I got everything setup and I was settling in for a good evening of side hustle when I saw this in my WordPress admin.
+After setting up my new computer and getting [MAMP Pro](https://www.mamp.info) running, I tried launching a WordPress project. The admin panel came up, but without any styles.
 
 <Image
   alt="WordPress admin styles not loading"
@@ -30,47 +28,29 @@ I got everything setup and I was settling in for a good evening of side hustle w
   width={768}
 />
 
-All WordPress admin CSS styles were missing! Turns out none of the WordPress admin styles were not loading.
+I tried reinstalling WordPress. No change. I spent a few hours digging through forums, trying countless suggestions. Eventually, something worked.
 
-**_Super..._**
-
-I wasn’t sure what was going on... I tried to reinstall WordPress a couple of times, but it didn't change anything, so intense Google searching ensued.
-
-I cannot remember how many articles I read or how many suggested hacks I attempted. I do know it took well over an hour and none of them worked. I eventually found something buried deep in some sketchy looking site, but it worked! I am not trying to withhold credit to the person or site who suggested it. I simply did not think to save the URK at the time. Regardless, this is what the article suggested.
-
-And let me be clear... I **_do not_** encourage WordPress core hacks, but in the moment, I just wanted it fixed so I could start working on what I wanted to do for the evening.
-
-In the `wp-admin/load-styles.php` file, find this line of code...
+Open `wp-admin/load-styles.php` and find this line:
 
 ```php
 error_reporting(0);
 ```
 
-...and change it to this...
+And change it to:
 
 ```php
 error_reporting( E_ALL | E_STRICT );
 ```
 
-...and then simply refresh your WordPress admin screen a few times. You should see the WordPress admin CSS styles come back to normal.
+After page refresh, the admin styles were back. I even switched the line back to its previous value, and everything still worked. Normally, I discourage editing WordPress core files, but I just needed to get back to work. Fortunately, you don't have to leave the change in place.
 
-And that’s it! You do not even have to leave this WordPress core hack in place. Once the admin styles are back and displaying correctly, you can revert the line of code back to what it was and it should still keep working.
-
-Bizarre... I know.
-
-A user suggested, non-WordPress core hack that might work for some is to add the following code to your `wp-config.php` file, _before_ any `require_once` calls.
+Someone else later mentioned you can add this code above any `require_once` calls in `wp-config.php` instead of modifying a WordPress core file:
 
 ```php
 define( ‘CONCATENATE_SCRIPTS’, false );
 define( ‘SCRIPT_DEBUG’, true );
 ```
 
-It certainly feels better than modifying the WordPress core, but it only seems to work some of the time.
+I’m not sure _why_ any of this works. If you know, [tell me](https://x.com/intent/post?screen_name=manovotny). I'm curious.
 
----
-
-So if you ever run across this, perhaps it can save you some time and get you back on track. I am not saying this will work in all cases of the WordPress admin not loading the styles, but this is what worked for me and for others who've tweeted me over the years.
-
-I have no idea why this works, so if you have a more technical or detailed explanation of why, then I would love to hear from you.
-
-I have also never had this happen again, otherwise, I will dig in much deeper next time to see if I can identify a root cause within WordPress itself and supply a patch to core.
+For what it’s worth, I’ve never seen the issue again. If it ever happens again, I'll take the time to root cause the and submit a patch.
