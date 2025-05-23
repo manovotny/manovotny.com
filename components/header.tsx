@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { Link } from "@/components/link";
-import { Logo } from "@/components/icons/logo";
+import { Logo } from "@/components/logo";
 
 export function Header() {
   const pathname = usePathname();
