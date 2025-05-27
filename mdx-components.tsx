@@ -40,14 +40,14 @@ const components: MDXComponents = {
     <li className="pl-1" {...props} />
   ),
   ol: (props: ComponentPropsWithoutRef<"ol">) => (
-    <ol className="list-decimal space-y-2 pl-5 text-neutral-800" {...props} />
+    <ol className="list-decimal space-y-2 pl-5" {...props} />
   ),
   p: (props: ComponentPropsWithoutRef<"p">) => (
     <p className="mb-6 last:mb-0" {...props} />
   ),
   // `pre` is styled in `globals.css`
   ul: (props: ComponentPropsWithoutRef<"ul">) => (
-    <ul className="list-disc space-y-1 pl-5 text-neutral-800" {...props} />
+    <ul className="list-disc space-y-1 pl-5" {...props} />
   ),
 };
 
