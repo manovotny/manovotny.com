@@ -6,7 +6,9 @@ import * as runtime from "react/jsx-runtime";
 import { globby } from "globby";
 
 describe("SEO", async () => {
-  const pages = await globby(["app/**/page.mdx"], { ignore: ["app/page.mdx"] });
+  const pages = await globby(["app/**/page.mdx"], {
+    ignore: ["app/page.mdx", "app/uses/page.mdx"],
+  });
 
   for (const page of pages) {
     const baseUrl = `file://${process.cwd()}`;

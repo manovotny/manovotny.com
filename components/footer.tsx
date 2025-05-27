@@ -28,7 +28,7 @@ export function Footer() {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`transition-all duration-200 ${linkClassNames}`}
+                className={linkClassNames}
               >
                 {link.name}
               </Link>

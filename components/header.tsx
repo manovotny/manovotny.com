@@ -4,6 +4,9 @@ import { usePathname } from "next/navigation";
 import { Link } from "@/components/link";
 import { Logo } from "@/components/logo";
 
+const linkClassNames =
+  "text-neutral-800 hover:text-neutral-800 dark:text-neutral-200 dark:hover:text-neutral-200";
+
 export function Header() {
   const pathname = usePathname();
   const isHome = pathname === "/";
@@ -26,13 +29,13 @@ export function Header() {
           </p>
         )}
       </Link>
-      {/* <nav className="ml-auto">
+      <nav className="ml-auto">
         <ol className="flex gap-10">
-          <li>Notes</li>
-          <li>About</li>
-          <li>Uses</li>
+          <Link className={linkClassNames} href="/uses">
+            Uses
+          </Link>
         </ol>
-      </nav> */}
+      </nav>
     </header>
   );
 }
