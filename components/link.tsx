@@ -29,8 +29,20 @@ export function Link({
     );
   }
 
+  const isAffiliateLink =
+    href?.includes("amzn.to") ||
+    href?.includes("join.robinhood.com") ||
+    href?.includes("share_your_love=manovotny");
+
   return (
-    <a href={href} rel="noopener noreferrer" className={classNames} {...props}>
+    <a
+      href={href}
+      rel={cn("noopener noreferrer nofollow", {
+        sponsored: isAffiliateLink,
+      })}
+      className={classNames}
+      {...props}
+    >
       {children}
     </a>
   );
