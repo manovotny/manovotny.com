@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { Link } from "@/components/link";
 import { Logo } from "@/components/logo";
+import { siteName, username } from "@/lib/constants";
 
 const linkClassNames =
   "text-neutral-800 hover:text-neutral-800 dark:text-neutral-200 dark:hover:text-neutral-200";
@@ -21,10 +22,10 @@ export function Header() {
         {isHome ? null : (
           <p className="mt-[-4px] h-[28px] transform text-2xl font-light transition-transform duration-[400ms] group-hover:translate-y-[-33px]">
             <span className="block origin-[right_center] transform transition-transform duration-[400ms]">
-              Michael Novotny
+              {siteName}
             </span>
             <span className="block origin-[left_center] transform transition-transform duration-[400ms]">
-              manovotny
+              {username}
             </span>
           </p>
         )}

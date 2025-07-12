@@ -1,10 +1,11 @@
 import { Link } from "@/components/link";
+import { siteDomain, username } from "@/lib/constants";
 
 const links = [
-  { name: "X", url: "https://x.com/manovotny" },
-  { name: "LinkedIn", url: "https://linkedin.com/in/manovotny" },
-  { name: "Bluesky", url: "https://bsky.app/profile/manovotny.com" },
-  { name: "GitHub", url: "https://github.com/manovotny" },
+  { name: "X", url: `https://x.com/${username}` },
+  { name: "LinkedIn", url: `https://linkedin.com/in/${username}` },
+  { name: "Bluesky", url: `https://bsky.app/profile/${siteDomain}` },
+  { name: "GitHub", url: `https://github.com/${username}` },
   { name: "Email", url: "mailto:manovotny@gmail.com" },
 ];
 
@@ -15,7 +16,7 @@ export function Footer() {
   return (
     <footer className="mb-0 flex grow items-end pt-16 text-sm">
       <a className={`hidden md:block ${linkClassNames}`} href="/">
-        {"manovotny.com"}
+        {siteDomain}
       </a>
       <nav className="flex md:grow md:justify-end">
         <ul className="flex gap-2">
