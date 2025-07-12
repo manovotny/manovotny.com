@@ -1,4 +1,4 @@
-import { baseUrl } from "@/lib/environment";
+import { baseUrl } from "@/lib/constants";
 import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {

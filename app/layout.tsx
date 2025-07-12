@@ -4,8 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
-import { baseUrl } from "@/lib/environment";
-import { siteName, siteDescription, username } from "@/lib/constants";
+import { baseUrl, siteName, siteDescription, username } from "@/lib/constants";
 import "./globals.css";
 
 const geistMono = Geist_Mono({

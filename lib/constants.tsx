@@ -1,5 +1,8 @@
 import { Link } from "@/components/link";
 
+export const baseUrl =
+  `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` ||
+  "http://localhost:3000";
 export const siteName = "Michael Novotny";
 export const siteDescription =
   "Software developer, stock trader, coffee connoisseur. Currently leading Content at Vercel.";
