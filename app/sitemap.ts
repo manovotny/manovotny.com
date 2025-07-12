@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { globby } from "globby";
 import { getLastModifiedDate } from "git-jiggy";
+import { baseUrl } from "@/lib/environment";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const sitemap = [];
@@ -15,7 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .replace("/page.mdx", "");
 
     sitemap.push({
-      url: `https://manovotny.com${path}`,
+      url: `${baseUrl}${path}`,
       lastModified,
     });
   }

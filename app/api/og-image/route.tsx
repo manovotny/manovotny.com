@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { Logo } from "@/components/logo";
+import { siteDomain, siteName } from "@/lib/constants";
 
 // https://developers.google.com/fonts/docs/css2
 async function loadGoogleFont(font: string, weight: number, text: string) {
@@ -23,11 +24,11 @@ async function loadGoogleFont(font: string, weight: number, text: string) {
 
 export async function GET(request: Request) {
   try {
-    const domain = "manovotny.com";
+    const domain = siteDomain;
     const { searchParams } = new URL(request.url);
     const title = searchParams.has("title")
-      ? searchParams.get("title") || "Michael Novotny"
-      : "Michael Novotny";
+      ? searchParams.get("title") || siteName
+      : siteName;
 
     return new ImageResponse(
       (

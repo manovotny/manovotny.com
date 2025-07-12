@@ -4,8 +4,9 @@ import { Analytics } from "@vercel/analytics/react";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
-import "./globals.css";
 import { baseUrl } from "@/lib/environment";
+import { siteName, siteDescription, username } from "@/lib/constants";
+import "./globals.css";
 
 const geistMono = Geist_Mono({
   display: "swap",
@@ -15,26 +16,41 @@ const geistMono = Geist_Mono({
 const geistSans = Geist({ display: "swap", preload: true, subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(baseUrl),
-  title: { default: "Michael Novotny", template: "%s • Michael Novotny" },
-  description:
-    "Software developer, stock trader, coffee enthusiast. Currently leading Content at Vercel.",
+  description: siteDescription,
   icons: [
     {
+      media: "(prefers-color-scheme: light)",
       rel: "icon",
       type: "image/png",
       url: "/icon-light.png",
-      media: "(prefers-color-scheme: light)",
     },
     {
+      media: "(prefers-color-scheme: dark)",
       rel: "icon",
       type: "image/png",
       url: "/icon-dark.png",
-      media: "(prefers-color-scheme: dark)",
     },
   ],
+  metadataBase: new URL(baseUrl),
   openGraph: {
+    description: siteDescription,
+    images: "/api/og-image",
+    locale: "en_US",
+    siteName,
+    title: siteName,
+    type: "website",
+    url: baseUrl,
+  },
+  title: { default: siteName, template: `%s • ${siteName}` },
+  twitter: {
+    card: "summary_large_image",
+    creator: `@${username}`,
+    creatorId: "14803093",
+    description: siteDescription,
     images: `/api/og-image`,
+    title: siteName,
+    site: `@${username}`,
+    siteId: "14803093",
   },
 };
 
