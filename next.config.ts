@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  pageExtensions: ["mdx", "ts", "tsx"],
+  pageExtensions: ["mdx", "tsx"],
   async redirects() {
     return [
       {
