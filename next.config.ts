@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
     // Disabled on builds because we're running checks on PRs via GitHub Actions.
     ignoreDuringBuilds: true,
   },
-  // Disabled because `--turbo` does not support remark/rehype plugins yet.
+  // Disabled because it currently breaks syntax highlighting
   // experimental: { mdxRs: true },
   images: {
     remotePatterns: [
