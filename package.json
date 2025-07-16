@@ -25,7 +25,7 @@
   "scripts": {
     "check": "npm-check -u",
     "build": "next build --turbopack",
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "lint": "next lint",
     "lint-staged": "lint-staged",
     "prettier": "prettier --write --ignore-unknown .",
