@@ -35,8 +35,8 @@ const nextConfig: NextConfig = {
 
 const withMDX = createMDX({
   options: {
-    rehypePlugins: [["rehype-unwrap-images"]],
-    remarkPlugins: [["remark-sugar-high"]],
+    rehypePlugins: ["rehype-unwrap-images"],
+    remarkPlugins: ["remark-sugar-high"],
   },
 });
 
