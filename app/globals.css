@@ -16,6 +16,14 @@
   --sh-comment: var(--color-gray-400);
 }
 
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
 pre {
   @apply mb-6 overflow-x-scroll overscroll-x-contain rounded-md border border-neutral-200 bg-white py-5 text-[13px] shadow-xs **:font-[Geist_Mono] dark:border-neutral-800 dark:bg-neutral-950;
 
