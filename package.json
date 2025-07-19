@@ -48,6 +48,7 @@
     "@vercel/analytics": "1.5.0",
     "@vercel/speed-insights": "1.2.0",
     "clsx": "2.1.1",
+    "geist": "1.4.2",
     "git-jiggy": "2.1.1",
     "next": "15.4.2-canary.5",
     "react": "19.1.0",
@@ -80,6 +81,9 @@
       "next": "$next"
     },
     "@vercel/speed-insights": {
+      "next": "$next"
+    },
+    "geist": {
       "next": "$next"
     }
   }
