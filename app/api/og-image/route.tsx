@@ -1,26 +1,10 @@
 import { ImageResponse } from "next/og";
 import { Logo } from "@/components/logo";
 import { siteDomain, siteName } from "@/lib/constants";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
-// https://developers.google.com/fonts/docs/css2
-async function loadGoogleFont(font: string, weight: number, text: string) {
-  const url = `https://fonts.googleapis.com/css2?family=${font.replaceAll(" ", "+")}:wght@${weight}&text=${encodeURIComponent(text)}`;
-  const css = await (await fetch(url)).text();
-  const resource = css.match(
-    /src: url\((.+)\) format\('(opentype|truetype)'\)/,
-  );
-
-  if (resource) {
-    const fontUrl = resource[1];
-    const response = await fetch(fontUrl);
-
-    if (response.status == 200) {
-      return await response.arrayBuffer();
-    }
-  }
-
-  throw new Error(`Failed to load font data: ${font}@${weight}`);
-}
+export const contentType = "image/jpg";
 
 export async function GET(request: Request) {
   try {
@@ -29,10 +13,22 @@ export async function GET(request: Request) {
     const title = searchParams.has("title")
       ? searchParams.get("title") || siteName
       : siteName;
+    const geistSansBold = await readFile(
+      join(
+        process.cwd(),
+        "node_modules/geist/dist/fonts/geist-sans/Geist-Bold.ttf",
+      ),
+    );
+    const geistSansThin = await readFile(
+      join(
+        process.cwd(),
+        "node_modules/geist/dist/fonts/geist-sans/Geist-Thin.ttf",
+      ),
+    );
 
     return new ImageResponse(
       (
-        <div tw="bg-neutral-50 text-neutral-800 flex font-['Geist'] h-full w-full flex-col p-8">
+        <div tw="font-['Geist'] bg-neutral-50 text-neutral-800 flex h-full w-full flex-col p-8">
           <div tw="flex flex-row justify-between">
             <Logo size={48} />
             <p tw="m-0 p-0 text-5xl font-thin">{domain}</p>
@@ -50,17 +46,16 @@ export async function GET(request: Request) {
       {
         width: 1200,
         height: 630,
-        // https://fonts.google.com/specimen/Geist
         fonts: [
           {
             name: "Geist",
-            data: await loadGoogleFont("Geist", 100, domain),
+            data: geistSansThin,
             style: "normal",
             weight: 100,
           },
           {
             name: "Geist",
-            data: await loadGoogleFont("Geist", 700, title),
+            data: geistSansBold,
             style: "normal",
             weight: 700,
           },

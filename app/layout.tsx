@@ -53,7 +53,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${GeistSans.variable} ${GeistMono.variable} min-w-[360px] bg-neutral-50 text-lg text-neutral-800 scheme-light-dark dark:bg-black dark:text-neutral-200`}
+      className={`${GeistSans.variable} ${GeistMono.variable} min-w-[360px] bg-neutral-50 font-sans text-lg text-neutral-800 scheme-light-dark dark:bg-black dark:text-neutral-200`}
     >
       <body>
         <div className="mx-auto flex min-h-dvh w-full max-w-3xl flex-col space-y-6 p-8 pt-0 md:pt-8">
