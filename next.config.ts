@@ -1,14 +1,12 @@
 import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
-import rehypeUnwrapImages from "rehype-unwrap-images";
-import remarkSugarHigh from "remark-sugar-high";
 
 const nextConfig: NextConfig = {
   eslint: {
     // Disabled on builds because we're running checks on PRs via GitHub Actions.
     ignoreDuringBuilds: true,
   },
-  // Disabled because `--turbo` does not support remark/rehype plugins yet.
+  // Disabled because it currently breaks syntax highlighting
   // experimental: { mdxRs: true },
   images: {
     remotePatterns: [
@@ -18,7 +16,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  pageExtensions: ["mdx", "ts", "tsx"],
+  pageExtensions: ["mdx", "tsx"],
   async redirects() {
     return [
       {
@@ -37,8 +35,8 @@ const nextConfig: NextConfig = {
 
 const withMDX = createMDX({
   options: {
-    rehypePlugins: [rehypeUnwrapImages],
-    remarkPlugins: [remarkSugarHigh],
+    rehypePlugins: ["rehype-unwrap-images"],
+    remarkPlugins: ["remark-sugar-high"],
   },
 });
 

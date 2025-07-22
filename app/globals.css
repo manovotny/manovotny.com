@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
-@theme {
+@theme inline {
   --breakpoint-xs: 32rem;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
 :root {
@@ -17,7 +19,7 @@
 }
 
 pre {
-  @apply mb-6 overflow-x-scroll overscroll-x-contain rounded-md border border-neutral-200 bg-white py-5 text-[13px] shadow-xs **:font-[Geist_Mono] dark:border-neutral-800 dark:bg-neutral-950;
+  @apply mb-6 overflow-x-scroll overscroll-x-contain rounded-md border border-neutral-200 bg-white py-5 text-[13px] shadow-xs **:font-mono dark:border-neutral-800 dark:bg-neutral-950;
 
   code {
     @apply grid;

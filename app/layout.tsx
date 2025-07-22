@@ -1,18 +1,12 @@
 import type { Metadata } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
-import { Geist, Geist_Mono } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { baseUrl, siteName, siteDescription, username } from "@/lib/constants";
 import "./globals.css";
-
-const geistMono = Geist_Mono({
-  display: "swap",
-  preload: true,
-  subsets: ["latin"],
-});
-const geistSans = Geist({ display: "swap", preload: true, subsets: ["latin"] });
 
 export const metadata: Metadata = {
   description: siteDescription,
@@ -59,9 +53,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.className} ${geistMono.className} min-w-[360px]`}
+      className={`${GeistSans.variable} ${GeistMono.variable} min-w-[360px] bg-neutral-50 font-sans text-lg text-neutral-800 scheme-light-dark dark:bg-black dark:text-neutral-200`}
     >
-      <body className="bg-neutral-50 text-lg text-neutral-800 scheme-light-dark dark:bg-black dark:text-neutral-200">
+      <body>
         <div className="mx-auto flex min-h-dvh w-full max-w-3xl flex-col space-y-6 p-8 pt-0 md:pt-8">
           <Header />
           <main>{children}</main>
