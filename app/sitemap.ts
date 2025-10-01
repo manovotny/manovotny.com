@@ -1,6 +1,6 @@
-import { MetadataRoute } from "next";
-import { globby } from "globby";
 import { getLastModifiedDate } from "git-jiggy";
+import { globby } from "globby";
+import type { MetadataRoute } from "next";
 import { baseUrl } from "@/lib/constants";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -12,12 +12,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Remove the `app` directory, remove group routes, and remove `page.mdx`
     const path = page
       .replace("app", "")
-      .replace(/\/\([^\/]*\)/g, "")
+      .replace(/\/\([^/]*\)/g, "")
       .replace("/page.mdx", "");
 
     sitemap.push({
-      url: `${baseUrl}${path}`,
       lastModified,
+      url: `${baseUrl}${path}`,
     });
   }
 

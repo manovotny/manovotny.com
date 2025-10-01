@@ -1,5 +1,5 @@
-import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   eslint: {
@@ -11,8 +11,8 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
         hostname: "ty3rozserpuox2as.public.blob.vercel-storage.com",
+        protocol: "https",
       },
     ],
   },
@@ -20,14 +20,14 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: "/phpstorm-keyboard-shortcuts",
         destination: "/",
         permanent: true,
+        source: "/phpstorm-keyboard-shortcuts",
       },
       {
-        source: "/setup-phpstorm-xdebug-mamp-debugging",
         destination: "/",
         permanent: true,
+        source: "/setup-phpstorm-xdebug-mamp-debugging",
       },
     ];
   },

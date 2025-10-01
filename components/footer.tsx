@@ -26,10 +26,10 @@ export function Footer() {
               key={link.url}
             >
               <Link
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
                 className={linkClassNames}
+                href={link.url}
+                rel="noopener noreferrer"
+                target="_blank"
               >
                 {link.name}
               </Link>

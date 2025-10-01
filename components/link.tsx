@@ -1,5 +1,5 @@
-import { ComponentPropsWithoutRef } from "react";
 import { default as NextLink } from "next/link";
+import type { ComponentPropsWithoutRef } from "react";
 import { cn } from "@/lib/classname";
 
 export function Link({
@@ -9,13 +9,13 @@ export function Link({
   ...props
 }: ComponentPropsWithoutRef<"a">) {
   const classNames = cn(
-    "text-blue-500 hover:text-blue-500 dark:text-blue-400 underline-offset-3 hover:underline",
+    "text-blue-500 underline-offset-3 hover:text-blue-500 hover:underline dark:text-blue-400",
     className,
   );
 
   if (href?.startsWith("/")) {
     return (
-      <NextLink href={href} className={classNames} {...props}>
+      <NextLink className={classNames} href={href} {...props}>
         {children}
       </NextLink>
     );
@@ -23,7 +23,7 @@ export function Link({
 
   if (href?.startsWith("#")) {
     return (
-      <a href={href} className={classNames} {...props}>
+      <a className={classNames} href={href} {...props}>
         {children}
       </a>
     );
@@ -36,11 +36,11 @@ export function Link({
 
   return (
     <a
+      className={classNames}
       href={href}
       rel={cn("noopener noreferrer nofollow", {
         sponsored: isAffiliateLink,
       })}
-      className={classNames}
       {...props}
     >
       {children}

@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
-import { GeistSans } from "geist/font/sans";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
+import type { Metadata } from "next";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
-import { baseUrl, siteName, siteDescription, username } from "@/lib/constants";
+import { baseUrl, siteDescription, siteName, username } from "@/lib/constants";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -41,9 +41,9 @@ export const metadata: Metadata = {
     creatorId: "14803093",
     description: siteDescription,
     images: `/api/og-image`,
-    title: siteName,
     site: `@${username}`,
     siteId: "14803093",
+    title: siteName,
   },
 };
 
@@ -52,8 +52,8 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
+      className={`${GeistSans.variable} ${GeistMono.variable} scheme-light-dark min-w-[360px] bg-neutral-50 font-sans text-lg text-neutral-800 dark:bg-black dark:text-neutral-200`}
       lang="en"
-      className={`${GeistSans.variable} ${GeistMono.variable} min-w-[360px] bg-neutral-50 font-sans text-lg text-neutral-800 scheme-light-dark dark:bg-black dark:text-neutral-200`}
     >
       <body>
         <div className="mx-auto flex min-h-dvh w-full max-w-3xl flex-col space-y-6 p-8 pt-0 md:pt-8">
