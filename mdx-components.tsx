@@ -1,5 +1,5 @@
-import React, { ComponentPropsWithoutRef, CSSProperties } from "react";
 import type { MDXComponents } from "mdx/types";
+import type { ComponentPropsWithoutRef } from "react";
 import { Link } from "@/components/link";
 
 const components: MDXComponents = {
