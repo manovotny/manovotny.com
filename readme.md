@@ -7,4 +7,4 @@ Built using:
 - [Next.js](https://nextjs.org/)
 - [MDX](https://mdxjs.com/)
 - [Tailwind](https://tailwindcss.com/)
-- [Vercel](https://vercel.com)
+- [Vercel](https://vercel.com/home)

@@ -8,11 +8,11 @@ export const baseUrl =
       : "http://localhost:3000";
 export const siteName = "Michael Novotny";
 export const siteDescription =
-  "Software developer, stock trader, coffee connoisseur. Currently leading Content at Vercel.";
+  "Software developer, stock investor/trader, coffee enthusiast. Currently working on docs at Clerk.";
 export const siteDescriptionCode = (
   <>
-    software developer, stock investor/trader, coffee connoisseur. Currently
-    leading content at <Link href="https://vercel.com/home">Vercel</Link>.
+    software developer, stock investor/trader, coffee enthusiast. Currently
+    working on docs at <Link href="https://clerk.com">Clerk</Link>.
   </>
 );
 export const siteDomain = "manovotny.com";
