@@ -1,44 +1,8 @@
 {
-  "name": "manovotny.com",
-  "description": "My website built with Next.js, MDX, Tailwind, and Vercel.",
-  "version": "2.0.0",
-  "private": true,
   "author": {
-    "name": "Michael Novotny",
     "email": "manovotny@gmail.com",
+    "name": "Michael Novotny",
     "url": "https://manovotny.com"
-  },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/manovotny/manovotny.com.git"
-  },
-  "engines": {
-    "node": ">=22.0.0"
-  },
-  "files": [
-    "app",
-    "components",
-    "lib",
-    "mdx-components.tsx"
-  ],
-  "scripts": {
-    "check": "npm-check -u",
-    "build": "next build --turbopack",
-    "dev": "next dev --turbopack",
-    "lint": "eslint .",
-    "lint-staged": "lint-staged",
-    "prettier": "prettier --write --ignore-unknown .",
-    "prettier:check": "prettier --check --ignore-unknown .",
-    "start": "next start",
-    "test": "npm run lint && npm run prettier:check && tsc && npm run test:unit",
-    "test:unit": "tsx --test './tests/**/*.test.*'"
-  },
-  "git": {
-    "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
     "@heroicons/react": "2.2.0",
@@ -55,9 +19,12 @@
     "react-dom": "19.1.1",
     "rehype-unwrap-images": "1.0.0",
     "remark-sugar-high": "0.6.0",
-    "tailwind-merge": "3.3.1"
+    "tailwind-merge": "3.3.1",
+    "uninstall": "0.0.0"
   },
+  "description": "My website built with Next.js, MDX, Tailwind, and Vercel.",
   "devDependencies": {
+    "@biomejs/biome": "2.2.4",
     "@eslint/eslintrc": "3.3.1",
     "@tailwindcss/postcss": "4.1.13",
     "@types/mdx": "2.0.13",
@@ -76,6 +43,23 @@
     "tsx": "4.20.6",
     "typescript": "5.9.3"
   },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "files": [
+    "app",
+    "components",
+    "lib",
+    "mdx-components.tsx"
+  ],
+  "git": {
+    "pre-commit": "lint:staged"
+  },
+  "license": "MIT",
+  "lint-staged": {
+    "*": "npm run lint -- --files-ignore-unknown=true"
+  },
+  "name": "manovotny.com",
   "overrides": {
     "@vercel/analytics": {
       "next": "$next"
@@ -86,5 +70,24 @@
     "geist": {
       "next": "$next"
     }
-  }
+  },
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manovotny/manovotny.com.git"
+  },
+  "scripts": {
+    "build": "next build --turbopack",
+    "check": "npm-check -u",
+    "dev": "next dev --turbopack",
+    "lint": "biome check",
+    "lint:fix": "npm run lint -- --write",
+    "lint:staged": "lint-staged",
+    "prettier": "prettier --write --ignore-unknown .",
+    "prettier:check": "prettier --check --ignore-unknown .",
+    "start": "next start",
+    "test": "npm run lint && tsc && npm run test:unit",
+    "test:unit": "tsx --test './tests/**/*.test.*'"
+  },
+  "version": "2.0.0"
 }

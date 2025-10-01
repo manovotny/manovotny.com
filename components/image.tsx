@@ -1,4 +1,7 @@
-import { default as NextImage, ImageProps as NextImageProps } from "next/image";
+import {
+  default as NextImage,
+  type ImageProps as NextImageProps,
+} from "next/image";
 
 type ImageProps = {
   caption?: string;
@@ -15,7 +18,7 @@ export function Image(props: ImageProps) {
         />
       </div>
       {props?.caption && props?.caption.length > 0 && (
-        <figcaption className="pt-4 text-center text-sm text-neutral-500 dark:text-neutral-400">
+        <figcaption className="pt-4 text-center text-neutral-500 text-sm dark:text-neutral-400">
           {props.caption}
         </figcaption>
       )}

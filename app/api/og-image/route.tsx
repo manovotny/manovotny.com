@@ -1,8 +1,9 @@
-import { ImageResponse } from "next/og";
-import { Logo } from "@/components/logo";
-import { siteDomain, siteName } from "@/lib/constants";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { ImageResponse } from "next/og";
+import type { CSSProperties } from "react";
+import { Logo } from "@/components/logo";
+import { siteDomain, siteName } from "@/lib/constants";
 
 export const contentType = "image/jpg";
 
@@ -27,39 +28,37 @@ export async function GET(request: Request) {
     );
 
     return new ImageResponse(
-      (
-        <div tw="font-['Geist'] bg-neutral-50 text-neutral-800 flex h-full w-full flex-col p-8">
-          <div tw="flex flex-row justify-between">
-            <Logo size={48} />
-            <p tw="m-0 p-0 text-5xl font-thin">{domain}</p>
-          </div>
-          <p
-            tw="text-center text-7xl m-auto font-bold"
-            style={{
-              textWrap: "balance",
-            }}
-          >
-            {title}
-          </p>
+      <div tw="bg-neutral-50 text-neutral-800 flex h-full w-full flex-col p-8">
+        <div tw="flex flex-row justify-between">
+          <Logo size={48} />
+          <p tw="m-0 p-0 text-5xl font-thin">{domain}</p>
         </div>
-      ),
+        <p
+          style={{
+            textWrap: "balance",
+          }}
+          tw="text-center text-7xl m-auto font-bold"
+        >
+          {title}
+        </p>
+      </div>,
       {
-        width: 1200,
-        height: 630,
         fonts: [
           {
-            name: "Geist",
             data: geistSansThin,
+            name: "Geist",
             style: "normal",
             weight: 100,
           },
           {
-            name: "Geist",
             data: geistSansBold,
+            name: "Geist",
             style: "normal",
             weight: 700,
           },
         ],
+        height: 630,
+        width: 1200,
       },
     );
   } catch (error: unknown) {

@@ -1,9 +1,9 @@
+import assert from "node:assert/strict";
 import { promises as fs } from "node:fs";
 import { describe, it } from "node:test";
-import assert from "node:assert/strict";
 import { evaluate } from "@mdx-js/mdx";
-import * as runtime from "react/jsx-runtime";
 import { globby } from "globby";
+import * as runtime from "react/jsx-runtime";
 
 describe("SEO", async () => {
   const pages = await globby(["app/**/page.mdx"], {
