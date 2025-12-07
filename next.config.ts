@@ -12,7 +12,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  pageExtensions: ["mdx", "tsx"],
+  pageExtensions: ["ts", "tsx", "mdx"],
+  reactStrictMode: true,
   async redirects() {
     return [
       {
