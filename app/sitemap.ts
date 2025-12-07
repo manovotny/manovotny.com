@@ -1,27 +1,26 @@
+import { glob } from "node:fs/promises";
+
 import { getLastModifiedDate } from "git-jiggy";
-import { globby } from "globby";
 import type { MetadataRoute } from "next";
+
 import { baseUrl } from "@/lib/constants";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const sitemap = [];
-  const pages = await globby(["app/**/page.mdx"]);
+  const sitemap: MetadataRoute.Sitemap = [];
 
-  for (const page of pages) {
+  for await (const page of glob("app/**/page.{mdx,tsx,jsx}")) {
     const lastModified = await getLastModifiedDate(page);
     // Remove the `app` directory, remove group routes, and remove `page.mdx`
     const path = page
       .replace("app", "")
       .replace(/\/\([^/]*\)/g, "")
-      .replace("/page.mdx", "");
+      .replace(/\/page\.(mdx|tsx|jsx)/, "");
 
     sitemap.push({
       lastModified,
       url: `${baseUrl}${path}`,
     });
   }
-
-  console.log("sitemap", sitemap);
 
   return sitemap;
 }

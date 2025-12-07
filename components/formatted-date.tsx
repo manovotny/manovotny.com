@@ -7,7 +7,7 @@ export function FormattedDate({ date }: { date: string }) {
 
   return (
     <time
-      className="mt-[-24px] mb-6 block text-neutral-600 text-sm dark:text-neutral-400"
+      className="mt-[-24px] mb-6 block text-sm text-neutral-600 dark:text-neutral-400"
       dateTime={date}
     >
       {formatted}

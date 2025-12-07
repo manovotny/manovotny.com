@@ -1,16 +1,15 @@
 import assert from "node:assert/strict";
 import { promises as fs } from "node:fs";
+import { glob } from "node:fs/promises";
 import { describe, it } from "node:test";
+
 import { evaluate } from "@mdx-js/mdx";
-import { globby } from "globby";
 import * as runtime from "react/jsx-runtime";
 
 describe("SEO", async () => {
-  const pages = await globby(["app/**/page.mdx"], {
-    ignore: ["app/page.mdx", "app/uses/page.mdx"],
-  });
-
-  for (const page of pages) {
+  for await (const page of await glob("app/**/page.mdx", {
+    exclude: ["app/page.mdx", "app/uses/page.mdx"],
+  })) {
     const baseUrl = `file://${process.cwd()}`;
     const contents = await fs.readFile(page, { encoding: "utf8" });
     const replaced = contents.replaceAll("@/", `${baseUrl}/`);

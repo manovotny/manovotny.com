@@ -1,7 +1,8 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+
 import { ImageResponse } from "next/og";
-import type { CSSProperties } from "react";
+
 import { Logo } from "@/components/logo";
 import { siteDomain, siteName } from "@/lib/constants";
 

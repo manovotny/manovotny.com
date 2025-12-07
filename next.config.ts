@@ -2,10 +2,6 @@ import createMDX from "@next/mdx";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  eslint: {
-    // Disabled on builds because we're running checks on PRs via GitHub Actions.
-    ignoreDuringBuilds: true,
-  },
   // Disabled because it currently breaks syntax highlighting
   // experimental: { mdxRs: true },
   images: {
@@ -16,7 +12,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  pageExtensions: ["mdx", "tsx"],
+  pageExtensions: ["ts", "tsx", "mdx"],
+  reactStrictMode: true,
   async redirects() {
     return [
       {

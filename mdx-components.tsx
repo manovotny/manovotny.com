@@ -1,34 +1,35 @@
 import type { MDXComponents } from "mdx/types";
 import type { ComponentPropsWithoutRef } from "react";
+
 import { Link } from "@/components/link";
 
 const components: MDXComponents = {
   a: Link,
   code: ({ children, ...props }: ComponentPropsWithoutRef<"code">) => (
     <code
-      className="whitespace-pre-wrap break-words rounded-md border border-neutral-200 bg-white px-[4px] py-[5px] font-mono text-sm shadow-xs dark:border-neutral-700 dark:bg-neutral-800"
+      className="rounded-md border border-neutral-200 bg-white px-[4px] py-[5px] font-mono text-sm break-words whitespace-pre-wrap shadow-xs dark:border-neutral-700 dark:bg-neutral-800"
       {...props}
     >
       {children}
     </code>
   ),
   h1: (props: ComponentPropsWithoutRef<"h1">) => (
-    <h1 className="mb-6 text-balance font-bold text-2xl" {...props} />
+    <h1 className="mb-6 text-2xl font-bold text-balance" {...props} />
   ),
   h2: (props: ComponentPropsWithoutRef<"h2">) => (
-    <h2 className="my-6 text-balance font-bold text-xl" {...props} />
+    <h2 className="my-6 text-xl font-bold text-balance" {...props} />
   ),
   h3: (props: ComponentPropsWithoutRef<"h3">) => (
-    <h3 className="my-6 text-balance font-bold text-lg" {...props} />
+    <h3 className="my-6 text-lg font-bold text-balance" {...props} />
   ),
   h4: (props: ComponentPropsWithoutRef<"h4">) => (
-    <h4 className="my-4 text-balance font-bold" {...props} />
+    <h4 className="my-4 font-bold text-balance" {...props} />
   ),
   h5: (props: ComponentPropsWithoutRef<"h5">) => (
-    <h5 className="my-4 text-balance font-bold" {...props} />
+    <h5 className="my-4 font-bold text-balance" {...props} />
   ),
   h6: (props: ComponentPropsWithoutRef<"h6">) => (
-    <h6 className="my-4 text-balance font-bold" {...props} />
+    <h6 className="my-4 font-bold text-balance" {...props} />
   ),
   hr: (props: ComponentPropsWithoutRef<"hr">) => (
     <hr

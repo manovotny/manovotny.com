@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+
 import { Link } from "@/components/link";
 import { Logo } from "@/components/logo";
 import { siteName, username } from "@/lib/constants";
@@ -20,7 +21,7 @@ export function Header() {
       >
         <Logo />
         {isHome ? null : (
-          <p className="mt-[-4px] h-[28px] transform font-light text-2xl transition-transform duration-[400ms] group-hover:translate-y-[-33px]">
+          <p className="mt-[-4px] h-[28px] transform text-2xl font-light transition-transform duration-[400ms] group-hover:translate-y-[-33px]">
             <span className="block origin-[right_center] transform transition-transform duration-[400ms]">
               {siteName}
             </span>
