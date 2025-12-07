@@ -1,5 +1,6 @@
 import { default as NextLink } from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
+
 import { cn } from "@/lib/classname";
 
 export function Link({

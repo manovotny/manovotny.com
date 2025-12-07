@@ -3,9 +3,11 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
+
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { baseUrl, siteDescription, siteName, username } from "@/lib/constants";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -52,7 +54,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
-      className={`${GeistSans.variable} ${GeistMono.variable} scheme-light-dark min-w-[360px] bg-neutral-50 font-sans text-lg text-neutral-800 dark:bg-black dark:text-neutral-200`}
+      className={`${GeistSans.variable} ${GeistMono.variable} min-w-[360px] bg-neutral-50 font-sans text-lg text-neutral-800 scheme-light-dark dark:bg-black dark:text-neutral-200`}
       lang="en"
     >
       <body>

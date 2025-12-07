@@ -1,6 +1,8 @@
 import { glob } from "node:fs/promises";
+
 import { getLastModifiedDate } from "git-jiggy";
 import type { MetadataRoute } from "next";
+
 import { baseUrl } from "@/lib/constants";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
