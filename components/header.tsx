@@ -16,16 +16,16 @@ export function Header() {
   return (
     <header className="flex py-16">
       <Link
-        className="group relative flex h-[28px] items-center gap-4 overflow-hidden text-neutral-800 hover:text-neutral-800 hover:no-underline dark:text-neutral-200 dark:hover:text-neutral-200"
+        className="group relative flex h-[30px] items-center gap-4 overflow-hidden text-neutral-800 hover:text-neutral-800 hover:no-underline dark:text-neutral-200 dark:hover:text-neutral-200"
         href="/"
       >
         <Logo />
         {isHome ? null : (
-          <p className="mt-[-4px] h-[28px] transform text-2xl font-light transition-transform duration-[400ms] group-hover:translate-y-[-33px]">
-            <span className="block origin-[right_center] transform transition-transform duration-[400ms]">
+          <p className="-mt-1 h-[30px] transform text-2xl font-light transition-transform duration-400 group-hover:translate-y-[-35px]">
+            <span className="block origin-[right_center] transform transition-transform duration-400">
               {siteName}
             </span>
-            <span className="block origin-[left_center] transform transition-transform duration-[400ms]">
+            <span className="block origin-[left_center] transform transition-transform duration-400">
               {username}
             </span>
           </p>
