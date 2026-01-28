@@ -31,6 +31,7 @@ export function Link({
   }
 
   const isAffiliateLink =
+    href?.includes("rwrd.io") ||
     href?.includes("join.robinhood.com") ||
     href?.includes("share_your_love=manovotny");
 
