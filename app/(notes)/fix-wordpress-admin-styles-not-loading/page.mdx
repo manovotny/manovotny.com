@@ -1,19 +1,16 @@
 import { FormattedDate } from "@/components/formatted-date";
 import { Image } from "@/components/image";
+import { createMetadata } from "@/lib/metadata";
 
 export const data = {
   date: "2013-02-28",
   description:
     "Fix missing CSS styles in the WordPress admin with a quick workaround. Change one line of code to restore your dashboard styles instantly.",
+  slug: "fix-wordpress-admin-styles-not-loading",
   title: "How to fix WordPress admin styles not loading",
 };
 
-export const metadata = {
-  ...data,
-  openGraph: {
-    images: `/api/og-image?title=${encodeURIComponent(data.title)}`,
-  },
-};
+export const metadata = createMetadata(data);
 
 # {data.title}
 

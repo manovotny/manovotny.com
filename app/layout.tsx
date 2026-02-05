@@ -11,6 +11,9 @@ import { baseUrl, siteDescription, siteName, username } from "@/lib/constants";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: baseUrl,
+  },
   description: siteDescription,
   icons: [
     {

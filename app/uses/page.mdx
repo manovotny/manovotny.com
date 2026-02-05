@@ -1,16 +1,14 @@
 import { Note } from "@/components/note";
+import { createMetadata } from "@/lib/metadata";
 
 export const data = {
-  description: "A list of all the hardware and software I use and recommend.",
+  description:
+    "A curated list of hardware, software, and gear I use on a daily basis and recommend.",
+  slug: "uses",
   title: "Uses",
 };
 
-export const metadata = {
-  ...data,
-  openGraph: {
-    images: `/api/og-image?title=${encodeURIComponent(data.title)}`,
-  },
-};
+export const metadata = createMetadata(data);
 
 # {data.title}
 

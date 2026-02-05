@@ -1,5 +1,6 @@
 *.log
 *.tsbuildinfo
+.context
 .DS_Store
 .env*
 .next
