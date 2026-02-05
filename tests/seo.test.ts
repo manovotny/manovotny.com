@@ -30,7 +30,7 @@ describe("seo", async () => {
 
     const titleMatch = contents.match(/title:\s*["']([^"']+)["']/);
     const descriptionMatch = contents.match(
-      /description:\s*\n?\s*["']([^"']+)["']/s,
+      /description:[\s\S]*?["']([^"']+)["']/,
     );
 
     if (titleMatch && !SKIP_TITLE_CHECKS.includes(page)) {
