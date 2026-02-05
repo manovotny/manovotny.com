@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 
 type PageData = {
+  alternates?: Metadata["alternates"];
   date?: string;
   description: string;
+  openGraph?: Metadata["openGraph"];
   slug: string;
   title: string;
 };
