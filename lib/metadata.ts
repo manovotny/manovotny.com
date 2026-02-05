@@ -11,9 +11,11 @@ export function createMetadata(data: PageData): Metadata {
   return {
     ...data,
     alternates: {
+      ...data.alternates,
       canonical: `/${data.slug}`,
     },
     openGraph: {
+      ...data.openGraph,
       images: `/api/og-image?title=${encodeURIComponent(data.title)}`,
     },
   };
