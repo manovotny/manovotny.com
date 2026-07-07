@@ -1,0 +1,62 @@
+import { FormattedDate } from "@/components/formatted-date";
+import { createMetadata } from "@/lib/metadata";
+
+export const data = {
+  date: "2013-03-27",
+  description:
+    "Introducing WP Test, an exhaustive set of test data to measure the quality and integrity of WordPress plugins and themes.",
+  slug: "wp-test",
+  title: "Introducing WP Test: The Best Tests For WordPress",
+};
+
+export const metadata = createMetadata(data);
+
+# {data.title}
+
+<FormattedDate date={data.date} />
+
+Accounting for all the variables is one of the most challenging aspects of developing for WordPress. There are so many scenarios to account for, such as WordPress versions, plugin versions, plugin conflicts, host server configurations, browsers, and the endless ways you can customize WordPress through post formats, custom post types, theme options, theme templates, etc.
+
+In this vast sea of variety is both the pleasure and the pain in developing WordPress themes and plugins for mass distribution.
+
+Today I would like to begin to put an end to one of those variables. I would like to introduce the release of WP Test, the best tests for WordPress.
+
+WP Test is exhaustive set of test data to measure the quality and integrity of your plugins and themes. The foundation of these tests are derived from the WordPress Theme Unit Test Codex data. On top of that, I added three years of leading quality, support, and testing for 8BIT, which has uncovered some corner cases in the way people use WordPress.
+
+WP Daily, Post Status, and Tom McFarlin have already given WP Test some great coverage (thanks guys!), but I want to expand upon the reasons why I created WP Test.
+
+## Transparency
+
+Without question, the WordPress Theme Unit Test Codex data is good place to start. My frustration with it was born out of lack of updates. It could go more than a year without any attention, even when major updates to WordPress introduced new features that lacked examples and testing coverage. And when the test data did update, there was no indication of what had changed within the data.
+
+WP Test comes with a changelog indicating what has been added, removed, or changed within the data for each release. The website also has a release notes page also indicating the history of changes to the test data.
+
+## Contribution
+
+Contributing to the WordPress Codex is fairly straightforward, but contributing to the test data is not. By using GitHub to host the test data, anyone is free to contribute to the project by making pull requests or by adding issues. There is also a contact page on the website if you are not comfortable with Git and / or GitHub.
+
+I purposely excluded the word "comprehensive" in the description of the tests. I know the test data is most likely missing coverage in some areas. That's where the community comes in. Let me know of a test that is not covered and I will get it added to the data so we can all account for it in our products.
+
+## Life
+
+Testing can be tedious and boring enough, but there is no need for the test data itself to be mundane. Lorem ipsum is effective. It does simulate text flow fairly well, but it's boring as hell.
+
+I wanted content with life and character. There are no testing benefit to this, but it does inject personality and fun into traditionally dry content. This alone is a good enough reason for it to exist in this way.
+
+## Purpose
+
+Not only is your test data content funny, but it's smart and helpful. Whenever possible, the test data references the WordPress Codex for best practices and function references. These kind of integration into the test data will only increase over time and lessen the barrier to resolving the issues the test data uncovers.
+
+## Consolidation
+
+I had test cases scattered all over the place... Across three servers and ten WordPress installations. It was a chore to remember where everything was located, so I decided to centralize it. This way everyone on the 8BIT team are consistently developing against common WordPress scenarios for both internal and personal projects.
+
+## Community
+
+Sharing is caring, right? I was going to consolidate all these test cases anyway, so I could have either kept it private for just our team or I could release it for the greater good of the WordPress community. All it literally cost me was a domain name. That seems like a small price to pay for continuity. The decision to make it public was a no brainer.
+
+## The Future
+
+WP Test would be good enough as just test data, but I do have bigger plans for what it could be beyond what it is today. I would love to see it grow into an all encompassing suite of WordPress testing tools and data. Who knows if it will ever get there, but at the very least, now we can all share and contribute to an impressive set of test data.
+
+Please let me know if you have any ideas, additional test cases, or feedback! Let's make WordPress testing easier and resilient together.

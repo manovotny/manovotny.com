@@ -1,0 +1,136 @@
+import { FormattedDate } from "@/components/formatted-date";
+import { createMetadata } from "@/lib/metadata";
+
+export const data = {
+  date: "2013-03-19",
+  description:
+    "Presentation slides, notes, and resources from my WordCamp Atlanta talk on testing and troubleshooting WordPress plugins and themes.",
+  slug: "test-and-troubleshoot-wordpress",
+  title: "How To Test And Troubleshoot WordPress Plugins And Themes",
+};
+
+export const metadata = createMetadata(data);
+
+# {data.title}
+
+<FormattedDate date={data.date} />
+
+I had the incredible honor and privilege to speak at WordCamp Atlanta last week. I gave a presentation on Testing & Troubleshooting WordPress Plugins & Themes, which is the culmination of all that I have learned from leading quality at 8BIT for the past three years.
+
+I am posting my entire presentation along with bullet point cliff notes and resource links for each slide.
+
+## About Me
+
+I live from Des Moines, IA. I am a frontend developer for John Deere. My website is manovotny.com. You can follow me on Twitter at @manovotny. I have been working for 8BIT for three years. I oversee quality for 8BIT, which means I test the integrity of our products before they are released.
+
+## jQuery Best Practices
+
+Most theme, and especially plugin issues, can be mitigated by properly using jQuery.
+
+- Do not add your own version of jQuery.
+- Do not deregister the version of jQuery that comes with WordPress.
+- To use jQuery, properly enqueue the version of jQuery that comes with WordPress.
+- While jQuery is the most popular example, there are actually several included scripts that come with WordPress, so be sure and properly queue those versions instead of using your own.
+- Use WordPress conditionals to only display scripts on pages when they are needed. This reduces the changes of scripts conflicting with each other. For example, only load the CSS and / or JavaScript for a widget plugin if that widget is being used and be displayed on the current page.
+
+## WP Test
+
+I created [WP Test](/wp-test) to help identify issues while developing WordPress themes and plugins. It is a fantastically exhaustive set of test data to measure the integrity of your plugins and themes. It contains lessons learned from over three years of theme and plugin support, and baffling corner cases, to create a potent cocktail of simulated, quirky user content.
+
+## Debug Mode
+
+In your development environments, tell WordPress to start logging and reporting errors so you can address them. Find your `wp-config.php` file, which should be at the root of your WordPress installation.
+
+{/* TODO: Review code snippet */}
+
+```php
+define( 'WP_DEBUG', true );
+define( 'WP_DEBUG_LOG', true );
+define( 'WP_DEBUG_DISPLAY', false );
+```
+
+## Debug Bar
+
+Debug Bar is a debugging menu added to the admin bar that quickly shows query, cache, and other helpful debugging information. A very useful way to view the errors being logged and reported. Notice the "Debug" button in the WordPress admin bar turns red when there is a error or warning. Click it to open the Debug Bar panel.
+
+{/* TODO: Add image - original showed Debug Bar in WordPress admin */}
+
+There are many Debug Bar extensions that can provide a deeper view into what is happening:
+
+- Debug Bar Actions and Filters Addon
+- Debug Bar Console
+- Debug Bar Cron
+- Debug Bar Post Meta
+- Debug Bar Query Tracer
+- Debug Bar Super Globals
+- Debug Bar Transients
+- Debug Bar-Extender
+- Kint Debugger
+- WooCommerce Debug Bar
+
+## Log Deprecated Notices
+
+Log Deprecated Notices is a plugin that helps you identify old WordPress API functions your theme or plugin is currently using so you can update to the newer methods. Log Deprecated Notices logs its calls under the Tools menu in the WordPress admin.
+
+Sometimes themes or plugins will want to keep these deprecated calls anyway, especially if they want to support older versions of WordPress, so you will need to make that call on your own when reported. Note that it is a best practice to keep up-to-date with the newer methods instead of keeping legacy support whenever possible.
+
+## Theme-Check & Theme Mentor
+
+Theme-Check is a simple and easy way to test your theme for all the latest WordPress standards and practices. It is located under the Appearance menu in the WordPress admin. Sometimes Theme-Check reports false positives, so you will need to determine if something is a legitimate claim that needs to be fixed or not.
+
+Theme Mentor is the cousin of Theme-Check plugin. It does deeper code analysis to ensure best practices, like checking for the dequeueing of jQuery as we discussed above.
+
+## Additional Testing Tools
+
+- **RTL Tester** is essential for troubleshooting for plugins and themes that offer support for right-to-left reading languages.
+- **Slim Jetpack** is simply Jetpack without the need to connect to a WordPress.com account. Handy for development environments who do not need the connection to WordPress.com to test Jetpack features.
+
+{/* TODO: Review code snippet */}
+
+```php
+// Jetpack Developer Mode
+define( 'JETPACK_DEV_DEBUG', true );
+```
+
+## Browser Cache
+
+At some point in your development career, you will be bit by browser cache. If you are not seeing changes you've made to CSS and JavaScript files, try clearing your browser cache.
+
+## Process of Elimination
+
+We use a process of elimination procedure at 8BIT to determine where to begin looking for a point of failure.
+
+1. If things are not working, we first disable all plugins to see if that resolves the issue.
+2. If things start working again, then we enable plugins one by one until the issue reappears. Then we know we've found our culprit and we can begin troubleshooting the plugin.
+3. If plugins are not the issue, then we try switching to one of the default WordPress themes like TwentyEleven or TwentyTwelve. If the issue goes away, then we know it's a theme problem we need to resolve.
+4. If both plugins and themes are not causing the issue, then you know you have an issue with WordPress core or a server configuration issue.
+
+## Chrome Developer Tools
+
+Chrome Developer Tools is the most advanced way to inspect what is going on underneath the covers of your website. The Firebug extension / add-on is a good alternative for other browsers, though it is not as capable as Chrome Developer Tools.
+
+You can open Chrome Developer Tools by right-clicking anywhere on the website and select Inspect Element.
+
+{/* TODO: Add image - original showed Chrome DevTools Elements panel */}
+
+- **Elements tab** contains markup and CSS for the current page. You can select an element and see the CSS being applied, the selector causing it, and the load order. CSS properties and values are editable for live changes.
+- **Sources tab** shows all CSS and JavaScript files loaded as part of the page. File content can be edited live. You can set breakpoints by clicking on a line number.
+- **Console tab** is essentially a full Terminal or Command Prompt. For troubleshooting, use it to see if the site is throwing any errors. Keep it open at all times during testing.
+
+## Responsive Testing
+
+**Viewport Resizer** is a handy bookmarklet that will load your site in a viewport the size of common devices. This is helpful in testing responsive design.
+
+**BrowserStack** is a paid service that will give you access to testing your website on all browsers, devices, and operating systems. It also comes with built-in debugging tools.
+
+You can also pair Xcode's iPhone / iPad simulator to Safari's Web Inspector to debug, or plug in your iPhone / iPad via USB and use Safari 6 to live debug webpages on your device.
+
+{/* TODO: Add image - original showed BrowserStack running IE 8 on Windows 7 */}
+
+## Slides
+
+I am also making all the slides available in a single PDF, which you can [download here](/test-and-troubleshoot-wordpress-plugins-and-themes/presentation.pdf).
+
+A special thanks to Jared Erickson for making our team look united in our presentations. The guy can make anything look good, even slides and presentations. And thanks to everyone who attended my talk and to everyone who came to WordCamp Atlanta. It was great to meet you all face-to-face and the conversations we had are priceless.
+
+Please let me know if you have any additional questions about my talk or these notes. I would love to help answer them for you.

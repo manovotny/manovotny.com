@@ -28,6 +28,52 @@ const nextConfig: NextConfig = {
         permanent: true,
         source: "/setup-phpstorm-xdebug-mamp-debugging",
       },
+      // Redirect removed posts that may still have inbound links
+      {
+        destination: "/",
+        permanent: true,
+        source: "/accounts-and-services",
+      },
+      {
+        destination: "/",
+        permanent: true,
+        source: "/blogging-advice",
+      },
+      {
+        destination: "/",
+        permanent: true,
+        source: "/macbook-air-vs-retina",
+      },
+      {
+        destination: "/",
+        permanent: true,
+        source: "/pagely",
+      },
+      {
+        destination: "/test-and-troubleshoot-wordpress",
+        permanent: true,
+        source: "/speaking-at-wordcamp-atlanta",
+      },
+      {
+        destination: "/",
+        permanent: true,
+        source: "/start-a-blog",
+      },
+      {
+        destination: "/",
+        permanent: true,
+        source: "/wordpress",
+      },
+      {
+        destination: "/",
+        permanent: true,
+        source: "/wordpress-plugins",
+      },
+      {
+        destination: "/",
+        permanent: true,
+        source: "/wp-engine",
+      },
       // Redirect old WordPress upload paths
       {
         destination:
