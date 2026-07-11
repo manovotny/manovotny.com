@@ -51,7 +51,7 @@ export default async function NotesPage() {
               className="group flex flex-col text-neutral-800 no-underline hover:text-neutral-800 sm:flex-row sm:items-baseline sm:gap-4 dark:text-neutral-200 dark:hover:text-neutral-200"
               href={`/${note.slug}`}
             >
-              <FormattedDate date={note.date} />
+              <FormattedDate className="w-28 shrink-0" date={note.date} />
               <span className="group-hover:underline">{note.title}</span>
             </Link>
           </li>
