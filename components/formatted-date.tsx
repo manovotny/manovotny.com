@@ -8,6 +8,7 @@ export function FormattedDate({
   const formatted = new Intl.DateTimeFormat("en-US", {
     day: "numeric",
     month: "short",
+    timeZone: "UTC",
     year: "numeric",
   }).format(new Date(date));
 
