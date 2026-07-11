@@ -10,4 +10,4 @@ if [ -n "$ROOT_PATH" ] && ! [ "$ROOT_PATH" -ef "$(pwd)" ]; then
     [ -d "$ROOT_PATH/.vercel" ] && cp -r "$ROOT_PATH/.vercel" .
 fi
 
-pnpm i
+npm i
