@@ -5,7 +5,7 @@ import { createMetadata } from "@/lib/metadata";
 export const data = {
   date: "2013-03-19",
   description:
-    "Presentation slides, notes, and resources from my WordCamp Atlanta talk on testing and troubleshooting WordPress plugins and themes.",
+    "Slides, notes, and resources from my WordCamp Atlanta talk on testing and troubleshooting WordPress plugins and themes.",
   slug: "test-and-troubleshoot-wordpress",
   title: "How To Test And Troubleshoot WordPress Plugins And Themes",
 };
@@ -16,21 +16,21 @@ export const metadata = createMetadata(data);
 
 <FormattedDate date={data.date} />
 
-I had the incredible honor and privilege to speak at [WordCamp Atlanta](https://2013.atlanta.wordcamp.org/) last week. I gave a presentation on **Testing & Troubleshooting WordPress Plugins & Themes**, which is the culmination of all that I have learned from leading quality at 8BIT for the past three years.
+I spoke at [WordCamp Atlanta](https://2013.atlanta.wordcamp.org/) last week — an honor. My presentation, **Testing & Troubleshooting WordPress Plugins & Themes**, is the culmination of three years leading quality at 8BIT.
 
-I am posting my entire presentation along with bullet point cliff notes and resource links for each slide.
+Here's the full presentation, with cliff notes and resource links for each slide.
 
 SLIDE_1
 
-- I live from Des Moines, IA.
-- I am a frontend developer for [John Deere](https://deere.com/).
+- I live in Des Moines, IA.
+- I'm a frontend developer for [John Deere](https://deere.com/).
 - My website is [manovotny.com](https://manovotny.com).
-- You can follow me on Twitter at [@manovotny](https://x.com/manovotny).
+- Follow me on Twitter at [@manovotny](https://x.com/manovotny).
 
 SLIDE_2
 
-- I have been working for [8BIT](https://web.archive.org/web/20130502041115/https://8bit.io/about/) for three years.
-- I oversee quality for 8BIT, which means I test the integrity of our products before they are released.
+- I've been working for [8BIT](https://web.archive.org/web/20130502041115/https://8bit.io/about/) for three years.
+- I oversee quality for 8BIT — I test the integrity of our products before they ship.
 
 SLIDE_3
 
@@ -40,31 +40,31 @@ SLIDE_5
 
 SLIDE_6
 
-- Most theme, and especially plugin issues, can be mitigated by properly using [jQuery](https://jquery.com).
-- Do not add your own version of jQuery.
-- Do not deregister the version of jQuery that comes with WordPress.
-- To use jQuery, properly enqueue the version of jQuery that comes with WordPress.
-- While jQuery is the most popular example, there are actually several included scripts that come with WordPress, so be sure and [properly queue](https://developer.wordpress.org/reference/functions/wp_enqueue_script/) those versions instead of using your own.
+- Using [jQuery](https://jquery.com) properly prevents most theme issues, and especially plugin issues.
+- Don't add your own version of jQuery.
+- Don't deregister the version of jQuery that comes with WordPress.
+- To use jQuery, enqueue the version that comes with WordPress.
+- jQuery is the most popular example, but WordPress includes several scripts — [properly enqueue](https://developer.wordpress.org/reference/functions/wp_enqueue_script/) those versions instead of using your own.
 
 SLIDE_7
 
-- Use [WordPress conditionals](https://codex.wordpress.org/Conditional_Tags) to only display scripts on pages when they are needed. This reduces the changes of scripts conflicting with each other.
-- For example, only load the CSS and / or JavaScript for a widget plugin if that widget is being used and be displayed on the current page.
+- Use [WordPress conditionals](https://codex.wordpress.org/Conditional_Tags) to load scripts only on pages that need them. Fewer scripts on a page means fewer chances of conflicts.
+- For example, only load a widget plugin's CSS and JavaScript when that widget displays on the current page.
 
 SLIDE_8
 
 SLIDE_9
 
-- I created [WP Test](/wp-test) to help identify issues while developing WordPress themes and plugins.
-- It is a fantastically exhaustive set of test data to measure the integrity of your plugins and themes.
-- It contains lessons learned from over three years of theme and plugin support, and baffling corner cases, to create a potent cocktail of simulated, quirky user content.
+- I created [WP Test](/wp-test) to catch issues while developing WordPress themes and plugins.
+- It's an exhaustive set of test data to measure the integrity of your plugins and themes.
+- Over three years of theme and plugin support, and its baffling corner cases, distilled into a potent cocktail of quirky, simulated user content.
 
 SLIDE_10
 
 SLIDE_11
 
-- In your development environments, tell WordPress to start logging and reporting errors so you can address them.
-- Find your `wp-config.php` file, which should be at the root of your WordPress installation.
+- In development environments, tell WordPress to log and report errors so you can fix them.
+- Open your `wp-config.php` file, at the root of your WordPress installation.
 
 ```php
 /**
@@ -83,18 +83,18 @@ define( 'SCRIPT_DEBUG', true );
 
 SLIDE_12
 
-- [Debug Bar](https://wordpress.org/plugins/debug-bar/) is a debugging menu added to the admin bar that quickly shows query, cache, and other helpful debugging information.
-- A very useful way to view the errors being logged and reported.
+- [Debug Bar](https://wordpress.org/plugins/debug-bar/) adds a debugging menu to the admin bar that shows query, cache, and other debugging information at a glance.
+- A useful way to see the errors being logged and reported.
 
 SLIDE_13
 
-- Notice the "Debug" button in the WordPress admin bar turns red when there is a error or warning.
+- The **Debug** button in the WordPress admin bar turns red when there's an error or warning.
 - Click it to open the Debug Bar panel.
-- Notice the message it’s reporting so you can fix them.
+- Read the messages it reports so you can fix them.
 
 SLIDE_14
 
-There are many Debug Bar extensions that can provide a deeper view into what is happening:
+Many Debug Bar extensions give a deeper view into what's happening:
 
 - [Debug Bar Actions and Filters Addon](https://wordpress.org/extend/plugins/debug-bar-actions-and-filters-addon/)
 - [Debug Bar Console](https://wordpress.org/extend/plugins/debug-bar-console/)
@@ -109,37 +109,37 @@ There are many Debug Bar extensions that can provide a deeper view into what is 
 
 SLIDE_15
 
-- [Log Deprecated Notices](https://wordpress.org/extend/plugins/log-deprecated-notices/) is a plugin that helps you identify old WordPress API functions your theme or plugin is currently using so you can update to the newer methods.
+- [Log Deprecated Notices](https://wordpress.org/extend/plugins/log-deprecated-notices/) identifies old WordPress API functions your theme or plugin uses so you can update to the newer methods.
 
 SLIDE_16
 
 - Log Deprecated Notices logs its calls under the Tools menu in the WordPress admin.
-- Sometimes themes or plugins will want to keep these deprecated calls anyway, especially if they want to support older versions of WordPress, so you will need to make that call on your own when reported.
-- Note that it is a best practice to keep up-to-date with the newer methods instead of keeping legacy support whenever possible.
+- Sometimes themes or plugins keep deprecated calls anyway, especially to support older versions of WordPress — that judgment call is yours when they're reported.
+- Whenever possible, stay current with the newer methods instead of keeping legacy support.
 
 SLIDE_17
 
-- [Theme-Check](https://wordpress.org/plugins/theme-check/) is a simple and easy way to test your theme for all the latest WordPress standards and practices.
-- It is located under the Appearance menu in the WordPress admin.
+- [Theme-Check](https://wordpress.org/plugins/theme-check/) tests your theme against the latest WordPress standards and practices.
+- It lives under the Appearance menu in the WordPress admin.
 
 SLIDE_18
 
-- Sometimes Theme-Check reports false positives, so you will need to determine if something is a legitimate claim that needs to be fixed or not.
+- Theme-Check reports false positives sometimes, so you'll need to decide whether each claim is legitimate and needs fixing.
 
 SLIDE_19
 
-- [Theme Mentor](https://wordpress.org/plugins/theme-mentor/) is the cousin of Theme-Check plugin.
-- It does deeper code analysis to ensure best practices, like checking for the dequeueing of jQuery as we discussed above.
+- [Theme Mentor](https://wordpress.org/plugins/theme-mentor/) is the cousin of the Theme-Check plugin.
+- It runs deeper code analysis for best practices, like checking for the jQuery dequeueing we covered above.
 
 SLIDE_20
 
-- [RTL Tester](https://wordpress.org/plugins/rtl-tester/) is essential for troubleshooting for plugins and themes that offer support for right-to-left reading languages.
+- [RTL Tester](https://wordpress.org/plugins/rtl-tester/) is essential for troubleshooting plugins and themes that support right-to-left reading languages.
 
 SLIDE_21
 
-- [Slim Jetpack](https://wordpress.org/plugins/slimjetpack/) is simply [Jetpack](https://wordpress.org/plugins/jetpack/) without the need to connect to a [WordPress.com](https://wordpress.com) account.
-- Handy for development environments who do not need the connection to WordPress.com to test Jetpack features.
-- Someone in the Q&A session mentioned that Jetpack does now ship with a “Developer Mode” which you can enable to not require the connection to WordPress.com while in development environments. Simply add the code below to wp-config.php to enable developer mode.
+- [Slim Jetpack](https://wordpress.org/plugins/slimjetpack/) is [Jetpack](https://wordpress.org/plugins/jetpack/) without the connection to a [WordPress.com](https://wordpress.com) account.
+- Handy for development environments that don't need the WordPress.com connection to test Jetpack features.
+- Someone in the Q&A session mentioned that Jetpack now ships with a "Developer Mode" that drops the WordPress.com connection requirement in development environments. Add the code below to `wp-config.php` to enable it.
 
 ```php
 define( 'JETPACK_DEV_DEBUG', true );
@@ -149,45 +149,45 @@ SLIDE_22
 
 SLIDE_23
 
-- At some point in your development career, you will be bit by browser cache.
-- If you are not seeing changes you've made to CSS and JavaScript files, try clearing your browser cache.
+- At some point in your development career, browser cache will bite you.
+- If changes to your CSS and JavaScript files aren't showing up, clear your browser cache.
 
 SLIDE_24
 
-We use a process of elimination procedure at 8BIT to determine where to begin looking for a point of failure:
+At 8BIT we use process of elimination to find where a failure starts:
 
-1. If things are not working, we first disable all plugins to see if that resolves the issue.
-2. If things start working again, then we enable plugins one by one until the issue reappears. Then we know we've found our culprit and we can begin troubleshooting the plugin.
-3. If plugins are not the issue, then we try switching to one of the default WordPress themes like TwentyEleven or TwentyTwelve. If the issue goes away, then we know it's a theme problem we need to resolve.
-4. If both plugins and themes are not causing the issue, then you know you have an issue with WordPress core or a server configuration issue.
+1. If things aren't working, we disable all plugins first to see if that resolves the issue.
+2. If things start working again, we enable plugins one by one until the issue reappears. That's our culprit, and we can start troubleshooting the plugin.
+3. If plugins aren't the issue, we switch to a default WordPress theme like TwentyEleven or TwentyTwelve. If the issue goes away, it's a theme problem we need to resolve.
+4. If neither plugins nor themes are causing the issue, it's WordPress core or a server configuration issue.
 
 SLIDE_25
 
-- [Chrome DevTools](https://developer.chrome.com/docs/devtools) is the most advanced way to inspect what is going on underneath the covers of your website.
-- The [Firebug](https://getfirebug.com) extension / add-on is a good alternative for other browsers, though it is not as capable as Chrome Developer Tools.
+- [Chrome DevTools](https://developer.chrome.com/docs/devtools) is the most advanced way to inspect what's going on under the covers of your website.
+- The [Firebug](https://getfirebug.com) extension / add-on is a good alternative for other browsers, though it isn't as capable as Chrome Developer Tools.
 
 SLIDE_26
 
-- You can open Chrome Developer Tools by right-clicking anywhere on the website and select **Inspect Element**.
-- This will open a panel at the bottom of your browser. You can change position — I have mine on the right.
+- Open Chrome Developer Tools by right-clicking anywhere on the website and selecting **Inspect Element**.
+- A panel opens at the bottom of your browser. You can change the position — mine's on the right.
 
 SLIDE_27
 
-- The **Elements** tab contains markup and CSS for the current page. You can select an element and see the CSS being applied, the selector causing it, and the load order. CSS properties and values are editable for live changes.
+- The **Elements** tab contains the markup and CSS for the current page. Select an element to see the CSS being applied, the selector causing it, and the load order. CSS properties and values are editable for live changes.
 
 SLIDE_28
 
-- The **Sources** tab shows all CSS and JavaScript files loaded as part of the page. File content can be edited live. You can set breakpoints by clicking on a line number.
+- The **Sources** tab shows all CSS and JavaScript files loaded as part of the page. File content can be edited live. Set breakpoints by clicking a line number.
 
 SLIDE_29
 
-- The **Console** tab is essentially a full Terminal or Command Prompt. For troubleshooting, use it to see if the site is throwing any errors. Keep it open at all times during testing.
+- The **Console** tab is a full Terminal or Command Prompt. For troubleshooting, use it to see if the site is throwing errors. Keep it open at all times during testing.
 
 SLIDE_30
 
 SLIDE_31
 
-- [Viewport Resizer](https://chromewebstore.google.com/detail/viewport-resizer-ultimate/kapnjjcfcncngkadhpmijlkblpibdcgm) is a handy bookmarklet that will load your site in a viewport the size of common devices. This is helpful in testing responsive design.
+- [Viewport Resizer](https://chromewebstore.google.com/detail/viewport-resizer-ultimate/kapnjjcfcncngkadhpmijlkblpibdcgm) is a handy bookmarklet that loads your site in viewports sized to common devices. Helpful for testing responsive design.
 
 SLIDE_32
 
@@ -201,22 +201,22 @@ SLIDE_32
 
 SLIDE_33
 
-- [BrowserStack](https://www.browserstack.com) is a paid service that will give you access to testing your website on all browsers, devices, and operating systems. It also comes with built-in debugging tools.
+- [BrowserStack](https://www.browserstack.com) is a paid service that lets you test your website on all browsers, devices, and operating systems. It comes with built-in debugging tools.
 
 SLIDE_34
 
 > An example of a website in IE 8 running on a Windows 7 machine all from within my browser.The websites are fully interactive not just a screenshots.
 
-- Someone in the Q&A session also mentioned [using Web Inspector to debug Mobile Safari](https://webdesign.tutsplus.com/quick-tip-using-web-inspector-to-debug-mobile-safari--webdesign-8787a) if you have a Mac to pair Xcode's iPhone/iPad simulator to Safari's Web Inspector to debug, or plug in your iPhone / iPad via USB and use Safari 6 to live debug webpages on your device.
+- Someone in the Q&A session also mentioned [using Web Inspector to debug Mobile Safari](https://webdesign.tutsplus.com/quick-tip-using-web-inspector-to-debug-mobile-safari--webdesign-8787a) if you have a Mac: pair Xcode's iPhone/iPad simulator with Safari's Web Inspector to debug, or plug in your iPhone / iPad via USB and use Safari 6 to live-debug webpages on your device.
 
 SLIDE_35
 
-You can [download the slides](/test-and-troubleshoot-wordpress-plugins-and-themes/presentation.pdf), [watch my session](https://wordpress.tv/2013/04/23/michael-novotny-testing-troubleshooting-wordpress-plugins-themes/), or [all the other WordCamp Atlanta 2013 sessions](https://wordpress.tv/event/wordcamp-atlanta-2013/).
+You can [download the slides](/test-and-troubleshoot-wordpress-plugins-and-themes/presentation.pdf), [watch my session](https://wordpress.tv/2013/04/23/michael-novotny-testing-troubleshooting-wordpress-plugins-themes/), or [browse all the other WordCamp Atlanta 2013 sessions](https://wordpress.tv/event/wordcamp-atlanta-2013/).
 
 EMBED
 
 > https://www.youtube.com/watch?v=T9JghRb9I-4
 
-A special thanks to [Jared Erickson](https://lessmade.com) for making our team look united in our presentations. The guy can make anything look good, even slides and presentations.
+A special thanks to [Jared Erickson](https://lessmade.com) for making our team look united in our presentations. The guy can make anything look good — even slides.
 
-And thanks to everyone who attended my talk and to everyone who came to WordCamp Atlanta. It was great to meet you all face-to-face and the conversations we had are priceless.
+And thanks to everyone who attended my talk and everyone who came to WordCamp Atlanta. Meeting you all face-to-face was a pleasure, and the conversations we had are priceless.

@@ -16,7 +16,7 @@ export const metadata = createMetadata(data);
 
 <FormattedDate date={data.date} />
 
-After setting up my new computer and getting [MAMP Pro](https://www.mamp.info) running, I tried launching a WordPress project. The admin panel came up, but without any styles.
+If your WordPress admin loads with no CSS, a one-line change can bring it back. File this one away — it won't mean much right now, but you'll be glad you have it when it does.
 
 <Image
   alt="WordPress admin styles not loading"
@@ -25,29 +25,33 @@ After setting up my new computer and getting [MAMP Pro](https://www.mamp.info) r
   width={768}
 />
 
-I tried reinstalling WordPress. No change. I spent a few hours digging through forums, trying countless suggestions. Eventually, something worked.
+Every admin style was gone. Not the evening I had planned.
 
-Open `wp-admin/load-styles.php` and find this line:
+I couldn't tell what was wrong. I reinstalled WordPress a couple of times with no luck, then started searching. Well over an hour of articles and suggested hacks later, nothing had worked. The fix finally turned up buried in a sketchy-looking site — I didn't think to save the URL, so I can't credit the author. But it worked.
+
+One caveat first: I don't encourage hacking WordPress core. In the moment, I wanted my admin back.
+
+In `wp-admin/load-styles.php`, find this line:
 
 ```php
 error_reporting(0);
 ```
 
-And change it to:
+Change it to this:
 
 ```php
 error_reporting( E_ALL | E_STRICT );
 ```
 
-After page refresh, the admin styles were back. I even switched the line back to its previous value, and everything still worked. Normally, I discourage editing WordPress core files, but I just needed to get back to work. Fortunately, you don't have to leave the change in place.
+Then refresh the admin screen a few times. The styles come back.
 
-Someone else later mentioned you can add this code above any `require_once` calls in `wp-config.php` instead of modifying a WordPress core file:
+The change doesn't need to stay. Once the styles return, revert the line and everything keeps working.
+
+A reader let me know that adding this to `wp-config.php`, above any `require_once` calls, also works — no core file involved:
 
 ```php
-define( ‘CONCATENATE_SCRIPTS’, false );
-define( ‘SCRIPT_DEBUG’, true );
+define( 'CONCATENATE_SCRIPTS', false );
+define( 'SCRIPT_DEBUG', true );
 ```
 
-I’m not sure _why_ any of this works. If you know, [tell me](https://x.com/intent/post?screen_name=manovotny). I'm curious.
-
-For what it’s worth, I’ve never seen the issue again. If it ever happens again, I'll take the time to root cause the and submit a patch.
+I won't claim this fixes every case of missing admin styles, but it fixed mine. Hopefully it saves you the hour I lost.
