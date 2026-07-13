@@ -25,9 +25,7 @@ If your WordPress admin loads with no CSS, a one-line change can bring it back. 
   width={768}
 />
 
-Every admin style was gone. Not the evening I had planned.
-
-I couldn't tell what was wrong. I reinstalled WordPress a couple of times with no luck, then started searching. Well over an hour of articles and suggested hacks later, nothing had worked. The fix finally turned up buried in a sketchy-looking site — I didn't think to save the URL, so I can't credit the author. But it worked.
+Every admin style was gone. I couldn't tell what was wrong. I reinstalled WordPress a couple of times with no luck, then started searching. Well over an hour of articles and suggested hacks later, nothing had worked. The fix finally turned up buried in a sketchy-looking site — I didn't think to save the URL, so I can't credit the author. But it worked.
 
 One caveat first: I don't encourage hacking WordPress core. In the moment, I wanted my admin back.
 
@@ -43,7 +41,7 @@ Change it to this:
 error_reporting( E_ALL | E_STRICT );
 ```
 
-Then refresh the admin screen a few times. The styles come back.
+Then refresh the admin screen a few times, and the styles come back.
 
 The change doesn't need to stay. Once the styles return, revert the line and everything keeps working.
 
