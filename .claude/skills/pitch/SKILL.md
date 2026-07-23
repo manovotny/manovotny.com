@@ -9,7 +9,7 @@ Evaluate a post idea against this site's editorial bar and deliver an honest ver
 
 ## The bar
 
-This site's best posts are experience-driven, not steps-driven: career decisions (breaking up with Flash), things built and shipped (WP Test), talks given (WordCamp Atlanta), honest starts (Push Start). The 2026 revival discarded ten posts; the discards were how-to series, vendor reviews, and version-pinned tutorials.
+This site's best posts are experience-driven, not steps-driven: career decisions (breaking up with Flash), things built and shipped (WP Test), talks given (WordCamp Atlanta), honest starts (Press Start). The 2026 revival discarded ten posts; the discards were how-to series, vendor reviews, and version-pinned tutorials.
 
 ## Evaluate every pitch on
 
