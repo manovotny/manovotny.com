@@ -1,10 +1,12 @@
 *.log
 *.tsbuildinfo
+.claude/worktrees
 .context
 .DS_Store
 .env*
 .next
 .vercel
 .vscode
+docs/superpowers
 next-env.d.ts
 node_modules
