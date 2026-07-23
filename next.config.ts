@@ -77,7 +77,7 @@ const nextConfig: NextConfig = {
       // Redirect old WordPress upload paths
       {
         destination:
-          "https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slides.pdf",
+          "/test-and-troubleshoot-wordpress-plugins-and-themes/presentation.pdf",
         permanent: true,
         source:
           "/wp-content/uploads/2013/03/How-To-Test-Troubleshoot-WordPress-Plugins-Themes.pdf",
