@@ -10,7 +10,11 @@ const CANONICAL_PATTERNS = [
 ] as const;
 
 // Pages with intentionally short titles (e.g., "Uses")
-const SKIP_TITLE_CHECKS = ["app/uses/page.mdx"];
+const SKIP_TITLE_CHECKS = [
+  "app/(notes)/flash/page.mdx",
+  "app/(notes)/start/page.mdx",
+  "app/uses/page.mdx",
+];
 
 describe("seo", async () => {
   for await (const page of await glob("app/**/page.mdx", {

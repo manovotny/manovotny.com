@@ -1,0 +1,12 @@
+{
+  "configurations": [
+    {
+      "autoPort": true,
+      "name": "dev",
+      "port": 3000,
+      "runtimeArgs": ["./scripts/ai/run.sh"],
+      "runtimeExecutable": "bash"
+    }
+  ],
+  "version": "0.0.1"
+}

@@ -1,13 +1,20 @@
-export function FormattedDate({ date }: { date: string }) {
+export function FormattedDate({
+  className = "mt-[-24px] mb-6 block",
+  date,
+}: {
+  className?: string;
+  date: string;
+}) {
   const formatted = new Intl.DateTimeFormat("en-US", {
     day: "numeric",
     month: "short",
+    timeZone: "UTC",
     year: "numeric",
   }).format(new Date(date));
 
   return (
     <time
-      className="mt-[-24px] mb-6 block text-sm text-neutral-600 dark:text-neutral-400"
+      className={`${className} text-sm text-neutral-600 dark:text-neutral-400`}
       dateTime={date}
     >
       {formatted}

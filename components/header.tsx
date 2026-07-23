@@ -33,9 +33,16 @@ export function Header() {
       </Link>
       <nav className="ml-auto">
         <ol className="flex gap-10">
-          <Link className={linkClassNames} href="/uses">
-            Uses
-          </Link>
+          <li>
+            <Link className={linkClassNames} href="/notes">
+              Notes
+            </Link>
+          </li>
+          <li>
+            <Link className={linkClassNames} href="/uses">
+              Uses
+            </Link>
+          </li>
         </ol>
       </nav>
     </header>
