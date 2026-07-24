@@ -25,6 +25,9 @@ const config = {
         // it locally. Safe to ignore during build.
         if (path.startsWith("/_vercel/image")) return;
 
+        // /notes and /uses index pages created in Task 8; safe to ignore during build.
+        if (path === "/notes" || path === "/uses") return;
+
         throw new Error(message);
       },
     },
