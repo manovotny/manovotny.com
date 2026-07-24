@@ -77,6 +77,7 @@ const config = {
       ),
       rehypePlugins: [rehypeUnwrapImages],
       remarkPlugins: [stripMdsvexForcedLinkRel],
+      smartypants: false,
     }),
     vitePreprocess(),
   ],

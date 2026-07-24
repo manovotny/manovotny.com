@@ -3,6 +3,10 @@
   import Seo from "$lib/components/seo.svelte";
 </script>
 
+<svelte:head>
+  <meta content="noindex" name="robots" />
+</svelte:head>
+
 <Seo />
 
 <h1 class="mb-6 text-2xl font-bold text-balance">Oops!</h1>
