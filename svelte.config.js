@@ -6,6 +6,30 @@ import { escapeSvelte, mdsvex } from "mdsvex";
 import rehypeUnwrapImages from "rehype-unwrap-images";
 import { highlight } from "sugar-high";
 
+// mdsvex hardcodes an internal remark-external-links pass (`rel: ["nofollow"]`,
+// not configurable via mdsvex's own options) that stamps every external
+// markdown link with `rel="nofollow"`. That prop flows through to
+// src/lib/components/link.svelte as part of `...rest`, which is spread after
+// the component's own `rel` attribute — so it silently overrides the
+// component's correct "noopener noreferrer nofollow" (+ "sponsored") value
+// down to just "nofollow". This remark plugin runs after mdsvex's internal
+// pass and strips that forced `rel` so the Link component's own logic wins,
+// matching production (which has no such forced injection).
+function stripMdsvexForcedLinkRel() {
+  return (tree) => {
+    const visit = (node) => {
+      if (node.type === "link" && node.data?.hProperties?.rel) {
+        delete node.data.hProperties.rel;
+      }
+      if (Array.isArray(node.children)) {
+        node.children.forEach(visit);
+      }
+    };
+
+    visit(tree);
+  };
+}
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   extensions: [".svelte", ".md"],
@@ -52,6 +76,7 @@ const config = {
         new URL("./src/lib/markdown/layout.svelte", import.meta.url),
       ),
       rehypePlugins: [rehypeUnwrapImages],
+      remarkPlugins: [stripMdsvexForcedLinkRel],
     }),
     vitePreprocess(),
   ],

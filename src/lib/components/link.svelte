@@ -25,17 +25,16 @@
       href?.includes("join.robinhood.com") ||
       href?.includes("share_your_love=manovotny"),
   );
+
+  const rel = $derived(
+    "noopener noreferrer nofollow" + (isAffiliateLink ? " sponsored" : ""),
+  );
 </script>
 
 {#if isInternal}
   <a class={classNames} {href} {...rest}>{@render children?.()}</a>
 {:else}
-  <a
-    class={classNames}
-    {href}
-    rel={cn("noopener noreferrer nofollow", { sponsored: isAffiliateLink })}
-    {...rest}
-  >
+  <a class={classNames} {href} {rel} {...rest}>
     {@render children?.()}
   </a>
 {/if}
