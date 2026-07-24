@@ -1,20 +1,18 @@
-import { FormattedDate } from "@/components/formatted-date";
-import { Image } from "@/components/image";
-import { createMetadata } from "@/lib/metadata";
+---
+date: "2013-01-02"
+description: "Six years of professional Flash development ended on December 31st, 2012. Time to move on to new platforms."
+slug: "flash"
+title: "Breaking up with Flash"
+---
 
-export const data = {
-  date: "2013-01-02",
-  description:
-    "Six years of professional Flash development ended on December 31st, 2012. Time to move on to new platforms.",
-  slug: "flash",
-  title: "Breaking up with Flash",
-};
+<script lang="ts">
+  import FormattedDate from "$lib/components/formatted-date.svelte";
+  import Image from "$lib/components/image.svelte";
+</script>
 
-export const metadata = createMetadata(data);
+# {title}
 
-# {data.title}
-
-<FormattedDate date={data.date} />
+<FormattedDate date={date} />
 
 I started working with [Adobe Flash](https://en.wikipedia.org/wiki/Adobe_Flash) in 2006. I owe a lot to Flash. It shaped my career for six years and paid for our wedding, our house, two cars, and two kids. I have immense gratitude and respect for the platform.
 

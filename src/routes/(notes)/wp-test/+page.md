@@ -1,26 +1,26 @@
-import { FormattedDate } from "@/components/formatted-date";
-import { Image } from "@/components/image";
-import { Note } from "@/components/note";
-import { createMetadata } from "@/lib/metadata";
+---
+date: "2013-03-27"
+description: "Introducing WP Test, an exhaustive set of test data to measure the quality and integrity of WordPress plugins and themes."
+slug: "wp-test"
+title: "Introducing WP Test: the best tests for WordPress"
+---
 
-export const data = {
-  date: "2013-03-27",
-  description:
-    "Introducing WP Test, an exhaustive set of test data to measure the quality and integrity of WordPress plugins and themes.",
-  slug: "wp-test",
-  title: "Introducing WP Test: the best tests for WordPress",
-};
+<script lang="ts">
+  import FormattedDate from "$lib/components/formatted-date.svelte";
+  import Image from "$lib/components/image.svelte";
+  import Note from "$lib/components/note.svelte";
+</script>
 
-export const metadata = createMetadata(data);
+# {title}
 
-# {data.title}
-
-<FormattedDate date={data.date} />
+<FormattedDate date={date} />
 
 <Note>
-  In September 2016, WP Test was purchased by [Brian
-  Krogsgard](https://krogsgard.com) of [Post Status](https://poststatus.com) —
-  read the [announcement](https://poststatus.com/new-wptest-io/).
+
+In September 2016, WP Test was purchased by [Brian
+Krogsgard](https://krogsgard.com) of [Post Status](https://poststatus.com) —
+read the [announcement](https://poststatus.com/new-wptest-io/).
+
 </Note>
 
 Building for WordPress means accounting for endless variables: WordPress versions, plugin versions, plugin conflicts, host configurations, browsers, and all the ways people customize WordPress — post formats, custom post types, theme options, theme templates.

@@ -1,20 +1,18 @@
-import { FormattedDate } from "@/components/formatted-date";
-import { Image } from "@/components/image";
-import { createMetadata } from "@/lib/metadata";
+---
+date: "2012-10-09"
+description: "At some point you have to stop making excuses and start. This is me starting."
+slug: "start"
+title: "Press start"
+---
 
-export const data = {
-  date: "2012-10-09",
-  description:
-    "At some point you have to stop making excuses and start. This is me starting.",
-  slug: "start",
-  title: "Press start",
-};
+<script lang="ts">
+  import FormattedDate from "$lib/components/formatted-date.svelte";
+  import Image from "$lib/components/image.svelte";
+</script>
 
-export const metadata = createMetadata(data);
+# {title}
 
-# {data.title}
-
-<FormattedDate date={data.date} />
+<FormattedDate date={date} />
 
 I'm detail oriented, probably to a fault. Planning, organizing, and executing are part of what makes me good at what I do. But when it comes to shipping, they can be my worst enemy.
 

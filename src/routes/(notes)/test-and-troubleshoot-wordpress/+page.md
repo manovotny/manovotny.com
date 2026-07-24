@@ -1,22 +1,20 @@
-import { FormattedDate } from "@/components/formatted-date";
-import { Image } from "@/components/image";
-import { Note } from "@/components/note";
-import { YouTube } from "@/components/youtube";
-import { createMetadata } from "@/lib/metadata";
+---
+date: "2013-03-19"
+description: "Slides, notes, and resources from my WordCamp Atlanta talk on testing and troubleshooting WordPress plugins and themes."
+slug: "test-and-troubleshoot-wordpress"
+title: "How to test and troubleshoot WordPress plugins and themes"
+---
 
-export const data = {
-  date: "2013-03-19",
-  description:
-    "Slides, notes, and resources from my WordCamp Atlanta talk on testing and troubleshooting WordPress plugins and themes.",
-  slug: "test-and-troubleshoot-wordpress",
-  title: "How to test and troubleshoot WordPress plugins and themes",
-};
+<script lang="ts">
+  import FormattedDate from "$lib/components/formatted-date.svelte";
+  import Image from "$lib/components/image.svelte";
+  import Note from "$lib/components/note.svelte";
+  import YouTube from "$lib/components/youtube.svelte";
+</script>
 
-export const metadata = createMetadata(data);
+# {title}
 
-# {data.title}
-
-<FormattedDate date={data.date} />
+<FormattedDate date={date} />
 
 I spoke at [WordCamp Atlanta](https://2013.atlanta.wordcamp.org/) last week. My presentation, **Testing and Troubleshooting WordPress Plugins and Themes**, is the culmination of three years leading quality at [8BIT](https://web.archive.org/web/20130502041115/https://8bit.io/about/).
 
@@ -363,9 +361,11 @@ At 8BIT we use process of elimination to find where a failure starts:
 - Someone in the Q&A session also recommended the [Web Developer extension](https://chrispederick.com/work/web-developer/) as an alternative that properly displays websites with the correct user agents.
 
 <Note>
-  Using the [Chrome DevTools **Toggle device
-  toolbar**](https://developer.chrome.com/docs/devtools/device-mode) is a better
-  approach now.
+
+Using the [Chrome DevTools **Toggle device
+toolbar**](https://developer.chrome.com/docs/devtools/device-mode) is a better
+approach now.
+
 </Note>
 
 <Image

@@ -25,8 +25,17 @@ const config = {
         // it locally. Safe to ignore during build.
         if (path.startsWith("/_vercel/image")) return;
 
-        // /notes and /uses index pages created in Task 8; safe to ignore during build.
-        if (path === "/notes" || path === "/uses") return;
+        // /notes index page is created in Task 9; safe to ignore during build.
+        if (path === "/notes") return;
+
+        // This path is rewritten by Vercel to an external blob storage URL
+        // (see next.config.ts's rewrites()); the rewrite is ported to
+        // vercel.json in Task 12, so locally the crawler can't resolve it yet.
+        if (
+          path ===
+          "/test-and-troubleshoot-wordpress-plugins-and-themes/presentation.pdf"
+        )
+          return;
 
         throw new Error(message);
       },

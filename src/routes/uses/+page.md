@@ -1,20 +1,20 @@
-import { Note } from "@/components/note";
-import { createMetadata } from "@/lib/metadata";
+---
+description: "A curated list of hardware, software, and gear I use on a daily basis and recommend."
+slug: "uses"
+title: "Uses"
+---
 
-export const data = {
-  description:
-    "A curated list of hardware, software, and gear I use on a daily basis and recommend.",
-  slug: "uses",
-  title: "Uses",
-};
+<script lang="ts">
+  import Note from "$lib/components/note.svelte";
+</script>
 
-export const metadata = createMetadata(data);
-
-# {data.title}
+# {title}
 
 <Note>
-  Some links may be referral links, but I only list products and services I
-  actually use and recommend.
+
+Some links may be referral links, but I only list products and services I
+actually use and recommend.
+
 </Note>
 
 ## Devices
@@ -126,8 +126,10 @@ export const metadata = createMetadata(data);
 ## Coffee
 
 <Note>
-  Get [$15 off your first purchase](http://rwrd.io/swgtzye?c) at [Clive
-  Coffee](https://clivecoffee.com).
+
+Get [$15 off your first purchase](http://rwrd.io/swgtzye?c) at [Clive
+Coffee](https://clivecoffee.com).
+
 </Note>
 
 - [County Line Kitchen glass cold brew coffee maker](https://www.amazon.com/dp/B0CSV7HFYF)
