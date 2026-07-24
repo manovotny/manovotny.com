@@ -18,6 +18,16 @@ const config = {
         sizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
       },
     }),
+    prerender: {
+      handleHttpError: ({ message, path }) => {
+        // Vercel's image optimization endpoint is served at runtime by the
+        // platform, not by this app, so the prerender crawler can't resolve
+        // it locally. Safe to ignore during build.
+        if (path.startsWith("/_vercel/image")) return;
+
+        throw new Error(message);
+      },
+    },
   },
   preprocess: [
     mdsvex({
