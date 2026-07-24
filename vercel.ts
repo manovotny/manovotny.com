@@ -3,6 +3,9 @@ import type { VercelConfig } from "@vercel/config/v1";
 const blobHostname = "ty3rozserpuox2as.public.blob.vercel-storage.com";
 
 export const config: VercelConfig = {
+  // The Vercel project's framework preset predates this repo's SvelteKit
+  // conversion; override per-deployment so main (still Next.js) is unaffected.
+  framework: "sveltekit-1",
   redirects: [
     {
       destination: "/",
