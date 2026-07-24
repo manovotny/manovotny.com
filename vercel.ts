@@ -1,7 +1,5 @@
 import type { VercelConfig } from "@vercel/config/v1";
 
-const blobHostname = "ty3rozserpuox2as.public.blob.vercel-storage.com";
-
 export const config: VercelConfig = {
   // The Vercel project's framework preset predates this repo's SvelteKit
   // conversion; override per-deployment so main (still Next.js) is unaffected.
@@ -41,7 +39,10 @@ export const config: VercelConfig = {
   ],
   rewrites: [
     {
-      destination: `https://${blobHostname}/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slides.pdf`,
+      // Vercel's server-side vercel.ts parser evaluates statically — the
+      // destination must be a literal string, not a template with variables.
+      destination:
+        "https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slides.pdf",
       source:
         "/test-and-troubleshoot-wordpress-plugins-and-themes/presentation.pdf",
     },
