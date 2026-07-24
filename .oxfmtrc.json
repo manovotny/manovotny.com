@@ -42,5 +42,13 @@
   "sortTailwindcss": {
     "functions": ["cn"]
   },
-  "svelte": {}
+  "svelte": {},
+  "overrides": [
+    {
+      "files": ["src/lib/components/bio.svelte"],
+      "options": {
+        "htmlWhitespaceSensitivity": "strict"
+      }
+    }
+  ]
 }
