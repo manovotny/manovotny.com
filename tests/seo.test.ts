@@ -1,60 +1,47 @@
-import assert from "node:assert/strict";
 import { promises as fs } from "node:fs";
 import { glob } from "node:fs/promises";
-import { describe, it } from "node:test";
 
-// Patterns that indicate proper canonical URL setup
-const CANONICAL_PATTERNS = [
-  /import\s*{\s*createMetadata\s*}\s*from\s*["']@\/lib\/metadata["']/,
-  /export\s+const\s+metadata\s*=\s*createMetadata\s*\(/,
-] as const;
+import { assert, describe, it } from "vitest";
 
 // Pages with intentionally short titles (e.g., "Uses")
 const SKIP_TITLE_CHECKS = [
-  "app/(notes)/flash/page.mdx",
-  "app/(notes)/start/page.mdx",
-  "app/uses/page.mdx",
+  "src/routes/(notes)/flash/+page.md",
+  "src/routes/(notes)/start/+page.md",
+  "src/routes/uses/+page.md",
 ];
 
-describe("seo", async () => {
-  for await (const page of await glob("app/**/page.mdx", {
-    exclude: ["app/page.mdx"],
-  })) {
-    const contents = await fs.readFile(page, { encoding: "utf8" });
+const pages: string[] = [];
 
-    it(`${page}: should use createMetadata for canonical URLs`, () => {
-      const hasAllPatterns = CANONICAL_PATTERNS.every((pattern) =>
-        pattern.test(contents),
-      );
-      assert.ok(
-        hasAllPatterns,
-        "Page must import createMetadata from @/lib/metadata and use it: export const metadata = createMetadata(data)",
-      );
-    });
+for await (const page of glob("src/routes/**/+page.md")) {
+  if (page === "src/routes/+page.md") continue; // home uses site defaults
+  pages.push(page);
+}
 
-    const titleMatch = contents.match(/title:\s*["']([^"']+)["']/);
-    const descriptionMatch = contents.match(
-      /description:[\s\S]*?["']([^"']+)["']/,
-    );
+describe("seo", () => {
+  for (const page of pages) {
+    it(`${page}: has required frontmatter`, async () => {
+      const contents = await fs.readFile(page, { encoding: "utf8" });
+      const frontmatter = contents.match(/^---\n([\s\S]*?)\n---/)?.[1] ?? "";
 
-    if (titleMatch && !SKIP_TITLE_CHECKS.includes(page)) {
-      const title = titleMatch[1];
-      it(`${page}: should have a title between 30-60 characters`, () => {
+      const title = frontmatter.match(/^title:\s*"(.+)"$/m)?.[1];
+      const description = frontmatter.match(/^description:\s*"(.+)"$/m)?.[1];
+      const slug = frontmatter.match(/^slug:\s*"(.+)"$/m)?.[1];
+
+      assert.ok(title, "frontmatter must include title");
+      assert.ok(description, "frontmatter must include description");
+      assert.ok(slug, "frontmatter must include slug");
+
+      if (!SKIP_TITLE_CHECKS.includes(page)) {
         assert.ok(
           title.length >= 30 && title.length <= 60,
           `Title length (${title.length}) is not between 30-60 characters.`,
         );
-      });
-    }
+      }
 
-    if (descriptionMatch) {
-      const description = descriptionMatch[1];
-      it(`${page}: should have description between 70-155 characters`, () => {
-        assert.ok(
-          description.length >= 70 && description.length <= 155,
-          `Description length (${description.length}) is not between 70-155 characters.`,
-        );
-      });
-    }
+      assert.ok(
+        description.length >= 70 && description.length <= 155,
+        `Description length (${description.length}) is not between 70-155 characters.`,
+      );
+    });
   }
 });
