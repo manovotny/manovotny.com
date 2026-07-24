@@ -39,9 +39,9 @@ export function Link({
     <a
       className={classNames}
       href={href}
-      rel={cn("noopener noreferrer nofollow", {
-        sponsored: isAffiliateLink,
-      })}
+      rel={
+        "noopener noreferrer nofollow" + (isAffiliateLink ? " sponsored" : "")
+      }
       {...props}
     >
       {children}
