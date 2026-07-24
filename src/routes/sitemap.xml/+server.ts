@@ -1,9 +1,4 @@
-// git-jiggy 2.1.1's package.json `main` field ("dist/index") lacks an
-// extension and there is no `exports` map, so Node's ESM resolver can't
-// find `dist/index.mjs` from the bare specifier at runtime (works fine
-// under Vite/TS, fails when the prerendered SSR bundle actually executes).
-// Import the concrete file directly as a workaround.
-import { getLastModifiedDate } from "git-jiggy/dist/index.mjs";
+import { getLastModifiedDate } from "git-jiggy";
 
 import { baseUrl } from "$lib/constants";
 
