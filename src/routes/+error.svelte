@@ -9,7 +9,11 @@
 
 <Seo />
 
-<h1 class="mb-6 text-2xl font-bold text-balance">Oops!</h1>
+<h1
+  class="mb-6 text-[22px] leading-[1.35] font-semibold tracking-[-0.02em] text-balance"
+>
+  Oops!
+</h1>
 
 <p class="mb-6 last:mb-0">What you were looking for no longer exists.</p>
 
