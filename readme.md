@@ -1,10 +1,10 @@
 # manovotny.com
 
-> My website. Built with Next.js, MDX, and Tailwind. Deployed on Vercel.
+> My website built with SvelteKit, mdsvex, Tailwind, and Vercel.
 
 Built using:
 
-- [Next.js](https://nextjs.org/)
-- [MDX](https://mdxjs.com/)
+- [SvelteKit](https://kit.svelte.dev/)
+- [mdsvex](https://mdsvex.pngwn.io/)
 - [Tailwind](https://tailwindcss.com/)
 - [Vercel](https://vercel.com/home)

@@ -1,0 +1,40 @@
+---
+date: "2012-10-09"
+description: "At some point you have to stop making excuses and start. This is me starting."
+slug: "start"
+title: "Press start"
+---
+
+<script lang="ts">
+  import FormattedDate from "$lib/components/formatted-date.svelte";
+  import Image from "$lib/components/image.svelte";
+</script>
+
+# {title}
+
+<FormattedDate date={date} />
+
+I'm detail oriented, probably to a fault. Planning, organizing, and executing are part of what makes me good at what I do. But when it comes to shipping, they can be my worst enemy.
+
+At the start of the year, I decided 2012 was the year I'd launch my site and start writing about my experiences as a developer.
+
+The friction of launching a site is low thanks to platforms like [WordPress](https://wordpress.org). But the platform wasn't holding me up. I was.
+
+I wanted the site perfect from day one — every pixel in place, the brand solidified, the color palette locked in. My grand entrance to the internet. As a developer, I wanted all of it in place to show what I could do and make visitors take notice.
+
+There's nothing wrong with wanting that, and I hope to get there eventually. But all it was doing was keeping me from the goal.
+
+At some point, you just have to press start.
+
+<Image
+  alt="Press start controller"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/press-start-controller.jpg"
+  width={1280}
+/>
+
+There's never a good time. There's always day-to-day life, a new idea, or an opportunity stealing focus. Ready or not, you stop making excuses and take the first step. This is me taking it.
+
+There's nothing fancy here. No design. No branding. No carefully selected colors. Me, my thoughts, an elegant and minimalistic WordPress theme, and a handful of hand-picked plugins. The site will take shape over time. For now, I want to share what I think and learn as a developer, and I hope it helps someone, starts conversations, and becomes a resource.
+
+Shoutout to [Tom McFarlin](https://tommcfarlin.com) and [Justin Wise](https://www.justinwise.net) for constantly pushing me outside my comfort zone.

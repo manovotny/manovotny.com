@@ -1,0 +1,407 @@
+---
+date: "2013-03-19"
+description: "Slides, notes, and resources from my WordCamp Atlanta talk on testing and troubleshooting WordPress plugins and themes."
+slug: "test-and-troubleshoot-wordpress"
+title: "How to test and troubleshoot WordPress plugins and themes"
+---
+
+<script lang="ts">
+  import FormattedDate from "$lib/components/formatted-date.svelte";
+  import Image from "$lib/components/image.svelte";
+  import Note from "$lib/components/note.svelte";
+  import YouTube from "$lib/components/youtube.svelte";
+</script>
+
+# {title}
+
+<FormattedDate date={date} />
+
+I spoke at [WordCamp Atlanta](https://2013.atlanta.wordcamp.org/) last week. My presentation, **Testing and Troubleshooting WordPress Plugins and Themes**, is the culmination of three years leading quality at [8BIT](https://web.archive.org/web/20130502041115/https://8bit.io/about/).
+
+<Image
+  alt="WordCamp Atlanta 2013 logo"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-cover.jpg"
+  width={1280}
+/>
+
+Here's the full presentation, with cliff notes and resource links for each slide.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 1"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-01.jpg"
+  width={1280}
+/>
+
+- I live in Des Moines, IA.
+- I'm a frontend developer for [John Deere](https://deere.com/).
+- My website is [manovotny.com](https://manovotny.com).
+- Follow me on Twitter at [@manovotny](https://x.com/manovotny).
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 2"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-02.jpg"
+  width={1280}
+/>
+
+- I've been working for [8BIT](https://web.archive.org/web/20130502041115/https://8bit.io/about/) for three years.
+- I oversee quality, testing the integrity of our products before they ship.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 3"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-03.jpg"
+  width={1280}
+/>
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 4"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-04.jpg"
+  width={1280}
+/>
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 5"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-05.jpg"
+  width={1280}
+/>
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 6"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-06.jpg"
+  width={1280}
+/>
+
+- Using [jQuery](https://jquery.com) properly prevents most theme issues, and especially plugin issues.
+- Don't add your own version of jQuery.
+- Don't deregister the version of jQuery that comes with WordPress.
+- To use jQuery, enqueue the version that comes with WordPress.
+- jQuery is the most popular example, but WordPress includes several scripts — [properly enqueue](https://developer.wordpress.org/reference/functions/wp_enqueue_script/) those versions instead of using your own.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 7"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-07.jpg"
+  width={1280}
+/>
+
+- Use [WordPress conditionals](https://codex.wordpress.org/Conditional_Tags) to load scripts only on pages that need them. Fewer scripts on a page means fewer chances of conflicts.
+- For example, only load a widget plugin's CSS and JavaScript when that widget displays on the current page.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 8"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-08.jpg"
+  width={1280}
+/>
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 9"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-09.jpg"
+  width={1280}
+/>
+
+- I created [WP Test](/wp-test) to catch issues while developing WordPress themes and plugins.
+- It's an exhaustive set of test data to measure the integrity of your plugins and themes.
+- Over three years of theme and plugin support, and its baffling corner cases, distilled into a potent cocktail of quirky, simulated user content.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 10"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-10.jpg"
+  width={1280}
+/>
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 11"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-11.jpg"
+  width={1280}
+/>
+
+- In development environments, tell WordPress to log and report errors so you can fix them.
+- Open your `wp-config.php` file, at the root of your WordPress installation.
+
+```php
+/**
+ * For developers: WordPress debugging mode.
+ *
+ * Change this to true to enable the display of notices during development.
+ * It is strongly recommended that plugin and theme developers use WP_DEBUG
+ * in their development environments.
+ */
+define( 'WP_DEBUG', true );
+define( 'WP_DEBUG_LOG', true );
+define( 'WP_DEBUG_DISPLAY', false ); // change to true if Debug Bar is off
+define( 'SCRIPT_DEBUG', true );
+@ini_set( 'display_errors', 0 ); // Hide errors from being displayed on screen
+```
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 12"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-12.jpg"
+  width={1280}
+/>
+
+- [Debug Bar](https://wordpress.org/plugins/debug-bar/) adds a debugging menu to the admin bar that shows query, cache, and other debugging information at a glance.
+- A useful way to see the errors being logged and reported.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 13"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-13.jpg"
+  width={1280}
+/>
+
+- The **Debug** button in the WordPress admin bar turns red when there's an error or warning.
+- Click it to open the Debug Bar panel.
+- Read the messages it reports so you can fix them.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 14"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-14.jpg"
+  width={1280}
+/>
+
+Many Debug Bar extensions give a deeper view into what's happening:
+
+- [Debug Bar Actions and Filters Addon](https://wordpress.org/extend/plugins/debug-bar-actions-and-filters-addon/)
+- [Debug Bar Console](https://wordpress.org/extend/plugins/debug-bar-console/)
+- [Debug Bar Cron](https://wordpress.org/extend/plugins/debug-bar-cron/)
+- [Debug Bar Post Meta](https://wordpress.org/extend/plugins/tdd-debug-bar-post-meta/)
+- [Debug Bar Query Tracer](https://wordpress.org/extend/plugins/debug-bar-query-tracer/)
+- [Debug Bar Super Globals](https://wordpress.org/extend/plugins/debug-bar-super-globals/)
+- [Debug Bar Transients](https://wordpress.org/extend/plugins/debug-bar-transients/)
+- [Debug Bar-Extender](https://wordpress.org/extend/plugins/debug-bar-extender/)
+- [Kint Debugger](https://wordpress.org/extend/plugins/kint-debugger/)
+- [WooCommerce Debug Bar](https://wordpress.org/extend/plugins/woocommerce-debug-bar/)
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 15"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-15.jpg"
+  width={1280}
+/>
+
+- [Log Deprecated Notices](https://wordpress.org/extend/plugins/log-deprecated-notices/) identifies old WordPress API functions your theme or plugin uses so you can update to the newer methods.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 16"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-16.jpg"
+  width={1280}
+/>
+
+- Log Deprecated Notices logs its calls under the Tools menu in the WordPress admin.
+- Sometimes themes or plugins keep deprecated calls anyway, especially to support older versions of WordPress — that judgment call is yours when they're reported.
+- Whenever possible, stay current with the newer methods instead of keeping legacy support.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 17"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-17.jpg"
+  width={1280}
+/>
+
+- [Theme-Check](https://wordpress.org/plugins/theme-check/) tests your theme against the latest WordPress standards and practices.
+- It lives under the Appearance menu in the WordPress admin.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 18"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-18.jpg"
+  width={1280}
+/>
+
+- Theme-Check reports false positives sometimes, so you'll need to decide whether each claim is legitimate and needs fixing.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 19"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-19.jpg"
+  width={1280}
+/>
+
+- [Theme Mentor](https://wordpress.org/plugins/theme-mentor/) is the cousin of the Theme-Check plugin.
+- It runs deeper code analysis for best practices, like checking for the jQuery dequeueing we covered above.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 20"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-20.jpg"
+  width={1280}
+/>
+
+- [RTL Tester](https://wordpress.org/plugins/rtl-tester/) is essential for troubleshooting plugins and themes that support right-to-left reading languages.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 21"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-21.jpg"
+  width={1280}
+/>
+
+- [Slim Jetpack](https://wordpress.org/plugins/slimjetpack/) is [Jetpack](https://wordpress.org/plugins/jetpack/) without the connection to a [WordPress.com](https://wordpress.com) account.
+- Handy for development environments that don't need the WordPress.com connection to test Jetpack features.
+- Someone in the Q&A session mentioned that Jetpack now ships with a "Developer Mode" that drops the WordPress.com connection requirement in development environments. Add the code below to `wp-config.php` to enable it.
+
+```php
+define( 'JETPACK_DEV_DEBUG', true );
+```
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 22"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-22.jpg"
+  width={1280}
+/>
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 23"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-23.jpg"
+  width={1280}
+/>
+
+- At some point in your development career, browser cache will bite you.
+- If changes to your CSS and JavaScript files aren't showing up, clear your browser cache.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 24"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-24.jpg"
+  width={1280}
+/>
+
+At 8BIT we use process of elimination to find where a failure starts:
+
+1. If things aren't working, we disable all plugins first to see if that resolves the issue.
+2. If things start working again, we enable plugins one by one until the issue reappears. That's our culprit, and we can start troubleshooting the plugin.
+3. If plugins aren't the issue, we switch to a default WordPress theme like TwentyEleven or TwentyTwelve. If the issue goes away, it's a theme problem we need to resolve.
+4. If neither plugins nor themes are causing the issue, it's WordPress core or a server configuration issue.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 25"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-25.jpg"
+  width={1280}
+/>
+
+- [Chrome DevTools](https://developer.chrome.com/docs/devtools) is the most advanced way to inspect what's going on under the covers of your website.
+- The [Firebug](https://getfirebug.com) extension / add-on is a good alternative for other browsers, though it isn't as capable as Chrome Developer Tools.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 26"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-26.jpg"
+  width={1280}
+/>
+
+- Open Chrome Developer Tools by right-clicking anywhere on the website and selecting **Inspect Element**.
+- A panel opens at the bottom of your browser. You can change the position — mine's on the right.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 27"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-27.jpg"
+  width={1280}
+/>
+
+- The **Elements** tab contains the markup and CSS for the current page. Select an element to see the CSS being applied, the selector causing it, and the load order. CSS properties and values are editable for live changes.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 28"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-28.jpg"
+  width={1280}
+/>
+
+- The **Sources** tab shows all CSS and JavaScript files loaded as part of the page. File content can be edited live. Set breakpoints by clicking a line number.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 29"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-29.jpg"
+  width={1280}
+/>
+
+- The **Console** tab lets you run JavaScript and shows any errors the site throws. For troubleshooting, use it to see if the site is throwing errors. Keep it open at all times during testing.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 30"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-30.jpg"
+  width={1280}
+/>
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 31"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-31.jpg"
+  width={1280}
+/>
+
+- [Viewport Resizer](https://chromewebstore.google.com/detail/viewport-resizer-ultimate/kapnjjcfcncngkadhpmijlkblpibdcgm) is a handy bookmarklet that loads your site in viewports sized to common devices. Helpful for testing responsive design.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 32"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-32.jpg"
+  width={1280}
+/>
+
+- Someone in the Q&A session also recommended the [Web Developer extension](https://chrispederick.com/work/web-developer/) as an alternative that properly displays websites with the correct user agents.
+
+<Note>
+
+Using the [Chrome DevTools **Toggle device
+toolbar**](https://developer.chrome.com/docs/devtools/device-mode) is a better
+approach now.
+
+</Note>
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 33"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-33.jpg"
+  width={1280}
+/>
+
+- [BrowserStack](https://www.browserstack.com) is a paid service that lets you test your website on all browsers, devices, and operating systems. It comes with built-in debugging tools.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 34"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-34.jpg"
+  width={1280}
+/>
+
+> An example of a website in IE 8 running on a Windows 7 machine all from within my browser. The websites are fully interactive, not just screenshots.
+
+- Someone in the Q&A session also mentioned [using Web Inspector to debug Mobile Safari](https://webdesign.tutsplus.com/quick-tip-using-web-inspector-to-debug-mobile-safari--webdesign-8787a) if you have a Mac: pair Xcode's iPhone/iPad simulator with Safari's Web Inspector to debug, or plug in your iPhone / iPad via USB and use Safari 6 to live-debug webpages on your device.
+
+<Image
+  alt="Troubleshoot WordPress Plugins And Themes — Slide 35"
+  height={720}
+  src="https://ty3rozserpuox2as.public.blob.vercel-storage.com/test-and-troubleshoot-wordpress-plugins-and-themes/wordcamp-atlanta-2013-slide-35.jpg"
+  width={1280}
+/>
+
+You can [download the slides](/test-and-troubleshoot-wordpress-plugins-and-themes/presentation.pdf), [watch my session](https://wordpress.tv/2013/04/23/michael-novotny-testing-troubleshooting-wordpress-plugins-themes/), or [watch all the other WordCamp Atlanta 2013 sessions](https://wordpress.tv/event/wordcamp-atlanta-2013/).
+
+<YouTube
+  id="T9JghRb9I-4"
+  title="WordCamp Atlanta 2013: Testing & Troubleshooting WordPress Plugins & Themes by Michael Novotny"
+/>
+
+A special thanks to [Jared Erickson](https://lessmade.com) for making our team look united in our presentations. The guy can make anything look good — even slides.
+
+And thanks to everyone who attended my talk and everyone who came to WordCamp Atlanta. Meeting you all face-to-face was a pleasure, and the conversations we had are priceless.

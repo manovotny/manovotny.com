@@ -4,9 +4,8 @@
 .context
 .DS_Store
 .env*
-.next
+.svelte-kit
 .vercel
 .vscode
 docs/superpowers
-next-env.d.ts
 node_modules

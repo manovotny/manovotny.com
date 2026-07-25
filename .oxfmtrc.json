@@ -1,0 +1,54 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 80,
+  "sortImports": {
+    "customGroups": [
+      {
+        "elementNamePattern": ["**/*.css", "*.css"],
+        "groupName": "css"
+      },
+      {
+        "elementNamePattern": ["$*", "$*/**"],
+        "groupName": "alias-type",
+        "modifiers": ["type"]
+      },
+      {
+        "elementNamePattern": ["$*", "$*/**"],
+        "groupName": "alias-value",
+        "modifiers": ["value"]
+      }
+    ],
+    "groups": [
+      "value-builtin",
+      "type-builtin",
+      { "newlinesBetween": true },
+      [
+        "value-external",
+        "value-parent",
+        "value-sibling",
+        "value-index",
+        "unknown"
+      ],
+      ["type-external", "type-parent", "type-sibling", "type-index"],
+      { "newlinesBetween": true },
+      "alias-value",
+      "alias-type",
+      { "newlinesBetween": true },
+      "css"
+    ],
+    "newlinesBetween": false
+  },
+  "sortPackageJson": true,
+  "sortTailwindcss": {
+    "functions": ["cn"]
+  },
+  "svelte": {},
+  "overrides": [
+    {
+      "files": ["src/lib/components/bio.svelte"],
+      "options": {
+        "htmlWhitespaceSensitivity": "strict"
+      }
+    }
+  ]
+}
