@@ -2,41 +2,47 @@
   import { page } from "$app/state";
   import Link from "$lib/components/link.svelte";
   import Logo from "$lib/components/logo.svelte";
-  import { siteName, username } from "$lib/constants";
+  import { siteName } from "$lib/constants";
 
   const linkClassNames =
-    "text-neutral-800 hover:text-neutral-800 dark:text-neutral-200 dark:hover:text-neutral-200";
+    "block p-2 text-secondary no-underline transition-colors duration-150 hover:text-ink";
 
   const isHome = $derived(page.url.pathname === "/");
+  const isNotes = $derived(page.url.pathname === "/notes");
+  const isUses = $derived(page.url.pathname === "/uses");
 </script>
 
-<header class="flex py-16">
+<header class="flex items-center pt-14">
   <Link
-    class="group relative flex h-[30px] items-center gap-4 overflow-hidden text-neutral-800 hover:text-neutral-800 hover:no-underline dark:text-neutral-200 dark:hover:text-neutral-200"
+    aria-label="Home"
+    class="text-ink hover:text-ink flex items-center gap-3 no-underline"
     href="/"
   >
-    <Logo />
+    <Logo size={26} />
     {#if !isHome}
-      <p
-        class="-mt-1 h-[30px] transform text-2xl font-light transition-transform duration-400 group-hover:translate-y-[-35px]"
-      >
-        <span
-          class="block origin-[right_center] transform transition-transform duration-400"
-        >
-          {siteName}
-        </span>
-        <span
-          class="block origin-[left_center] transform transition-transform duration-400"
-        >
-          {username}
-        </span>
-      </p>
+      <span class="text-[15px] font-medium tracking-[-0.01em]">{siteName}</span>
     {/if}
   </Link>
-  <nav class="ml-auto">
-    <ol class="flex gap-10">
-      <li><Link class={linkClassNames} href="/notes">Notes</Link></li>
-      <li><Link class={linkClassNames} href="/uses">Uses</Link></li>
+  <nav aria-label="Primary" class="-mr-2 ml-auto">
+    <ol class="meta flex gap-3">
+      <li>
+        <Link
+          aria-current={isNotes ? "page" : undefined}
+          class={linkClassNames}
+          href="/notes"
+        >
+          Notes
+        </Link>
+      </li>
+      <li>
+        <Link
+          aria-current={isUses ? "page" : undefined}
+          class={linkClassNames}
+          href="/uses"
+        >
+          Uses
+        </Link>
+      </li>
     </ol>
   </nav>
 </header>
