@@ -42,11 +42,21 @@
             format="month-year"
           />
           <span class="min-w-0 break-words">{note.title}</span>
-          <span
+          <svg
             aria-hidden="true"
-            class="text-faint ml-auto translate-y-[2px] pl-4 font-mono text-[13px]"
-            >↗</span
+            class="text-faint ml-auto size-3 shrink-0 translate-y-[0.75px]"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
           >
+            <path
+              d="M7 17 17 7M7 7h10v10"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
           <span class="sr-only">(external link)</span>
         </a>
       {/if}
