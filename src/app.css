@@ -28,16 +28,12 @@
   --color-hover: light-dark(#f6f6f7, #131317);
 }
 
-body {
-  @apply antialiased;
-}
-
 :focus-visible {
   outline: 2px solid var(--color-ink);
   outline-offset: 2px;
 }
 
-@utility meta {
+@utility metadata {
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.08em;

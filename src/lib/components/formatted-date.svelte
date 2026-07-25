@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { formatNoteDate } from "$lib/dates";
+  import { formatDate } from "$lib/dates";
 
   let {
     class: className = "mt-[-16px] mb-8 block",
@@ -11,9 +11,9 @@
     format?: "full" | "month-year";
   } = $props();
 
-  const formatted = $derived(formatNoteDate(date, format));
+  const formatted = $derived(formatDate(date, format));
 </script>
 
-<time class={`meta text-secondary ${className}`} dateTime={date}>
+<time class={`metadata text-secondary ${className}`} dateTime={date}>
   {formatted}
 </time>

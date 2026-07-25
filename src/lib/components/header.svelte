@@ -24,7 +24,7 @@
     {/if}
   </Link>
   <nav aria-label="Primary" class="-mr-2 ml-auto">
-    <ol class="meta flex gap-3">
+    <ol class="metadata flex gap-3">
       <li>
         <Link
           aria-current={isNotes ? "page" : undefined}

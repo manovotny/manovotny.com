@@ -1,4 +1,4 @@
-export function formatNoteDate(
+export function formatDate(
   date: string,
   format: "full" | "month-year" = "full",
 ): string {
