@@ -13,7 +13,7 @@
 
   const classNames = $derived(
     cn(
-      "text-blue-500 underline-offset-3 hover:text-blue-500 hover:underline dark:text-blue-400",
+      "text-ink decoration-faint hover:decoration-ink underline decoration-1 underline-offset-3 transition-colors duration-150",
       className,
     ),
   );
