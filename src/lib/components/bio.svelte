@@ -8,6 +8,6 @@
     class="dark:text-neutral-40 inline font-extralight text-neutral-500 before:content-['—']"
   >
     software developer, stock investor/trader, coffee enthusiast. Currently
-    working on docs at <Link href="https://clerk.com">Clerk</Link>.
+    working on docs at <Link href="https://clerk.com/home">Clerk</Link>.
   </h2>
 </div>
