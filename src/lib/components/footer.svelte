@@ -3,30 +3,40 @@
   import { siteDomain, username } from "$lib/constants";
 
   const links = [
-    { name: "X", url: `https://x.com/${username}` },
-    { name: "LinkedIn", url: `https://linkedin.com/in/${username}` },
-    { name: "Bluesky", url: `https://bsky.app/profile/${siteDomain}` },
-    { name: "GitHub", url: `https://github.com/${username}` },
-    { name: "Email", url: "mailto:manovotny@gmail.com" },
+    { name: "X", newTab: true, url: `https://x.com/${username}` },
+    {
+      name: "LinkedIn",
+      newTab: true,
+      url: `https://linkedin.com/in/${username}`,
+    },
+    {
+      name: "Bluesky",
+      newTab: true,
+      url: `https://bsky.app/profile/${siteDomain}`,
+    },
+    { name: "GitHub", newTab: true, url: `https://github.com/${username}` },
+    { name: "Email", newTab: false, url: "mailto:manovotny@gmail.com" },
   ];
 
   const linkClassNames =
-    "text-neutral-500 hover:text-neutral-500 dark:text-neutral-400 dark:hover:text-neutral-400";
+    "block p-2 text-secondary no-underline transition-colors duration-150 hover:text-ink";
 </script>
 
-<footer class="mb-0 flex grow items-end pt-16 text-sm">
-  <a class={`hidden md:block ${linkClassNames}`} href="/">{siteDomain}</a>
-  <nav class="flex md:grow md:justify-end">
-    <ul class="flex gap-2">
+<footer class="meta flex items-center pt-20 pb-10">
+  <a class={`-ml-2 hidden md:block ${linkClassNames}`} href="/">{siteDomain}</a>
+  <nav aria-label="Social" class="-mx-2 flex min-w-0 grow md:justify-end">
+    <ul class="flex flex-wrap gap-x-2 gap-y-1">
       {#each links as link (link.url)}
-        <li class="after:pl-2 after:content-['•'] last:after:content-['']">
+        <li>
           <Link
             class={linkClassNames}
             href={link.url}
-            rel="noopener noreferrer"
-            target="_blank"
+            rel={link.newTab ? "noopener noreferrer" : undefined}
+            target={link.newTab ? "_blank" : undefined}
           >
-            {link.name}
+            {link.name}{#if link.newTab}<span class="sr-only normal-case">
+                (opens in new tab)</span
+              >{/if}
           </Link>
         </li>
       {/each}
