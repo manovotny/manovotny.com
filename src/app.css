@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: "Switzer";
+  font-family: "Mona Sans";
   font-style: normal;
-  font-weight: 100 900;
+  font-weight: 200 900;
   font-display: swap;
-  src: url("/fonts/Switzer-Variable.woff2") format("woff2");
+  src: url("/fonts/MonaSans-Variable.woff2") format("woff2");
 }
 
 @font-face {
@@ -18,7 +18,7 @@
 
 @theme inline {
   --breakpoint-xs: 32rem;
-  --font-sans: "Switzer", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Mona Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
   --color-bg: light-dark(#ffffff, #0a0a0c);
   --color-ink: light-dark(#131316, #e6e6ea);

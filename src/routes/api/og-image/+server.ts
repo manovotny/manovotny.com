@@ -5,7 +5,7 @@ import { read } from "$app/server";
 import { siteDomain, siteName } from "$lib/constants";
 import { logoPaths } from "$lib/logo-paths";
 import plexMono from "$lib/server/fonts/IBMPlexMono-Regular.ttf";
-import switzerSemibold from "$lib/server/fonts/Switzer-Semibold.ttf";
+import monaSansSemibold from "$lib/server/fonts/MonaSans-SemiBold.woff";
 
 export const prerender = false;
 
@@ -27,14 +27,14 @@ export const GET: RequestHandler = async ({ url }) => {
   try {
     const title = url.searchParams.get("title") || siteName;
     const [semibold, mono] = await Promise.all([
-      read(switzerSemibold).arrayBuffer(),
+      read(monaSansSemibold).arrayBuffer(),
       read(plexMono).arrayBuffer(),
     ]);
 
     const card = h(
       "div",
       {
-        style: { fontFamily: "Switzer" },
+        style: { fontFamily: "Mona Sans" },
         tw: "bg-white text-[#131316] flex h-full w-full flex-col p-16",
       },
       h(
@@ -73,7 +73,7 @@ export const GET: RequestHandler = async ({ url }) => {
     return new ImageResponse(card as never, {
       fonts: [
         { data: mono, name: "IBM Plex Mono", style: "normal", weight: 400 },
-        { data: semibold, name: "Switzer", style: "normal", weight: 600 },
+        { data: semibold, name: "Mona Sans", style: "normal", weight: 600 },
       ],
       height: 630,
       width: 1200,
