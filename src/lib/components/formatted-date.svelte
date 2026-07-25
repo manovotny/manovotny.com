@@ -1,22 +1,19 @@
 <script lang="ts">
-  let {
-    class: className = "mt-[-24px] mb-6 block",
-    date,
-  }: { class?: string; date: string } = $props();
+  import { formatDate } from "$lib/dates";
 
-  const formatted = $derived(
-    new Intl.DateTimeFormat("en-US", {
-      day: "numeric",
-      month: "short",
-      timeZone: "UTC",
-      year: "numeric",
-    }).format(new Date(date)),
-  );
+  let {
+    class: className = "mt-[-16px] mb-8 block",
+    date,
+    format = "full",
+  }: {
+    class?: string;
+    date: string;
+    format?: "full" | "month-year";
+  } = $props();
+
+  const formatted = $derived(formatDate(date, format));
 </script>
 
-<time
-  class={`${className} text-sm text-neutral-600 dark:text-neutral-400`}
-  dateTime={date}
->
+<time class={`metadata text-secondary ${className}`} dateTime={date}>
   {formatted}
 </time>

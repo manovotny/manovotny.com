@@ -1,6 +1,6 @@
 <!doctype html>
 <html
-  class="min-w-[360px] bg-neutral-50 font-sans text-lg text-neutral-800 scheme-light-dark dark:bg-black dark:text-neutral-200"
+  class="bg-bg text-ink font-sans text-base leading-[1.7] scheme-light-dark"
   lang="en"
 >
   <head>
@@ -18,16 +18,26 @@
       href="%sveltekit.assets%/icon-dark.png"
       media="(prefers-color-scheme: dark)"
     />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: light)"
+      content="#ffffff"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#0a0a0c"
+    />
     <link
       rel="preload"
-      href="%sveltekit.assets%/fonts/Geist-Variable.woff2"
+      href="%sveltekit.assets%/fonts/MonaSans-Variable.woff2"
       as="font"
       type="font/woff2"
       crossorigin
     />
     <link
       rel="preload"
-      href="%sveltekit.assets%/fonts/GeistMono-Variable.woff2"
+      href="%sveltekit.assets%/fonts/IBMPlexMono-Regular.woff2"
       as="font"
       type="font/woff2"
       crossorigin
@@ -43,7 +53,7 @@
     <script defer src="/_vercel/insights/script.js"></script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
   </head>
-  <body>
+  <body class="antialiased">
     <div style="display: contents">%sveltekit.body%</div>
   </body>
 </html>

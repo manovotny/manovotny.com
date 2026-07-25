@@ -4,8 +4,8 @@ import type { RequestHandler } from "./$types";
 import { read } from "$app/server";
 import { siteDomain, siteName } from "$lib/constants";
 import { logoPaths } from "$lib/logo-paths";
-import geistBold from "$lib/server/fonts/Geist-Bold.ttf";
-import geistThin from "$lib/server/fonts/Geist-Thin.ttf";
+import plexMono from "$lib/server/fonts/IBMPlexMono-Regular.ttf";
+import monaSansSemibold from "$lib/server/fonts/MonaSans-SemiBold.woff";
 
 export const prerender = false;
 
@@ -26,17 +26,20 @@ const h = (
 export const GET: RequestHandler = async ({ url }) => {
   try {
     const title = url.searchParams.get("title") || siteName;
-    const [bold, thin] = await Promise.all([
-      read(geistBold).arrayBuffer(),
-      read(geistThin).arrayBuffer(),
+    const [semibold, mono] = await Promise.all([
+      read(monaSansSemibold).arrayBuffer(),
+      read(plexMono).arrayBuffer(),
     ]);
 
     const card = h(
       "div",
-      { tw: "bg-neutral-50 text-neutral-800 flex h-full w-full flex-col p-8" },
+      {
+        style: { fontFamily: "Mona Sans" },
+        tw: "bg-white text-[#131316] flex h-full w-full flex-col p-16",
+      },
       h(
         "div",
-        { tw: "flex flex-row justify-between" },
+        { tw: "flex flex-row items-center justify-between" },
         h(
           "svg",
           {
@@ -48,13 +51,20 @@ export const GET: RequestHandler = async ({ url }) => {
           },
           ...logoPaths.map((d) => h("path", { d })),
         ),
-        h("p", { tw: "m-0 p-0 text-5xl font-thin" }, siteDomain),
+        h(
+          "p",
+          {
+            style: { fontFamily: "IBM Plex Mono", letterSpacing: "0.08em" },
+            tw: "m-0 p-0 text-[26px] uppercase text-[#70707b]",
+          },
+          siteDomain,
+        ),
       ),
       h(
         "p",
         {
-          style: { textWrap: "balance" },
-          tw: "text-center text-7xl m-auto font-bold",
+          style: { letterSpacing: "-0.02em", textWrap: "balance" },
+          tw: "text-center text-7xl m-auto font-semibold",
         },
         title,
       ),
@@ -62,8 +72,8 @@ export const GET: RequestHandler = async ({ url }) => {
 
     return new ImageResponse(card as never, {
       fonts: [
-        { data: thin, name: "Geist", style: "normal", weight: 100 },
-        { data: bold, name: "Geist", style: "normal", weight: 700 },
+        { data: mono, name: "IBM Plex Mono", style: "normal", weight: 400 },
+        { data: semibold, name: "Mona Sans", style: "normal", weight: 600 },
       ],
       height: 630,
       width: 1200,

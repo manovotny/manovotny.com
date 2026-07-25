@@ -23,7 +23,9 @@ const externalNotes: NoteData[] = [
   },
 ];
 
-const modules = import.meta.glob("/src/routes/(notes)/*/+page.md", {
+// The parentheses in the (notes) route group are glob pattern syntax and
+// must be escaped to match the literal directory name.
+const modules = import.meta.glob("/src/routes/\\(notes\\)/*/+page.md", {
   eager: true,
 });
 

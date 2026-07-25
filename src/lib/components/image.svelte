@@ -5,7 +5,7 @@
     alt,
     caption,
     height,
-    sizes = "(min-width: 1024px) 768px, 100vw",
+    sizes = "(min-width: 656px) 608px, calc(100vw - 3rem)",
     src,
     width,
   }: {
@@ -19,12 +19,10 @@
 </script>
 
 <figure class="mb-6">
-  <div
-    class="rounded-lg border border-neutral-200 bg-white p-2 shadow-xs dark:border-neutral-700 dark:bg-neutral-800"
-  >
+  <div class="border-hairline bg-hover rounded-lg border p-2">
     <img
       {alt}
-      class="rounded-md border border-neutral-200"
+      class="border-hairline rounded-md border"
       decoding="async"
       {height}
       loading="lazy"
@@ -36,9 +34,7 @@
     />
   </div>
   {#if caption && caption.length > 0}
-    <figcaption
-      class="pt-4 text-center text-sm text-neutral-500 dark:text-neutral-400"
-    >
+    <figcaption class="text-secondary pt-4 text-center text-sm">
       {caption}
     </figcaption>
   {/if}

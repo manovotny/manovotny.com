@@ -5,11 +5,11 @@
 </script>
 
 <div
-  class="mb-4 flex gap-2 rounded-md border border-neutral-200 bg-neutral-100 p-4 text-sm text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300"
+  class="border-hairline bg-hover text-secondary mb-[1.4rem] flex gap-2.5 rounded-md border p-4 text-sm"
 >
   <svg
     aria-hidden="true"
-    class="size-5 shrink-0 stroke-neutral-700 dark:stroke-neutral-300"
+    class="stroke-secondary size-5 shrink-0"
     data-slot="icon"
     fill="none"
     stroke="currentColor"
