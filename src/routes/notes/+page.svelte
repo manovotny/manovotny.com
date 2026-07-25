@@ -44,7 +44,8 @@
           <span class="min-w-0 break-words">{note.title}</span>
           <span
             aria-hidden="true"
-            class="text-faint ml-auto pl-4 font-mono text-[13px]">↗</span
+            class="text-faint ml-auto translate-y-[2px] pl-4 font-mono text-[13px]"
+            >↗</span
           >
           <span class="sr-only">(external link)</span>
         </a>
