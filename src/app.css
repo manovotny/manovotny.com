@@ -20,6 +20,28 @@
   --breakpoint-xs: 32rem;
   --font-sans: "Switzer", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --color-bg: light-dark(#ffffff, #0a0a0c);
+  --color-ink: light-dark(#131316, #e6e6ea);
+  --color-secondary: light-dark(#70707b, #85858f);
+  --color-faint: light-dark(#a0a0a8, #5a5a64);
+  --color-hairline: light-dark(#ececee, #1d1d22);
+  --color-hover: light-dark(#f6f6f7, #131317);
+}
+
+body {
+  @apply antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+@utility meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 :root {
