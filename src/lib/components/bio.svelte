@@ -3,11 +3,11 @@
   import { siteName } from "$lib/constants";
 </script>
 
-<div class="text-2xl text-balance">
-  <h1 class="inline font-bold">{siteName}</h1><h2
-    class="dark:text-neutral-40 inline font-extralight text-neutral-500 before:content-['—']"
-  >
-    software developer, stock investor/trader, coffee enthusiast. Currently
-    working on docs at <Link href="https://clerk.com/home">Clerk</Link>.
-  </h2>
-</div>
+<h1
+  class="text-secondary pt-20 text-[17px] leading-[1.75] font-normal text-balance"
+>
+  <span class="text-ink font-medium">{siteName}</span> — software developer,
+  <span class="whitespace-nowrap">stock investor&#8202;/&#8202;trader,</span>
+  coffee enthusiast. Currently working on docs at
+  <Link href="https://clerk.com/home">Clerk</Link>.
+</h1>
