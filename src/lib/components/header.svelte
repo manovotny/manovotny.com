@@ -18,9 +18,9 @@
     class="text-ink hover:text-ink flex items-center gap-3 no-underline"
     href="/"
   >
-    <Logo size={26} />
+    <Logo size={22} />
     {#if !isHome}
-      <span class="text-[15px] font-medium tracking-[-0.01em]">{siteName}</span>
+      <span class="text-base font-medium tracking-[-0.01em]">{siteName}</span>
     {/if}
   </Link>
   <nav aria-label="Primary" class="-mr-2 ml-auto">
