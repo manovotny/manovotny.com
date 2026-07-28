@@ -1,6 +1,6 @@
 ---
 date: "2013-02-28"
-description: "Fix missing CSS styles in the WordPress admin with a quick workaround. Change one line of code to restore your dashboard styles instantly."
+description: "WordPress admin loading with no CSS? One line in wp-admin/load-styles.php brings the styles back, plus a wp-config alternative that skips the core hack."
 slug: "fix-wordpress-admin-styles-not-loading"
 title: "How to fix WordPress admin styles not loading"
 ---
