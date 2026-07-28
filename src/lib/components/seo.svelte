@@ -2,15 +2,15 @@
   import { baseUrl, siteDescription, siteName, username } from "$lib/constants";
 
   let {
+    date,
     description,
     slug,
     title,
-    type,
   }: {
+    date?: string;
     description?: string;
     slug?: string;
     title?: string;
-    type?: "article" | "website";
   } = $props();
 
   const pageTitle = $derived(title ? `${title} • ${siteName}` : siteName);
@@ -21,7 +21,9 @@
       ? `${baseUrl}/api/og-image?title=${encodeURIComponent(title)}`
       : `${baseUrl}/api/og-image`,
   );
-  const ogType = $derived(type ?? (title ? "article" : "website"));
+  // Only notes carry a date, so it separates an article from a listing page
+  // like /notes or /uses — both have a title but neither is an article.
+  const ogType = $derived(date ? "article" : "website");
 </script>
 
 <svelte:head>
