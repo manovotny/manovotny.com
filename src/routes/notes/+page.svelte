@@ -15,6 +15,7 @@
   description="A collection of notes, thoughts, and articles."
   slug="notes"
   title="Notes"
+  type="website"
 />
 
 <PageTitle>Notes</PageTitle>
