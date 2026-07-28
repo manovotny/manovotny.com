@@ -39,8 +39,10 @@ describe("baseUrl", () => {
     expect(await baseUrlWithPort("")).toBe("http://localhost:5173");
   });
 
+  // Only the URL falls back — the dev server itself refuses garbage loudly
+  // (see scripts/ai/run.sh). This coercion is for builds, which read PORT
+  // without going through run.sh.
   it("falls back to Vite's default when PORT can't name a port", async () => {
-    // "0" is truthy but Vite won't serve it, and neither survives coercion.
     expect(await baseUrlWithPort("0")).toBe("http://localhost:5173");
     expect(await baseUrlWithPort("http://localhost")).toBe(
       "http://localhost:5173",
