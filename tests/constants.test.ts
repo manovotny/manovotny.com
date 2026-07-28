@@ -38,4 +38,12 @@ describe("baseUrl", () => {
   it("falls back to Vite's default when PORT is empty", async () => {
     expect(await baseUrlWithPort("")).toBe("http://localhost:5173");
   });
+
+  it("falls back to Vite's default when PORT can't name a port", async () => {
+    // "0" is truthy but Vite won't serve it, and neither survives coercion.
+    expect(await baseUrlWithPort("0")).toBe("http://localhost:5173");
+    expect(await baseUrlWithPort("http://localhost")).toBe(
+      "http://localhost:5173",
+    );
+  });
 });
