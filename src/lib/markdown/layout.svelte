@@ -19,17 +19,19 @@
 
   let {
     children,
+    date,
     description,
     slug,
     title,
   }: {
     children?: import("svelte").Snippet;
+    date?: string;
     description?: string;
     slug?: string;
     title?: string;
   } = $props();
 </script>
 
-<Seo {description} {slug} {title} />
+<Seo {date} {description} {slug} {title} />
 
 {@render children?.()}
