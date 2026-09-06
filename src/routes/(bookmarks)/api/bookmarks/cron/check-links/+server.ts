@@ -2,6 +2,7 @@ import type { RequestHandler } from "./$types";
 
 import { dev } from "$app/environment";
 import { env } from "$env/dynamic/private";
+import { hasBearerToken } from "$lib/bookmarks/auth";
 import { listStaleLinks, recordLinkCheck } from "$lib/bookmarks/db/queries";
 import { checkLink } from "$lib/bookmarks/link-check";
 
@@ -15,13 +16,8 @@ export const config = { maxDuration: 300 };
 
 export const GET: RequestHandler = async ({ request }) => {
   try {
-    const authHeader = request.headers.get("authorization");
-
     // Fail closed: no configured secret means no cron, not "any caller".
-    if (
-      !dev &&
-      (!env.CRON_SECRET || authHeader !== `Bearer ${env.CRON_SECRET}`)
-    ) {
+    if (!dev && !hasBearerToken(request, env.CRON_SECRET)) {
       return new Response("Unauthorized", { status: 401 });
     }
 

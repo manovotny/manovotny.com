@@ -76,12 +76,15 @@ export async function saveBookmark(input: SaveInput): Promise<SaveResult> {
 }
 
 function isUniqueViolation(caught: unknown): boolean {
-  return (
-    typeof caught === "object" &&
-    caught !== null &&
-    "code" in caught &&
-    caught.code === "23505"
-  );
+  if (typeof caught !== "object" || caught === null) {
+    return false;
+  }
+
+  if ("code" in caught && caught.code === "23505") {
+    return true;
+  }
+
+  return "cause" in caught && isUniqueViolation(caught.cause);
 }
 
 // Runs after the capture response has been sent (see the POST endpoint).

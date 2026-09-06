@@ -3,7 +3,7 @@
 Private bookmarks tool at `/bookmarks`. Replaces Raindrop.io. Everything lives in
 `src/lib/bookmarks/` and `src/routes/(bookmarks)/`; the only site files it touches
 are `src/hooks.server.ts`, the sitemap route, `vercel.ts`, `static/robots.txt`,
-`src/app.d.ts`, and `package.json`.
+`src/app.d.ts`, `package.json`, and `scripts/import-raindrop.ts`.
 
 ## Environment variables
 

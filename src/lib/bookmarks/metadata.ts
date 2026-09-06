@@ -49,7 +49,8 @@ function metaContent(
       "i",
     ),
   )?.[0];
-  const content = tag?.match(/\bcontent\s*=\s*["']([^"']*)["']/i)?.[1]?.trim();
+  const contentMatch = tag?.match(/\bcontent\s*=\s*(?:"([^"]*)"|'([^']*)')/i);
+  const content = (contentMatch?.[1] ?? contentMatch?.[2])?.trim();
 
   return content ? decodeEntities(content) : undefined;
 }

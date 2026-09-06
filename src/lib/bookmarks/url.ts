@@ -62,10 +62,14 @@ export function normalizeUrl(input: string): NormalizedUrl {
   );
 
   // `url`: what the user saved, minus tracking noise. Opened by the UI.
+  // Only rebuilt when a tracking param was actually stripped — otherwise the
+  // original query string is kept verbatim (e.g. `%20` is not re-encoded).
   const cleaned = new URL(parsed.href);
-  cleaned.search = "";
-  for (const [key, value] of params) {
-    cleaned.searchParams.append(key, value);
+  if (params.length !== parsed.searchParams.size) {
+    cleaned.search = "";
+    for (const [key, value] of params) {
+      cleaned.searchParams.append(key, value);
+    }
   }
 
   // `normalizedUrl`: dupe identity. Aggressively canonical.

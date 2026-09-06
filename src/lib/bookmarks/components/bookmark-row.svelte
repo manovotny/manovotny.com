@@ -77,7 +77,7 @@
       >
         <span>{bookmark.domain}</span>
         <span>·</span>
-        <time dateTime={bookmark.createdAt}>{bookmark.createdAtLabel}</time>
+        <time datetime={bookmark.createdAt}>{bookmark.createdAtLabel}</time>
         {#if !bookmark.processed}
           <span>·</span>
           <span>Untagged</span>

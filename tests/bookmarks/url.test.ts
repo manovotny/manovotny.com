@@ -73,6 +73,12 @@ describe("normalizeUrl", () => {
     expect(() => normalizeUrl("not a url")).toThrow(InvalidUrlError);
     expect(() => normalizeUrl("")).toThrow(InvalidUrlError);
   });
+
+  it("leaves the query string untouched when nothing was stripped", () => {
+    expect(normalizeUrl("https://example.com/?q=a%20b&next=/foo").url).toBe(
+      "https://example.com/?q=a%20b&next=/foo",
+    );
+  });
 });
 
 describe("isPublicHttpUrl", () => {

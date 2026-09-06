@@ -129,6 +129,22 @@ describe("saveBookmark", () => {
     expect(queries.findByNormalizedUrl).toHaveBeenCalledTimes(2);
   });
 
+  it("treats a wrapped unique-violation cause as a duplicate", async () => {
+    vi.mocked(queries.findByNormalizedUrl)
+      .mockResolvedValueOnce(undefined)
+      .mockResolvedValueOnce(base);
+    vi.mocked(queries.insertBookmark).mockRejectedValue(
+      Object.assign(new Error("Failed query"), {
+        cause: Object.assign(new Error("dup"), { code: "23505" }),
+      }),
+    );
+
+    const result = await saveBookmark({ url: "https://example.com/a" });
+
+    expect(result).toEqual({ bookmark: base, outcome: "duplicate" });
+    expect(queries.findByNormalizedUrl).toHaveBeenCalledTimes(2);
+  });
+
   it("restores a soft-deleted winner after a race", async () => {
     const deleted = { ...base, deletedAt: new Date() };
     vi.mocked(queries.findByNormalizedUrl)

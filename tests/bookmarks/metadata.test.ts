@@ -43,6 +43,23 @@ describe("parseMetadata", () => {
   it("returns an empty object for HTML without metadata", () => {
     expect(parseMetadata("<html></html>", "https://example.com")).toEqual({});
   });
+
+  it("does not truncate a double-quoted content value at an apostrophe", () => {
+    const withApostrophe =
+      '<meta property="og:title" content="Here\'s how it works">';
+
+    expect(parseMetadata(withApostrophe, "https://example.com").title).toBe(
+      "Here's how it works",
+    );
+  });
+
+  it("reads a single-quoted content value containing double quotes", () => {
+    const singleQuoted = `<meta property="og:title" content='Say "hi"'>`;
+
+    expect(parseMetadata(singleQuoted, "https://example.com").title).toBe(
+      'Say "hi"',
+    );
+  });
 });
 
 describe("fetchMetadata", () => {
