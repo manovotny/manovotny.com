@@ -324,3 +324,112 @@ describe("PATCH /api/bookmarks/:id", () => {
     });
   });
 });
+
+describe("/bookmarks page load", () => {
+  const load = async (userId: string | null) => {
+    const page =
+      await import("../../src/routes/(bookmarks)/bookmarks/+page.server");
+
+    return page.load({ locals: { auth: () => ({ userId }) } } as never);
+  };
+
+  it("ships no data and touches no database for anonymous visitors", async () => {
+    expect(await load(null)).toEqual({ bookmarks: [], tags: [] });
+    expect(queries.listBookmarks).not.toHaveBeenCalled();
+  });
+
+  it("404s a signed-in stranger", async () => {
+    await expect(load("user_other")).rejects.toMatchObject({ status: 404 });
+    expect(queries.listBookmarks).not.toHaveBeenCalled();
+  });
+
+  it("returns rows for the owner", async () => {
+    vi.mocked(queries.listBookmarks).mockResolvedValue([row]);
+
+    const data = (await load("user_owner")) as { bookmarks: unknown[] };
+
+    expect(data.bookmarks).toHaveLength(1);
+  });
+});
+
+describe("/bookmarks actions", () => {
+  const actionEvent = (
+    userId: string | null,
+    fields: Record<string, string>,
+  ) => {
+    const form = new FormData();
+    for (const [key, value] of Object.entries(fields)) form.set(key, value);
+
+    return {
+      locals: { auth: () => ({ userId }) },
+      request: new Request("http://localhost/bookmarks", {
+        body: form,
+        method: "POST",
+      }),
+    } as never;
+  };
+
+  it("rejects anonymous (401) and strangers (404) before touching the database", async () => {
+    const page =
+      await import("../../src/routes/(bookmarks)/bookmarks/+page.server");
+    const attempts = [
+      () => page.actions.add(actionEvent(null, { url: "https://example.com" })),
+      () => page.actions.delete(actionEvent(null, { id: row.id })),
+      () =>
+        page.actions.favorite(
+          actionEvent("user_other", { favorite: "true", id: row.id }),
+        ),
+      () =>
+        page.actions.update(
+          actionEvent("user_other", { id: row.id, tags: "css" }),
+        ),
+    ];
+    const expected = [401, 401, 404, 404];
+
+    for (const [index, attempt] of attempts.entries()) {
+      await expect(attempt()).rejects.toMatchObject({
+        status: expected[index],
+      });
+    }
+
+    expect(queries.insertBookmark).not.toHaveBeenCalled();
+    expect(queries.softDeleteBookmark).not.toHaveBeenCalled();
+    expect(queries.updateBookmark).not.toHaveBeenCalled();
+  });
+
+  it("fails inline on a malformed id and on invalid tags for the owner", async () => {
+    const page =
+      await import("../../src/routes/(bookmarks)/bookmarks/+page.server");
+
+    const badId = await page.actions.delete(
+      actionEvent("user_owner", { id: "nope" }),
+    );
+    expect(badId).toMatchObject({ status: 400 });
+
+    const badTags = await page.actions.update(
+      actionEvent("user_owner", { id: row.id, tags: "css, c++" }),
+    );
+    expect(badTags).toMatchObject({ data: { id: row.id }, status: 422 });
+    expect(queries.updateBookmark).not.toHaveBeenCalled();
+  });
+
+  it("marks a manual tag edit as processed", async () => {
+    const page =
+      await import("../../src/routes/(bookmarks)/bookmarks/+page.server");
+    vi.mocked(queries.updateBookmark).mockResolvedValue(row);
+
+    await page.actions.update(
+      actionEvent("user_owner", {
+        id: row.id,
+        tags: "CSS, learning",
+        title: " T ",
+      }),
+    );
+
+    expect(queries.updateBookmark).toHaveBeenCalledWith(row.id, {
+      processed: true,
+      tags: ["css", "learning"],
+      title: "T",
+    });
+  });
+});

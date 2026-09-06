@@ -1,7 +1,7 @@
 import { error } from "@sveltejs/kit";
 
 import { env } from "$env/dynamic/private";
-import { hasBearerToken } from "$lib/bookmarks/auth";
+import { hasBearerToken, viewerRole } from "$lib/bookmarks/auth";
 
 const UUID_PATTERN =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -43,5 +43,20 @@ export function requireServiceToken(
 
   if (!allowed) {
     error(401, "Unauthorized");
+  }
+}
+
+// Layout `load` and page `load` run in parallel, and form actions run before
+// either, so nothing upstream protects data. Every page load and action
+// calls this (or branches on viewerRole) itself.
+export function requireOwner(locals: App.Locals): void {
+  const role = viewerRole(locals.auth().userId, env.BOOKMARKS_OWNER_USER_ID);
+
+  if (role === "anonymous") {
+    error(401, "Sign in required");
+  }
+
+  if (role === "stranger") {
+    error(404, "Not found");
   }
 }
