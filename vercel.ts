@@ -5,6 +5,14 @@ export const config: VercelConfig = {
   // DATABASE_URL points at (production, or the Neon `dev` branch for
   // previews). Forward-only and additive; see src/lib/bookmarks/README.md.
   buildCommand: "npm run db:migrate && npm run build",
+  crons: [
+    {
+      // Daily at 6 AM UTC; 100 least-recently-checked bookmarks per run, so
+      // the whole collection is re-checked roughly every nine days.
+      path: "/api/bookmarks/cron/check-links",
+      schedule: "0 6 * * *",
+    },
+  ],
   // The Vercel project's framework preset predates this repo's SvelteKit
   // conversion (merged 2026-07-24); keep the override so the preset never
   // has to be edited by hand in the dashboard.
