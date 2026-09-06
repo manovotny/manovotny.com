@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { untrack } from "svelte";
+
   import { enhance } from "$app/forms";
   import type { BookmarkView } from "$lib/bookmarks/view";
 
@@ -14,7 +16,10 @@
     vocabulary: string[];
   } = $props();
 
-  let tags = $state(bookmark.tags.join(", "));
+  // A draft: snapshot the tags once when the editor opens. The editor is
+  // mounted per edit and unmounts on success, so it never needs to track
+  // later prop changes — untrack makes that intentional.
+  let tags = $state(untrack(() => bookmark.tags.join(", ")));
 
   const inputClassNames =
     "border-hairline bg-bg focus:border-ink w-full rounded-md border px-3 py-2 outline-none";

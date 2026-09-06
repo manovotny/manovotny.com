@@ -103,4 +103,46 @@ describe("fetchMetadata", () => {
     ).toEqual({});
     expect(fetcher).not.toHaveBeenCalled();
   });
+
+  it("follows public redirects and parses the final page", async () => {
+    const fetcher = vi
+      .fn()
+      .mockResolvedValueOnce(
+        new Response("", {
+          headers: { location: "/final" },
+          status: 302,
+        }),
+      )
+      .mockResolvedValueOnce(
+        new Response(html, {
+          headers: { "content-type": "text/html" },
+        }),
+      );
+
+    expect(
+      await fetchMetadata(
+        "https://example.com/start",
+        fetcher as unknown as typeof fetch,
+      ),
+    ).toMatchObject({ title: "OG Title" });
+    expect(fetcher).toHaveBeenCalledTimes(2);
+    expect(fetcher.mock.calls[1]?.[0]).toBe("https://example.com/final");
+  });
+
+  it("refuses redirects to non-public hosts", async () => {
+    const fetcher = vi.fn().mockResolvedValueOnce(
+      new Response("", {
+        headers: { location: "http://169.254.169.254/latest/meta-data" },
+        status: 302,
+      }),
+    );
+
+    expect(
+      await fetchMetadata(
+        "https://example.com/start",
+        fetcher as unknown as typeof fetch,
+      ),
+    ).toEqual({});
+    expect(fetcher).toHaveBeenCalledTimes(1);
+  });
 });

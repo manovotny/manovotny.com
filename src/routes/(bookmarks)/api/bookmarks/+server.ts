@@ -35,9 +35,10 @@ export const POST: RequestHandler = async ({ request }) => {
       waitUntil(backfillMetadata(bookmark));
     }
 
+    // Outcome only: the capture token lives on a phone and must not be able
+    // to read back an existing record by resubmitting its URL.
     return json(
       {
-        bookmark,
         duplicate: outcome === "duplicate",
         restored: outcome === "restored",
       },

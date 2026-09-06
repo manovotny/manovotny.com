@@ -1,20 +1,26 @@
+import { fetchPublic } from "./safe-fetch";
 import { isPublicHttpUrl } from "./url";
 
 const TIMEOUT_MS = 10_000;
 const USER_AGENT =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15";
 
+// fetchPublic follows redirects by hand so every hop is held to the
+// host-literal guard.
 async function request(
   url: string,
   method: "GET" | "HEAD",
   fetcher: typeof fetch,
 ): Promise<Response> {
-  return fetcher(url, {
-    headers: { "user-agent": USER_AGENT },
-    method,
-    redirect: "follow",
-    signal: AbortSignal.timeout(TIMEOUT_MS),
-  });
+  return fetchPublic(
+    url,
+    {
+      headers: { "user-agent": USER_AGENT },
+      method,
+      signal: AbortSignal.timeout(TIMEOUT_MS),
+    },
+    fetcher,
+  );
 }
 
 // Final status after redirects; 0 when the host could not be reached at all

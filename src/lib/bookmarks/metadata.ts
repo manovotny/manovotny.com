@@ -1,4 +1,4 @@
-import { isPublicHttpUrl } from "./url";
+import { fetchPublic } from "./safe-fetch";
 
 export type Metadata = {
   description?: string;
@@ -118,16 +118,16 @@ export async function fetchMetadata(
   url: string,
   fetcher: typeof fetch = fetch,
 ): Promise<Metadata> {
-  if (!isPublicHttpUrl(url)) {
-    return {};
-  }
-
   try {
-    const response = await fetcher(url, {
-      headers: { accept: "text/html", "user-agent": USER_AGENT },
-      redirect: "follow",
-      signal: AbortSignal.timeout(TIMEOUT_MS),
-    });
+    // fetchPublic refuses non-public hosts, including redirect targets.
+    const response = await fetchPublic(
+      url,
+      {
+        headers: { accept: "text/html", "user-agent": USER_AGENT },
+        signal: AbortSignal.timeout(TIMEOUT_MS),
+      },
+      fetcher,
+    );
 
     const contentType = response.headers.get("content-type")?.toLowerCase();
 

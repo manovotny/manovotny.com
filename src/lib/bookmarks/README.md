@@ -14,7 +14,7 @@ are `src/hooks.server.ts`, the sitemap route, `vercel.ts`, `static/robots.txt`,
 | `PUBLIC_CLERK_PUBLISHABLE_KEY` | Vercel + `.env.local`                                                        | Clerk client key.                                                                                                                                                      |
 | `BOOKMARKS_OWNER_USER_ID`      | Vercel + `.env.local`                                                        | Your Clerk user id. Anyone else signed in gets a 404.                                                                                                                  |
 | `BOOKMARKS_CAPTURE_TOKEN`      | Vercel + `.env.local` + the Apple Shortcut                                   | May only `POST /api/bookmarks`. Lives on a phone, so it can't read or edit anything. `openssl rand -hex 32`.                                                           |
-| `BOOKMARKS_API_TOKEN`          | Vercel + `.env.local` + the Claude Routine (as a host-scoped API credential) | Full access to `/api/bookmarks/*`. `openssl rand -hex 32`.                                                                                                             |
+| `BOOKMARKS_API_TOKEN`          | Vercel + `.env.local` + the Claude Routine (as a host-scoped API credential) | Every service endpoint in the API table below. The cron endpoint takes `CRON_SECRET` instead. `openssl rand -hex 32`.                                                  |
 | `CRON_SECRET`                  | Vercel (**set it yourself**) + `.env.local`                                  | Vercel sends `Authorization: Bearer $CRON_SECRET` to cron endpoints once the variable exists; it is not created automatically. The endpoint refuses to run without it. |
 
 Clerk instance: **restricted** sign-up mode with only your account allowlisted.
@@ -41,22 +41,22 @@ One-off. The CSV is personal data and must not be committed.
 
 ```bash
 npm run import:raindrop -- /path/to/raindrop-export.csv          # dry run: prints the DB host + counts
-npm run import:raindrop -- /path/to/raindrop-export.csv --write  # actually insert
+npm run import:raindrop -- /path/to/raindrop-export.csv --write  # insert
 ```
 
 Idempotent: re-running skips rows already present (matched on normalized URL).
 
 ## API
 
-Bearer `BOOKMARKS_API_TOKEN` for everything; `POST /api/bookmarks` also accepts `BOOKMARKS_CAPTURE_TOKEN`.
+Bearer `BOOKMARKS_API_TOKEN` for the service endpoints below; `POST /api/bookmarks` also accepts `BOOKMARKS_CAPTURE_TOKEN`. The cron endpoint is separate and takes `CRON_SECRET` (see Broken links).
 
-| Call                                                                                   | Purpose                                                                      |
-| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `POST /api/bookmarks` `{ url, title? }`                                                | Capture. `201` created, `200 { duplicate: true }`, `200 { restored: true }`. |
-| `GET /api/bookmarks/untagged?limit=25`                                                 | Rows the routine hasn't tagged.                                              |
-| `GET /api/bookmarks/tags`                                                              | Tag vocabulary with counts.                                                  |
-| `PATCH /api/bookmarks/:id` `{ tags?, title?, description?, image?, processed?: true }` | Routine writes.                                                              |
-| `GET /api/bookmarks/export`                                                            | Full JSON dump. The exit door.                                               |
+| Call                                                                                   | Purpose                                                                                                                                |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `POST /api/bookmarks` `{ url, title? }`                                                | Capture. Responds with outcome only: `201 { duplicate: false, restored: false }`, `200 { duplicate: true }`, `200 { restored: true }`. |
+| `GET /api/bookmarks/untagged?limit=25`                                                 | Rows the routine hasn't tagged.                                                                                                        |
+| `GET /api/bookmarks/tags`                                                              | Tag vocabulary with counts.                                                                                                            |
+| `PATCH /api/bookmarks/:id` `{ tags?, title?, description?, image?, processed?: true }` | Routine writes.                                                                                                                        |
+| `GET /api/bookmarks/export`                                                            | Full JSON dump. The exit door.                                                                                                         |
 
 ## Apple Shortcut — "Save Bookmark"
 

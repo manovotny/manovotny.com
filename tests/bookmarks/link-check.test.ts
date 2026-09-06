@@ -66,4 +66,42 @@ describe("checkLink", () => {
     ).toBe(0);
     expect(fetcher).not.toHaveBeenCalled();
   });
+
+  it("follows public redirects to the final status", async () => {
+    const fetcher = vi
+      .fn()
+      .mockResolvedValueOnce(
+        new Response("", {
+          headers: { location: "https://example.com/moved" },
+          status: 301,
+        }),
+      )
+      .mockResolvedValueOnce(new Response("", { status: 404 }));
+
+    expect(
+      await checkLink(
+        "https://example.com",
+        fetcher as unknown as typeof fetch,
+      ),
+    ).toBe(404);
+    expect(fetcher).toHaveBeenCalledTimes(2);
+  });
+
+  it("treats a redirect to a non-public host as unreachable", async () => {
+    const fetcher = vi.fn().mockResolvedValue(
+      new Response("", {
+        headers: { location: "http://127.0.0.1/" },
+        status: 302,
+      }),
+    );
+
+    expect(
+      await checkLink(
+        "https://example.com",
+        fetcher as unknown as typeof fetch,
+      ),
+    ).toBe(0);
+    // HEAD refused at the redirect, then GET refused at the redirect.
+    expect(fetcher).toHaveBeenCalledTimes(2);
+  });
 });
