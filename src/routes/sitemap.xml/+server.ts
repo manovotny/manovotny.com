@@ -1,10 +1,13 @@
 import { getLastModifiedDate } from "git-jiggy";
 
+import { isBookmarksRouteFile } from "$lib/bookmarks/paths";
 import { baseUrl } from "$lib/constants";
 
 export const prerender = true;
 
-const pages = Object.keys(import.meta.glob("/src/routes/**/+page.{md,svelte}"));
+const pages = Object.keys(
+  import.meta.glob("/src/routes/**/+page.{md,svelte}"),
+).filter((page) => !isBookmarksRouteFile(page));
 
 export const GET = async () => {
   const entries = await Promise.all(
