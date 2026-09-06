@@ -137,5 +137,5 @@ export async function recordLinkCheck(
   await db
     .update(bookmarks)
     .set({ httpStatus, lastCheckedAt: sql`now()` })
-    .where(eq(bookmarks.id, id));
+    .where(and(eq(bookmarks.id, id), notDeleted));
 }
