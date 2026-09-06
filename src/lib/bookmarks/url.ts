@@ -120,7 +120,9 @@ export function isPublicHttpUrl(input: string): boolean {
     return false;
   }
 
-  const host = parsed.hostname.toLowerCase();
+  // A trailing dot is the DNS root ("localhost." resolves like "localhost");
+  // drop it so the suffix checks below can't be sidestepped.
+  const host = parsed.hostname.toLowerCase().replace(/\.$/, "");
 
   if (
     host === "localhost" ||

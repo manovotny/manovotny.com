@@ -100,6 +100,9 @@ describe("isPublicHttpUrl", () => {
       "http://[fe90::1]/",
       "http://printer.local/",
       "http://db.internal/",
+      "http://localhost./",
+      "http://sub.localhost./",
+      "http://metadata.google.internal./",
       "https://user:pw@example.com/",
       "ftp://example.com/",
     ]) {

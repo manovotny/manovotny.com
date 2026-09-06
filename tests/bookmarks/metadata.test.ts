@@ -130,19 +130,24 @@ describe("fetchMetadata", () => {
   });
 
   it("refuses redirects to non-public hosts", async () => {
-    const fetcher = vi.fn().mockResolvedValueOnce(
-      new Response("", {
-        headers: { location: "http://169.254.169.254/latest/meta-data" },
-        status: 302,
-      }),
-    );
+    for (const location of [
+      "http://169.254.169.254/latest/meta-data",
+      "http://localhost./",
+    ]) {
+      const fetcher = vi
+        .fn()
+        .mockResolvedValueOnce(
+          new Response("", { headers: { location }, status: 302 }),
+        );
 
-    expect(
-      await fetchMetadata(
-        "https://example.com/start",
-        fetcher as unknown as typeof fetch,
-      ),
-    ).toEqual({});
-    expect(fetcher).toHaveBeenCalledTimes(1);
+      expect(
+        await fetchMetadata(
+          "https://example.com/start",
+          fetcher as unknown as typeof fetch,
+        ),
+        location,
+      ).toEqual({});
+      expect(fetcher, location).toHaveBeenCalledTimes(1);
+    }
   });
 });

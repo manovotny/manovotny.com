@@ -143,22 +143,26 @@ describe("POST /api/bookmarks", () => {
     );
 
     expect(response.status).toBe(201);
-    expect(await response.json()).toMatchObject({
+    // Exact: the capture token must never get the record back.
+    expect(await response.json()).toEqual({
       duplicate: false,
       restored: false,
     });
     expect(waitUntil).toHaveBeenCalledTimes(1);
   });
 
-  it("reports duplicates and restores with 200", async () => {
+  it("reports duplicates and restores with 200 and no record", async () => {
     vi.mocked(queries.findByNormalizedUrl).mockResolvedValue(row);
 
     const duplicate = await capture.POST(
-      event({ body: { url: "https://example.com/a" }, token: "service-token" }),
+      event({ body: { url: "https://example.com/a" }, token: "capture-token" }),
     );
 
     expect(duplicate.status).toBe(200);
-    expect(await duplicate.json()).toMatchObject({ duplicate: true });
+    expect(await duplicate.json()).toEqual({
+      duplicate: true,
+      restored: false,
+    });
     expect(waitUntil).not.toHaveBeenCalled();
 
     vi.mocked(queries.findByNormalizedUrl).mockResolvedValue({
@@ -168,11 +172,14 @@ describe("POST /api/bookmarks", () => {
     vi.mocked(queries.restoreBookmark).mockResolvedValue(row);
 
     const restored = await capture.POST(
-      event({ body: { url: "https://example.com/a" }, token: "service-token" }),
+      event({ body: { url: "https://example.com/a" }, token: "capture-token" }),
     );
 
     expect(restored.status).toBe(200);
-    expect(await restored.json()).toMatchObject({ restored: true });
+    expect(await restored.json()).toEqual({
+      duplicate: false,
+      restored: true,
+    });
   });
 
   it("returns 400 for malformed JSON, missing url, and invalid url", async () => {
