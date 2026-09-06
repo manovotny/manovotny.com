@@ -116,10 +116,9 @@
           <form
             action="?/delete"
             method="POST"
-            onsubmit={(event) => {
-              if (!confirm("Delete this bookmark?")) event.preventDefault();
+            use:enhance={({ cancel }) => {
+              if (!confirm("Delete this bookmark?")) cancel();
             }}
-            use:enhance
           >
             <input name="id" type="hidden" value={bookmark.id} />
             <button class={actionClassNames} type="submit">Delete</button>
