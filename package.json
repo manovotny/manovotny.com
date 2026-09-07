@@ -21,10 +21,14 @@
     "build": "svelte-kit sync && vite build",
     "check": "ncu --interactive --format group",
     "check:pre": "npm run check -- --target greatest",
+    "db:generate": "drizzle-kit generate --config=./src/lib/bookmarks/db/config.ts",
+    "db:migrate": "drizzle-kit migrate --config=./src/lib/bookmarks/db/config.ts",
+    "db:studio": "drizzle-kit studio --config=./src/lib/bookmarks/db/config.ts",
     "dev": "svelte-kit sync && vite dev",
     "fix": "npm run lint:fix && npm run format:fix",
     "format": "oxfmt --check .",
     "format:fix": "oxfmt --write .",
+    "import:raindrop": "tsx scripts/import-raindrop.ts",
     "lint": "oxlint .",
     "lint:fix": "oxlint . --fix",
     "lint:staged": "lint-staged",
@@ -34,10 +38,15 @@
     "types": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
   },
   "dependencies": {
+    "@neondatabase/serverless": "1.1.0",
+    "@vercel/functions": "3.9.5",
     "@vercel/og": "0.11.1",
     "clsx": "2.1.1",
+    "drizzle-orm": "0.45.2",
     "git-jiggy": "2.1.2",
+    "minisearch": "7.2.0",
     "rehype-unwrap-images": "1.0.0",
+    "svelte-clerk": "1.1.15",
     "tailwind-merge": "3.6.0"
   },
   "devDependencies": {
@@ -48,6 +57,7 @@
     "@types/node": "25.9.1",
     "@vercel/config": "0.5.2",
     "@vercel/git-hooks": "1.0.0",
+    "drizzle-kit": "0.31.10",
     "lint-staged": "17.0.5",
     "mdsvex": "0.12.8",
     "npm-check-updates": "22.2.0",
@@ -57,6 +67,7 @@
     "svelte": "5.56.3",
     "svelte-check": "4.6.0",
     "tailwindcss": "4.3.1",
+    "tsx": "4.23.13",
     "typescript": "6.0.3",
     "vite": "8.0.16",
     "vitest": "4.1.9"
