@@ -127,9 +127,11 @@ export function countTags(
     }
   }
 
+  // Alphabetical: this feeds the Tags menu and the editor's tag picker,
+  // where people scan by name, not popularity.
   return [...counts]
     .map(([tag, count]) => ({ count, tag }))
-    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
+    .sort((a, b) => a.tag.localeCompare(b.tag));
 }
 
 export function filtersFromParams(params: URLSearchParams): Filters {

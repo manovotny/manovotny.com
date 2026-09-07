@@ -2,6 +2,8 @@
   import { untrack } from "svelte";
 
   import { enhance } from "$app/forms";
+  import TagInput from "$lib/bookmarks/components/tag-input.svelte";
+  import TextInput from "$lib/bookmarks/components/text-input.svelte";
   import type { BookmarkView } from "$lib/bookmarks/view";
 
   let {
@@ -13,31 +15,13 @@
     bookmark: BookmarkView;
     message?: string;
     onclose: () => void;
-    vocabulary: string[];
+    vocabulary: { count: number; tag: string }[];
   } = $props();
 
   // A draft: snapshot the tags once when the editor opens. The editor is
   // mounted per edit and unmounts on success, so it never needs to track
   // later prop changes — untrack makes that intentional.
-  let tags = $state(untrack(() => bookmark.tags.join(", ")));
-
-  const inputClassNames =
-    "border-hairline bg-bg focus:border-ink w-full rounded-md border px-3 py-2 outline-none";
-
-  // A <datalist> would replace the whole comma-separated value, so existing
-  // tags are appended from a plain <select> instead.
-  function appendTag(tag: string) {
-    if (!tag) return;
-
-    const current = tags
-      .split(",")
-      .map((item) => item.trim())
-      .filter(Boolean);
-
-    if (!current.includes(tag)) {
-      tags = [...current, tag].join(", ");
-    }
-  }
+  let tags = $state(untrack(() => [...bookmark.tags]));
 </script>
 
 <form
@@ -57,37 +41,26 @@
   <input name="id" type="hidden" value={bookmark.id} />
   <label class="flex flex-col gap-1">
     <span class="metadata text-secondary">Title</span>
-    <input class={inputClassNames} name="title" value={bookmark.title ?? ""} />
+    <TextInput name="title" value={bookmark.title ?? ""} />
   </label>
-  <label class="flex flex-col gap-1">
-    <span class="metadata text-secondary">Tags (comma separated)</span>
-    <input bind:value={tags} class={inputClassNames} name="tags" />
-  </label>
-  <select
-    aria-label="Add an existing tag"
-    class="metadata border-hairline bg-bg cursor-pointer rounded-md border px-3 py-2"
-    onchange={(event) => {
-      appendTag(event.currentTarget.value);
-      event.currentTarget.value = "";
-    }}
-  >
-    <option value="">Add existing tag…</option>
-    {#each vocabulary as tag (tag)}
-      <option value={tag}>{tag}</option>
-    {/each}
-  </select>
+  <!-- Not a <label>: a click on a label's dead space activates its first
+       labelable descendant, which here would be a tag chip's remove button. -->
+  <div class="flex flex-col gap-1">
+    <span class="metadata text-secondary">Tags</span>
+    <TagInput bind:tags name="tags" {vocabulary} />
+  </div>
   {#if message}
     <p class="text-secondary text-sm" role="alert">{message}</p>
   {/if}
   <div class="flex gap-2">
     <button
-      class="metadata bg-ink text-bg cursor-pointer rounded-md px-3 py-2"
+      class="metadata bg-ink text-bg inline-flex h-9 cursor-pointer items-center rounded-md px-3"
       type="submit"
     >
       Save
     </button>
     <button
-      class="metadata border-hairline hover:bg-hover cursor-pointer rounded-md border px-3 py-2"
+      class="metadata border-hairline hover:bg-hover inline-flex h-9 cursor-pointer items-center rounded-md border px-3"
       onclick={onclose}
       type="button"
     >

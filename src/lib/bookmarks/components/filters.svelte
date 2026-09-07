@@ -1,5 +1,8 @@
 <script lang="ts">
-  import type { Filters, SortOrder } from "$lib/bookmarks/search";
+  import Menu from "$lib/bookmarks/components/menu.svelte";
+  import SortMenu from "$lib/bookmarks/components/sort-menu.svelte";
+  import TextInput from "$lib/bookmarks/components/text-input.svelte";
+  import type { Filters } from "$lib/bookmarks/search";
 
   let {
     filters,
@@ -11,10 +14,21 @@
     tags: { count: number; tag: string }[];
   } = $props();
 
-  const summaryClassNames =
-    "metadata border-hairline hover:bg-hover flex cursor-pointer list-none items-center gap-2 rounded-md border px-3 py-2 select-none";
-  const menuClassNames =
-    "border-hairline bg-bg absolute top-full left-0 z-10 mt-1 max-h-80 min-w-56 overflow-y-auto rounded-md border p-2 shadow-lg";
+  const rowClassNames =
+    "hover:bg-hover flex cursor-pointer items-center gap-2 px-3 py-2 text-sm select-none";
+
+  const showOptions: [
+    keyof Pick<Filters, "broken" | "favorites" | "untagged">,
+    string,
+  ][] = [
+    ["favorites", "Favorites"],
+    ["untagged", "Untagged"],
+    ["broken", "Broken links"],
+  ];
+
+  const tagsLabel = $derived(
+    filters.tags.length > 0 ? `Tags · ${filters.tags.length}` : "Tags",
+  );
 
   function toggleTag(tag: string, checked: boolean) {
     const next = checked
@@ -26,9 +40,9 @@
 </script>
 
 <div class="flex flex-wrap items-center gap-2">
-  <input
+  <TextInput
     aria-label="Search bookmarks"
-    class="border-hairline bg-bg focus:border-ink min-w-0 grow rounded-md border px-3 py-2 outline-none"
+    class="min-w-0 grow"
     oninput={(event) =>
       onchange({ ...filters, query: event.currentTarget.value })}
     placeholder="Search, or #tag"
@@ -36,60 +50,36 @@
     value={filters.query}
   />
 
-  <details class="relative">
-    <summary class={summaryClassNames}>
-      Tags{filters.tags.length > 0 ? ` · ${filters.tags.length}` : ""}
-    </summary>
-    <ul class={menuClassNames}>
-      {#each tags as { count, tag } (tag)}
-        <li>
-          <label
-            class="hover:bg-hover flex cursor-pointer items-center gap-2 rounded px-2 py-1 text-sm"
-          >
-            <input
-              checked={filters.tags.includes(tag)}
-              onchange={(event) => toggleTag(tag, event.currentTarget.checked)}
-              type="checkbox"
-            />
-            <span class="grow">{tag}</span>
-            <span class="text-faint text-xs">{count}</span>
-          </label>
-        </li>
-      {/each}
-    </ul>
-  </details>
+  <Menu id="tags" label={tagsLabel}>
+    {#each tags as { count, tag } (tag)}
+      <label class={rowClassNames}>
+        <input
+          checked={filters.tags.includes(tag)}
+          onchange={(event) => toggleTag(tag, event.currentTarget.checked)}
+          type="checkbox"
+        />
+        <span class="grow">{tag}</span>
+        <span class="text-faint text-xs">{count}</span>
+      </label>
+    {/each}
+  </Menu>
 
-  <details class="relative">
-    <summary class={summaryClassNames}>Show</summary>
-    <div class={menuClassNames}>
-      {#each [["favorites", "Favorites"], ["untagged", "Untagged"], ["broken", "Broken links"]] as [key, label] (key)}
-        <label
-          class="hover:bg-hover flex cursor-pointer items-center gap-2 rounded px-2 py-1 text-sm"
-        >
-          <input
-            checked={filters[key as "broken" | "favorites" | "untagged"]}
-            onchange={(event) =>
-              onchange({
-                ...filters,
-                [key]: event.currentTarget.checked,
-              } as Filters)}
-            type="checkbox"
-          />
-          {label}
-        </label>
-      {/each}
-    </div>
-  </details>
+  <Menu id="show" label="Show" width="w-44">
+    {#each showOptions as [key, label] (key)}
+      <label class={rowClassNames}>
+        <input
+          checked={filters[key]}
+          onchange={(event) =>
+            onchange({ ...filters, [key]: event.currentTarget.checked })}
+          type="checkbox"
+        />
+        {label}
+      </label>
+    {/each}
+  </Menu>
 
-  <select
-    aria-label="Sort"
-    class="metadata border-hairline bg-bg cursor-pointer rounded-md border px-3 py-2"
-    onchange={(event) =>
-      onchange({ ...filters, sort: event.currentTarget.value as SortOrder })}
-    value={filters.sort}
-  >
-    <option value="newest">Newest</option>
-    <option value="oldest">Oldest</option>
-    <option value="title">Title</option>
-  </select>
+  <SortMenu
+    onchange={(sort) => onchange({ ...filters, sort })}
+    sort={filters.sort}
+  />
 </div>

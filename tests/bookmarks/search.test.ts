@@ -142,12 +142,18 @@ describe("sortBookmarks", () => {
 });
 
 describe("countTags", () => {
-  it("counts and orders by count desc then tag asc", () => {
-    expect(countTags(bookmarks)).toEqual([
+  it("counts and orders alphabetically regardless of count", () => {
+    const withRepeat = [
+      ...bookmarks,
+      view({ id: "d", tags: ["ios", "css"] }),
+      view({ id: "e", tags: ["ios"] }),
+    ];
+
+    expect(countTags(withRepeat)).toEqual([
       { count: 1, tag: "animation" },
       { count: 1, tag: "app" },
-      { count: 1, tag: "css" },
-      { count: 1, tag: "ios" },
+      { count: 2, tag: "css" },
+      { count: 3, tag: "ios" },
     ]);
   });
 });

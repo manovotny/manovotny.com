@@ -7,6 +7,7 @@
   import { page } from "$app/state";
   import BookmarkRow from "$lib/bookmarks/components/bookmark-row.svelte";
   import Filters from "$lib/bookmarks/components/filters.svelte";
+  import TextInput from "$lib/bookmarks/components/text-input.svelte";
   import {
     applyFilters,
     buildIndex,
@@ -25,7 +26,6 @@
 
   const index = $derived(buildIndex(data.bookmarks));
   const results = $derived(applyFilters(data.bookmarks, index, filters));
-  const vocabulary = $derived(data.tags.map(({ tag }) => tag));
 
   function setFilters(next: FilterState) {
     filters = next;
@@ -65,9 +65,9 @@
       }
     }}
 >
-  <input
+  <TextInput
     aria-label="Add a bookmark by URL"
-    class="border-hairline bg-bg focus:border-ink min-w-0 grow rounded-md border px-3 py-2 outline-none"
+    class="min-w-0 grow"
     inputmode="url"
     name="url"
     placeholder="Paste a URL to save it"
@@ -75,7 +75,7 @@
     value={form?.url ?? ""}
   />
   <button
-    class="metadata bg-ink text-bg cursor-pointer rounded-md px-3 py-2"
+    class="metadata bg-ink text-bg inline-flex h-9 cursor-pointer items-center rounded-md px-3"
     type="submit"
   >
     Add
@@ -102,13 +102,13 @@
   </SignOutButton>
 </p>
 
-<ul class="mt-2">
+<ul class="border-hairline mt-2 border-t">
   {#each results.slice(0, visible) as bookmark (bookmark.id)}
     <BookmarkRow
       {bookmark}
       message={form?.id === bookmark.id ? form.message : undefined}
       ontag={addTag}
-      {vocabulary}
+      vocabulary={data.tags}
     />
   {/each}
 </ul>

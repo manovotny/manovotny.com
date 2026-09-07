@@ -13,7 +13,7 @@
     bookmark: BookmarkView;
     message?: string;
     ontag: (tag: string) => void;
-    vocabulary: string[];
+    vocabulary: { count: number; tag: string }[];
   } = $props();
 
   let editing = $state(false);
