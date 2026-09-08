@@ -1,10 +1,10 @@
 import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 
+import { createDb } from "../src/db/client";
+import { bookmarks } from "../src/db/schema";
 import { parseCsvRecords } from "../src/lib/bookmarks/csv";
 import { mapRaindropRow } from "../src/lib/bookmarks/raindrop";
-import { createDb } from "../src/lib/db/client";
-import { bookmarks } from "../src/lib/db/schema";
 
 const BATCH_SIZE = 100;
 

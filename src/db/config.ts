@@ -16,6 +16,6 @@ export default defineConfig({
     url: process.env.DATABASE_URL,
   },
   dialect: "postgresql",
-  out: "./src/lib/db/migrations",
-  schema: "./src/lib/db/schema.ts",
+  out: "./src/db/migrations",
+  schema: "./src/db/schema.ts",
 });

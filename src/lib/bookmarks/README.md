@@ -5,8 +5,8 @@ Private bookmarks tool at `/bookmarks`. Replaces Raindrop.io. Everything lives i
 are `src/hooks.server.ts`, the sitemap route, `vercel.ts`, `static/robots.txt`,
 `src/app.d.ts`, `package.json`, `scripts/import-raindrop.ts`, and a browser-safe
 `process` guard in `src/lib/constants.ts` (the site never hydrated before this).
-The database layer is site-wide: `src/lib/db/` holds the Drizzle schema, client,
-config, and migrations; bookmarks keeps only its queries.
+The database layer is site-wide: `src/db/` (alias `$db`) holds the Drizzle
+schema, client, config, and migrations; bookmarks keeps only its queries.
 
 ## Environment variables
 
@@ -26,11 +26,11 @@ nothing.
 
 ## Database
 
-Drizzle + Neon. Schema and migrations live in `src/lib/db/`; migrations are
+Drizzle + Neon. Schema and migrations live in `src/db/`; migrations are
 applied at build by `vercel.ts` (`npm run db:migrate && npm run build`).
 
 ```bash
-npm run db:generate   # after editing src/lib/db/schema.ts
+npm run db:generate   # after editing src/db/schema.ts
 npm run db:migrate    # apply to whatever DATABASE_URL points at
 npm run db:studio
 ```

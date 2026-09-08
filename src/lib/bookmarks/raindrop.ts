@@ -1,6 +1,6 @@
 import { isValidTag, normalizeTags } from "./tags";
 import { InvalidUrlError, normalizeUrl } from "./url";
-import type { NewBookmark } from "../db/schema";
+import type { NewBookmark } from "../../db/schema";
 
 export type RaindropRow = Record<string, string>;
 

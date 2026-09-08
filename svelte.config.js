@@ -43,7 +43,7 @@ const config = {
       },
     }),
     alias: {
-      $db: "src/lib/db",
+      $db: "src/db",
     },
     prerender: {
       handleHttpError: ({ message, path }) => {

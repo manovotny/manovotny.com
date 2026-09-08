@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import type { Bookmark } from "../../src/lib/db/schema";
+import type { Bookmark } from "../../src/db/schema";
 
 vi.mock("$env/dynamic/private", () => ({
   env: {

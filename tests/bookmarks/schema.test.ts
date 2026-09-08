@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 
-import { bookmarks } from "../../src/lib/db/schema";
+import { bookmarks } from "../../src/db/schema";
 import { getTableColumns } from "drizzle-orm";
 import { getTableConfig } from "drizzle-orm/pg-core";
 import { describe, expect, it } from "vitest";
@@ -9,7 +9,7 @@ import { describe, expect, it } from "vitest";
 // client), not from the schema, so snake_case is asserted on the generated
 // migration rather than on the table object.
 const migration = readFileSync(
-  "src/lib/db/migrations/0000_giant_retro_girl.sql",
+  "src/db/migrations/0000_giant_retro_girl.sql",
   "utf8",
 );
 
