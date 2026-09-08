@@ -1,8 +1,14 @@
+// The site renders without client-side JS, but /bookmarks hydrates and the
+// header imports `siteName` from here, so this module runs in the browser
+// too. `process` only exists on the server, and `baseUrl` is only read there.
+const env: NodeJS.ProcessEnv =
+  typeof process === "undefined" ? {} : process.env;
+
 export const baseUrl =
-  process.env.VERCEL_ENV === "production"
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : process.env.VERCEL_ENV === "preview"
-      ? `https://${process.env.VERCEL_BRANCH_URL}`
+  env.VERCEL_ENV === "production"
+    ? `https://${env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : env.VERCEL_ENV === "preview"
+      ? `https://${env.VERCEL_BRANCH_URL}`
       : // AI harnesses pick a free port and pass it as `PORT` (see
         // scripts/ai/run.sh), which the dev server binds to with
         // `--strictPort`. Reading it back keeps canonical/og:image/sitemap URLs
@@ -12,7 +18,7 @@ export const baseUrl =
         // builds read PORT without run.sh in the way, and `??` would keep `""`.
         // The URL is the only thing that falls back: run.sh still hands the
         // raw value to Vite, where `--strictPort` makes garbage fail loudly.
-        `http://localhost:${Number(process.env.PORT) || 5173}`;
+        `http://localhost:${Number(env.PORT) || 5173}`;
 export const siteName = "Michael Novotny";
 export const siteDescription =
   "Software developer, stock investor/trader, coffee enthusiast. Currently working on docs at Clerk.";
