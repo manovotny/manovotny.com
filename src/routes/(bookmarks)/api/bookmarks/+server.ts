@@ -36,9 +36,12 @@ export const POST: RequestHandler = async ({ request }) => {
     }
 
     // Outcome only: the capture token lives on a phone and must not be able
-    // to read back an existing record by resubmitting its URL.
+    // to read back an existing record by resubmitting its URL. `message` is
+    // what the Shortcut shows, so it needs no branching of its own.
+    const duplicate = outcome === "duplicate";
+
     return json(
-      { duplicate: outcome === "duplicate" },
+      { duplicate, message: duplicate ? "Already saved" : "Saved" },
       { status: outcome === "created" ? 201 : 200 },
     );
   } catch (caught) {

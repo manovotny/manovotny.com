@@ -144,6 +144,7 @@ describe("POST /api/bookmarks", () => {
     // Exact: the capture token must never get the record back.
     expect(await response.json()).toEqual({
       duplicate: false,
+      message: "Saved",
     });
     expect(waitUntil).toHaveBeenCalledTimes(1);
   });
@@ -156,7 +157,10 @@ describe("POST /api/bookmarks", () => {
     );
 
     expect(duplicate.status).toBe(200);
-    expect(await duplicate.json()).toEqual({ duplicate: true });
+    expect(await duplicate.json()).toEqual({
+      duplicate: true,
+      message: "Already saved",
+    });
     expect(waitUntil).not.toHaveBeenCalled();
   });
 
