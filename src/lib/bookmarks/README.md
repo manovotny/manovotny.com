@@ -74,27 +74,30 @@ Vercel's), run
 npm run shortcut
 ```
 
-It writes a signed `Save Bookmark.shortcut` next to the repo and opens it;
-accept the import in Shortcuts and it syncs to your iPhone. Re-run it whenever
-the token changes. The file embeds the token, so it's gitignored.
+It writes a signed `Save Bookmark.shortcut` next to the repo and opens it. In
+the import window choose **Add Shortcut**, then **Replace** if one already
+exists (Keep Both leaves a numbered copy behind). It syncs to your iPhone.
+Re-run it whenever the token changes. The file embeds the token, so it's
+gitignored.
 
 The manual way, in the **Shortcuts** app on your iPhone (it syncs to the Mac):
 tap **+**, name it "Save Bookmark", then add these actions in order.
 
-1. **Receive** `URLs` and `Safari web pages` from **Share Sheet**. If there's no
-   input, **Get Clipboard**.
-2. **Get URLs from** Shortcut Input → variable `URL`.
-3. **Get Details of Safari Web Page** → `Name` of Shortcut Input → variable
-   `Title` (leave empty if unavailable).
-4. **Get Contents of URL**
+1. **Receive** `URLs` and `Safari web pages` from **Share Sheet**.
+2. **Get Details of Safari Web Page** → `Name` of Shortcut Input (empty when
+   the input isn't a page; that's fine).
+3. **Get Contents of URL**
    - URL: `https://manovotny.com/api/bookmarks`
    - Method: `POST`
    - Headers: `Authorization` = `Bearer <BOOKMARKS_CAPTURE_TOKEN>`
-   - Request Body: JSON — `url` = `URL`, `title` = `Title`
-5. **Get Dictionary Value** `message` from Contents of URL.
-6. **Show Notification** with that Dictionary Value ("Saved" or "Already
+   - Request Body: JSON — `url` = `Shortcut Input`, `title` = the `Name`
+     from step 2. Shortcut Input coerces to the page's URL; a "Get URLs from
+     Input" step is not needed and, in generated shortcuts, came through
+     empty.
+4. **Get Dictionary Value** `message` from Contents of URL.
+5. **Show Notification** with that Dictionary Value ("Saved" or "Already
    saved").
-7. Open the Shortcut's settings (the ⓘ button), turn on **Show in Share Sheet**,
+6. Open the Shortcut's settings (the ⓘ button), turn on **Show in Share Sheet**,
    and limit inputs to URLs and Safari web pages.
 
 To use it: in Safari, tap **Share**, then **Save Bookmark**. On the Mac it is in
