@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import type { Bookmark } from "../../src/lib/bookmarks/db/schema";
+import type { Bookmark } from "../../src/lib/db/schema";
 
-vi.mock("../../src/lib/bookmarks/db/queries", () => ({
+vi.mock("../../src/lib/bookmarks/queries", () => ({
   fillEmptyFields: vi.fn(),
   findByNormalizedUrl: vi.fn(),
   insertBookmark: vi.fn(),
@@ -12,7 +12,7 @@ vi.mock("../../src/lib/bookmarks/metadata", () => ({
   fetchMetadata: vi.fn(),
 }));
 
-const queries = await import("../../src/lib/bookmarks/db/queries");
+const queries = await import("../../src/lib/bookmarks/queries");
 const metadata = await import("../../src/lib/bookmarks/metadata");
 const { backfillMetadata, decideSaveOutcome, saveBookmark } =
   await import("../../src/lib/bookmarks/save");

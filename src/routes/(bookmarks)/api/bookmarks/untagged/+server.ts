@@ -1,7 +1,7 @@
 import { json } from "@sveltejs/kit";
 import type { RequestHandler } from "./$types";
 
-import { listUntagged } from "$lib/bookmarks/db/queries";
+import { listUntagged } from "$lib/bookmarks/queries";
 import { parseLimit, requireServiceToken } from "$lib/bookmarks/service";
 
 export const prerender = false;

@@ -8,7 +8,7 @@ import {
   listBookmarks,
   softDeleteBookmark,
   updateBookmark,
-} from "$lib/bookmarks/db/queries";
+} from "$lib/bookmarks/queries";
 import { backfillMetadata, saveBookmark } from "$lib/bookmarks/save";
 import { countTags } from "$lib/bookmarks/search";
 import { isUuid, requireOwner } from "$lib/bookmarks/service";

@@ -1,11 +1,11 @@
 import { error, json } from "@sveltejs/kit";
 import type { RequestHandler } from "./$types";
 
-import { updateBookmark } from "$lib/bookmarks/db/queries";
+import { updateBookmark } from "$lib/bookmarks/queries";
 import { isUuid, requireServiceToken } from "$lib/bookmarks/service";
 import { invalidTags, normalizeTags } from "$lib/bookmarks/tags";
 import { isPublicHttpUrl } from "$lib/bookmarks/url";
-import type { BookmarkPatch } from "$lib/bookmarks/db/queries";
+import type { BookmarkPatch } from "$lib/bookmarks/queries";
 
 export const prerender = false;
 

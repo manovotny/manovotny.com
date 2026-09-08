@@ -1,7 +1,8 @@
-import { db } from "./index";
-import { bookmarks } from "./schema";
 import { and, asc, desc, eq, isNull, sql } from "drizzle-orm";
-import type { Bookmark, NewBookmark } from "./schema";
+
+import { db } from "$lib/db";
+import { bookmarks } from "$lib/db/schema";
+import type { Bookmark, NewBookmark } from "$lib/db/schema";
 
 export type BookmarkPatch = Partial<
   Pick<Bookmark, "description" | "favorite" | "image" | "tags" | "title">

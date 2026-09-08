@@ -5,19 +5,19 @@ vi.mock("$env/dynamic/private", () => ({
   env: { CRON_SECRET: "cron-secret" },
 }));
 vi.mock("../../src/lib/bookmarks/link-check", () => ({ checkLink: vi.fn() }));
-vi.mock("../../src/lib/bookmarks/db/queries", () => ({
+vi.mock("../../src/lib/bookmarks/queries", () => ({
   listStaleLinks: vi.fn(),
   recordLinkCheck: vi.fn(),
 }));
 
-const queries = await import("../../src/lib/bookmarks/db/queries");
+const queries = await import("../../src/lib/bookmarks/queries");
 const { checkLink } = await import("../../src/lib/bookmarks/link-check");
 const { GET } =
-  await import("../../src/routes/(bookmarks)/api/bookmarks/cron/check-links/+server");
+  await import("../../src/routes/(bookmarks)/api/cron/bookmarks/check-links/+server");
 
 const call = (authorization?: string) =>
   GET({
-    request: new Request("http://localhost/api/bookmarks/cron/check-links", {
+    request: new Request("http://localhost/api/cron/bookmarks/check-links", {
       headers: authorization ? { authorization } : {},
     }),
   } as never);

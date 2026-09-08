@@ -150,7 +150,7 @@
       autocomplete="off"
       bind:this={input}
       bind:value={draft}
-      class="h-[22.857143px] min-w-32 grow origin-left scale-[0.875] bg-transparent text-[16px] outline-none"
+      class="h-[22.857143px] min-w-32 grow origin-left scale-[0.875] bg-transparent text-[16px] outline-none focus-visible:outline-none!"
       oninput={() => {
         dismissed = false;
         active = 0;
@@ -207,11 +207,3 @@
     </ul>
   {/if}
 </div>
-
-<style>
-  /* The site's global :focus-visible ring is un-layered, so Tailwind's
-     outline utilities can't override it. The ink border is the focus cue. */
-  input:focus-visible {
-    outline: none;
-  }
-</style>

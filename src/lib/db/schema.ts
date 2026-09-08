@@ -13,29 +13,25 @@ import {
 export const bookmarks = pgTable(
   "bookmarks",
   {
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .defaultNow()
-      .notNull(),
-    deletedAt: timestamp("deleted_at", { withTimezone: true }),
+    createdAt: timestamp({ withTimezone: true }).defaultNow().notNull(),
+    deletedAt: timestamp({ withTimezone: true }),
     description: text(),
     domain: text().notNull(),
     favorite: boolean().default(false).notNull(),
-    httpStatus: integer("http_status"),
+    httpStatus: integer(),
     id: uuid().defaultRandom().primaryKey(),
     image: text(),
-    lastCheckedAt: timestamp("last_checked_at", { withTimezone: true }),
+    lastCheckedAt: timestamp({ withTimezone: true }),
     // Dupe identity; see url.ts normalizeUrl.
-    normalizedUrl: text("normalized_url").notNull(),
+    normalizedUrl: text().notNull(),
     // Null = the tagging routine hasn't handled this row yet.
-    processedAt: timestamp("processed_at", { withTimezone: true }),
+    processedAt: timestamp({ withTimezone: true }),
     tags: text()
       .array()
       .default(sql`'{}'::text[]`)
       .notNull(),
     title: text(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .defaultNow()
-      .notNull(),
+    updatedAt: timestamp({ withTimezone: true }).defaultNow().notNull(),
     url: text().notNull(),
   },
   (table) => [

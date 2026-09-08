@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import type { Bookmark } from "../../src/lib/bookmarks/db/schema";
+import type { Bookmark } from "../../src/lib/db/schema";
 
 vi.mock("$env/dynamic/private", () => ({
   env: {
@@ -15,7 +15,7 @@ vi.mock("@vercel/functions", () => ({ waitUntil: vi.fn() }));
 // without this mock the "creates" test would start a real fetch.
 vi.mock("../../src/lib/bookmarks/metadata", () => ({ fetchMetadata: vi.fn() }));
 
-vi.mock("../../src/lib/bookmarks/db/queries", () => ({
+vi.mock("../../src/lib/bookmarks/queries", () => ({
   fillEmptyFields: vi.fn(),
   findByNormalizedUrl: vi.fn(),
   insertBookmark: vi.fn(),
@@ -27,7 +27,7 @@ vi.mock("../../src/lib/bookmarks/db/queries", () => ({
   updateBookmark: vi.fn(),
 }));
 
-const queries = await import("../../src/lib/bookmarks/db/queries");
+const queries = await import("../../src/lib/bookmarks/queries");
 const metadata = await import("../../src/lib/bookmarks/metadata");
 const { parseLimit } = await import("../../src/lib/bookmarks/service");
 const { waitUntil } = await import("@vercel/functions");

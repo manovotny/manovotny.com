@@ -5,6 +5,8 @@ Private bookmarks tool at `/bookmarks`. Replaces Raindrop.io. Everything lives i
 are `src/hooks.server.ts`, the sitemap route, `vercel.ts`, `static/robots.txt`,
 `src/app.d.ts`, `package.json`, `scripts/import-raindrop.ts`, and a browser-safe
 `process` guard in `src/lib/constants.ts` (the site never hydrated before this).
+The database layer is site-wide: `src/lib/db/` holds the Drizzle schema, client,
+config, and migrations; bookmarks keeps only its queries.
 
 ## Environment variables
 
@@ -24,11 +26,11 @@ nothing.
 
 ## Database
 
-Drizzle + Neon. Migrations are generated into `db/migrations/` and applied at
-build by `vercel.ts` (`npm run db:migrate && npm run build`).
+Drizzle + Neon. Schema and migrations live in `src/lib/db/`; migrations are
+applied at build by `vercel.ts` (`npm run db:migrate && npm run build`).
 
 ```bash
-npm run db:generate   # after editing db/schema.ts
+npm run db:generate   # after editing src/lib/db/schema.ts
 npm run db:migrate    # apply to whatever DATABASE_URL points at
 npm run db:studio
 ```
@@ -61,8 +63,12 @@ Bearer `BOOKMARKS_API_TOKEN` for the service endpoints below; `POST /api/bookmar
 
 ## Apple Shortcut — "Save Bookmark"
 
-Build once on iPhone; it syncs to the Mac. Works from Safari's share sheet on
-both.
+This is the capture button. There is no browser extension; Apple's Shortcuts
+app does the job on iPhone and Mac, and a Shortcut set to show in the share
+sheet appears in Safari's share menu on both.
+
+Build it once in the **Shortcuts** app on your iPhone (it syncs to the Mac):
+tap **+**, name it "Save Bookmark", then add these actions in order.
 
 1. **Receive** `URLs` and `Safari web pages` from **Share Sheet**. If there's no
    input, **Get Clipboard**.
@@ -78,8 +84,12 @@ both.
    likewise `restored` → `Restored`.
 6. **If** `Duplicate` is `true` → **Show Notification** "Already saved".
    **Otherwise If** `Restored` is `true` → "Restored". **Otherwise** → "Saved".
-7. In the Shortcut's settings, enable **Show in Share Sheet** and limit inputs to
-   URLs and Safari web pages.
+7. Open the Shortcut's settings (the ⓘ button), turn on **Show in Share Sheet**,
+   and limit inputs to URLs and Safari web pages.
+
+To use it: in Safari, tap **Share**, then **Save Bookmark**. On the Mac it is in
+the same share menu (the box-with-arrow button in the toolbar). If it is not
+listed, scroll the share sheet to **Edit Actions** and add it.
 
 If the request fails (no network, site down), Shortcuts surfaces the error; the
 save is not lost silently — retry from the same tab.
@@ -105,7 +115,7 @@ See `routine.md` for what it does; page content it reads is untrusted input.
 
 ## Broken links
 
-`/api/bookmarks/cron/check-links` runs daily (see `vercel.ts`), checks the 100
+`/api/cron/bookmarks/check-links` runs daily (see `vercel.ts`), checks the 100
 least-recently-checked rows (~9 days per full sweep of the collection), and
 records `http_status` — `0` when the host could not be reached at all. The
 **Show → Broken links** filter surfaces `0` and `>= 400` excluding bot-block

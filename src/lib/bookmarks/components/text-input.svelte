@@ -20,15 +20,7 @@
 <div class={cn("relative", className)}>
   <input
     bind:value
-    class="border-hairline bg-bg focus:border-ink mr-[-14.285714%] mb-[-5.142857px] h-[41.142857px] w-[114.285714%] origin-top-left scale-[0.875] rounded-[6.857143px] border-[1.142857px] px-[13.714286px] text-[16px] outline-none"
+    class="border-hairline bg-bg focus:border-ink mr-[-14.285714%] mb-[-5.142857px] h-[41.142857px] w-[114.285714%] origin-top-left scale-[0.875] rounded-[6.857143px] border-[1.142857px] px-[13.714286px] text-[16px] outline-none focus-visible:outline-none!"
     {...rest}
   />
 </div>
-
-<style>
-  /* The site's global :focus-visible ring is un-layered, so Tailwind's
-     outline utilities can't override it. The ink border is the focus cue. */
-  input:focus-visible {
-    outline: none;
-  }
-</style>

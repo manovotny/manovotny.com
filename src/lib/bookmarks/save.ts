@@ -1,12 +1,12 @@
+import { fetchMetadata } from "./metadata";
 import {
   fillEmptyFields,
   findByNormalizedUrl,
   insertBookmark,
   restoreBookmark,
-} from "./db/queries";
-import { fetchMetadata } from "./metadata";
+} from "./queries";
 import { isPublicHttpUrl, normalizeUrl } from "./url";
-import type { Bookmark } from "./db/schema";
+import type { Bookmark } from "../db/schema";
 
 export type SaveOutcome = "created" | "duplicate" | "restored";
 

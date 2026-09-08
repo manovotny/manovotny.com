@@ -3,8 +3,8 @@ import type { RequestHandler } from "./$types";
 import { dev } from "$app/environment";
 import { env } from "$env/dynamic/private";
 import { hasBearerToken } from "$lib/bookmarks/auth";
-import { listStaleLinks, recordLinkCheck } from "$lib/bookmarks/db/queries";
 import { checkLink } from "$lib/bookmarks/link-check";
+import { listStaleLinks, recordLinkCheck } from "$lib/bookmarks/queries";
 
 const BATCH_SIZE = 100;
 const CONCURRENCY = 10;

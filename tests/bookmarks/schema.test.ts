@@ -1,33 +1,57 @@
-import { bookmarks } from "../../src/lib/bookmarks/db/schema";
+import { readFileSync } from "node:fs";
+
+import { bookmarks } from "../../src/lib/db/schema";
+import { getTableColumns } from "drizzle-orm";
 import { getTableConfig } from "drizzle-orm/pg-core";
 import { describe, expect, it } from "vitest";
 
+// Column names come from `casing: "snake_case"` (drizzle-kit config and the
+// client), not from the schema, so snake_case is asserted on the generated
+// migration rather than on the table object.
+const migration = readFileSync(
+  "src/lib/db/migrations/0000_giant_retro_girl.sql",
+  "utf8",
+);
+
 describe("bookmarks schema", () => {
   const config = getTableConfig(bookmarks);
-  const columnNames = config.columns.map((column) => column.name).sort();
 
   it("uses the snake_case table name", () => {
     expect(config.name).toBe("bookmarks");
   });
 
   it("has exactly the spec's columns", () => {
-    expect(columnNames).toEqual([
-      "created_at",
-      "deleted_at",
+    expect(Object.keys(getTableColumns(bookmarks)).sort()).toEqual([
+      "createdAt",
+      "deletedAt",
       "description",
       "domain",
       "favorite",
-      "http_status",
+      "httpStatus",
       "id",
       "image",
+      "lastCheckedAt",
+      "normalizedUrl",
+      "processedAt",
+      "tags",
+      "title",
+      "updatedAt",
+      "url",
+    ]);
+  });
+
+  it("migrates multi-word columns as snake_case", () => {
+    for (const column of [
+      "created_at",
+      "deleted_at",
+      "http_status",
       "last_checked_at",
       "normalized_url",
       "processed_at",
-      "tags",
-      "title",
       "updated_at",
-      "url",
-    ]);
+    ]) {
+      expect(migration, column).toContain(`"${column}"`);
+    }
   });
 
   it("enforces a unique index on normalized_url", () => {
