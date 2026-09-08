@@ -5,7 +5,7 @@
 //   npm run shortcut
 //
 // Shortcuts are property lists. The action identifiers and parameter shapes
-// below are what the Shortcuts app itself writes for these five actions.
+// below are what the Shortcuts app itself writes for these four actions.
 import { execFileSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { existsSync, unlinkSync, writeFileSync } from "node:fs";
@@ -21,8 +21,10 @@ if (!token) {
   process.exit(1);
 }
 
-const ENDPOINT = "https://manovotny.com/api/bookmarks";
-const NAME = "Save Bookmark";
+// Override to point a test build somewhere else, e.g. a local echo server.
+const ENDPOINT =
+  process.env.SHORTCUT_ENDPOINT ?? "https://manovotny.com/api/bookmarks";
+const NAME = process.env.SHORTCUT_NAME ?? "Save Bookmark";
 
 type Plist = string | number | boolean | Plist[] | { [key: string]: Plist };
 
@@ -88,6 +90,16 @@ function tokenText(uuid: string, name: string): Plist {
   };
 }
 
+// Text consisting solely of the Shortcut Input token. A shared Safari page or
+// link coerces to its URL, which is all the endpoint needs.
+const inputText: Plist = {
+  Value: {
+    attachmentsByRange: { "{0, 1}": { Type: "ExtensionInput" } },
+    string: "￼",
+  },
+  WFSerializationType: "WFTextTokenString",
+};
+
 function text(value: string): Plist {
   return {
     Value: { attachmentsByRange: {}, string: value },
@@ -110,17 +122,12 @@ function dictionary(entries: [string, Plist][]): Plist {
 
 // --- the workflow ----------------------------------------------------------
 
-const urls = randomUUID().toUpperCase();
 const title = randomUUID().toUpperCase();
 const request = randomUUID().toUpperCase();
 const message = randomUUID().toUpperCase();
 
 const workflow: Plist = {
   WFWorkflowActions: [
-    {
-      WFWorkflowActionIdentifier: "is.workflow.actions.detect.link",
-      WFWorkflowActionParameters: { UUID: urls, WFInput: shortcutInput },
-    },
     {
       WFWorkflowActionIdentifier:
         "is.workflow.actions.properties.safariwebpage",
@@ -136,11 +143,12 @@ const workflow: Plist = {
         Advanced: true,
         ShowHeaders: true,
         UUID: request,
-        WFHTTPBodyType: "JSON",
+        // Shortcuts spells this "Json"; any other casing drops the body.
+        WFHTTPBodyType: "Json",
         WFHTTPHeaders: dictionary([["Authorization", text(`Bearer ${token}`)]]),
         WFHTTPMethod: "POST",
         WFJSONValues: dictionary([
-          ["url", tokenText(urls, "URLs")],
+          ["url", inputText],
           ["title", tokenText(title, "Name")],
         ]),
         WFURL: text(ENDPOINT),
@@ -179,7 +187,6 @@ const workflow: Plist = {
   WFWorkflowMinimumClientVersion: 900,
   WFWorkflowMinimumClientVersionString: "900",
   WFWorkflowName: NAME,
-  WFWorkflowNoInputBehavior: { Name: "WFWorkflowNoInputBehaviorGetClipboard" },
   WFWorkflowOutputContentItemClasses: [],
   WFWorkflowTypes: ["ActionExtension"],
 };
