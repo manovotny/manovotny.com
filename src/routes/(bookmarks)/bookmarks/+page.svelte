@@ -44,6 +44,8 @@
   }
 </script>
 
+t
+
 <svelte:head>
   <title>Bookmarks • Michael Novotny</title>
   <meta content="noindex, nofollow" name="robots" />
@@ -100,7 +102,7 @@
   </SignOutButton>
 </p>
 
-<ul class="border-hairline mt-2 border-t">
+<ul class="border-hairline mt-8 border-t">
   {#each results.slice(0, visible) as bookmark (bookmark.id)}
     <BookmarkRow
       {bookmark}
