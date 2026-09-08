@@ -28,7 +28,6 @@
     "fix": "npm run lint:fix && npm run format:fix",
     "format": "oxfmt --check .",
     "format:fix": "oxfmt --write .",
-    "import:raindrop": "tsx scripts/import-raindrop.ts",
     "lint": "oxlint .",
     "lint:fix": "oxlint . --fix",
     "lint:staged": "lint-staged",
