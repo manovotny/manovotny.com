@@ -1,4 +1,20 @@
-# Bookmark tagging routine
+---
+name: bookmark-tagging
+type: cloud
+description: ""
+schedule: "Every 6 hours (cron: 0 */6 * * *)"
+connectors: None
+repository: None
+cloudEnvironment:
+  name: manovotny.com
+  networkAccess: Full
+  environmentVariables: [BOOKMARKS_BASE_URL]
+  apiCredentials:
+    - name: Bookmarks API
+      type: Bearer
+      allowedWebsites: [manovotny.com]
+      header: "Authorization: Bearer <BOOKMARKS_API_TOKEN>"
+---
 
 You are tagging newly saved bookmarks for a single user. Work only through the
 HTTP API below. Do not edit files, do not commit, do not open pull requests.
@@ -26,7 +42,13 @@ every request to that host. You never see the token; if a request comes back
       `{ "tags": [...], "processed": true }` plus any `title`/`description`/
       `image` you recovered. A `422` means a tag was invalid — fix it and
       retry once.
-4. Finish with a one-line summary per bookmark: title → tags.
+   5. If there is nothing to classify — a dead link, a placeholder page, a
+      test URL, no title, no description, no content — still PATCH
+      `{ "tags": [], "processed": true }`. That takes it out of this queue;
+      the user sees it as untagged in the app and decides. Leaving it
+      unprocessed only means re-reading it every run.
+4. Finish with a one-line summary per bookmark: title → tags, or "no
+   content, marked processed".
 
 A single failing page must not stop the batch. Never call any other endpoint.
 

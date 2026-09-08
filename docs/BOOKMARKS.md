@@ -3,7 +3,7 @@
 Private bookmarks tool at `/bookmarks`. Replaces Raindrop.io. Everything lives in
 `src/lib/bookmarks/` and `src/routes/(bookmarks)/`; the only site files it touches
 are `src/hooks.server.ts`, the sitemap route, `vercel.ts`, `static/robots.txt`,
-`src/app.d.ts`, `package.json`, `scripts/import-raindrop.ts`, and a browser-safe
+`src/app.d.ts`, `package.json`, and a browser-safe
 `process` guard in `src/lib/constants.ts` (the site never hydrated before this).
 The database layer is site-wide: `src/db/` (alias `$db`) holds the Drizzle
 schema, client, config, and migrations; bookmarks keeps only its queries.
@@ -37,17 +37,6 @@ npm run db:studio
 
 Forward-only, additive migrations. Destructive changes go expand → migrate code
 → contract across separate deploys.
-
-## Import from Raindrop
-
-One-off. The CSV is personal data and must not be committed.
-
-```bash
-npm run import:raindrop -- /path/to/raindrop-export.csv          # dry run: prints the DB host + counts
-npm run import:raindrop -- /path/to/raindrop-export.csv --write  # insert
-```
-
-Idempotent: re-running skips rows already present (matched on normalized URL).
 
 ## API
 
@@ -110,21 +99,30 @@ save is not lost silently — retry from the same tab.
 ## Tagging routine
 
 A Claude Code cloud Routine runs every 6 hours on this repo with the prompt
-`Follow src/lib/bookmarks/routine.md.` It runs on included subscription usage
+`Follow routines/bookmark-tagging.md.` It runs on included subscription usage
 (routines count against the account's usage and daily run allowance — no API
-key, but not free either). Setup:
+key, but not free either).
 
-1. **Cloud environment**: create a dedicated one for this routine with
-   **Full network access** — the default trusted-network mode cannot fetch
-   arbitrary bookmark URLs. Remove every connector it doesn't need.
-2. **API credential**: add `BOOKMARKS_API_TOKEN` as a **Bearer API credential
-   scoped to `manovotny.com`**, not as a plain environment variable. The
-   proxy injects it on requests to that host only; the model and any fetched
-   page never see the value.
-3. **Environment variable**: `BOOKMARKS_BASE_URL=https://manovotny.com`.
-4. Run it once by hand and confirm untagged saves get tags.
+The environment, as it works today:
 
-See `routine.md` for what it does; page content it reads is untrusted input.
+1. **Network access: Full.** The default trusted-network mode can't fetch
+   arbitrary bookmark URLs. No connectors.
+2. **Environment variables:** `BOOKMARKS_BASE_URL="https://manovotny.com"` and
+   nothing else. Don't put the token here; the routine is told not to build an
+   `Authorization` header, so a token in env vars is both visible and unused,
+   and every request comes back 401.
+3. **API credential** (the "Add credential" form): name `Bookmarks API`, type
+   Bearer, allowed website `manovotny.com`, header `Authorization` with prefix
+   `Bearer` and the bare 64-character `BOOKMARKS_API_TOKEN` as the value. The
+   prefix field adds "Bearer " itself. The proxy attaches the header to
+   requests for that host; the model never sees the value.
+4. Run it once by hand. With untagged rows waiting it should tag them; with
+   none it says "Nothing to tag."
+
+Contentless rows (dead links, placeholders) get `processed: true` with no
+tags so they leave the queue; they stay visible in the app under Show →
+Untagged. Page content the routine reads is untrusted input; see the routine
+file for the rules.
 
 ## Broken links
 
