@@ -53,13 +53,13 @@ Idempotent: re-running skips rows already present (matched on normalized URL).
 
 Bearer `BOOKMARKS_API_TOKEN` for the service endpoints below; `POST /api/bookmarks` also accepts `BOOKMARKS_CAPTURE_TOKEN`. The cron endpoint is separate and takes `CRON_SECRET` (see Broken links).
 
-| Call                                                                                   | Purpose                                                                                           |
-| -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `POST /api/bookmarks` `{ url, title? }`                                                | Capture. Responds with the outcome only: `201 { duplicate: false }` or `200 { duplicate: true }`. |
-| `GET /api/bookmarks/untagged?limit=25`                                                 | Rows the routine hasn't tagged.                                                                   |
-| `GET /api/bookmarks/tags`                                                              | Tag vocabulary with counts.                                                                       |
-| `PATCH /api/bookmarks/:id` `{ tags?, title?, description?, image?, processed?: true }` | Routine writes.                                                                                   |
-| `GET /api/bookmarks/export`                                                            | Full JSON dump. The exit door.                                                                    |
+| Call                                                                                   | Purpose                                                                                                                     |
+| -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `POST /api/bookmarks` `{ url, title? }`                                                | Capture. Outcome only: `201 { duplicate: false, message: "Saved" }` or `200 { duplicate: true, message: "Already saved" }`. |
+| `GET /api/bookmarks/untagged?limit=25`                                                 | Rows the routine hasn't tagged.                                                                                             |
+| `GET /api/bookmarks/tags`                                                              | Tag vocabulary with counts.                                                                                                 |
+| `PATCH /api/bookmarks/:id` `{ tags?, title?, description?, image?, processed?: true }` | Routine writes.                                                                                                             |
+| `GET /api/bookmarks/export`                                                            | Full JSON dump. The exit door.                                                                                              |
 
 ## Apple Shortcut — "Save Bookmark"
 
@@ -67,7 +67,18 @@ This is the capture button. There is no browser extension; Apple's Shortcuts
 app does the job on iPhone and Mac, and a Shortcut set to show in the share
 sheet appears in Safari's share menu on both.
 
-Build it once in the **Shortcuts** app on your iPhone (it syncs to the Mac):
+The easy way: with `BOOKMARKS_CAPTURE_TOKEN` in `.env.local` (the same value as
+Vercel's), run
+
+```bash
+npm run shortcut
+```
+
+It writes a signed `Save Bookmark.shortcut` next to the repo and opens it;
+accept the import in Shortcuts and it syncs to your iPhone. Re-run it whenever
+the token changes. The file embeds the token, so it's gitignored.
+
+The manual way, in the **Shortcuts** app on your iPhone (it syncs to the Mac):
 tap **+**, name it "Save Bookmark", then add these actions in order.
 
 1. **Receive** `URLs` and `Safari web pages` from **Share Sheet**. If there's no
@@ -80,9 +91,9 @@ tap **+**, name it "Save Bookmark", then add these actions in order.
    - Method: `POST`
    - Headers: `Authorization` = `Bearer <BOOKMARKS_CAPTURE_TOKEN>`
    - Request Body: JSON — `url` = `URL`, `title` = `Title`
-5. **Get Dictionary Value** `duplicate` from Contents of URL → `Duplicate`.
-6. **If** `Duplicate` is `true` → **Show Notification** "Already saved".
-   **Otherwise** → "Saved".
+5. **Get Dictionary Value** `message` from Contents of URL.
+6. **Show Notification** with that Dictionary Value ("Saved" or "Already
+   saved").
 7. Open the Shortcut's settings (the ⓘ button), turn on **Show in Share Sheet**,
    and limit inputs to URLs and Safari web pages.
 
