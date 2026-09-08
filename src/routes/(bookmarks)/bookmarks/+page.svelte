@@ -44,8 +44,6 @@
   }
 </script>
 
-t
-
 <svelte:head>
   <title>Bookmarks • Michael Novotny</title>
   <meta content="noindex, nofollow" name="robots" />
