@@ -38,10 +38,7 @@ export const POST: RequestHandler = async ({ request }) => {
     // Outcome only: the capture token lives on a phone and must not be able
     // to read back an existing record by resubmitting its URL.
     return json(
-      {
-        duplicate: outcome === "duplicate",
-        restored: outcome === "restored",
-      },
+      { duplicate: outcome === "duplicate" },
       { status: outcome === "created" ? 201 : 200 },
     );
   } catch (caught) {

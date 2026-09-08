@@ -5,7 +5,6 @@ vi.mock("../../src/lib/bookmarks/queries", () => ({
   fillEmptyFields: vi.fn(),
   findByNormalizedUrl: vi.fn(),
   insertBookmark: vi.fn(),
-  restoreBookmark: vi.fn(),
 }));
 
 vi.mock("../../src/lib/bookmarks/metadata", () => ({
@@ -14,12 +13,11 @@ vi.mock("../../src/lib/bookmarks/metadata", () => ({
 
 const queries = await import("../../src/lib/bookmarks/queries");
 const metadata = await import("../../src/lib/bookmarks/metadata");
-const { backfillMetadata, decideSaveOutcome, saveBookmark } =
+const { backfillMetadata, saveBookmark } =
   await import("../../src/lib/bookmarks/save");
 
 const base: Bookmark = {
   createdAt: new Date("2026-01-01T00:00:00Z"),
-  deletedAt: null,
   description: null,
   domain: "example.com",
   favorite: false,
@@ -37,22 +35,6 @@ const base: Bookmark = {
 
 beforeEach(() => {
   vi.resetAllMocks();
-});
-
-describe("decideSaveOutcome", () => {
-  it("creates when nothing exists", () => {
-    expect(decideSaveOutcome(undefined)).toBe("created");
-  });
-
-  it("reports a duplicate for a live row", () => {
-    expect(decideSaveOutcome(base)).toBe("duplicate");
-  });
-
-  it("restores a soft-deleted row", () => {
-    expect(decideSaveOutcome({ ...base, deletedAt: new Date() })).toBe(
-      "restored",
-    );
-  });
 });
 
 describe("saveBookmark", () => {
@@ -84,20 +66,6 @@ describe("saveBookmark", () => {
 
     expect(result).toEqual({ bookmark: base, outcome: "duplicate" });
     expect(queries.insertBookmark).not.toHaveBeenCalled();
-    expect(queries.restoreBookmark).not.toHaveBeenCalled();
-  });
-
-  it("restores a soft-deleted row", async () => {
-    vi.mocked(queries.findByNormalizedUrl).mockResolvedValue({
-      ...base,
-      deletedAt: new Date(),
-    });
-    vi.mocked(queries.restoreBookmark).mockResolvedValue(base);
-
-    const result = await saveBookmark({ url: "https://example.com/a" });
-
-    expect(result.outcome).toBe("restored");
-    expect(queries.restoreBookmark).toHaveBeenCalledWith(base.id);
   });
 
   it("stores null when the title is blank", async () => {
@@ -143,22 +111,6 @@ describe("saveBookmark", () => {
 
     expect(result).toEqual({ bookmark: base, outcome: "duplicate" });
     expect(queries.findByNormalizedUrl).toHaveBeenCalledTimes(2);
-  });
-
-  it("restores a soft-deleted winner after a race", async () => {
-    const deleted = { ...base, deletedAt: new Date() };
-    vi.mocked(queries.findByNormalizedUrl)
-      .mockResolvedValueOnce(undefined)
-      .mockResolvedValueOnce(deleted);
-    vi.mocked(queries.insertBookmark).mockRejectedValue(
-      Object.assign(new Error("duplicate key"), { code: "23505" }),
-    );
-    vi.mocked(queries.restoreBookmark).mockResolvedValue(base);
-
-    const result = await saveBookmark({ url: "https://example.com/a" });
-
-    expect(result).toEqual({ bookmark: base, outcome: "restored" });
-    expect(queries.restoreBookmark).toHaveBeenCalledWith(base.id);
   });
 
   it("rethrows non-unique database errors", async () => {

@@ -53,13 +53,13 @@ Idempotent: re-running skips rows already present (matched on normalized URL).
 
 Bearer `BOOKMARKS_API_TOKEN` for the service endpoints below; `POST /api/bookmarks` also accepts `BOOKMARKS_CAPTURE_TOKEN`. The cron endpoint is separate and takes `CRON_SECRET` (see Broken links).
 
-| Call                                                                                   | Purpose                                                                                                                                |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `POST /api/bookmarks` `{ url, title? }`                                                | Capture. Responds with outcome only: `201 { duplicate: false, restored: false }`, `200 { duplicate: true }`, `200 { restored: true }`. |
-| `GET /api/bookmarks/untagged?limit=25`                                                 | Rows the routine hasn't tagged.                                                                                                        |
-| `GET /api/bookmarks/tags`                                                              | Tag vocabulary with counts.                                                                                                            |
-| `PATCH /api/bookmarks/:id` `{ tags?, title?, description?, image?, processed?: true }` | Routine writes.                                                                                                                        |
-| `GET /api/bookmarks/export`                                                            | Full JSON dump. The exit door.                                                                                                         |
+| Call                                                                                   | Purpose                                                                                           |
+| -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `POST /api/bookmarks` `{ url, title? }`                                                | Capture. Responds with the outcome only: `201 { duplicate: false }` or `200 { duplicate: true }`. |
+| `GET /api/bookmarks/untagged?limit=25`                                                 | Rows the routine hasn't tagged.                                                                   |
+| `GET /api/bookmarks/tags`                                                              | Tag vocabulary with counts.                                                                       |
+| `PATCH /api/bookmarks/:id` `{ tags?, title?, description?, image?, processed?: true }` | Routine writes.                                                                                   |
+| `GET /api/bookmarks/export`                                                            | Full JSON dump. The exit door.                                                                    |
 
 ## Apple Shortcut — "Save Bookmark"
 
@@ -80,10 +80,9 @@ tap **+**, name it "Save Bookmark", then add these actions in order.
    - Method: `POST`
    - Headers: `Authorization` = `Bearer <BOOKMARKS_CAPTURE_TOKEN>`
    - Request Body: JSON — `url` = `URL`, `title` = `Title`
-5. **Get Dictionary Value** `duplicate` from Contents of URL → `Duplicate`;
-   likewise `restored` → `Restored`.
+5. **Get Dictionary Value** `duplicate` from Contents of URL → `Duplicate`.
 6. **If** `Duplicate` is `true` → **Show Notification** "Already saved".
-   **Otherwise If** `Restored` is `true` → "Restored". **Otherwise** → "Saved".
+   **Otherwise** → "Saved".
 7. Open the Shortcut's settings (the ⓘ button), turn on **Show in Share Sheet**,
    and limit inputs to URLs and Safari web pages.
 
@@ -115,7 +114,7 @@ See `routine.md` for what it does; page content it reads is untrusted input.
 
 ## Broken links
 
-`/api/cron/bookmarks/check-links` runs daily (see `vercel.ts`), checks the 100
+`/api/bookmarks/cron/check-links` runs daily (see `vercel.ts`), checks the 100
 least-recently-checked rows (~9 days per full sweep of the collection), and
 records `http_status` — `0` when the host could not be reached at all. The
 **Show → Broken links** filter surfaces `0` and `>= 400` excluding bot-block

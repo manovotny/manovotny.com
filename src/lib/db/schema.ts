@@ -14,7 +14,6 @@ export const bookmarks = pgTable(
   "bookmarks",
   {
     createdAt: timestamp({ withTimezone: true }).defaultNow().notNull(),
-    deletedAt: timestamp({ withTimezone: true }),
     description: text(),
     domain: text().notNull(),
     favorite: boolean().default(false).notNull(),

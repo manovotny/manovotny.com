@@ -1,14 +1,12 @@
-import { and, asc, desc, eq, isNull, sql } from "drizzle-orm";
+import { asc, desc, eq, isNull, sql } from "drizzle-orm";
 
-import { db } from "$lib/db";
-import { bookmarks } from "$lib/db/schema";
-import type { Bookmark, NewBookmark } from "$lib/db/schema";
+import { db } from "$db";
+import { bookmarks } from "$db/schema";
+import type { Bookmark, NewBookmark } from "$db/schema";
 
 export type BookmarkPatch = Partial<
   Pick<Bookmark, "description" | "favorite" | "image" | "tags" | "title">
 > & { processed?: boolean };
-
-const notDeleted = isNull(bookmarks.deletedAt);
 
 export async function findByNormalizedUrl(
   normalizedUrl: string,
@@ -23,18 +21,14 @@ export async function findByNormalizedUrl(
 }
 
 export function listBookmarks(): Promise<Bookmark[]> {
-  return db
-    .select()
-    .from(bookmarks)
-    .where(notDeleted)
-    .orderBy(desc(bookmarks.createdAt));
+  return db.select().from(bookmarks).orderBy(desc(bookmarks.createdAt));
 }
 
 export function listUntagged(limit: number): Promise<Bookmark[]> {
   return db
     .select()
     .from(bookmarks)
-    .where(and(notDeleted, isNull(bookmarks.processedAt)))
+    .where(isNull(bookmarks.processedAt))
     .orderBy(asc(bookmarks.createdAt))
     .limit(limit);
 }
@@ -45,7 +39,6 @@ export async function listTagCounts(): Promise<
   const rows = await db.execute<{ count: string; tag: string }>(sql`
     select tag, count(*)::text as count
     from ${bookmarks}, unnest(${bookmarks.tags}) as tag
-    where ${bookmarks.deletedAt} is null
     group by tag
     order by count(*) desc, tag asc
   `);
@@ -57,18 +50,6 @@ export async function insertBookmark(values: NewBookmark): Promise<Bookmark> {
   const [row] = await db.insert(bookmarks).values(values).returning();
 
   return row!;
-}
-
-export async function restoreBookmark(
-  id: string,
-): Promise<Bookmark | undefined> {
-  const [row] = await db
-    .update(bookmarks)
-    .set({ deletedAt: null, updatedAt: sql`now()` })
-    .where(eq(bookmarks.id, id))
-    .returning();
-
-  return row;
 }
 
 export async function updateBookmark(
@@ -83,17 +64,18 @@ export async function updateBookmark(
       ...(processed && { processedAt: sql`now()` }),
       updatedAt: sql`now()`,
     })
-    .where(and(eq(bookmarks.id, id), notDeleted))
+    .where(eq(bookmarks.id, id))
     .returning();
 
   return row;
 }
 
-export async function softDeleteBookmark(id: string): Promise<boolean> {
+// Hard delete. Re-saving the same URL later creates a fresh row and the
+// routine tags it again.
+export async function deleteBookmark(id: string): Promise<boolean> {
   const rows = await db
-    .update(bookmarks)
-    .set({ deletedAt: sql`now()`, updatedAt: sql`now()` })
-    .where(and(eq(bookmarks.id, id), notDeleted))
+    .delete(bookmarks)
+    .where(eq(bookmarks.id, id))
     .returning({ id: bookmarks.id });
 
   return rows.length > 0;
@@ -119,14 +101,13 @@ export async function fillEmptyFields(
       }),
       updatedAt: sql`now()`,
     })
-    .where(and(eq(bookmarks.id, id), notDeleted));
+    .where(eq(bookmarks.id, id));
 }
 
 export function listStaleLinks(limit: number): Promise<Bookmark[]> {
   return db
     .select()
     .from(bookmarks)
-    .where(notDeleted)
     .orderBy(sql`${bookmarks.lastCheckedAt} asc nulls first`)
     .limit(limit);
 }
@@ -138,5 +119,5 @@ export async function recordLinkCheck(
   await db
     .update(bookmarks)
     .set({ httpStatus, lastCheckedAt: sql`now()` })
-    .where(and(eq(bookmarks.id, id), notDeleted));
+    .where(eq(bookmarks.id, id));
 }

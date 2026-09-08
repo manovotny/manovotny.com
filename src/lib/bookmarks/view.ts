@@ -1,4 +1,4 @@
-import type { Bookmark } from "../db/schema";
+import type { Bookmark } from "$db/schema";
 
 // The user's zone. Captures are timestamps, not dates, so the site's UTC
 // date-only formatter would show the wrong day late in the evening.

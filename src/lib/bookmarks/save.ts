@@ -3,12 +3,12 @@ import {
   fillEmptyFields,
   findByNormalizedUrl,
   insertBookmark,
-  restoreBookmark,
 } from "./queries";
 import { isPublicHttpUrl, normalizeUrl } from "./url";
-import type { Bookmark } from "../db/schema";
 
-export type SaveOutcome = "created" | "duplicate" | "restored";
+import type { Bookmark } from "$db/schema";
+
+export type SaveOutcome = "created" | "duplicate";
 
 export type SaveInput = {
   title?: string;
@@ -20,27 +20,12 @@ export type SaveResult = {
   outcome: SaveOutcome;
 };
 
-export function decideSaveOutcome(existing: Bookmark | undefined): SaveOutcome {
-  if (!existing) {
-    return "created";
-  }
-
-  return existing.deletedAt ? "restored" : "duplicate";
-}
-
 export async function saveBookmark(input: SaveInput): Promise<SaveResult> {
   const { domain, normalizedUrl, url } = normalizeUrl(input.url);
   const existing = await findByNormalizedUrl(normalizedUrl);
-  const outcome = decideSaveOutcome(existing);
 
-  if (outcome === "duplicate") {
-    return { bookmark: existing!, outcome };
-  }
-
-  if (outcome === "restored") {
-    const restored = await restoreBookmark(existing!.id);
-
-    return { bookmark: restored ?? existing!, outcome };
+  if (existing) {
+    return { bookmark: existing, outcome: "duplicate" };
   }
 
   const title = input.title?.trim() || null;
@@ -53,18 +38,12 @@ export async function saveBookmark(input: SaveInput): Promise<SaveResult> {
       url,
     });
 
-    return { bookmark, outcome };
+    return { bookmark, outcome: "created" };
   } catch (caught) {
     // Two saves of the same URL raced past the lookup; the unique index
     // caught it. Re-read and report what the other request created.
     if (isUniqueViolation(caught)) {
       const winner = await findByNormalizedUrl(normalizedUrl);
-
-      if (winner?.deletedAt) {
-        const restored = await restoreBookmark(winner.id);
-
-        return { bookmark: restored ?? winner, outcome: "restored" };
-      }
 
       if (winner) {
         return { bookmark: winner, outcome: "duplicate" };

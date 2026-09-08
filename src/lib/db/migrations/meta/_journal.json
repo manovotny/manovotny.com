@@ -8,6 +8,13 @@
       "when": 1788655529452,
       "tag": "0000_giant_retro_girl",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1788834206210,
+      "tag": "0001_powerful_rumiko_fujikawa",
+      "breakpoints": true
     }
   ]
 }

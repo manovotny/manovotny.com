@@ -9,7 +9,7 @@ vi.mock("../../src/lib/bookmarks/queries", () => ({
 }));
 
 const { GET } =
-  await import("../../src/routes/(bookmarks)/api/cron/bookmarks/check-links/+server");
+  await import("../../src/routes/(bookmarks)/api/bookmarks/cron/check-links/+server");
 
 describe("check-links cron without a configured secret", () => {
   it("fails closed even for 'Bearer undefined'", async () => {

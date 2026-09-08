@@ -42,6 +42,9 @@ const config = {
         sizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
       },
     }),
+    alias: {
+      $db: "src/lib/db",
+    },
     prerender: {
       handleHttpError: ({ message, path }) => {
         // Vercel's image optimization endpoint is served at runtime by the

@@ -6,7 +6,7 @@ import { env } from "$env/dynamic/private";
 import { viewerRole } from "$lib/bookmarks/auth";
 import {
   listBookmarks,
-  softDeleteBookmark,
+  deleteBookmark,
   updateBookmark,
 } from "$lib/bookmarks/queries";
 import { backfillMetadata, saveBookmark } from "$lib/bookmarks/save";
@@ -76,7 +76,7 @@ export const actions: Actions = {
       return invalidId();
     }
 
-    if (!(await softDeleteBookmark(id))) {
+    if (!(await deleteBookmark(id))) {
       return fail(404, { message: "Bookmark not found." });
     }
 

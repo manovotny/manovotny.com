@@ -23,7 +23,6 @@ describe("bookmarks schema", () => {
   it("has exactly the spec's columns", () => {
     expect(Object.keys(getTableColumns(bookmarks)).sort()).toEqual([
       "createdAt",
-      "deletedAt",
       "description",
       "domain",
       "favorite",
@@ -43,7 +42,6 @@ describe("bookmarks schema", () => {
   it("migrates multi-word columns as snake_case", () => {
     for (const column of [
       "created_at",
-      "deleted_at",
       "http_status",
       "last_checked_at",
       "normalized_url",

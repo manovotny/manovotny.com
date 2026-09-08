@@ -16,14 +16,13 @@ vi.mock("@vercel/functions", () => ({ waitUntil: vi.fn() }));
 vi.mock("../../src/lib/bookmarks/metadata", () => ({ fetchMetadata: vi.fn() }));
 
 vi.mock("../../src/lib/bookmarks/queries", () => ({
+  deleteBookmark: vi.fn(),
   fillEmptyFields: vi.fn(),
   findByNormalizedUrl: vi.fn(),
   insertBookmark: vi.fn(),
   listBookmarks: vi.fn(),
   listTagCounts: vi.fn(),
   listUntagged: vi.fn(),
-  restoreBookmark: vi.fn(),
-  softDeleteBookmark: vi.fn(),
   updateBookmark: vi.fn(),
 }));
 
@@ -44,7 +43,6 @@ const exportRoute =
 
 const row: Bookmark = {
   createdAt: new Date("2026-01-01T00:00:00Z"),
-  deletedAt: null,
   description: null,
   domain: "example.com",
   favorite: false,
@@ -146,12 +144,11 @@ describe("POST /api/bookmarks", () => {
     // Exact: the capture token must never get the record back.
     expect(await response.json()).toEqual({
       duplicate: false,
-      restored: false,
     });
     expect(waitUntil).toHaveBeenCalledTimes(1);
   });
 
-  it("reports duplicates and restores with 200 and no record", async () => {
+  it("reports a duplicate with 200 and no record", async () => {
     vi.mocked(queries.findByNormalizedUrl).mockResolvedValue(row);
 
     const duplicate = await capture.POST(
@@ -159,27 +156,8 @@ describe("POST /api/bookmarks", () => {
     );
 
     expect(duplicate.status).toBe(200);
-    expect(await duplicate.json()).toEqual({
-      duplicate: true,
-      restored: false,
-    });
+    expect(await duplicate.json()).toEqual({ duplicate: true });
     expect(waitUntil).not.toHaveBeenCalled();
-
-    vi.mocked(queries.findByNormalizedUrl).mockResolvedValue({
-      ...row,
-      deletedAt: new Date(),
-    });
-    vi.mocked(queries.restoreBookmark).mockResolvedValue(row);
-
-    const restored = await capture.POST(
-      event({ body: { url: "https://example.com/a" }, token: "capture-token" }),
-    );
-
-    expect(restored.status).toBe(200);
-    expect(await restored.json()).toEqual({
-      duplicate: false,
-      restored: true,
-    });
   });
 
   it("returns 400 for malformed JSON, missing url, and invalid url", async () => {
@@ -400,7 +378,7 @@ describe("/bookmarks actions", () => {
     }
 
     expect(queries.insertBookmark).not.toHaveBeenCalled();
-    expect(queries.softDeleteBookmark).not.toHaveBeenCalled();
+    expect(queries.deleteBookmark).not.toHaveBeenCalled();
     expect(queries.updateBookmark).not.toHaveBeenCalled();
   });
 

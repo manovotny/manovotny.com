@@ -86,8 +86,6 @@
   <p class="text-secondary mb-4 text-sm" role="alert">{form.message}</p>
 {:else if form?.added === "duplicate"}
   <p class="text-secondary mb-4 text-sm" role="status">Already saved.</p>
-{:else if form?.added === "restored"}
-  <p class="text-secondary mb-4 text-sm" role="status">Restored.</p>
 {/if}
 
 <Filters {filters} onchange={setFilters} tags={data.tags} />

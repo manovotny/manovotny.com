@@ -175,7 +175,6 @@ describe("toBookmarkView", () => {
     const { toBookmarkView } = await import("../../src/lib/bookmarks/view");
     const view = toBookmarkView({
       createdAt: new Date("2026-03-02T04:30:00Z"), // 10:30 PM Mar 1 in Chicago
-      deletedAt: null,
       description: null,
       domain: "example.com",
       favorite: false,

@@ -13,11 +13,11 @@ vi.mock("../../src/lib/bookmarks/queries", () => ({
 const queries = await import("../../src/lib/bookmarks/queries");
 const { checkLink } = await import("../../src/lib/bookmarks/link-check");
 const { GET } =
-  await import("../../src/routes/(bookmarks)/api/cron/bookmarks/check-links/+server");
+  await import("../../src/routes/(bookmarks)/api/bookmarks/cron/check-links/+server");
 
 const call = (authorization?: string) =>
   GET({
-    request: new Request("http://localhost/api/cron/bookmarks/check-links", {
+    request: new Request("http://localhost/api/bookmarks/cron/check-links", {
       headers: authorization ? { authorization } : {},
     }),
   } as never);

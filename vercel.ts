@@ -9,7 +9,7 @@ export const config: VercelConfig = {
     {
       // Daily at 6 AM UTC; 100 least-recently-checked bookmarks per run, so
       // the whole collection is re-checked roughly every nine days.
-      path: "/api/cron/bookmarks/check-links",
+      path: "/api/bookmarks/cron/check-links",
       schedule: "0 6 * * *",
     },
   ],
