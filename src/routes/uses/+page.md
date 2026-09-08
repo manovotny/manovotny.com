@@ -85,8 +85,7 @@ actually use and recommend.
 - [Apple Photos](https://apps.apple.com/us/app/photos/id1584215428)
 - [Apple Reminders](https://apps.apple.com/us/app/reminders/id1108187841)
 - [Boop](https://boop.okat.best) — local code formatting and utility tool, not using sketchy websites
-- [Claude](https://claude.ai)
-- [CleanMyMac](https://cleanmymac.com)
+- [Capsomnia](https://capsomnia.com) — prevent computer from going to sleep using the caps lock key
 - [Cleanshot X](https://cleanshot.com) — screenshot and screen recorder
 - [ClipBook](https://clipbook.app) — clipboard histrory
 - [Command X](https://sindresorhus.com/command-x) — cut and paste files in Finder
@@ -95,15 +94,14 @@ actually use and recommend.
 - [ExcalidrawZ](https://excalidrawz.chocoford.com) — diagrams
 - [HandBrake](https://handbrake.fr) — video converter and compressor
 - [Hyper](https://hyper.is) — terminal
-- [Lungo](https://sindresorhus.com/lungo) — prevent computer from going to sleep
 - [Magnet](https://magnet.crowdcafe.com) — window resizer/manager
+- [Mole](https://mole.fit) — clear junk, uninstall and update apps, maintain macOS, analyze disk space, and monitor your Mac
 - [Notion](https://www.notion.so) — migrating from Apple Notes
 - [OpenUsage](https://www.openusage.ai) — AI usage tracker
 - [Parcel](https://parcel.app) — delivery/packages tracking
 - [Pixelmator Pro](https://www.pixelmator.com/pro/)
 - [PixelSnap 2](https://getpixelsnap.com) — screen measurement tool
 - [ProtonVPN](https://protonvpn.com)
-- [Raindrop.io](https://raindrop.io) — bookmark manager
 - [Reflex](https://stuntsoftware.com/reflex/) — maps media keys to the music player of your choice
 - [RunJS](https://runjs.app) — local JavaScript playground
 - [Safari](https://www.apple.com/safari/) — primary browser
