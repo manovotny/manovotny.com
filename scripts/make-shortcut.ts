@@ -21,7 +21,9 @@ if (!token) {
   process.exit(1);
 }
 
-const ENDPOINT = "https://manovotny.com/api/bookmarks";
+// Override to point a test build somewhere else, e.g. a local echo server.
+const ENDPOINT =
+  process.env.SHORTCUT_ENDPOINT ?? "https://manovotny.com/api/bookmarks";
 const NAME = "Save Bookmark";
 
 type Plist = string | number | boolean | Plist[] | { [key: string]: Plist };
@@ -136,7 +138,8 @@ const workflow: Plist = {
         Advanced: true,
         ShowHeaders: true,
         UUID: request,
-        WFHTTPBodyType: "JSON",
+        // Shortcuts spells this "Json"; any other casing drops the body.
+        WFHTTPBodyType: "Json",
         WFHTTPHeaders: dictionary([["Authorization", text(`Bearer ${token}`)]]),
         WFHTTPMethod: "POST",
         WFJSONValues: dictionary([
