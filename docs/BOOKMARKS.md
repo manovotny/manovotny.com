@@ -91,7 +91,14 @@ tap **+**, name it "Save Bookmark", then add these actions in order.
 
 To use it: in Safari, tap **Share**, then **Save Bookmark**. On the Mac it is in
 the same share menu (the box-with-arrow button in the toolbar). If it is not
-listed, scroll the share sheet to **Edit Actions** and add it.
+listed on iPhone, scroll the share sheet to **Edit Actions** and add it. If it
+is not listed on the Mac, macOS has the Shortcuts sharing extension turned off:
+choose **Edit Extensions…** at the bottom of the menu and turn on **Shortcuts**,
+or run
+
+```bash
+pluginkit -e use -i com.apple.shortcuts.Run-Workflow
+```
 
 If the request fails (no network, site down), Shortcuts surfaces the error; the
 save is not lost silently — retry from the same tab.
