@@ -1,6 +1,7 @@
 import {
   InvalidUrlError,
   isPublicHttpUrl,
+  isSameUrl,
   normalizeUrl,
 } from "../../src/lib/bookmarks/url";
 import { describe, expect, it } from "vitest";
@@ -108,5 +109,41 @@ describe("isPublicHttpUrl", () => {
     ]) {
       expect(isPublicHttpUrl(url), url).toBe(false);
     }
+  });
+});
+
+describe("isSameUrl", () => {
+  it("matches the same address, including www/scheme/trailing-slash variants", () => {
+    expect(
+      isSameUrl(
+        "https://vercel.com/customers/x",
+        "https://vercel.com/customers/x",
+      ),
+    ).toBe(true);
+    expect(
+      isSameUrl(
+        "http://www.vercel.com/customers/x/",
+        "https://vercel.com/customers/x",
+      ),
+    ).toBe(true);
+  });
+
+  it("does not match a different page on the same site", () => {
+    expect(
+      isSameUrl(
+        "https://vercel.com/customers",
+        "https://vercel.com/customers/x",
+      ),
+    ).toBe(false);
+  });
+
+  it("does not match text that is not a URL", () => {
+    expect(
+      isSameUrl(
+        "How Tailscale built a model router",
+        "https://vercel.com/customers/x",
+      ),
+    ).toBe(false);
+    expect(isSameUrl("", "https://vercel.com/customers/x")).toBe(false);
   });
 });

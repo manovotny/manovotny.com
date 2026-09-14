@@ -91,6 +91,17 @@ export function normalizeUrl(input: string): NormalizedUrl {
   return { domain, normalizedUrl: normalized.href, url: cleaned.href };
 }
 
+// True when both inputs are the same page once normalized. Used to drop a
+// captured "title" that is really the page's own address: a URL item's Name
+// in Shortcuts is the URL itself.
+export function isSameUrl(a: string, b: string): boolean {
+  try {
+    return normalizeUrl(a).normalizedUrl === normalizeUrl(b).normalizedUrl;
+  } catch {
+    return false;
+  }
+}
+
 const PRIVATE_IPV4 = [
   /^0\./,
   /^10\./,

@@ -90,16 +90,6 @@ function tokenText(uuid: string, name: string): Plist {
   };
 }
 
-// Text consisting solely of the Shortcut Input token. A shared Safari page or
-// link coerces to its URL, which is all the endpoint needs.
-const inputText: Plist = {
-  Value: {
-    attachmentsByRange: { "{0, 1}": { Type: "ExtensionInput" } },
-    string: "￼",
-  },
-  WFSerializationType: "WFTextTokenString",
-};
-
 function text(value: string): Plist {
   return {
     Value: { attachmentsByRange: {}, string: value },
@@ -122,19 +112,31 @@ function dictionary(entries: [string, Plist][]): Plist {
 
 // --- the workflow ----------------------------------------------------------
 
+const page = randomUUID().toUpperCase();
 const title = randomUUID().toUpperCase();
 const request = randomUUID().toUpperCase();
 const message = randomUUID().toUpperCase();
 
 const workflow: Plist = {
   WFWorkflowActions: [
+    // Safari's share sheet on the Mac hands over two items (a URL and a web
+    // page). Coerced to text they run together, so take one item first. A
+    // shared page or link coerces to its URL, which is all the endpoint needs.
+    {
+      WFWorkflowActionIdentifier: "is.workflow.actions.getitemfromlist",
+      WFWorkflowActionParameters: {
+        UUID: page,
+        WFInput: shortcutInput,
+        WFItemSpecifier: "First Item",
+      },
+    },
     {
       WFWorkflowActionIdentifier:
         "is.workflow.actions.properties.safariwebpage",
       WFWorkflowActionParameters: {
         UUID: title,
         WFContentItemPropertyName: "Name",
-        WFInput: shortcutInput,
+        WFInput: output(page, "Item from List"),
       },
     },
     {
@@ -148,7 +150,7 @@ const workflow: Plist = {
         WFHTTPHeaders: dictionary([["Authorization", text(`Bearer ${token}`)]]),
         WFHTTPMethod: "POST",
         WFJSONValues: dictionary([
-          ["url", inputText],
+          ["url", tokenText(page, "Item from List")],
           ["title", tokenText(title, "Name")],
         ]),
         WFURL: text(ENDPOINT),
@@ -188,7 +190,9 @@ const workflow: Plist = {
   WFWorkflowMinimumClientVersionString: "900",
   WFWorkflowName: NAME,
   WFWorkflowOutputContentItemClasses: [],
-  WFWorkflowTypes: ["ActionExtension"],
+  // ActionExtension: show in the share sheet. ReceivesOnScreenContent: a
+  // keyboard shortcut or menu bar run takes the front Safari tab as input.
+  WFWorkflowTypes: ["ActionExtension", "ReceivesOnScreenContent"],
 };
 
 const plist = [

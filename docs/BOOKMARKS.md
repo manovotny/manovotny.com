@@ -53,8 +53,9 @@ Bearer `BOOKMARKS_API_TOKEN` for the service endpoints below; `POST /api/bookmar
 ## Apple Shortcut — "Save Bookmark"
 
 This is the capture button. There is no browser extension; Apple's Shortcuts
-app does the job on iPhone and Mac, and a Shortcut set to show in the share
-sheet appears in Safari's share menu on both.
+app does the job on iPhone and Mac. The Shortcut takes the page from the share
+sheet, or from the front Safari tab when run by keyboard shortcut or from the
+menu bar.
 
 The easy way: with `BOOKMARKS_CAPTURE_TOKEN` in `.env.local` (the same value as
 Vercel's), run
@@ -65,40 +66,53 @@ npm run shortcut
 
 It writes a signed `Save Bookmark.shortcut` next to the repo and opens it. In
 the import window choose **Add Shortcut**, then **Replace** if one already
-exists (Keep Both leaves a numbered copy behind). It syncs to your iPhone.
-Re-run it whenever the token changes. The file embeds the token, so it's
-gitignored.
+exists. Replace still leaves the old copy behind under a numbered name ("Save
+Bookmark 1"); delete it by hand. It syncs to your iPhone. Re-run it whenever
+the token changes. The file embeds the token, so it's gitignored.
 
 The manual way, in the **Shortcuts** app on your iPhone (it syncs to the Mac):
 tap **+**, name it "Save Bookmark", then add these actions in order.
 
 1. **Receive** `URLs` and `Safari web pages` from **Share Sheet**.
-2. **Get Details of Safari Web Page** → `Name` of Shortcut Input (empty when
-   the input isn't a page; that's fine).
-3. **Get Contents of URL**
+2. **Get Item from List** → `First Item` of Shortcut Input. Safari's share
+   sheet on the Mac hands over two items (the URL and the page); without this
+   step they run together into one string.
+3. **Get Details of Safari Web Page** → `Name` of the Item from List. For a
+   plain URL this is the URL itself; the server drops that and fills the real
+   title from the page's metadata.
+4. **Get Contents of URL**
    - URL: `https://manovotny.com/api/bookmarks`
    - Method: `POST`
    - Headers: `Authorization` = `Bearer <BOOKMARKS_CAPTURE_TOKEN>`
-   - Request Body: JSON — `url` = `Shortcut Input`, `title` = the `Name`
-     from step 2. Shortcut Input coerces to the page's URL; a "Get URLs from
-     Input" step is not needed and, in generated shortcuts, came through
-     empty.
-4. **Get Dictionary Value** `message` from Contents of URL.
-5. **Show Notification** with that Dictionary Value ("Saved" or "Already
+   - Request Body: JSON — `url` = the Item from List, `title` = the `Name`
+     from step 3. A page or link coerces to its URL; a "Get URLs from Input"
+     step is not needed and, in generated shortcuts, came through empty.
+5. **Get Dictionary Value** `message` from Contents of URL.
+6. **Show Notification** with that Dictionary Value ("Saved" or "Already
    saved").
-6. Open the Shortcut's settings (the ⓘ button), turn on **Show in Share Sheet**,
-   and limit inputs to URLs and Safari web pages.
+7. Open the Shortcut's settings (the ⓘ button), turn on **Show in Share Sheet**,
+   limit inputs to URLs and Safari web pages, and on the Mac turn on
+   **Receive What's On Screen**.
 
-To use it: in Safari, tap **Share**, then **Save Bookmark**. On the Mac it is in
-the same share menu (the box-with-arrow button in the toolbar). If it is not
-listed on iPhone, scroll the share sheet to **Edit Actions** and add it. If it
-is not listed on the Mac, macOS has the Shortcuts sharing extension turned off:
-choose **Edit Extensions…** at the bottom of the menu and turn on **Shortcuts**,
-or run
+### Using it
+
+**Share sheet, iPhone and Mac.** In Safari, tap **Share**, then **Save
+Bookmark**. On the Mac it is in the same share menu (the box-with-arrow button
+in the toolbar). If it is not listed on iPhone, scroll the share sheet to
+**Edit Actions** and add it. If it is not listed on the Mac, macOS has the
+Shortcuts sharing extension turned off: choose **Edit Extensions…** at the
+bottom of the menu and turn on **Shortcuts**, or run
 
 ```bash
 pluginkit -e use -i com.apple.shortcuts.Run-Workflow
 ```
+
+**Keyboard shortcut, Mac.** Faster than the menu. In Shortcuts, open Save
+Bookmark, select the ⓘ button, then **Add Keyboard Shortcut** and press a
+combo. The generated file already accepts on-screen content, so the combo
+saves the front Safari tab from anywhere. The key combo is stored per device,
+so set it again after a rebuild. **Pin in Menu Bar** in the same pane gives a
+one-click version.
 
 If the request fails (no network, site down), Shortcuts surfaces the error; the
 save is not lost silently — retry from the same tab.

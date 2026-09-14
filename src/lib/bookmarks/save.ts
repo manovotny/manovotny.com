@@ -4,7 +4,7 @@ import {
   findByNormalizedUrl,
   insertBookmark,
 } from "./queries";
-import { isPublicHttpUrl, normalizeUrl } from "./url";
+import { isPublicHttpUrl, isSameUrl, normalizeUrl } from "./url";
 
 import type { Bookmark } from "$db/schema";
 
@@ -28,7 +28,10 @@ export async function saveBookmark(input: SaveInput): Promise<SaveResult> {
     return { bookmark: existing, outcome: "duplicate" };
   }
 
-  const title = input.title?.trim() || null;
+  const trimmed = input.title?.trim();
+  // A title that is the page's own address is no title; leave it null so the
+  // metadata backfill can fill in the real one.
+  const title = trimmed && !isSameUrl(trimmed, url) ? trimmed : null;
 
   try {
     const bookmark = await insertBookmark({
