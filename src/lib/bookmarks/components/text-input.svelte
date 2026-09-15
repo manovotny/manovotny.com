@@ -6,9 +6,8 @@
   https://thingsthemselves.com/no-input-zoom-in-safari-on-iphone-the-pixel-perfect-way/
 -->
 <script lang="ts">
+  import { cn } from "cn";
   import type { HTMLInputAttributes } from "svelte/elements";
-
-  import { cn } from "$lib/classname";
 
   let {
     class: className,

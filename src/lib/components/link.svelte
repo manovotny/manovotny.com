@@ -1,8 +1,7 @@
 <script lang="ts">
+  import { cn } from "cn";
   import type { Snippet } from "svelte";
   import type { HTMLAnchorAttributes } from "svelte/elements";
-
-  import { cn } from "$lib/classname";
 
   let {
     children,

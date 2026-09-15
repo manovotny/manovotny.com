@@ -41,13 +41,12 @@
     "@neondatabase/serverless": "1.1.0",
     "@vercel/functions": "3.9.5",
     "@vercel/og": "0.11.1",
-    "clsx": "2.1.1",
+    "cn": "0.3.0",
     "drizzle-orm": "0.45.2",
     "git-jiggy": "2.1.2",
     "minisearch": "7.2.0",
     "rehype-unwrap-images": "1.0.0",
-    "svelte-clerk": "1.1.15",
-    "tailwind-merge": "3.6.0"
+    "svelte-clerk": "1.1.15"
   },
   "devDependencies": {
     "@sveltejs/adapter-vercel": "6.3.3",
