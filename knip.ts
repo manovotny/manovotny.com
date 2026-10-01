@@ -4,6 +4,10 @@ import type { KnipConfig } from "knip";
 // the `export { default as a } from "./a.svelte"` re-exports that mdsvex's
 // layout relies on, and it doesn't read mdsvex `.md` pages at all. Handing knip
 // every <script> body covers both.
+//
+// The tradeoff: this replaces the built-in compiler, so dynamic imports in
+// template expressions and style preprocessor imports go undetected. Nothing
+// here uses either. Knip doesn't export its helpers to compose with.
 const scripts = (text: string) =>
   [...text.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)]
     .map(([, body]) => body)
