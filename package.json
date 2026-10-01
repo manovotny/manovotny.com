@@ -19,7 +19,8 @@
   "type": "module",
   "scripts": {
     "build": "svelte-kit sync && vite build",
-    "check": "ncu --interactive --format group",
+    "check": "ncu --format group -u",
+    "check:i": "ncu --interactive --format group",
     "check:pre": "npm run check -- --target greatest",
     "db:generate": "drizzle-kit generate --config=./src/db/config.ts",
     "db:migrate": "drizzle-kit migrate --config=./src/db/config.ts",
