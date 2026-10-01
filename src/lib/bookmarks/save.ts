@@ -8,7 +8,7 @@ import { isPublicHttpUrl, isSameUrl, normalizeUrl } from "./url";
 
 import type { Bookmark } from "$db/schema";
 
-export type SaveOutcome = "created" | "duplicate";
+type SaveOutcome = "created" | "duplicate";
 
 export type SaveInput = {
   title?: string;
