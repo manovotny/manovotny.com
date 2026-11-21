@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
 
-  import { menuState } from "$lib/bookmarks/components/menu-state.svelte";
+  import { menuState } from "#lib/bookmarks/components/menu-state.svelte.ts";
 
   let {
     align = "left",

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { formatDate } from "$lib/dates";
+  import { formatDate } from "#lib/dates.ts";
 
   let {
     class: className = "mt-[-16px] mb-8 block",

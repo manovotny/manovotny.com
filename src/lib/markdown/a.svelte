@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Link from "$lib/components/link.svelte";
+  import Link from "#lib/components/link.svelte";
 
   let { children, ...rest } = $props();
 </script>

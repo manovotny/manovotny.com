@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { isValidTag, normalizeTags } from "$lib/bookmarks/tags";
+  import { isValidTag, normalizeTags } from "#lib/bookmarks/tags.ts";
 
   let {
     name,

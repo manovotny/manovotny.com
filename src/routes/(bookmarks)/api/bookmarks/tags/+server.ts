@@ -1,13 +1,12 @@
-import { json } from "@sveltejs/kit";
 import type { RequestHandler } from "./$types";
 
-import { listTagCounts } from "$lib/bookmarks/queries";
-import { requireServiceToken } from "$lib/bookmarks/service";
+import { listTagCounts } from "#lib/bookmarks/queries.ts";
+import { requireServiceToken } from "#lib/bookmarks/service.ts";
 
 export const prerender = false;
 
 export const GET: RequestHandler = async ({ request }) => {
   requireServiceToken(request, "service");
 
-  return json(await listTagCounts());
+  return Response.json(await listTagCounts());
 };

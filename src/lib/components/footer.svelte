@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Link from "$lib/components/link.svelte";
-  import { siteDomain, username } from "$lib/constants";
+  import Link from "#lib/components/link.svelte";
+  import { siteDomain, username } from "#lib/constants.ts";
 
   const links = [
     { name: "X", url: `https://x.com/${username}` },

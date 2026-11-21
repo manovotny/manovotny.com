@@ -32,7 +32,9 @@
       ["type-external", "type-parent", "type-sibling", "type-index"],
       { "newlinesBetween": true },
       "alias-value",
+      "value-subpath",
       "alias-type",
+      "type-subpath",
       { "newlinesBetween": true },
       "css"
     ],

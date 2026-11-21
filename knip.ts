@@ -23,10 +23,18 @@ const config: KnipConfig = {
     // DATABASE_URL (which CI doesn't have).
     entry: ["src/db/config.ts"],
   },
+  // SvelteKit loads this by convention.
+  entry: ["src/env.ts"],
   // macOS's built-in Shortcuts CLI, used to sign the generated shortcut.
   ignoreBinaries: ["shortcuts"],
   // Runs the pre-commit hook via package.json's "git" field.
   ignoreDependencies: ["@vercel/git-hooks"],
+  ignoreIssues: {
+    // knip reports the `$app/tsconfig` extends as an unlisted `$app` package,
+    // but `svelte-kit sync` generates it. `ignoreDependencies` can't match
+    // `$app` because knip doesn't parse it as a package name.
+    "tsconfig.json": ["unlisted"],
+  },
   // Only mdsvex pages are code; the rest of the markdown is docs.
   project: ["**/*.{css,js,ts,svelte}", "src/**/*.md"],
 };

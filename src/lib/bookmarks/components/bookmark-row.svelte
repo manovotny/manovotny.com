@@ -1,8 +1,8 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
-  import BookmarkEditor from "$lib/bookmarks/components/bookmark-editor.svelte";
-  import { isBrokenStatus } from "$lib/bookmarks/search";
-  import type { BookmarkView } from "$lib/bookmarks/view";
+  import BookmarkEditor from "#lib/bookmarks/components/bookmark-editor.svelte";
+  import { isBrokenStatus } from "#lib/bookmarks/search.ts";
+  import type { BookmarkView } from "#lib/bookmarks/view.ts";
 
   let {
     bookmark,

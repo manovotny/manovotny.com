@@ -1,8 +1,8 @@
 <script lang="ts">
   import { page } from "$app/state";
-  import Link from "$lib/components/link.svelte";
-  import Logo from "$lib/components/logo.svelte";
-  import { siteName } from "$lib/constants";
+  import Link from "#lib/components/link.svelte";
+  import Logo from "#lib/components/logo.svelte";
+  import { siteName } from "#lib/constants.ts";
 
   const linkClassNames =
     "block p-2 text-secondary no-underline transition-colors duration-150 hover:text-ink";

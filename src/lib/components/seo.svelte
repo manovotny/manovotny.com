@@ -1,5 +1,10 @@
 <script lang="ts">
-  import { baseUrl, siteDescription, siteName, username } from "$lib/constants";
+  import {
+    baseUrl,
+    siteDescription,
+    siteName,
+    username,
+  } from "#lib/constants.ts";
 
   let {
     date,

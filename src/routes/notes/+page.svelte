@@ -1,9 +1,9 @@
 <script lang="ts">
-  import FormattedDate from "$lib/components/formatted-date.svelte";
-  import Link from "$lib/components/link.svelte";
-  import PageTitle from "$lib/components/page-title.svelte";
-  import Seo from "$lib/components/seo.svelte";
-  import { getNotes } from "$lib/notes";
+  import FormattedDate from "#lib/components/formatted-date.svelte";
+  import Link from "#lib/components/link.svelte";
+  import PageTitle from "#lib/components/page-title.svelte";
+  import Seo from "#lib/components/seo.svelte";
+  import { getNotes } from "#lib/notes.ts";
 
   const notes = getNotes();
 

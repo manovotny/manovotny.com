@@ -2,22 +2,22 @@ import { error, fail } from "@sveltejs/kit";
 import { waitUntil } from "@vercel/functions";
 import type { Actions, PageServerLoad } from "./$types";
 
-import { env } from "$env/dynamic/private";
-import { viewerRole } from "$lib/bookmarks/auth";
+import { BOOKMARKS_OWNER_USER_ID } from "$app/env/private";
+import { viewerRole } from "#lib/bookmarks/auth.ts";
 import {
   listBookmarks,
   deleteBookmark,
   updateBookmark,
-} from "$lib/bookmarks/queries";
-import { backfillMetadata, saveBookmark } from "$lib/bookmarks/save";
-import { countTags } from "$lib/bookmarks/search";
-import { isUuid, requireOwner } from "$lib/bookmarks/service";
-import { invalidTags, normalizeTags } from "$lib/bookmarks/tags";
-import { InvalidUrlError } from "$lib/bookmarks/url";
-import { toBookmarkView } from "$lib/bookmarks/view";
+} from "#lib/bookmarks/queries.ts";
+import { backfillMetadata, saveBookmark } from "#lib/bookmarks/save.ts";
+import { countTags } from "#lib/bookmarks/search.ts";
+import { isUuid, requireOwner } from "#lib/bookmarks/service.ts";
+import { invalidTags, normalizeTags } from "#lib/bookmarks/tags.ts";
+import { InvalidUrlError } from "#lib/bookmarks/url.ts";
+import { toBookmarkView } from "#lib/bookmarks/view.ts";
 
 export const load: PageServerLoad = async ({ locals }) => {
-  const role = viewerRole(locals.auth().userId, env.BOOKMARKS_OWNER_USER_ID);
+  const role = viewerRole(locals.auth().userId, BOOKMARKS_OWNER_USER_ID);
 
   // Anonymous: the layout renders <SignIn />; ship no data, touch no DB.
   if (role === "anonymous") {

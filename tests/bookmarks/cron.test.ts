@@ -1,9 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-vi.mock("$app/environment", () => ({ dev: false }));
-vi.mock("$env/dynamic/private", () => ({
-  env: { CRON_SECRET: "cron-secret" },
-}));
+vi.mock("$app/env", () => ({ dev: false }));
+vi.mock("$app/env/private", () => ({ CRON_SECRET: "cron-secret" }));
 vi.mock("../../src/lib/bookmarks/link-check", () => ({ checkLink: vi.fn() }));
 vi.mock("../../src/lib/bookmarks/queries", () => ({
   listStaleLinks: vi.fn(),

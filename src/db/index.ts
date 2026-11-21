@@ -1,5 +1,5 @@
 import { createDb } from "./client";
 
-import { env } from "$env/dynamic/private";
+import { DATABASE_URL } from "$app/env/private";
 
-export const db = createDb(env.DATABASE_URL!);
+export const db = createDb(DATABASE_URL!);

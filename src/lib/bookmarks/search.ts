@@ -134,7 +134,9 @@ export function countTags(
     .sort((a, b) => a.tag.localeCompare(b.tag));
 }
 
-export function filtersFromParams(params: URLSearchParams): Filters {
+export function filtersFromParams(
+  params: Pick<URLSearchParams, "get">,
+): Filters {
   const sort = params.get("sort");
 
   return {

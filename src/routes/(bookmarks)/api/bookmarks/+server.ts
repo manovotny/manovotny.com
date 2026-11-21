@@ -1,10 +1,10 @@
-import { error, json } from "@sveltejs/kit";
+import { error } from "@sveltejs/kit";
 import { waitUntil } from "@vercel/functions";
 import type { RequestHandler } from "./$types";
 
-import { backfillMetadata, saveBookmark } from "$lib/bookmarks/save";
-import { requireServiceToken } from "$lib/bookmarks/service";
-import { InvalidUrlError } from "$lib/bookmarks/url";
+import { backfillMetadata, saveBookmark } from "#lib/bookmarks/save.ts";
+import { requireServiceToken } from "#lib/bookmarks/service.ts";
+import { InvalidUrlError } from "#lib/bookmarks/url.ts";
 
 export const prerender = false;
 
@@ -40,7 +40,7 @@ export const POST: RequestHandler = async ({ request }) => {
     // what the Shortcut shows, so it needs no branching of its own.
     const duplicate = outcome === "duplicate";
 
-    return json(
+    return Response.json(
       { duplicate, message: duplicate ? "Already saved" : "Saved" },
       { status: outcome === "created" ? 201 : 200 },
     );

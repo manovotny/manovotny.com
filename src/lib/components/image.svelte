@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { vercelImage, vercelImageSrcset } from "$lib/image";
+  import { vercelImage, vercelImageSrcset } from "#lib/image.ts";
 
   let {
     alt,

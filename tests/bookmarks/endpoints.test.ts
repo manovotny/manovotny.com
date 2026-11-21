@@ -1,12 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { Bookmark } from "../../src/db/schema";
 
-vi.mock("$env/dynamic/private", () => ({
-  env: {
-    BOOKMARKS_API_TOKEN: "service-token",
-    BOOKMARKS_CAPTURE_TOKEN: "capture-token",
-    BOOKMARKS_OWNER_USER_ID: "user_owner",
-  },
+vi.mock("$app/env/private", () => ({
+  BOOKMARKS_API_TOKEN: "service-token",
+  BOOKMARKS_CAPTURE_TOKEN: "capture-token",
+  BOOKMARKS_OWNER_USER_ID: "user_owner",
 }));
 
 vi.mock("@vercel/functions", () => ({ waitUntil: vi.fn() }));

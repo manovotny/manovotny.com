@@ -5,8 +5,8 @@ title: "Uses"
 ---
 
 <script lang="ts">
-  import Note from "$lib/components/note.svelte";
-  import PageTitle from "$lib/components/page-title.svelte";
+  import Note from "#lib/components/note.svelte";
+  import PageTitle from "#lib/components/page-title.svelte";
 </script>
 
 <PageTitle>{title}</PageTitle>

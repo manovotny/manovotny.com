@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { menuState } from "$lib/bookmarks/components/menu-state.svelte";
-  import Menu from "$lib/bookmarks/components/menu.svelte";
-  import type { SortOrder } from "$lib/bookmarks/search";
+  import { menuState } from "#lib/bookmarks/components/menu-state.svelte.ts";
+  import Menu from "#lib/bookmarks/components/menu.svelte";
+  import type { SortOrder } from "#lib/bookmarks/search.ts";
 
   let {
     onchange,

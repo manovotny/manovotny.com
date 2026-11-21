@@ -2,10 +2,10 @@ import { ImageResponse } from "@vercel/og";
 import type { RequestHandler } from "./$types";
 
 import { read } from "$app/server";
-import { siteDomain, siteName } from "$lib/constants";
-import { logoPaths } from "$lib/logo-paths";
-import plexMono from "$lib/server/fonts/IBMPlexMono-Regular.ttf";
-import monaSansSemibold from "$lib/server/fonts/MonaSans-SemiBold.woff";
+import { siteDomain, siteName } from "#lib/constants.ts";
+import { logoPaths } from "#lib/logo-paths.ts";
+import plexMono from "#lib/server/fonts/IBMPlexMono-Regular.ttf";
+import monaSansSemibold from "#lib/server/fonts/MonaSans-SemiBold.woff";
 
 export const prerender = false;
 

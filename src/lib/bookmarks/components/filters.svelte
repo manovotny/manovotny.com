@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Menu from "$lib/bookmarks/components/menu.svelte";
-  import SortMenu from "$lib/bookmarks/components/sort-menu.svelte";
-  import TextInput from "$lib/bookmarks/components/text-input.svelte";
-  import type { Filters } from "$lib/bookmarks/search";
+  import Menu from "#lib/bookmarks/components/menu.svelte";
+  import SortMenu from "#lib/bookmarks/components/sort-menu.svelte";
+  import TextInput from "#lib/bookmarks/components/text-input.svelte";
+  import type { Filters } from "#lib/bookmarks/search.ts";
 
   let {
     filters,

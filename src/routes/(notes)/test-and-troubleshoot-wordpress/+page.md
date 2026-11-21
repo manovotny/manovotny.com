@@ -6,10 +6,10 @@ title: "How to test and troubleshoot WordPress plugins and themes"
 ---
 
 <script lang="ts">
-  import FormattedDate from "$lib/components/formatted-date.svelte";
-  import Image from "$lib/components/image.svelte";
-  import Note from "$lib/components/note.svelte";
-  import YouTube from "$lib/components/youtube.svelte";
+  import FormattedDate from "#lib/components/formatted-date.svelte";
+  import Image from "#lib/components/image.svelte";
+  import Note from "#lib/components/note.svelte";
+  import YouTube from "#lib/components/youtube.svelte";
 </script>
 
 # {title}

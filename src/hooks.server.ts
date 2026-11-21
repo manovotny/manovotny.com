@@ -1,8 +1,7 @@
-import { sequence } from "@sveltejs/kit/hooks";
+import { sequence, type Handle } from "@sveltejs/kit/hooks";
 import { withClerkHandler } from "svelte-clerk/server";
-import type { Handle } from "@sveltejs/kit";
 
-import { isBookmarksPagePath, isBookmarksPath } from "$lib/bookmarks/paths";
+import { isBookmarksPagePath, isBookmarksPath } from "#lib/bookmarks/paths.ts";
 
 // /bookmarks and /api/bookmarks are private: keep crawlers out via header so
 // no per-page meta tags are needed, and forbid shared caches. Responses like
