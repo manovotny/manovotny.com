@@ -1,0 +1,45 @@
+# Project Context
+
+## Stack
+
+SvelteKit 3 (Svelte 5 runes — `$props`, `$state`, `$derived`) on Vite, deployed via `@sveltejs/adapter-vercel`. Kit config lives in `vite.config.ts` (no `svelte.config.js`), including the mdsvex preprocessor and the adapter's image settings. `src/lib` and `src/db` are imported through the `#lib/*` and `#db/*` subpath imports in `package.json` (not `$lib`/`$db`), with file extensions. Server env vars must be declared in `src/env.ts` before `$app/env/private` exposes them; Clerk's come from `clerkEnvVars()`, and without them `svelte-clerk` can't read its keys. TypeScript, Node 24.
+
+Pages are mdsvex Markdown (`+page.md`) or Svelte under `src/routes/`. Notes sit in the `(notes)` route group, and Markdown pages render through `src/lib/markdown/layout.svelte`. Components live in `src/lib/components/`. `/bookmarks` is a private, Clerk-gated bookmarks app (route group `(bookmarks)`, code in `src/lib/bookmarks/`); see `docs/BOOKMARKS.md`.
+
+Styling is Tailwind v4 through `@tailwindcss/vite` (no PostCSS config). `src/app.css` holds the `@font-face` rules, `@theme` tokens, and a few base styles and utilities. Fonts are self-hosted in `static/fonts/`. Vercel Web Analytics and Speed Insights load from script tags in `src/app.html`, not from the npm packages.
+
+Tooling, all part of `npm test`:
+
+- oxlint, with `sort-keys` as an error, so keep object keys sorted.
+- oxfmt, which also sorts imports, `package.json`, and Tailwind classes (including inside `cn()`). Neither oxlint nor oxfmt sorts keys in JSON config files ([oxc-project/oxc#21644](https://github.com/oxc-project/oxc/issues/21644)), so keep those in order by hand.
+- svelte-check, with `noUnusedLocals` and `noUnusedParameters` on, so unused code fails in `.ts` and `.svelte` files.
+- knip, for unused files, exports, and dependencies. Its config in `knip.ts` hands knip every `<script>` body in `.svelte` and `.md` files, since its built-in Svelte compiler misses mdsvex pages. It lists `src/db/config.ts` as an entry, since loading it as a drizzle config throws without `DATABASE_URL`. It lists `src/env.ts` as an entry, since SvelteKit loads it by convention. It also ignores unlisted dependencies in `tsconfig.json`: knip ≥6.45 reports the `$app/tsconfig` extends as a missing `$app` package even though `svelte-kit sync` generates it. Drop that ignore once [webpro-nl/knip#2453](https://github.com/webpro-nl/knip/issues/2453) is fixed. Drop `export` from anything only used in its own file.
+- vitest, with tests in `tests/`.
+
+## Security
+
+- `save-exact=true` in `.npmrc`. New dependencies are saved at exact versions, not ranges.
+- `fund=false` in `.npmrc`. It only silences npm's funding notices.
+- `engines.node` is `24.x`, not `>=24`. With an open range, Vercel built with Node 26, which `@sveltejs/adapter-vercel` rejects, so every deploy failed.
+- CI (`.github/workflows/test.yml`) runs `npm ci` and `npm test`. It has no `npm audit` or signature step, so run `npm audit --audit-level=high` yourself after dependency changes.
+- Dependabot opens weekly update PRs for GitHub Actions only.
+- The pre-commit hook runs `lint-staged` through `@vercel/git-hooks`, wired by the `git` field in `package.json`.
+- `overrides` in `package.json` pin safe versions of transitive deps where upstream is slow to update. Both are scoped under `@vercel/config`:
+  - `zod@4.6.7` clears [GHSA-mrhx-c7xc-m3w5](https://github.com/advisories/GHSA-mrhx-c7xc-m3w5) (high).
+  - `path-to-regexp@6.3.0`, under `@vercel/routing-utils`, clears [GHSA-9wv6-86v2-598j](https://github.com/advisories/GHSA-9wv6-86v2-598j) (high).
+
+## Security follow-ups
+
+- `zod@4.6.7` override. `@vercel/config` still depends on `zod@^3`, and the advisory is only fixed in 4.6.6+. It's safe because `vercel.ts` only imports a type from `@vercel/config`, so its zod never runs. Drop it when `@vercel/config` moves to zod 4.
+- `path-to-regexp@6.3.0` override. `@vercel/routing-utils` 6.6.1 pins `path-to-regexp@6.1.0`. Drop it when `@vercel/config` ships a `@vercel/routing-utils` that uses 6.3.0 or later.
+- `@vercel/og` is held at `1.0.1`. 1.0.3 crashes on import in Node (`Dynamic require of "fs" is not supported`), which fails `npm run build`. Upstream: [vercel/satori#971](https://github.com/vercel/satori/issues/971). That leaves a moderate `satori` advisory. `npm run check` keeps offering 1.0.3, so revert it to 1.0.1 until a release fixes #971.
+- TypeScript is held at `6.0.3`. `@sveltejs/kit` and `svelte-check` peer on TypeScript `^6` (and `^5`), so TS 7 fails `npm install` with `ERESOLVE`. `npm run check` runs ncu with `--peer`, which skips it and lists the blocking peers under "Ignored incompatible updates". It takes TS 7 once the Svelte toolchain supports it.
+- `engines.node` is pinned to `24.x`. Loosen it once `@sveltejs/adapter-vercel` supports a newer Node.
+
+## Database
+
+Drizzle + Neon. Schema and migrations live in `src/db/`. Migrations run at build time via `buildCommand` in `vercel.ts` (`npm run db:migrate && npm run build`), against whichever database that environment's `DATABASE_URL` points at. Keep migrations forward-only and additive; see `docs/BOOKMARKS.md`.
+
+## Never commit
+
+- Specs and implementation plans (`docs/superpowers/`).
