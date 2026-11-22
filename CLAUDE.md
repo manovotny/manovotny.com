@@ -18,12 +18,16 @@ Tooling, all part of `npm test`:
 
 ## Security
 
-- `save-exact=true` in `.npmrc`. New dependencies are saved at exact versions, not ranges.
-- `fund=false` in `.npmrc`. It only silences npm's funding notices.
+- `ignore-scripts=true` in `.npmrc` blocks install-script attacks (e.g., the Axios supply chain RAT via `postinstall`).
+- `allow-git=none` in `.npmrc` refuses git-spec dependencies. They bypass the registry (no immutable versions, signatures, or provenance), so they're a supply chain vector.
+- `min-release-age=3` in `.npmrc` only installs versions published more than 3 days ago, so a compromised maintainer's fresh release stays out until the ecosystem has time to flag it. It applies to anything that resolves from the registry: `npm install`/`update`, `npm run check`'s ncu (which detects the key), and CI's `npm audit signatures`. That last one re-resolves the tree, so right after a dependency bump it fails with `ETARGET` until the new versions are 3 days old. Bypass case by case with `--min-release-age=0` only for an urgent patch.
+- `save-exact=true` in `.npmrc` saves new dependencies at exact versions, and `fund=false` silences npm's funding notices.
+- `engines.npm` is `>=11.12.0`, since older npm ignores `min-release-age` and `allow-git` with only a warning. Don't loosen it.
 - `engines.node` is `24.x`, not `>=24`. With an open range, Vercel built with Node 26, which `@sveltejs/adapter-vercel` rejects, so every deploy failed.
-- CI (`.github/workflows/test.yml`) runs `npm ci` and `npm test`. It has no `npm audit` or signature step, so run `npm audit --audit-level=high` yourself after dependency changes.
-- Dependabot opens weekly update PRs for GitHub Actions only.
-- The pre-commit hook runs `lint-staged` through `@vercel/git-hooks`, wired by the `git` field in `package.json`.
+- CI (`.github/workflows/test.yml`) installs with `npm ci --ignore-scripts`, then runs `npm audit signatures` (registry signatures and provenance), `npm audit --audit-level=high` (fails on high or critical advisories), the install-script allowlist check, and `npm test`. It doesn't build, since Vercel builds every PR.
+- The install-script allowlist (`.github/actions/check-install-scripts`) fails CI if a package outside it has `hasInstallScript` in the lockfile. It allows `esbuild` and `fsevents`; their scripts never run because of `ignore-scripts=true`. Reassess it whenever a dependency is added.
+- Dependabot is alerts only: `open-pull-requests-limit: 0` in `.github/dependabot.yml`, since auto-PRs are themselves a supply chain vector. Security alerts live in repo settings and are unaffected. Bump GitHub Actions by hand.
+- Git hooks are repo-owned in `.githooks/`, not managed by a dependency. `.githooks/pre-commit` runs `lint-staged`. Turn them on once per clone with `npm run setup`.
 - `overrides` in `package.json` pin safe versions of transitive deps where upstream is slow to update. Both are scoped under `@vercel/config`:
   - `zod@4.6.7` clears [GHSA-mrhx-c7xc-m3w5](https://github.com/advisories/GHSA-mrhx-c7xc-m3w5) (high).
   - `path-to-regexp@6.3.0`, under `@vercel/routing-utils`, clears [GHSA-9wv6-86v2-598j](https://github.com/advisories/GHSA-9wv6-86v2-598j) (high).

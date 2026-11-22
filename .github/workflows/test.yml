@@ -18,9 +18,17 @@ jobs:
         uses: actions/cache@v5
         with:
           path: "**/node_modules"
-          key: node-modules-cache-${{ hashFiles('**/package-lock.json') }}
+          key: node-modules-cache-${{ hashFiles('**/package-lock.json', '.npmrc', '.nvmrc') }}
       - name: Install dependencies
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
-        run: npm ci
+        run: npm ci --ignore-scripts
+      - name: Verify package signatures
+        run: npm audit signatures
+      - name: Audit for vulnerabilities
+        run: npm audit --audit-level=high
+      - name: Check install script allowlist
+        uses: ./.github/actions/check-install-scripts
+        with:
+          allowed-packages: "esbuild,fsevents"
       - name: Run tests
         run: npm test

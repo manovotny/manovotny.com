@@ -27,8 +27,6 @@ const config: KnipConfig = {
   entry: ["src/env.ts"],
   // macOS's built-in Shortcuts CLI, used to sign the generated shortcut.
   ignoreBinaries: ["shortcuts"],
-  // Runs the pre-commit hook via package.json's "git" field.
-  ignoreDependencies: ["@vercel/git-hooks"],
   ignoreIssues: {
     // knip reports the `$app/tsconfig` extends as an unlisted `$app` package,
     // but `svelte-kit sync` generates it. `ignoreDependencies` can't match

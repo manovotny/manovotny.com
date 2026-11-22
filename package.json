@@ -41,7 +41,8 @@
     "shortcut": "tsx scripts/make-shortcut.ts",
     "test": "npm run lint && npm run format && npm run types && npm run knip && npm run test:unit",
     "test:unit": "vitest run",
-    "types": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
+    "types": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "setup": "git config core.hooksPath .githooks"
   },
   "dependencies": {
     "@neondatabase/serverless": "1.1.0",
@@ -61,7 +62,6 @@
     "@tailwindcss/vite": "4.3.1",
     "@types/node": "25.9.1",
     "@vercel/config": "0.14.1",
-    "@vercel/git-hooks": "1.0.0",
     "drizzle-kit": "0.31.10",
     "knip": "6.45.1",
     "lint-staged": "17.0.5",
@@ -91,9 +91,7 @@
     "*.{js,ts,svelte}": "oxlint --fix"
   },
   "engines": {
-    "node": "24.x"
-  },
-  "git": {
-    "pre-commit": "lint:staged"
+    "node": "24.x",
+    "npm": ">=11.12.0"
   }
 }
