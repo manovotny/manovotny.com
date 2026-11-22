@@ -1,6 +1,10 @@
 version: 2
 updates:
+  # Alerts only, no auto-PRs (Dependabot auto-PRs are themselves a supply
+  # chain vector — see CLAUDE.md). Security alerts are configured in repo
+  # settings and are unaffected by this file.
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
+    open-pull-requests-limit: 0

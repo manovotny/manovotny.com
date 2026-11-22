@@ -1,11 +1,11 @@
-import { error, json } from "@sveltejs/kit";
+import { error } from "@sveltejs/kit";
 import type { RequestHandler } from "./$types";
 
-import { updateBookmark } from "$lib/bookmarks/queries";
-import { isUuid, requireServiceToken } from "$lib/bookmarks/service";
-import { invalidTags, normalizeTags } from "$lib/bookmarks/tags";
-import { isPublicHttpUrl } from "$lib/bookmarks/url";
-import type { BookmarkPatch } from "$lib/bookmarks/queries";
+import { updateBookmark } from "#lib/bookmarks/queries.ts";
+import { isUuid, requireServiceToken } from "#lib/bookmarks/service.ts";
+import { invalidTags, normalizeTags } from "#lib/bookmarks/tags.ts";
+import { isPublicHttpUrl } from "#lib/bookmarks/url.ts";
+import type { BookmarkPatch } from "#lib/bookmarks/queries.ts";
 
 export const prerender = false;
 
@@ -71,7 +71,10 @@ export const PATCH: RequestHandler = async ({ params, request }) => {
     const invalid = invalidTags(raw);
 
     if (invalid.length > 0) {
-      return json({ invalid, message: "Invalid tags" }, { status: 422 });
+      return Response.json(
+        { invalid, message: "Invalid tags" },
+        { status: 422 },
+      );
     }
 
     patch.tags = normalizeTags(raw);
@@ -95,5 +98,5 @@ export const PATCH: RequestHandler = async ({ params, request }) => {
     error(404, "Not found");
   }
 
-  return json({ bookmark });
+  return Response.json({ bookmark });
 };

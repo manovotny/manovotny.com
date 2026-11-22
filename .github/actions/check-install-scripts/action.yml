@@ -1,0 +1,14 @@
+name: Check install scripts
+description: Fail if any package not in the allowlist has hasInstallScript in the lockfile
+
+inputs:
+  allowed-packages:
+    description: Comma-separated list of package names allowed to have install scripts
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Check install script allowlist
+      shell: bash
+      run: node ${{ github.action_path }}/index.mjs "${{ inputs.allowed-packages }}"

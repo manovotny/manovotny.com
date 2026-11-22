@@ -17,10 +17,14 @@
     "src"
   ],
   "type": "module",
+  "imports": {
+    "#db/*": "./src/db/*",
+    "#lib/*": "./src/lib/*"
+  },
   "scripts": {
     "build": "svelte-kit sync && vite build",
-    "check": "ncu --format group -u",
-    "check:i": "ncu --interactive --format group",
+    "check": "ncu --format group --peer -u",
+    "check:i": "ncu --interactive --format group --peer",
     "check:pre": "npm run check -- --target greatest",
     "db:generate": "drizzle-kit generate --config=./src/db/config.ts",
     "db:migrate": "drizzle-kit migrate --config=./src/db/config.ts",
@@ -37,51 +41,57 @@
     "shortcut": "tsx scripts/make-shortcut.ts",
     "test": "npm run lint && npm run format && npm run types && npm run knip && npm run test:unit",
     "test:unit": "vitest run",
-    "types": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
+    "types": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "setup": "git config core.hooksPath .githooks"
   },
   "dependencies": {
     "@neondatabase/serverless": "1.1.0",
-    "@vercel/functions": "3.9.5",
-    "@vercel/og": "0.11.1",
+    "@vercel/functions": "3.11.3",
+    "@vercel/og": "1.0.1",
     "cn": "0.3.0",
     "drizzle-orm": "0.45.2",
     "git-jiggy": "2.1.2",
     "minisearch": "7.2.0",
     "rehype-unwrap-images": "1.0.0",
-    "svelte-clerk": "1.1.15"
+    "svelte-clerk": "1.3.0"
   },
   "devDependencies": {
-    "@sveltejs/adapter-vercel": "6.3.3",
-    "@sveltejs/kit": "2.65.1",
-    "@sveltejs/vite-plugin-svelte": "7.1.2",
+    "@sveltejs/adapter-vercel": "7.0.3",
+    "@sveltejs/kit": "3.2.0",
+    "@sveltejs/vite-plugin-svelte": "7.3.1",
     "@tailwindcss/vite": "4.3.1",
     "@types/node": "25.9.1",
-    "@vercel/config": "0.5.2",
-    "@vercel/git-hooks": "1.0.0",
+    "@vercel/config": "0.14.1",
     "drizzle-kit": "0.31.10",
-    "knip": "6.39.0",
+    "knip": "6.45.1",
     "lint-staged": "17.0.5",
     "mdsvex": "0.12.8",
     "npm-check-updates": "22.2.0",
-    "oxfmt": "0.58.0",
+    "oxfmt": "0.78.0",
     "oxlint": "1.70.0",
     "sugar-high": "0.9.5",
-    "svelte": "5.56.3",
-    "svelte-check": "4.6.0",
+    "svelte": "5.57.3",
+    "svelte-check": "4.7.8",
     "tailwindcss": "4.3.1",
     "tsx": "4.23.13",
     "typescript": "6.0.3",
-    "vite": "8.0.16",
+    "vite": "8.3.8",
     "vitest": "4.1.9"
+  },
+  "overrides": {
+    "@vercel/config": {
+      "@vercel/routing-utils": {
+        "path-to-regexp": "6.3.0"
+      },
+      "zod": "4.6.7"
+    }
   },
   "lint-staged": {
     "*": "oxfmt --write --no-error-on-unmatched-pattern",
     "*.{js,ts,svelte}": "oxlint --fix"
   },
   "engines": {
-    "node": ">=24.0.0"
-  },
-  "git": {
-    "pre-commit": "lint:staged"
+    "node": "24.x",
+    "npm": ">=11.12.0"
   }
 }

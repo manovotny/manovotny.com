@@ -6,8 +6,8 @@ title: "Press start"
 ---
 
 <script lang="ts">
-  import FormattedDate from "$lib/components/formatted-date.svelte";
-  import Image from "$lib/components/image.svelte";
+  import FormattedDate from "#lib/components/formatted-date.svelte";
+  import Image from "#lib/components/image.svelte";
 </script>
 
 # {title}

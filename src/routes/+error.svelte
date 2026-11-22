@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Link from "$lib/components/link.svelte";
-  import Seo from "$lib/components/seo.svelte";
+  import Link from "#lib/components/link.svelte";
+  import Seo from "#lib/components/seo.svelte";
 </script>
 
 <svelte:head>

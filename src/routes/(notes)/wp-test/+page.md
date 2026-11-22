@@ -6,9 +6,9 @@ title: "Introducing WP Test: the best tests for WordPress"
 ---
 
 <script lang="ts">
-  import FormattedDate from "$lib/components/formatted-date.svelte";
-  import Image from "$lib/components/image.svelte";
-  import Note from "$lib/components/note.svelte";
+  import FormattedDate from "#lib/components/formatted-date.svelte";
+  import Image from "#lib/components/image.svelte";
+  import Note from "#lib/components/note.svelte";
 </script>
 
 # {title}

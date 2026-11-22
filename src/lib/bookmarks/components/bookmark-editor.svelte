@@ -2,9 +2,9 @@
   import { untrack } from "svelte";
 
   import { enhance } from "$app/forms";
-  import TagInput from "$lib/bookmarks/components/tag-input.svelte";
-  import TextInput from "$lib/bookmarks/components/text-input.svelte";
-  import type { BookmarkView } from "$lib/bookmarks/view";
+  import TagInput from "#lib/bookmarks/components/tag-input.svelte";
+  import TextInput from "#lib/bookmarks/components/text-input.svelte";
+  import type { BookmarkView } from "#lib/bookmarks/view.ts";
 
   let {
     bookmark,

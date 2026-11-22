@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Link from "$lib/components/link.svelte";
-  import { siteName } from "$lib/constants";
+  import Link from "#lib/components/link.svelte";
+  import { siteName } from "#lib/constants.ts";
 </script>
 
 <h1

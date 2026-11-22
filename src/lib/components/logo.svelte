@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { logoPaths } from "$lib/logo-paths";
+  import { logoPaths } from "#lib/logo-paths.ts";
 
   let { size = 28 }: { size?: number } = $props();
 </script>

@@ -1,7 +1,7 @@
 import { getLastModifiedDate } from "git-jiggy";
 
-import { isBookmarksRouteFile } from "$lib/bookmarks/paths";
-import { baseUrl } from "$lib/constants";
+import { isBookmarksRouteFile } from "#lib/bookmarks/paths.ts";
+import { baseUrl } from "#lib/constants.ts";
 
 export const prerender = true;
 

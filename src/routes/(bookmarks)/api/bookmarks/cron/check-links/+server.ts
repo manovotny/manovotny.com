@@ -1,10 +1,10 @@
 import type { RequestHandler } from "./$types";
 
-import { dev } from "$app/environment";
-import { env } from "$env/dynamic/private";
-import { hasBearerToken } from "$lib/bookmarks/auth";
-import { checkLink } from "$lib/bookmarks/link-check";
-import { listStaleLinks, recordLinkCheck } from "$lib/bookmarks/queries";
+import { dev } from "$app/env";
+import { CRON_SECRET } from "$app/env/private";
+import { hasBearerToken } from "#lib/bookmarks/auth.ts";
+import { checkLink } from "#lib/bookmarks/link-check.ts";
+import { listStaleLinks, recordLinkCheck } from "#lib/bookmarks/queries.ts";
 
 const BATCH_SIZE = 100;
 const CONCURRENCY = 10;
@@ -17,7 +17,7 @@ export const config = { maxDuration: 300 };
 export const GET: RequestHandler = async ({ request }) => {
   try {
     // Fail closed: no configured secret means no cron, not "any caller".
-    if (!dev && !hasBearerToken(request, env.CRON_SECRET)) {
+    if (!dev && !hasBearerToken(request, CRON_SECRET)) {
       return new Response("Unauthorized", { status: 401 });
     }
 

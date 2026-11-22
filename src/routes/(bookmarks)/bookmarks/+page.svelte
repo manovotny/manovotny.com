@@ -3,19 +3,19 @@
   import type { ActionData, PageData } from "./$types";
 
   import { enhance } from "$app/forms";
-  import { replaceState } from "$app/navigation";
+  import { goto } from "$app/navigation";
   import { page } from "$app/state";
-  import BookmarkRow from "$lib/bookmarks/components/bookmark-row.svelte";
-  import Filters from "$lib/bookmarks/components/filters.svelte";
-  import TextInput from "$lib/bookmarks/components/text-input.svelte";
+  import BookmarkRow from "#lib/bookmarks/components/bookmark-row.svelte";
+  import Filters from "#lib/bookmarks/components/filters.svelte";
+  import TextInput from "#lib/bookmarks/components/text-input.svelte";
   import {
     applyFilters,
     buildIndex,
     filtersFromParams,
     filtersToParams,
-  } from "$lib/bookmarks/search";
-  import PageTitle from "$lib/components/page-title.svelte";
-  import type { Filters as FilterState } from "$lib/bookmarks/search";
+  } from "#lib/bookmarks/search.ts";
+  import PageTitle from "#lib/components/page-title.svelte";
+  import type { Filters as FilterState } from "#lib/bookmarks/search.ts";
 
   const PAGE_SIZE = 100;
 
@@ -32,9 +32,9 @@
     visible = PAGE_SIZE;
 
     const params = filtersToParams(next).toString();
-    const url = new URL(page.url);
+    const url = new URL(page.url.href);
     url.search = params ? `?${params}` : "";
-    replaceState(url, {});
+    goto(url, { replace: true, shallow: true });
   }
 
   function addTag(tag: string) {

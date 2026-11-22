@@ -1,7 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
 
-vi.mock("$app/environment", () => ({ dev: false }));
-vi.mock("$env/dynamic/private", () => ({ env: {} }));
+vi.mock("$app/env", () => ({ dev: false }));
+// The `has` trap lets the module read an unset CRON_SECRET without tripping
+// vitest's missing-export check on the mocked module.
+vi.mock("$app/env/private", () => new Proxy({}, { has: () => true }));
 vi.mock("../../src/lib/bookmarks/link-check", () => ({ checkLink: vi.fn() }));
 vi.mock("../../src/lib/bookmarks/queries", () => ({
   listStaleLinks: vi.fn(),

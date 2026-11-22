@@ -6,7 +6,7 @@ import {
 } from "./queries";
 import { isPublicHttpUrl, isSameUrl, normalizeUrl } from "./url";
 
-import type { Bookmark } from "$db/schema";
+import type { Bookmark } from "#db/schema.ts";
 
 type SaveOutcome = "created" | "duplicate";
 
