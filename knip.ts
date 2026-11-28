@@ -18,22 +18,14 @@ const config: KnipConfig = {
     md: scripts,
     svelte: scripts,
   },
-  drizzle: {
-    // An entry rather than a config, since loading it throws without
-    // DATABASE_URL (which CI doesn't have).
-    entry: ["src/db/config.ts"],
-  },
+  // The plugin loads src/db/config.ts (passed to drizzle-kit with --config),
+  // which throws without DATABASE_URL (which CI doesn't have). Knip still
+  // treats it as an entry from those script arguments.
+  drizzle: false,
   // SvelteKit loads this by convention.
   entry: ["src/env.ts"],
   // macOS's built-in Shortcuts CLI, used to sign the generated shortcut.
   ignoreBinaries: ["shortcuts"],
-  ignoreIssues: {
-    // knip reports the `$app/tsconfig` extends as an unlisted `$app` package,
-    // but `svelte-kit sync` generates it. `ignoreDependencies` can't match
-    // `$app` because knip doesn't parse it as a package name.
-    // Drop once https://github.com/webpro-nl/knip/issues/2453 is fixed.
-    "tsconfig.json": ["unlisted"],
-  },
   // Only mdsvex pages are code; the rest of the markdown is docs.
   project: ["**/*.{css,js,ts,svelte}", "src/**/*.md"],
 };

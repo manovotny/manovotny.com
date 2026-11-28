@@ -13,7 +13,7 @@ Tooling, all part of `npm test`:
 - oxlint, with `sort-keys` as an error, so keep object keys sorted.
 - oxfmt, which also sorts imports, `package.json`, and Tailwind classes (including inside `cn()`). Neither oxlint nor oxfmt sorts keys in JSON config files ([oxc-project/oxc#21644](https://github.com/oxc-project/oxc/issues/21644)), so keep those in order by hand.
 - svelte-check, with `noUnusedLocals` and `noUnusedParameters` on, so unused code fails in `.ts` and `.svelte` files.
-- knip, for unused files, exports, and dependencies. Its config in `knip.ts` hands knip every `<script>` body in `.svelte` and `.md` files, since its built-in Svelte compiler misses mdsvex pages. It lists `src/db/config.ts` as an entry, since loading it as a drizzle config throws without `DATABASE_URL`. It lists `src/env.ts` as an entry, since SvelteKit loads it by convention. It also ignores unlisted dependencies in `tsconfig.json`: knip ≥6.45 reports the `$app/tsconfig` extends as a missing `$app` package even though `svelte-kit sync` generates it. Drop that ignore once [webpro-nl/knip#2453](https://github.com/webpro-nl/knip/issues/2453) is fixed. Drop `export` from anything only used in its own file.
+- knip, for unused files, exports, and dependencies. Its config in `knip.ts` hands knip every `<script>` body in `.svelte` and `.md` files, since its built-in Svelte compiler misses mdsvex pages. It turns off the drizzle plugin, since that plugin loads `src/db/config.ts`, which throws without `DATABASE_URL`; knip still treats that file as an entry through the `--config` in the `db:*` scripts. It lists `src/env.ts` as an entry, since SvelteKit loads it by convention. Drop `export` from anything only used in its own file.
 - vitest, with tests in `tests/`.
 
 ## Security
