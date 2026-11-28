@@ -63,7 +63,7 @@
     "@types/node": "25.9.1",
     "@vercel/config": "0.14.1",
     "drizzle-kit": "0.31.10",
-    "knip": "6.45.1",
+    "knip": "6.48.0",
     "lint-staged": "17.0.5",
     "mdsvex": "0.12.8",
     "npm-check-updates": "22.2.0",
